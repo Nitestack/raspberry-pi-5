@@ -12,5 +12,5 @@
       ansible.builtin.cron:
         name: "Cloudflare DDNS Updater"
         minute: "*/1"
-        job: "/bin/bash {{ cloudflare_script }}"
+        job: "{{ cloudflare_script }}"
       become_user: "{{ ansible_user }}"
