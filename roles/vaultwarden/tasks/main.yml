@@ -1,0 +1,24 @@
+---
+- name: Set up Vaultwarden
+  vars:
+    vaultwarden_dir: "/home/{{ ansible_user }}/vw"
+
+  block:
+    - name: Create Vaultwarden directory
+      ansible.builtin.file:
+        path: "{{ vaultwarden_dir }}"
+        state: directory
+
+    - name: Copy Caddyfile to Vaultwarden directory
+      ansible.builtin.copy:
+        src: "../files/Caddyfile"
+        dest: "{{ vaultwarden_dir }}/Caddyfile"
+
+    - name: Copy docker-compose.yml to Vaultwarden directory
+      ansible.builtin.template:
+        src: "../files/docker-compose.yml.j2"
+        dest: "{{ vaultwarden_dir }}/docker-compose.yml"
+
+    - name: Start Docker Compose
+      community.docker.docker_compose_v2:
+        project_src: "{{ vaultwarden_dir }}"

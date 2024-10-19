@@ -1,0 +1,22 @@
+---
+- name: Raspberry Pi 5
+  hosts: raspberrypi
+  become: true
+  gather_facts: true
+
+  vars_files:
+    - secrets.yml
+
+  pre_tasks:
+    - name: Static IPv4
+      ansible.builtin.import_tasks: pre_tasks/ipv4.yml
+    - name: Gather package facts
+      ansible.builtin.import_tasks: pre_tasks/gather_facts.yml
+    - name: Ensure the keyrings directory exists
+      ansible.builtin.import_tasks: pre_tasks/keyrings_dir.yml
+
+  roles:
+    - docker
+    - caddy
+    - vaultwarden
+    - cloudflare-ddns-updater

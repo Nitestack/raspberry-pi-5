@@ -1,0 +1,61 @@
+---
+- name: Install Docker
+  when: "'docker-ce' not in ansible_facts.packages"
+  block:
+    - name: Remove conflicting packages
+      ansible.builtin.apt:
+        name:
+          - docker.io
+          - docker-doc
+          - docker-compose
+          - podman-docker
+          - containerd
+          - runc
+        state: absent
+        purge: true
+
+    - name: Install dependencies
+      ansible.builtin.apt:
+        name:
+          - ca-certificates
+          - gnupg
+        update_cache: true
+
+    - name: Download GPG key
+      ansible.builtin.get_url:
+        url: https://download.docker.com/linux/debian/gpg
+        dest: /etc/apt/keyrings/docker.asc
+        mode: "0644"
+
+    - name: Add GPG key to apt
+      ansible.builtin.apt_key:
+        file: /etc/apt/keyrings/docker.asc
+
+    - name: Map architecture for Docker repository
+      ansible.builtin.set_fact:
+        docker_arch: "{{ 'arm64' if ansible_architecture == 'aarch64' else ansible_architecture }}"
+
+    - name: Add Docker repository to sources list
+      ansible.builtin.apt_repository:
+        repo: "deb [arch={{ docker_arch }} signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release | lower }} stable"
+        filename: docker
+
+    - name: Install
+      ansible.builtin.apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
+        update_cache: true
+
+    - name: Ensure docker group exists
+      ansible.builtin.group:
+        name: docker
+
+    - name: Add user to docker group
+      ansible.builtin.user:
+        name: "{{ ansible_user }}"
+        groups: docker
+        append: true
