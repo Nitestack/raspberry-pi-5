@@ -3,53 +3,14 @@
   vars:
     cloudflare_script: "/home/{{ ansible_user }}/cloudflare.sh"
   block:
-    - name: Get stats of Cloudflare script
-      ansible.builtin.stat:
-        path: "{{ cloudflare_script }}"
-      register: cloudflare_script_check
-
-    - name: Set up Cloudflare script if it does not exist
-      when: not cloudflare_script_check.stat.exists
-      block:
-        - name: Download the script
-          ansible.builtin.get_url:
-            url: https://raw.githubusercontent.com/K0p1-Git/cloudflare-ddns-updater/refs/heads/main/cloudflare-template.sh
-            dest: "{{ cloudflare_script }}"
-            mode: "0755"
-
-        - name: Set 'auth_email'
-          ansible.builtin.replace:
-            path: "{{ cloudflare_script }}"
-            regexp: 'auth_email=""'
-            replace: 'auth_email="{{ CLOUDFLARE_EMAIL }}"'
-
-        - name: Set 'auth_method'
-          ansible.builtin.replace:
-            path: "{{ cloudflare_script }}"
-            regexp: 'auth_method="token"'
-            replace: 'auth_method="{{ CLOUDFLARE_AUTH_METHOD }}"'
-
-        - name: Set 'auth_key'
-          ansible.builtin.replace:
-            path: "{{ cloudflare_script }}"
-            regexp: 'auth_key=""'
-            replace: 'auth_key="{{ CLOUDFLARE_AUTH_KEY }}"'
-
-        - name: Set 'zone_identifier'
-          ansible.builtin.replace:
-            path: "{{ cloudflare_script }}"
-            regexp: 'zone_identifier=""'
-            replace: 'zone_identifier="{{ CLOUDFLARE_ZONE_IDENTIFIER }}"'
-
-        - name: Set 'record_name'
-          ansible.builtin.replace:
-            path: "{{ cloudflare_script }}"
-            regexp: 'record_name=""'
-            replace: 'record_name="{{ CLOUDFLARE_RECORD_NAME }}"'
-
-        - name: Ensure the cron job is present
-          ansible.builtin.cron:
-            name: "Cloudflare DDNS Updater"
-            minute: "*/1"
-            job: "/bin/bash {{ cloudflare_script }}"
-          become_user: "{{ ansible_user }}"
+    - name: Copy Cloudflare script
+      ansible.builtin.template:
+        src: "../files/cloudflare.sh.j2"
+        dest: "{{ cloudflare_script }}"
+        mode: "0755"
+    - name: Ensure the cron job is present
+      ansible.builtin.cron:
+        name: "Cloudflare DDNS Updater"
+        minute: "*/1"
+        job: "/bin/bash {{ cloudflare_script }}"
+      become_user: "{{ ansible_user }}"
