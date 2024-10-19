@@ -72,6 +72,10 @@ ansible-playbook -i inventory.ini playbook.yml --ask-pass
 
 This will prompt you for the password for the user on the Raspberry Pi.
 
+### Environment Variables
+
+Ensure you create a `secrets.yml` file in the root directory of this project. Just copy the `secrets.example.yml` file to `secrets.yml` and insert the values.
+
 ### Vaultwarden
 
 To get Vaultwarden running, you’ll need to configure port forwarding on your router:
@@ -84,10 +88,6 @@ public:443/udp  -> local:443/udp
 
 > [!NOTE]
 > If you modify any ports in the `docker-compose.yml`, make sure to update your port forwarding settings accordingly.
-
-### Cloudflare DDNS Updater
-
-Ensure you create a `secrets.yml` file in the root directory of this project. Just copy the `secrets.example.yml` file to `secrets.yml` and insert the values.
 
 ## 📝 License
 
