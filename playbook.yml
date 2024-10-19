@@ -20,3 +20,4 @@
     - caddy
     - vaultwarden
     - cloudflare-ddns-updater
+    - pivpn
