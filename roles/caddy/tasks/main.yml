@@ -1,0 +1,37 @@
+---
+- name: Install Caddy
+  when: "'caddy' not in ansible_facts.packages"
+  block:
+    - name: Install dependencies
+      ansible.builtin.apt:
+        name:
+          - debian-keyring
+          - debian-archive-keyring
+          - apt-transport-https
+        update_cache: true
+
+    - name: Download Caddy GPG key
+      ansible.builtin.get_url:
+        url: "https://dl.cloudsmith.io/public/caddy/stable/gpg.key"
+        dest: /tmp/caddy.gpg.key
+
+    - name: Convert GPG key to keyring format
+      ansible.builtin.command:
+        cmd: "gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg /tmp/caddy.gpg.key"
+      args:
+        creates: /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+
+    - name: Remove temporary GPG key
+      ansible.builtin.file:
+        name: /tmp/caddy.gpg.key
+        state: absent
+
+    - name: Download Caddy repository list
+      ansible.builtin.get_url:
+        url: "https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt"
+        dest: /etc/apt/sources.list.d/caddy-stable.list
+
+    - name: Install
+      ansible.builtin.apt:
+        name: caddy
+        update_cache: true
