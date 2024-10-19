@@ -33,6 +33,8 @@ _This [Ansible](https://www.ansible.com) configuration is designed to automate t
 
 - Cloudflare DDNS Updater Setup (for dynamic IPv4 addresses)
 
+- PiVPN (Wireguard) Setup
+
 ## ⚙️ Requirements
 
 Make sure your Raspberry Pi is running the latest version of [Raspberry Pi OS Lite (64-bit)](https://www.raspberrypi.com/software).
@@ -76,6 +78,14 @@ This will prompt you for the password for the user on the Raspberry Pi.
 
 Ensure you create a `secrets.yml` file in the root directory of this project. Just copy the `secrets.example.yml` file to `secrets.yml` and insert the values.
 
+### Cloudflare DDNS Updater
+
+Make sure to create an `A` record for your domain that initially points to a placeholder IP address (e.g., `8.8.8.8`). This will be automatically updated to your public IP address by the script. Specify the record name in the `secrets.yml` file under the key `CLOUDFLARE_RECORD_NAME`.
+
+### PiVPN
+
+Create a `CNAME` record for your domain that directs your PiVPN subdomain to the value specified in `CLOUDFLARE_RECORD_NAME`. Furthermore, set the domain in the `PIVPN_HOST` variable.
+
 ### Vaultwarden
 
 To get Vaultwarden running, you’ll need to configure port forwarding on your router:
@@ -88,6 +98,8 @@ public:443/udp  -> local:443/udp
 
 > [!NOTE]
 > If you modify any ports in the `docker-compose.yml`, make sure to update your port forwarding settings accordingly.
+
+Create a `CNAME` record for your domain that points your Vaultwarden subdomain to the value specified in `CLOUDFLARE_RECORD_NAME`. Additionally, set the full URL (including the `https://`` prefix) in the`VAULTWARDEN_DOMAIN` variable.
 
 ## 📝 License
 
