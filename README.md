@@ -86,6 +86,12 @@ Make sure to create an `A` record for your domain that initially points to a pla
 
 Create a `CNAME` record for your domain that directs your PiVPN subdomain to the value specified in `CLOUDFLARE_RECORD_NAME`. Furthermore, set the domain in the `PIVPN_HOST` variable.
 
+You'll also need to configure port forwarding on your router:
+
+```
+public:51820/tcp -> local:51820/tcp
+```
+
 ### Vaultwarden
 
 To get Vaultwarden running, you’ll need to configure port forwarding on your router:
