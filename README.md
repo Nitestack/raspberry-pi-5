@@ -15,7 +15,7 @@
 
 [Features](#-features) • [Requirements](#️-requirements) • [Getting Started](#-getting-started) • [License](#-license)
 
-_This [Ansible](https://www.ansible.com) configuration is designed to automate the setup and management of a Raspberry Pi Home Server running [Raspberry Pi OS](https://www.raspberrypi.com/software). The configuration aims to streamline the deployment of various services, enhance security, and ensure consistency across the server environment._
+_This [Ansible](https://www.ansible.com) configuration automates the setup of a Raspberry Pi Home Server running [Raspberry Pi OS](https://www.raspberrypi.com/software). It deploys essential services, enhances security, and ensures consistency across the server environment._
 
 <p>
   <strong>Be sure to <a href="#" title="star">⭐️</a> or fork this repo if you find it useful!</strong>
@@ -25,36 +25,27 @@ _This [Ansible](https://www.ansible.com) configuration is designed to automate t
 ## 🚀 Features
 
 > [!WARNING]
-> This setup will only work if your domain is fully managed by Cloudflare DNS.
+> This setup requires your domain to be fully managed by Cloudflare DNS.
 
-- Caddy and Docker Installation
-
-- Vaultwarden Setup
-
-- Cloudflare DDNS Updater Setup (for dynamic IPv4 addresses)
-
-- PiVPN (Wireguard) Setup
+- Automated installation of Caddy and Docker
+- Vaultwarden deployment
+- Cloudflare DDNS updater for dynamic IP management
+- PiVPN (WireGuard) configuration for secure remote access
 
 ## ⚙️ Requirements
 
-Make sure your Raspberry Pi is running the latest version of [Raspberry Pi OS Lite (64-bit)](https://www.raspberrypi.com/software).
-
-You'll also need to install [Ansible](https://www.ansible.com) and `sshpass` on your local machine.
-
-A domain is required.
-
-Your Raspberry Pi has to be connected via ethernet cable.
+1. **Raspberry Pi OS Lite (64-bit)**: Ensure your Raspberry Pi is running the latest version.
+2. **Ansible and sshpass**: Install these tools on your local machine.
+3. **Cloudflare-managed domain**: Necessary for dynamic DNS updates and subdomain routing.
+4. **Ethernet connection**: Your Raspberry Pi must be connected via Ethernet for optimal stability.
 
 > [!IMPORTANT]
-> When flashing your SD card, remember to enable SSH and select the `Use password authentication` option.
-
-> [!IMPORTANT]
-> If you plan to customize the default user or hostname, update these details accordingly in the `inventory.ini` file.
+> When flashing your SD card, enable SSH and select the `Use password authentication` option.
 
 > [!NOTE]
-> To ensure `.local` domain resolution works properly, you must have Avahi installed and running. If Avahi isn't set up, you can connect using the Raspberry Pi's IPv4 address directly.
+> If customizing your hostname or user, update the `inventory.ini` file accordingly.
 
-Also ensure you Raspberry Pi has an internal static IPv4 address. You can run the following commands to bind the Pi to `192.168.2.210`:
+5. **Static IPv4 configuration**: Your Raspberry Pi should have a static IP address on your local network. To assign the IP `192.168.2.210`, run the following:
 
 ```sh
 sudo nmcli con mod "Wired connection 1" ipv4.addresses "192.168.2.210/24" \
@@ -64,43 +55,46 @@ sudo nmcli con mod "Wired connection 1" ipv4.addresses "192.168.2.210/24" \
 sudo nmcli con up "Wired connection 1"
 ```
 
-This has to be done once to register the device in the network. After executing the Ansible playbook the first time, it ensures the configuration stays.
+This step is needed only once. The Ansible playbook will manage IP persistence thereafter.
+
+> [!NOTE]
+> Ensure Avahi is installed and running for `.local` domain resolution. Alternatively, use the Pi's IP address directly.
 
 ## 🏁 Getting Started
 
-Clone the dotfiles repository:
+1. **Clone the repository**:
 
 ```sh
 git clone https://github.com/Nitestack/raspberry-pi-5.git ~/raspberry-pi-5
 ```
 
-Install Ansible Galaxy Collections:
+2. **Install required Ansible Galaxy collections**:
 
 ```sh
 ansible-galaxy install -r requirements.yml --force # to get the latest versions
 ```
 
-Finally run the playbook:
+3. **Run the playbook**:
 
 ```sh
 ansible-playbook -i inventory.ini playbook.yml --ask-pass
 ```
 
-This will prompt you for the password for the user on the Raspberry Pi.
+This command prompts for the Raspberry Pi user's password.
 
 ### Environment Variables
 
-Ensure you create a `secrets.yml` file in the root directory of this project. Just copy the `secrets.example.yml` file to `secrets.yml` and insert the values.
+To configure sensitive data, create a `secrets.yml` file in the root directory. Copy the `secrets.example.yml` file, then populate the required fields.
 
 ### Cloudflare DDNS Updater
 
-Make sure to create an `A` record for your domain that initially points to a placeholder IP address (e.g., `8.8.8.8`). This will be automatically updated to your public IP address by the script. Specify the record name in the `secrets.yml` file under the key `CLOUDFLARE_RECORD_NAME`.
+Ensure an `A` record for your domain is set up, initially pointing to a placeholder IP (e.g., `8.8.8.8`). The DDNS script will update it with your public IP. The record name should be defined in `secrets.yml` under the key `CLOUDFLARE_RECORD_NAME`.
 
 ### PiVPN
 
-Create a `CNAME` record for your domain that directs your PiVPN subdomain to the value specified in `CLOUDFLARE_RECORD_NAME`. Furthermore, set the domain in the `PIVPN_HOST` variable.
+Set up a `CNAME` record for your PiVPN subdomain, pointing it to the value defined in `CLOUDFLARE_RECORD_NAME`. Update the `PIVPN_HOST` variable with the correct domain.
 
-You'll also need to configure port forwarding on your router:
+Configure port forwarding on your router for WireGuard:
 
 ```
 public:51820/tcp -> local:51820/tcp
@@ -108,18 +102,18 @@ public:51820/tcp -> local:51820/tcp
 
 ### Vaultwarden
 
-To get Vaultwarden running, you’ll need to configure port forwarding on your router:
+Vaultwarden requires additional port forwarding:
 
 ```
-public:8080/tcp -> local:80/tcp
+public:8888/tcp -> local:80/tcp
 public:443/tcp  -> local:443/tcp
 public:443/udp  -> local:443/udp
 ```
 
 > [!NOTE]
-> If you modify any ports in the `docker-compose.yml`, make sure to update your port forwarding settings accordingly.
+> If you modify ports in the `docker-compose.yml`, ensure your router’s port forwarding is adjusted accordingly.
 
-Create a `CNAME` record for your domain that points your Vaultwarden subdomain to the value specified in `CLOUDFLARE_RECORD_NAME`. Additionally, set the full URL (including the `https://`` prefix) in the`VAULTWARDEN_DOMAIN` variable.
+Set up a `CNAME` record for your Vaultwarden subdomain, directing it to the value specified in `CLOUDFLARE_RECORD_NAME`. Also, set the `VAULTWARDEN_DOMAIN` variable to the full URL (including the `https://` prefix).
 
 ## 📝 License
 
