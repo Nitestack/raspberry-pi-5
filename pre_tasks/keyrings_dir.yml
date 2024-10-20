@@ -1,3 +1,4 @@
+---
 - name: Ensure the keyrings directory exists
   ansible.builtin.file:
     path: /etc/apt/keyrings

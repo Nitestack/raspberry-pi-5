@@ -1,3 +1,4 @@
+---
 - name: Set IPv4 address, gateway, and DNS
   community.general.nmcli:
     type: ethernet

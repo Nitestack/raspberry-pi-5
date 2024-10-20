@@ -8,6 +8,8 @@
     - secrets.yml
 
   pre_tasks:
+    - name: Upgrade system
+      ansible.builtin.import_tasks: pre_tasks/upgrade_system.yml
     - name: Static IPv4
       ansible.builtin.import_tasks: pre_tasks/ipv4.yml
     - name: Gather package facts
