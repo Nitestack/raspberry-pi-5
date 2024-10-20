@@ -7,14 +7,14 @@ services:
       DOMAIN: "{{ VAULTWARDEN_DOMAIN }}"
       SIGNUPS_ALLOWED: "{{ VAULTWARDEN_SIGNUPS_ALLOWED }}"
     volumes:
-      - /vw-data:/data
+      - /mnt/data/vw-data:/data
 
   caddy:
     image: caddy:2
     container_name: caddy
     restart: always
     ports:
-      - 8080:80 # Needed for the ACME HTTP-01 challenge.
+      - 8888:80 # Needed for the ACME HTTP-01 challenge.
       - 443:443
       - 443:443/udp # Needed for HTTP/3.
     volumes:
