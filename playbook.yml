@@ -14,6 +14,8 @@
       ansible.builtin.import_tasks: pre_tasks/gather_facts.yml
     - name: Ensure the keyrings directory exists
       ansible.builtin.import_tasks: pre_tasks/keyrings_dir.yml
+    - name: Ensure the NVME SSDs are mounted
+      ansible.builtin.import_tasks: pre_tasks/mount_nvme_ssds.yml
 
   roles:
     - docker
