@@ -41,7 +41,9 @@ Make sure your Raspberry Pi is running the latest version of [Raspberry Pi OS Li
 
 You'll also need to install [Ansible](https://www.ansible.com) and `sshpass` on your local machine.
 
-A domain is required to run Vaultwarden.
+A domain is required.
+
+Your Raspberry Pi has to be connected via ethernet cable.
 
 > [!IMPORTANT]
 > When flashing your SD card, remember to enable SSH and select the `Use password authentication` option.
@@ -51,6 +53,18 @@ A domain is required to run Vaultwarden.
 
 > [!NOTE]
 > To ensure `.local` domain resolution works properly, you must have Avahi installed and running. If Avahi isn't set up, you can connect using the Raspberry Pi's IPv4 address directly.
+
+Also ensure you Raspberry Pi has an internal static IPv4 address. You can run the following commands to bind the Pi to `192.168.2.210`:
+
+```sh
+sudo nmcli con mod "Wired connection 1" ipv4.addresses "192.168.2.210/24" \
+  ipv4.gateway "192.168.2.1" \
+  ipv4.dns "192.168.2.1" \
+  ipv4.method manual && \
+sudo nmcli con up "Wired connection 1"
+```
+
+This has to be done once to register the device in the network. After executing the Ansible playbook the first time, it ensures the configuration stays.
 
 ## 🏁 Getting Started
 

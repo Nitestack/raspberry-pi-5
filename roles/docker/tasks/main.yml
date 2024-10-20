@@ -1,6 +1,8 @@
 ---
 - name: Install Docker
   when: "'docker-ce' not in ansible_facts.packages"
+  vars:
+    gpg_key_file: /etc/apt/keyrings/docker.asc
   block:
     - name: Remove conflicting packages
       ansible.builtin.apt:
@@ -24,12 +26,12 @@
     - name: Download GPG key
       ansible.builtin.get_url:
         url: https://download.docker.com/linux/debian/gpg
-        dest: /etc/apt/keyrings/docker.asc
+        dest: "{{ gpg_key_file }}"
         mode: "0644"
 
     - name: Add GPG key to apt
       ansible.builtin.apt_key:
-        file: /etc/apt/keyrings/docker.asc
+        file: "{{ gpg_key_file }}"
 
     - name: Map architecture for Docker repository
       ansible.builtin.set_fact:
