@@ -1,3 +1,4 @@
+---
 - name: Gather package facts
   ansible.builtin.package_facts:
     manager: apt
