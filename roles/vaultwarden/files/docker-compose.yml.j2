@@ -23,5 +23,5 @@ services:
       - ./caddy-data:/data
     environment:
       DOMAIN: "{{ VAULTWARDEN_DOMAIN }}"
-      EMAIL: "{{ VAULTWARDEN_ACME_EMAIL }}"
+      EMAIL: "{{ ACME_EMAIL }}"
       LOG_FILE: "/data/access.log"
