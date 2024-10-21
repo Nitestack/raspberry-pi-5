@@ -106,8 +106,8 @@ Vaultwarden requires additional port forwarding:
 
 ```
 public:8888/tcp -> local:80/tcp
-public:443/tcp  -> local:443/tcp
-public:443/udp  -> local:443/udp
+public:444/tcp  -> local:443/tcp
+public:444/udp  -> local:443/udp
 ```
 
 > [!NOTE]
