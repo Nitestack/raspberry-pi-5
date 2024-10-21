@@ -1,5 +1,5 @@
 services:
-  vaultwarden:
+  app:
     image: vaultwarden/server:latest
     container_name: vaultwarden
     restart: always
@@ -7,11 +7,11 @@ services:
       DOMAIN: "{{ VAULTWARDEN_DOMAIN }}"
       SIGNUPS_ALLOWED: "{{ VAULTWARDEN_SIGNUPS_ALLOWED }}"
     volumes:
-      - /mnt/data/vw-data:/data
+      - /mnt/data/vaultwarden/data:/data
 
-  caddy:
+  web:
     image: caddy:2
-    container_name: caddy
+    container_name: vaultwarden-caddy
     restart: always
     ports:
       - 8888:80 # Needed for the ACME HTTP-01 challenge.

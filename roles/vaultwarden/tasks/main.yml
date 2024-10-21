@@ -1,7 +1,7 @@
 ---
 - name: Set up Vaultwarden
   vars:
-    vaultwarden_dir: "/mnt/data/vw"
+    vaultwarden_dir: "/mnt/data/vaultwarden"
 
   block:
     - name: Create Vaultwarden directory
