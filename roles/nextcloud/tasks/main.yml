@@ -1,0 +1,29 @@
+---
+- name: Set up NextCloud
+  vars:
+    nextcloud_dir: "/mnt/data/nextcloud"
+
+  block:
+    - name: Create NextCloud directory
+      ansible.builtin.file:
+        path: "{{ nextcloud_dir }}"
+        state: directory
+
+    - name: Copy nginx.conf to NextCloud directory
+      ansible.builtin.copy:
+        src: "../files/nginx.conf"
+        dest: "{{ nextcloud_dir }}/nginx.conf"
+
+    - name: Copy uploadsize.conf to NextCloud directory
+      ansible.builtin.copy:
+        src: "../files/uploadsize.conf"
+        dest: "{{ nextcloud_dir }}/uploadsize.conf"
+
+    - name: Copy docker-compose.yml to NextCloud directory
+      ansible.builtin.template:
+        src: "../files/docker-compose.yml.j2"
+        dest: "{{ nextcloud_dir }}/docker-compose.yml"
+
+    - name: Start Docker Compose
+      community.docker.docker_compose_v2:
+        project_src: "{{ nextcloud_dir }}"
