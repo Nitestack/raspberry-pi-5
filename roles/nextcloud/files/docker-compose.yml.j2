@@ -1,0 +1,105 @@
+services:
+  db:
+    image: mariadb
+    container_name: nextcloud-db
+    command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
+    restart: always
+    volumes:
+      - /mnt/data/nextcloud/db:/var/lib/mysql:Z
+    environment:
+      - MYSQL_ROOT_PASSWORD=69a168d1-e149-4139-9665-988adff56bc9
+      - MARIADB_AUTO_UPGRADE=1
+      - MARIADB_DISABLE_UPGRADE_BACKUP=1
+      - MYSQL_PASSWORD=4a170cfa-9d4e-4206-9c26-17b0ef4d1a1b
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+
+  redis:
+    image: redis
+    container_name: nextcloud-redis
+    restart: always
+    volumes:
+      - /mnt/data/nextcloud/redis:/var/lib/redis
+
+  app:
+    image: nextcloud:fpm
+    container_name: nextcloud-app
+    restart: always
+    volumes:
+      - /mnt/data/nextcloud/data:/var/www/html:z
+    environment:
+      - MYSQL_HOST=db
+      - REDIS_HOST=redis
+      - MYSQL_PASSWORD=4a170cfa-9d4e-4206-9c26-17b0ef4d1a1b
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+    depends_on:
+      - db
+      - redis
+      - proxy
+
+  web:
+    image: nginx
+    container_name: nextcloud-nginx
+    restart: always
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - /mnt/data/nextcloud/data:/var/www/html:z
+    environment:
+      - VIRTUAL_HOST=cloud.npham.de
+      - LETSENCRYPT_HOST=cloud.npham.de
+      - LETSENCRYPT_EMAIL={{ ACME_EMAIL }}
+    depends_on:
+      - app
+    networks:
+      - proxy-tier
+      - default
+
+  cron:
+    image: nextcloud:fpm
+    container_name: nextcloud-cron
+    restart: always
+    volumes:
+      - /mnt/data/nextcloud/data:/var/www/html:z
+    entrypoint: /cron.sh
+    depends_on:
+      - db
+      - redis
+
+  proxy:
+    image: nginxproxy/nginx-proxy
+    container_name: nextcloud-proxy
+    restart: always
+    ports:
+      - 8080:80
+      - 443:443
+    labels:
+      - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy"
+    volumes:
+      - ./uploadsize.conf:/etc/nginx/conf.d/uploadsize.conf
+      - /mnt/data/nextcloud/certs:/etc/nginx/certs:z,ro
+      - /mnt/data/nextcloud/vhost.d:/etc/nginx/vhost.d:z
+      - /mnt/data/nextcloud/html:/usr/share/nginx/html:z
+      - /var/run/docker.sock:/tmp/docker.sock:z,ro
+    networks:
+      - proxy-tier
+
+  letsencrypt-companion:
+    image: nginxproxy/acme-companion
+    container_name: nextcloud-acme
+    restart: always
+    environment:
+      - DEFAULT_EMAIL=
+    volumes:
+      - /mnt/data/nextcloud/certs:/etc/nginx/certs:z
+      - /mnt/data/nextcloud/acme:/etc/acme.sh:z
+      - /mnt/data/nextcloud/vhost.d:/etc/nginx/vhost.d:z
+      - /mnt/data/nextcloud/html:/usr/share/nginx/html:z
+      - /var/run/docker.sock:/var/run/docker.sock:z,ro
+    networks:
+      - proxy-tier
+    depends_on:
+      - proxy
+
+networks:
+  proxy-tier:
