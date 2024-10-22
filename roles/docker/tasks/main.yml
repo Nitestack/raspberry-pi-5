@@ -33,13 +33,9 @@
       ansible.builtin.apt_key:
         file: "{{ gpg_key_file }}"
 
-    - name: Map architecture for Docker repository
-      ansible.builtin.set_fact:
-        docker_arch: "{{ 'arm64' if ansible_architecture == 'aarch64' else ansible_architecture }}"
-
     - name: Add Docker repository to sources list
       ansible.builtin.apt_repository:
-        repo: "deb [arch={{ docker_arch }} signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release | lower }} stable"
+        repo: "deb [arch=arm64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release | lower }} stable"
         filename: docker
 
     - name: Install
