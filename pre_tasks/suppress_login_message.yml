@@ -1,0 +1,5 @@
+---
+- name: Suppress login message
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.hushlogin"
+    state: touch
