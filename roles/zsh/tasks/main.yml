@@ -1,0 +1,36 @@
+---
+- name: Set up Zsh
+  block:
+    - name: Ensure Zsh is installed
+      ansible.builtin.apt:
+        name: zsh
+        update_cache: true
+
+    - name: Set Zsh as default shell
+      ansible.builtin.user:
+        name: "{{ ansible_user }}"
+        shell: /bin/zsh
+
+    - name: Download and install Oh My Zsh
+      ansible.builtin.shell: 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended'
+      args:
+        creates: "/home/{{ ansible_user }}/.oh-my-zsh"
+      become_user: "{{ ansible_user }}"
+
+    - name: Copy .zshrc to home directory
+      ansible.builtin.copy:
+        src: "../files/.zshrc"
+        dest: "/home/{{ ansible_user }}/.zshrc"
+      become_user: "{{ ansible_user }}"
+
+    - name: Install bat
+      ansible.builtin.include_tasks: ./bat.yml
+
+    - name: Install eza
+      ansible.builtin.include_tasks: ./eza.yml
+
+    - name: Install fastfetch
+      ansible.builtin.include_tasks: ./fastfetch.yml
+
+    - name: Install Oh My Posh
+      ansible.builtin.include_tasks: ./oh-my-posh.yml
