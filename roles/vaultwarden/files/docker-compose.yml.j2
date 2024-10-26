@@ -4,7 +4,7 @@ services:
     container_name: vaultwarden
     restart: always
     environment:
-      DOMAIN: "{{ VAULTWARDEN_DOMAIN }}"
+      DOMAIN: "{{ VAULTWARDEN_URL }}"
       SIGNUPS_ALLOWED: "{{ VAULTWARDEN_SIGNUPS_ALLOWED }}"
     volumes:
       - /mnt/data/vaultwarden/data:/data
@@ -22,6 +22,6 @@ services:
       - ./caddy-config:/config
       - ./caddy-data:/data
     environment:
-      DOMAIN: "{{ VAULTWARDEN_DOMAIN }}"
+      DOMAIN: "{{ VAULTWARDEN_URL }}"
       EMAIL: "{{ ACME_EMAIL }}"
       LOG_FILE: "/data/access.log"

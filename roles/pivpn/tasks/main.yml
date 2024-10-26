@@ -14,7 +14,7 @@
           VPN=wireguard
           pivpnDNS1=1.1.1.1 # Cloudflare
           pivpnDNS2=1.0.0.1 # Cloudflare
-          pivpnHOST={{ PIVPN_HOST }}
+          pivpnHOST={{ PIVPN_DOMAIN }}
         mode: "0644"
       register: options_conf
     - name: Run PiVPN installer if options.conf changed
