@@ -92,7 +92,7 @@ Ensure an `A` record for your domain is set up, initially pointing to a placehol
 
 ### PiVPN
 
-Set up a `CNAME` record for your PiVPN subdomain, pointing it to the value defined in `CLOUDFLARE_RECORD_NAME`. Update the `PIVPN_HOST` variable with the correct domain.
+Set up a `CNAME` record for your PiVPN subdomain, pointing it to the value defined in `CLOUDFLARE_RECORD_NAME`. Update the `PIVPN_DOMAIN` variable with the correct domain.
 
 Configure port forwarding on your router for WireGuard:
 
@@ -113,7 +113,7 @@ public:444/udp  -> local:443/udp
 > [!NOTE]
 > If you modify ports in the `docker-compose.yml`, ensure your router’s port forwarding is adjusted accordingly.
 
-Set up a `CNAME` record for your Vaultwarden subdomain, directing it to the value specified in `CLOUDFLARE_RECORD_NAME`. Also, set the `VAULTWARDEN_DOMAIN` variable to the full URL (including the `https://` prefix).
+Set up a `CNAME` record for your Vaultwarden subdomain, directing it to the value specified in `CLOUDFLARE_RECORD_NAME`. Also, set the `VAULTWARDEN_URL` variable to the full URL (including the `https://` prefix).
 
 ## 📝 License
 
