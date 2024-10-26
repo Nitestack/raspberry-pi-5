@@ -1,5 +1,5 @@
 services:
-  app:
+  vaultwarden:
     image: vaultwarden/server:latest
     container_name: vaultwarden
     restart: always
@@ -9,14 +9,14 @@ services:
     volumes:
       - /mnt/data/vaultwarden/data:/data
 
-  web:
-    image: caddy:2
+  caddy:
+    image: caddy:latest
     container_name: vaultwarden-caddy
     restart: always
     ports:
-      - 8888:80 # Needed for the ACME HTTP-01 challenge.
-      - 443:443
-      - 443:443/udp # Needed for HTTP/3.
+      - 8888:80
+      - 444:443
+      - 444:443/udp
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - ./caddy-config:/config
