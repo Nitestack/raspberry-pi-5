@@ -27,10 +27,11 @@ _This [Ansible](https://www.ansible.com) configuration automates the setup of a 
 > [!WARNING]
 > This setup requires your domain to be fully managed by Cloudflare DNS.
 
-- Automated installation of Caddy and Docker
+- Automated installation of Docker
 - Vaultwarden deployment
 - Cloudflare DDNS updater for dynamic IP management
 - PiVPN (WireGuard) configuration for secure remote access
+- NextCloud
 
 ## ⚙️ Requirements
 
@@ -113,7 +114,19 @@ public:444/udp  -> local:443/udp
 > [!NOTE]
 > If you modify ports in the `docker-compose.yml`, ensure your router’s port forwarding is adjusted accordingly.
 
-Set up a `CNAME` record for your Vaultwarden subdomain, directing it to the value specified in `CLOUDFLARE_RECORD_NAME`. Also, set the `VAULTWARDEN_URL` variable to the full URL (including the `https://` prefix).
+Set up a `CNAME` record for your Vaultwarden subdomain, directing it to the value specified in `CLOUDFLARE_RECORD_NAME`. Also, set the `VAULTWARDEN_URL` variable to the URL.
+
+### NextCloud
+
+NextCloud requires additional port forwarding:
+
+```
+public:80/tcp  -> local:80/tcp
+public:443/tcp -> local:443/tcp
+public:443/udp -> local:443/udp
+```
+
+Set up a CNAME record for your NextCloud subdomain, directing it to the value specified in `CLOUDFLARE_RECORD_NAME`. Also, set the `NEXTCLOUD_URL` variable to the URL.
 
 ## 📝 License
 
