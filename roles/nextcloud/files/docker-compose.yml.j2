@@ -3,6 +3,8 @@ services:
     image: nextcloud/all-in-one:latest
     container_name: nextcloud-aio-mastercontainer
     restart: always
+    networks:
+      - nextcloud-aio
     ports:
       - "8080:8080"
     volumes:
@@ -11,24 +13,7 @@ services:
     environment:
       APACHE_PORT: 11000
       APACHE_IP_BINDING: 127.0.0.1
-      NEXTCLOUD_DATADIR: /mnt/data/nextcloud/data
-    networks:
-      - nextcloud-aio
-    depends_on:
-      - caddy
-
-  caddy:
-    image: caddy:latest
-    container_name: nextcloud-aio-caddy
-    restart: always
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
-      - ./caddy_config:/config
-      - ./caddy_data:/data
-    environment:
-      EMAIL: "{{ ACME_EMAIL }}"
-      DOMAIN: "{{ NEXTCLOUD_URL }}"
-    network_mode: host
+      NEXTCLOUD_DATADIR: "{{ nextcloud_dir }}/data"
 
 networks:
   nextcloud-aio:

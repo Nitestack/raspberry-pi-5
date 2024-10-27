@@ -3,25 +3,10 @@ services:
     image: vaultwarden/server:latest
     container_name: vaultwarden
     restart: always
+    ports:
+      - "8888:80"
+    volumes:
+      - "{{ vaultwarden_dir }}/data:/data"
     environment:
       DOMAIN: "{{ VAULTWARDEN_URL }}"
       SIGNUPS_ALLOWED: "{{ VAULTWARDEN_SIGNUPS_ALLOWED }}"
-    volumes:
-      - /mnt/data/vaultwarden/data:/data
-
-  caddy:
-    image: caddy:latest
-    container_name: vaultwarden-caddy
-    restart: always
-    ports:
-      - 8888:80
-      - 444:443
-      - 444:443/udp
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - ./caddy-config:/config
-      - ./caddy-data:/data
-    environment:
-      DOMAIN: "{{ VAULTWARDEN_URL }}"
-      EMAIL: "{{ ACME_EMAIL }}"
-      LOG_FILE: "/data/access.log"

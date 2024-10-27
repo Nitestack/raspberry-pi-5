@@ -24,7 +24,8 @@
   roles:
     - zsh
     - docker
-    - vaultwarden
+    - caddy
     - cloudflare-ddns-updater
     - pivpn
+    - vaultwarden
     - nextcloud
