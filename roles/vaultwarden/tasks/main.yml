@@ -9,11 +9,6 @@
         path: "{{ vaultwarden_dir }}"
         state: directory
 
-    - name: Copy Caddyfile to Vaultwarden directory
-      ansible.builtin.copy:
-        src: "../files/Caddyfile"
-        dest: "{{ vaultwarden_dir }}/Caddyfile"
-
     - name: Copy docker-compose.yml to Vaultwarden directory
       ansible.builtin.template:
         src: "../files/docker-compose.yml.j2"

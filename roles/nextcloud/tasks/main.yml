@@ -9,18 +9,13 @@
         path: "{{ nextcloud_dir }}"
         state: directory
 
-    - name: Copy Caddyfile to NextCloud directory
-      ansible.builtin.copy:
-        src: "../files/Caddyfile"
-        dest: "{{ nextcloud_dir }}/Caddyfile"
-
     - name: Copy docker-compose.yml to NextCloud directory
       ansible.builtin.template:
         src: "../files/docker-compose.yml.j2"
         dest: "{{ nextcloud_dir }}/docker-compose.yml"
 
     - name: Copy daemon.json to a directory
-      ansible.builtin.template:
+      ansible.builtin.copy:
         src: "../files/daemon.json"
         dest: "/etc/docker/daemon.json"
 
