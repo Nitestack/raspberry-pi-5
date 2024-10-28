@@ -6,12 +6,12 @@ services:
     networks:
       - nextcloud-aio
     ports:
-      - "8080:8080"
+      - "{{ NEXTCLOUD_AIO_PORT }}:8080"
     volumes:
       - nextcloud_aio_mastercontainer:/mnt/docker-aio-config
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
-      APACHE_PORT: 11000
+      APACHE_PORT: {{ NEXTCLOUD_PORT }}
       APACHE_IP_BINDING: 127.0.0.1
       NEXTCLOUD_DATADIR: "{{ nextcloud_dir }}/data"
 

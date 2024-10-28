@@ -89,15 +89,10 @@ To ensure remote access and proper functionality of the services, configure the 
 
 ```plaintext
 # PiVPN (WireGuard)
-public:51820/tcp -> local:51820/tcp
+# PIVPN_PORT is an environment variable configurable in `secrets.yml`. The default value is `51820`.
+public:${PIVPN_PORT}/tcp -> local:${PIVPN_PORT}/tcp
 
-# Vaultwarden
-public:8888/tcp -> local:8888/tcp
-
-# NextCloud
-public:80/tcp  -> local:80/tcp
-
-# Shared Ports (Vaultwarden & NextCloud)
+# Caddy (handling NextCloud and Vaultwarden)
 public:443/tcp -> local:443/tcp
 public:443/udp -> local:443/udp
 ```
