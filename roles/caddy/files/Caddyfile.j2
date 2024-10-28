@@ -6,7 +6,7 @@
 	# if you encounter issues.
 	encode zstd gzip
 
-	reverse_proxy localhost:8888 {
+	reverse_proxy localhost:{{ VAULTWARDEN_PORT }} {
 		# Send the true remote IP to Rocket, so that vaultwarden can put this in the log, so that fail2ban can ban the correct IP.
 		header_up X-Real-IP {remote_host}
 	}
@@ -17,5 +17,5 @@
 
 	header Strict-Transport-Security max-age=31536000;
 
-	reverse_proxy localhost:11000
+	reverse_proxy localhost:{{ NEXTCLOUD_PORT }}
 }
