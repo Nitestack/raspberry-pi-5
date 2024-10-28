@@ -4,7 +4,7 @@ services:
     container_name: vaultwarden
     restart: always
     ports:
-      - "8888:80"
+      - "127.0.0.1:8888:80"
     volumes:
       - "{{ vaultwarden_dir }}/data:/data"
     environment:
