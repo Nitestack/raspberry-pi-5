@@ -13,7 +13,7 @@
 ![GitHub Repo Stars](https://img.shields.io/github/stars/Nitestack/raspberry-pi-5?style=for-the-badge)
 ![Github Created At](https://img.shields.io/github/created-at/Nitestack/raspberry-pi-5?style=for-the-badge)
 
-[Features](#-features) • [Requirements](#️-requirements) • [Getting Started](#-getting-started) • [Port Forwarding](#-port-forwarding) • [Environment Variables](#-environment-variables) • [License](#-license)
+[Features](#-features) • [Requirements](#️-requirements) • [Getting Started](#-getting-started) • [Port Forwarding](#-port-forwarding) • [Environment Variables](#-environment-variables) • [Security](#-security) • [License](#-license)
 
 _This [Ansible](https://www.ansible.com) configuration automates the setup of a Raspberry Pi Home Server running [Raspberry Pi OS](https://www.raspberrypi.com/software). It deploys essential services, enhances security, and ensures consistency across the server environment._
 
@@ -36,7 +36,7 @@ _This [Ansible](https://www.ansible.com) configuration automates the setup of a 
 ## ⚙️ Requirements
 
 1. **Raspberry Pi OS Lite (64-bit)**: Ensure your Raspberry Pi is running the latest version.
-2. **Ansible and sshpass**: Install these tools on your local machine.
+2. **Ansible**: Install Ansible on your local machine.
 3. **Cloudflare-managed domain**: Required for dynamic DNS updates and subdomain routing.
 4. **Ethernet connection**: Use a wired connection for your Raspberry Pi to ensure stable performance.
 
@@ -78,10 +78,11 @@ _This [Ansible](https://www.ansible.com) configuration automates the setup of a 
 3. **Run the playbook**:
 
    ```sh
-   ansible-playbook -i inventory.ini playbook.yml --ask-pass
+   ansible-playbook -i inventory.ini playbook.yml
    ```
 
-   You’ll be prompted for the Raspberry Pi user’s password.
+> [!IMPORTANT]
+> This only works if you have set up password-less authentication on your Raspberry Pi. Please look at the [Security](#-security) section for more details.
 
 ## 🔌 Port Forwarding
 
@@ -116,6 +117,33 @@ Create a `CNAME` record for your Vaultwarden subdomain, directing it to the valu
 ### NextCloud Settings
 
 Create a `CNAME` record for your NextCloud subdomain, directing it to the value specified in `CLOUDFLARE_RECORD_NAME`. Set the `NEXTCLOUD_URL` variable in `secrets.yml` to your NextCloud URL.
+
+## 🛡️ Security
+
+### 1. Add Your Host to Authorized Keys on the Raspberry Pi
+
+To enable secure SSH access, copy your public key to the Raspberry Pi:
+
+```sh
+ssh-copy-id nhan@raspberrypi.local
+```
+
+### 2. Update SSH Configuration
+
+Edit the `/etc/ssh/sshd_config` file on the Raspberry Pi to strengthen security. Update the following settings:
+
+```plaintext
+PasswordAuthentication no
+UsePAM no
+```
+
+### 3. Reload the SSH Service
+
+Apply the changes by reloading the SSH service:
+
+```sh
+sudo systemctl reload ssh
+```
 
 ## 📝 License
 
