@@ -1,0 +1,24 @@
+---
+- name: Set up Immich
+  vars:
+    immich_dir: "/mnt/data/immich"
+
+  block:
+    - name: Create Immich directory
+      ansible.builtin.file:
+        path: "{{ immich_dir }}"
+        state: directory
+
+    - name: Download docker-compose.yml
+      ansible.builtin.get_url:
+        url: "https://github.com/immich-app/immich/releases/latest/download/docker-compose.yml"
+        dest: "{{ immich_dir }}/docker-compose.yml"
+
+    - name: Copy .env to Immich directory
+      ansible.builtin.template:
+        src: "../files/.env.j2"
+        dest: "{{ immich_dir }}/.env"
+
+    - name: Start Docker Compose
+      community.docker.docker_compose_v2:
+        project_src: "{{ immich_dir }}"

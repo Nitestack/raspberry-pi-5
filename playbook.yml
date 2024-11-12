@@ -28,4 +28,5 @@
     - cloudflare-ddns-updater
     - pivpn
     - vaultwarden
+    - immich
     - nextcloud
