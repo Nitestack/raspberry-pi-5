@@ -40,3 +40,4 @@ fi
 # ── Aliases ───────────────────────────────────────────────────────────
 alias eza="eza --icons --group-directories-first --octal-permissions"
 alias v="nvim"
+alias udc="docker compose pull && docker compose up -d"
