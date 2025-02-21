@@ -33,6 +33,7 @@ _This [Ansible](https://www.ansible.com) configuration automates the setup of a 
 - **PiVPN (WireGuard)** configuration for secure remote access
 - **NextCloud** for file synchronization and sharing
 - **Immich** for media synchronization with fast-upload speeds
+- **Home Assistant** for home automation and IoT management
 
 ## ⚙️ Requirements
 
@@ -94,7 +95,7 @@ To ensure remote access and proper functionality of the services, configure the 
 # PIVPN_PORT is an environment variable configurable in `secrets.yml`. The default value is `51820`.
 public:${PIVPN_PORT}/tcp -> local:${PIVPN_PORT}/tcp
 
-# Caddy (handling NextCloud, Vaultwarden and Immich)
+# Caddy (handling all the websites)
 public:443/tcp -> local:443/tcp
 public:443/udp -> local:443/udp
 ```
@@ -122,6 +123,10 @@ Create a `CNAME` record for your NextCloud subdomain, directing it to the value 
 ### Immich Settings
 
 Create a `CNAME` record for your Immich subdomain, directing it to the value specified in `CLOUDFLARE_RECORD_NAME`. Set the `IMMICH_URL` variable in `secrets.yml` to your Immich URL. In addition to that, please set your timezone id (TZ identifier) with `TIMEZONE` (check this [Wikipedia article](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List)). You also have to set a database password with `IMMICH_DB_WORD` (only use the characters `A-Za-z0-9`, without special characters or spaces).
+
+### Home Assistant Settings
+
+Create a `CNAME` record for your Home Assistant subdomain, directing it to the value specified in `CLOUDFLARE_RECORD_NAME`. Set the `HOME_ASSISTANT_URL` variable in `secrets.yml` to your Home Assistant URL.
 
 ## 🛡️ Security
 

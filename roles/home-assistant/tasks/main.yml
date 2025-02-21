@@ -1,0 +1,37 @@
+---
+- name: Set up Home Assistant
+  vars:
+    home_assistant_dir: "/mnt/data/home-assistant"
+
+  block:
+    - name: Create Home Assistant directory
+      ansible.builtin.file:
+        path: "{{ home_assistant_dir }}"
+        state: directory
+
+    - name: Copy docker-compose.yml to Home Assistant directory
+      ansible.builtin.template:
+        src: "../files/docker-compose.yml.j2"
+        dest: "{{ home_assistant_dir }}/docker-compose.yml"
+
+    - name: Start Docker Compose
+      community.docker.docker_compose_v2:
+        project_src: "{{ home_assistant_dir }}"
+
+    - name: Edit HTTP configuration
+      ansible.builtin.blockinfile:
+        path: "{{ home_assistant_dir }}/configuration.yaml"
+        insertafter: EOF
+        block: |
+          http:
+            server_host: 127.0.0.1
+            base_url: {{ HOME_ASSISTANT_URL }}
+            use_x_forwarded_for: true
+            trusted_proxies: 127.0.0.1
+      register: http_config_result
+
+    - name: Restart Docker Compose
+      community.docker.docker_compose_v2:
+        project_src: "{{ home_assistant_dir }}"
+        state: restarted
+      when: http_config_result.changed
