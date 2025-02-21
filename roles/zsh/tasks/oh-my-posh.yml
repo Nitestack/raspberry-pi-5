@@ -21,5 +21,5 @@
 
     - name: Copy config
       ansible.builtin.get_url:
-        url: "https://raw.githubusercontent.com/Nitestack/dotfiles/refs/heads/master/config/private_dot_config/exact_oh-my-posh/config.yml"
+        url: "https://raw.githubusercontent.com/Nitestack/dotfiles/refs/heads/main/config/private_dot_config/oh-my-posh/config.yml"
         dest: "{{ ohmyposh_config_dir }}/config.yml"
