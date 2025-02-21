@@ -25,5 +25,5 @@
 
     - name: Copy config
       ansible.builtin.get_url:
-        url: "https://raw.githubusercontent.com/Nitestack/dotfiles/refs/heads/master/config/private_dot_config/exact_fastfetch/config.jsonc"
+        url: "https://raw.githubusercontent.com/Nitestack/dotfiles/refs/heads/main/config/private_dot_config/exact_fastfetch/config.jsonc"
         dest: "{{ fastfetch_config_dir }}/config.jsonc"
