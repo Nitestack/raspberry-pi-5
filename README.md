@@ -98,6 +98,9 @@ public:${PIVPN_PORT}/tcp -> local:${PIVPN_PORT}/tcp
 # Caddy (handling all the websites)
 public:443/tcp -> local:443/tcp
 public:443/udp -> local:443/udp
+
+# SSH (optional, if you want to access the Raspberry Pi remotely without WireGuard)
+public:22/tcp -> local:22/tcp
 ```
 
 ## 🛠️ Environment Variables
