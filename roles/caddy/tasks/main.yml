@@ -48,9 +48,17 @@
       ansible.builtin.template:
         src: "../files/Caddyfile.j2"
         dest: "{{ caddy_dir }}/Caddyfile"
+      register: caddy_config_result
 
     - name: Enable and start
       ansible.builtin.systemd_service:
         name: caddy
         state: started
         enabled: true
+
+    - name: Restart
+      ansible.builtin.systemd_service:
+        name: caddy
+        state: restarted
+        enabled: true
+      when: caddy_config_result.changed
