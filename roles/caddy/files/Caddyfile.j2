@@ -1,6 +1,4 @@
 {{ VAULTWARDEN_URL }} {
-	tls {{ ACME_EMAIL }}
-
 	# This setting may have compatibility issues with some browsers
 	# (e.g., attachment downloading on Firefox). Try disabling this
 	# if you encounter issues.
@@ -13,21 +11,19 @@
 }
 
 {{ NEXTCLOUD_URL }} {
-	tls {{ ACME_EMAIL }}
-
 	header Strict-Transport-Security max-age=31536000;
 
 	reverse_proxy localhost:{{ NEXTCLOUD_PORT }}
 }
 
-{{ IMMICH_URL }} {
-	tls {{ ACME_EMAIL }}
+{{ ONLYOFFICE_URL }} {
+	reverse_proxy localhost:{{ ONLYOFFICE_PORT }}
+}
 
+{{ IMMICH_URL }} {
 	reverse_proxy localhost:2283
 }
 
 {{ HOME_ASSISTANT_URL }} {
-	tls {{ ACME_EMAIL }}
-
 	reverse_proxy localhost:8123
 }
