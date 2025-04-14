@@ -31,7 +31,7 @@ _This [Ansible](https://www.ansible.com) configuration automates the setup of a 
 - **Vaultwarden deployment** for secure password management
 - **Cloudflare DDNS updater** for dynamic IP management
 - **PiVPN (WireGuard)** configuration for secure remote access
-- **NextCloud** for file synchronization and sharing
+- **NextCloud** with **OnlyOffice** for file synchronization and sharing
 - **Immich** for media synchronization with fast-upload speeds
 - **Home Assistant** for home automation and IoT management
 
@@ -121,7 +121,7 @@ Create a `CNAME` record for your Vaultwarden subdomain, directing it to the valu
 
 ### NextCloud Settings
 
-Create a `CNAME` record for your NextCloud subdomain, directing it to the value specified in `CLOUDFLARE_RECORD_NAME`. Set the `NEXTCLOUD_URL` variable in `secrets.yml` to your NextCloud URL.
+Create a `CNAME` record for your NextCloud subdomain, directing it to the value specified in `CLOUDFLARE_RECORD_NAME`. Set the `NEXTCLOUD_URL` and `ONLYOFFICE_URL` variable in `secrets.yml` to your NextCloud URL.
 
 ### Immich Settings
 
