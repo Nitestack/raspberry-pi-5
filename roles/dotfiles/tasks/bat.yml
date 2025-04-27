@@ -1,10 +1,10 @@
 - name: Install bat
-  when: "'bat' not in ansible_facts.packages"
   block:
     - name: Install
       ansible.builtin.apt:
         name: bat
         update_cache: true
+      when: "'bat' not in ansible_facts.packages"
 
     - name: Ensure .local/bin directory exists
       file:

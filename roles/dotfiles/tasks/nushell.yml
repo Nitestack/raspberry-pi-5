@@ -1,0 +1,86 @@
+- name: Install Nushell
+  when: "'nu' not in ansible_facts.packages"
+  vars:
+    gpg_key_tmp_file: /tmp/nushell.gpg.key
+    gpg_key_file: /etc/apt/keyrings/fury-nushell.gpg
+  block:
+    - name: Install dependencies
+      ansible.builtin.apt:
+        name: gpg
+        update_cache: true
+
+    - name: Download GPG key
+      ansible.builtin.get_url:
+        url: "https://apt.fury.io/nushell/gpg.key"
+        dest: "{{ gpg_key_tmp_file }}"
+        mode: "0644"
+
+    - name: Convert GPG key to keyring format
+      ansible.builtin.command:
+        cmd: "gpg --dearmor -o {{ gpg_key_file }} {{ gpg_key_tmp_file }}"
+      args:
+        creates: "{{ gpg_key_file }}"
+
+    - name: Remove temporary GPG key
+      ansible.builtin.file:
+        name: "{{ gpg_key_tmp_file }}"
+        state: absent
+
+    - name: Add Nushell repository to sources list
+      ansible.builtin.apt_repository:
+        repo: "deb [signed-by={{ gpg_key_file }}] https://apt.fury.io/nushell/ /"
+        filename: fury
+
+    - name: Install
+      ansible.builtin.apt:
+        name: nushell
+        update_cache: true
+
+    - name: Check if ~/.bashrc exists
+      ansible.builtin.stat:
+        path: "/home/{{ ansible_user }}/.bashrc"
+      register: bashrc_stat
+
+    - name: Check if ~/.profile exists
+      ansible.builtin.stat:
+        path: "/home/{{ ansible_user }}/.profile"
+      register: profile_stat
+
+    - name: Check if ~/.bash_logout exists
+      ansible.builtin.stat:
+        path: "/home/{{ ansible_user }}/.bash_logout"
+      register: bash_logout_stat
+
+    - name: Copy /etc/skel/.bashrc to ~/.bashrc
+      ansible.builtin.copy:
+        src: "/etc/skel/.bashrc"
+        dest: "/home/{{ ansible_user }}/.bashrc"
+      when: not bashrc_stat.stat.exists
+      become_user: "{{ ansible_user }}"
+
+    - name: Copy /etc/skel/.profile to ~/.profile
+      ansible.builtin.copy:
+        src: "/etc/skel/.profile"
+        dest: "/home/{{ ansible_user }}/.profile"
+      when: not profile_stat.stat.exists
+      become_user: "{{ ansible_user }}"
+
+    - name: Copy /etc/skel/.bash_logout to ~/.bash_logout
+      ansible.builtin.copy:
+        src: "/etc/skel/.bash_logout"
+        dest: "/home/{{ ansible_user }}/.bash_logout"
+      when: not bash_logout_stat.stat.exists
+      become_user: "{{ ansible_user }}"
+
+    - name: Ensure Nushell startup
+      ansible.builtin.blockinfile:
+        path: "/home/{{ ansible_user }}/.bashrc"
+        insertafter: EOF
+        block: |
+          # Start Nushell for interactive sessions
+          if [ -n "$PS1" ]; then
+            if command -v nu &> /dev/null; then
+              exec nu
+            fi
+          fi
+      become_user: "{{ ansible_user }}"

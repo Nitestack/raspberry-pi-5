@@ -1,0 +1,13 @@
+- name: Install chezmoi
+  block:
+    - name: Ensure .local/bin directory exists
+      file:
+        path: "/home/{{ ansible_user }}/.local/bin"
+        state: directory
+      become_user: "{{ ansible_user }}"
+
+    - name: Install
+      ansible.builtin.shell: sh -c "$(curl -fsLS get.chezmoi.io/lb)"
+      args:
+        creates: "/home/{{ ansible_user }}/.local/bin/chezmoi"
+      become_user: "{{ ansible_user }}"

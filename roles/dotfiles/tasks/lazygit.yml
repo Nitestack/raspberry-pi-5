@@ -1,0 +1,30 @@
+- name: Install lazygit
+  block:
+    - name: Ensure /usr/local/bin directory exists
+      file:
+        path: "/usr/local/bin"
+        state: directory
+
+    - name: Check if already installed
+      ansible.builtin.command: which lazygit
+      register: lazygit_check
+      failed_when: false
+      changed_when: false
+
+    - name: Check latest lazygit version
+      ansible.builtin.uri:
+        url: "https://api.github.com/repos/jesseduffield/lazygit/releases/latest"
+        return_content: true
+        body_format: json
+      register: response
+      when: lazygit_check.rc != 0
+
+    - name: Install
+      ansible.builtin.unarchive:
+        src: "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_{{ response.json.tag_name | regex_replace('^v(?=[0-9])', '') }}_Linux_arm64.tar.gz"
+        dest: "/usr/local/bin/"
+        creates: "/usr/local/bin/lazygit"
+        remote_src: true
+        include:
+          - lazygit
+      when: lazygit_check.rc != 0

@@ -35,7 +35,7 @@
 
     - name: Add Docker repository to sources list
       ansible.builtin.apt_repository:
-        repo: "deb [arch=arm64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release | lower }} stable"
+        repo: "deb [arch=arm64 signed-by={{ gpg_key_file }}] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release | lower }} stable"
         filename: docker
 
     - name: Install
