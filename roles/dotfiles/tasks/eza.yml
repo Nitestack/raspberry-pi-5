@@ -28,7 +28,7 @@
 
     - name: Add eza repository to sources list
       ansible.builtin.apt_repository:
-        repo: "deb [arch=arm64 signed-by={{ gpg_key_file }}] http://deb.gierens.de stable main"
+        repo: "deb [signed-by={{ gpg_key_file }}] http://deb.gierens.de stable main"
         filename: gierens
 
     - name: Install

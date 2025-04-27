@@ -20,9 +20,18 @@
       ansible.builtin.import_tasks: pre_tasks/mount_nvme_ssds.yml
     - name: Suppress login message
       ansible.builtin.import_tasks: pre_tasks/suppress_login_message.yml
+  post_tasks:
+    - name: Display new public key for manual GitHub setup
+      ansible.builtin.debug:
+        msg: "Copy this public key into your GitHub account: {{ keypair_result.public_key }}"
+      when: keypair_result.changed
+    - name: Post-install instructions for Dotfiles
+      ansible.builtin.debug:
+        msg: "To initialize the dotfiles, run the following command: chezmoi init --source=~/.dotfiles --apply"
+      when: not dotfiles_stat.stat.exists
 
   roles:
-    - zsh
+    - dotfiles
     - docker
     - caddy
     - cloudflare-ddns-updater

@@ -1,6 +1,4 @@
 - name: Install fastfetch
-  vars:
-    fastfetch_config_dir: "/home/{{ ansible_user }}/.config/fastfetch"
   block:
     - name: Check if already installed
       ansible.builtin.command: dpkg-query -W fastfetch
@@ -17,13 +15,3 @@
       ansible.builtin.apt:
         deb: "https://github.com/fastfetch-cli/fastfetch/releases/latest/download/fastfetch-linux-aarch64.deb"
       when: fastfetch_res.rc == 1
-
-    - name: Ensure fastfetch config directory exists
-      ansible.builtin.file:
-        path: "{{ fastfetch_config_dir }}"
-        state: directory
-
-    - name: Copy config
-      ansible.builtin.get_url:
-        url: "https://raw.githubusercontent.com/Nitestack/dotfiles/refs/heads/main/config/private_dot_config/exact_fastfetch/config.jsonc"
-        dest: "{{ fastfetch_config_dir }}/config.jsonc"

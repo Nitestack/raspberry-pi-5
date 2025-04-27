@@ -1,0 +1,12 @@
+- name: Install carapace
+  when: "'carapace' not in ansible_facts.packages"
+  block:
+    - name: Add carapace repository to sources list
+      ansible.builtin.apt_repository:
+        repo: "deb [trusted=yes] https://apt.fury.io/rsteube/ /"
+        filename: fury
+
+    - name: Install
+      ansible.builtin.apt:
+        name: carapace-bin
+        update_cache: true
