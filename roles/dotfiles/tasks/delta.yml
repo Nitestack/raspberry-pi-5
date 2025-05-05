@@ -1,7 +1,7 @@
 - name: Install delta
   block:
     - name: Check if already installed
-      ansible.builtin.command: dpkg-query -W delta
+      ansible.builtin.command: dpkg-query -W git-delta
       register: delta_res
       failed_when: delta_res.rc > 1
       changed_when: delta_res.rc == 1
