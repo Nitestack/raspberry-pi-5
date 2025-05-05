@@ -1,5 +1,5 @@
 - name: Install carapace
-  when: "'carapace' not in ansible_facts.packages"
+  when: "'carapace-bin' not in ansible_facts.packages"
   block:
     - name: Add carapace repository to sources list
       ansible.builtin.apt_repository:

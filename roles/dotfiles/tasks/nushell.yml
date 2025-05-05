@@ -1,5 +1,5 @@
 - name: Install Nushell
-  when: "'nu' not in ansible_facts.packages"
+  when: "'nushell' not in ansible_facts.packages"
   vars:
     gpg_key_tmp_file: /tmp/nushell.gpg.key
     gpg_key_file: /etc/apt/keyrings/fury-nushell.gpg
