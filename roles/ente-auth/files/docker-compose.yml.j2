@@ -1,0 +1,35 @@
+services:
+  museum:
+    image: ghcr.io/ente-io/server
+    ports:
+      - "{{ ENTE_API_PORT }}:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./museum.yml:/museum.yaml:ro
+      - "{{ ente_auth_dir }}/data:/data:ro"
+
+  web:
+    image: ghcr.io/ente-io/web
+    ports:
+      # - 3001:3001 # Accounts
+      - "{{ ENTE_AUTH_PORT }}:3003" # Auth
+    environment:
+      ENTE_API_ORIGIN: "{{ ENTE_API_URL }}"
+
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: pguser
+      POSTGRES_PASSWORD: "{{ ENTE_DB_PASSWORD }}"
+      POSTGRES_DB: ente_db
+    healthcheck:
+      test: pg_isready -q -d ente_db -U pguser
+      start_period: 40s
+      start_interval: 1s
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:
