@@ -29,7 +29,4 @@ services:
       start_period: 40s
       start_interval: 1s
     volumes:
-      - postgres-data:/var/lib/postgresql/data
-
-volumes:
-  postgres-data:
+      - "{{ ente_auth_dir }}/db:/var/lib/postgresql/data"
