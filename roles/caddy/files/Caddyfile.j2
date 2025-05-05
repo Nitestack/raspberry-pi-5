@@ -27,3 +27,11 @@
 {{ HOME_ASSISTANT_URL }} {
 	reverse_proxy localhost:8123
 }
+
+{{ ENTE_API_URL }} {
+	reverse_proxy localhost:{{ ENTE_API_PORT }}
+}
+
+{{ ENTE_AUTH_URL }} {
+	reverse_proxy localhost:{{ ENTE_AUTH_PORT }}
+}
