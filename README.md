@@ -27,13 +27,14 @@ _This [Ansible](https://www.ansible.com) configuration automates the setup of a 
 > [!Warning]
 > This setup requires your domain to be fully managed by Cloudflare DNS.
 
-- **Automated Docker installation**
-- **Vaultwarden deployment** for secure password management
-- **Cloudflare DDNS updater** for dynamic IP management
+- **Automated Docker Installation**
+- **Vaultwarden Deployment** for secure password management
+- **Cloudflare DDNS Updater** for dynamic IP management
 - **PiVPN (WireGuard)** configuration for secure remote access
 - **NextCloud** with **OnlyOffice** for file synchronization and sharing
 - **Immich** for media synchronization with fast-upload speeds
 - **Home Assistant** for home automation and IoT management
+- **Ente Auth** for a cross-platform 2FA solution
 - **Dotfiles** for a standardized environment
 
 ## ⚙️ Requirements
@@ -108,29 +109,16 @@ public:22/tcp -> local:22/tcp
 
 To securely configure sensitive data, create a `secrets.yml` file in the root directory. Copy the `secrets.example.yml` file and populate the fields as required.
 
+> [!IMPORTANT]
+> All environment variables ending with `_URL` need to have a `CNAME` record pointing to the `CLOUDFLARE_RECORD_NAME` value.
+
 ### Cloudflare DDNS Updater
 
-Ensure that an `A` record for your domain is set up, initially pointing to a placeholder IP (e.g., `8.8.8.8`). The DDNS script will update it with your public IP. Define the record name in `secrets.yml` under `CLOUDFLARE_RECORD_NAME`.
-
-### PiVPN Configuration
-
-Add a `CNAME` record for your PiVPN subdomain, pointing it to the value in `CLOUDFLARE_RECORD_NAME`. Update the `PIVPN_DOMAIN` variable in `secrets.yml` with the correct domain.
-
-### Vaultwarden Settings
-
-Create a `CNAME` record for your Vaultwarden subdomain, directing it to the value specified in `CLOUDFLARE_RECORD_NAME`. Set the `VAULTWARDEN_URL` variable in `secrets.yml` to your Vaultwarden URL.
-
-### NextCloud Settings
-
-Create a `CNAME` record for your NextCloud subdomain, directing it to the value specified in `CLOUDFLARE_RECORD_NAME`. Set the `NEXTCLOUD_URL` and `ONLYOFFICE_URL` variable in `secrets.yml` to your NextCloud URL.
+Ensure that an `A` record for your domain is set up, initially pointing to a placeholder IP (e.g., `8.8.8.8`). The DDNS script will update it with your public IP. Define the record name under `CLOUDFLARE_RECORD_NAME`.
 
 ### Immich Settings
 
-Create a `CNAME` record for your Immich subdomain, directing it to the value specified in `CLOUDFLARE_RECORD_NAME`. Set the `IMMICH_URL` variable in `secrets.yml` to your Immich URL. In addition to that, please set your timezone id (TZ identifier) with `TIMEZONE` (check this [Wikipedia article](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List)). You also have to set a database password with `IMMICH_DB_WORD` (only use the characters `A-Za-z0-9`, without special characters or spaces).
-
-### Home Assistant Settings
-
-Create a `CNAME` record for your Home Assistant subdomain, directing it to the value specified in `CLOUDFLARE_RECORD_NAME`. Set the `HOME_ASSISTANT_URL` variable in `secrets.yml` to your Home Assistant URL.
+Please set your timezone id (TZ identifier) with `TIMEZONE` (check this [Wikipedia article](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List)).
 
 ## 🛡️ Security
 
