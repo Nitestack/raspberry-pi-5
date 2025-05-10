@@ -2,16 +2,11 @@
 - name: Set up NextCloud
   vars:
     nextcloud_dir: "/mnt/data/nextcloud"
-    onlyoffice_dir: "{{ nextcloud_dir }}/onlyoffice"
 
   block:
     - name: Create NextCloud directory
       ansible.builtin.file:
         path: "{{ nextcloud_dir }}"
-        state: directory
-    - name: Create OnlyOffice directory
-      ansible.builtin.file:
-        path: "{{ onlyoffice_dir }}"
         state: directory
 
     - name: Copy docker-compose.yml to NextCloud directory
