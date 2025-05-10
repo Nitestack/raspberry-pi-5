@@ -12,6 +12,7 @@
           - debian-archive-keyring
           - apt-transport-https
         update_cache: true
+      when: "'caddy' not in ansible_facts.packages"
     - name: Download GPG key
       ansible.builtin.get_url:
         url: "https://dl.cloudsmith.io/public/caddy/stable/gpg.key"
@@ -28,6 +29,7 @@
       ansible.builtin.file:
         name: "{{ gpg_key_tmp_file }}"
         state: absent
+      when: "'caddy' not in ansible_facts.packages"
     - name: Download repository list
       ansible.builtin.get_url:
         url: "https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt"
@@ -38,6 +40,7 @@
       ansible.builtin.apt:
         name: caddy
         update_cache: true
+      when: "'caddy' not in ansible_facts.packages"
 
     - name: Create Caddy directory
       ansible.builtin.file:

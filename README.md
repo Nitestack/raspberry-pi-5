@@ -34,6 +34,7 @@ _This [Ansible](https://www.ansible.com) configuration automates the setup of a 
 - **NextCloud** for file synchronization and sharing
 - **Immich** for media synchronization with fast-upload speeds
 - **Ente Auth** for a cross-platform 2FA solution
+- **FreshRSS** for a news aggregator
 - **Dotfiles** for a standardized environment
 
 ## ⚙️ Requirements
