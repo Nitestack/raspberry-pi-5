@@ -35,9 +35,11 @@
     - docker
     - caddy
     - cloudflare-ddns-updater
-    - pivpn
-    - vaultwarden
-    - immich
+
     - nextcloud
-    - ente-auth
+    - immich
+    - vaultwarden
+    - karakeep
     - freshrss
+    - ente-auth
+    - pivpn
