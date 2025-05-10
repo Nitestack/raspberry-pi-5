@@ -1,3 +1,15 @@
+(protected) {
+	@blocked not remote_ip 8.8.8.8
+	error @blocked 403
+
+	handle_errors 403 {
+		rewrite * /403.html
+		file_server {
+			root /etc/caddy/errors
+		}
+	}
+}
+
 {{ VAULTWARDEN_URL }} {
 	# This setting may have compatibility issues with some browsers
 	# (e.g., attachment downloading on Firefox). Try disabling this
@@ -35,3 +47,4 @@
 {{ KARAKEEP_URL }} {
 	reverse_proxy localhost:{{ KARAKEEP_PORT }}
 }
+
