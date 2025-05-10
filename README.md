@@ -31,7 +31,7 @@ _This [Ansible](https://www.ansible.com) configuration automates the setup of a 
 - **Vaultwarden Deployment** for secure password management
 - **Cloudflare DDNS Updater** for dynamic IP management
 - **PiVPN (WireGuard)** configuration for secure remote access
-- **NextCloud** with **OnlyOffice** for file synchronization and sharing
+- **NextCloud** for file synchronization and sharing
 - **Immich** for media synchronization with fast-upload speeds
 - **Ente Auth** for a cross-platform 2FA solution
 - **Dotfiles** for a standardized environment

@@ -14,19 +14,6 @@ services:
       APACHE_PORT: {{ NEXTCLOUD_PORT }}
       APACHE_IP_BINDING: 127.0.0.1
       NEXTCLOUD_DATADIR: "{{ nextcloud_dir }}/data"
-  onlyoffice:
-    image: onlyoffice/documentserver:latest
-    container_name: onlyoffice-document-server
-    restart: always
-    ports:
-      - "{{ ONLYOFFICE_PORT }}:80"
-    volumes:
-      - "{{ onlyoffice_dir }}/data:/var/www/onlyoffice/Data"
-      - "{{ onlyoffice_dir }}/log:/var/log/onlyoffice"
-      - "{{ onlyoffice_dir }}/lib:/var/lib/onlyoffice"
-      - "{{ onlyoffice_dir }}/db:/var/lib/postgresql"
-    environment:
-      JWT_SECRET: {{ ONLYOFFICE_JWT_SECRET }}
 
 networks:
   nextcloud-aio:
