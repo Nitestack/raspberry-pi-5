@@ -14,7 +14,7 @@ services:
     image: ghcr.io/ente-io/web
     ports:
       # - 3001:3001 # Accounts
-      - "{{ ENTE_AUTH_PORT }}:3003" # Auth
+      - "127.0.0.1:{{ ENTE_AUTH_PORT }}:3003" # Auth
     environment:
       ENTE_API_ORIGIN: "{{ ENTE_API_URL }}"
 
