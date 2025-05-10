@@ -24,10 +24,6 @@
 	reverse_proxy localhost:2283
 }
 
-{{ HOME_ASSISTANT_URL }} {
-	reverse_proxy localhost:8123
-}
-
 {{ ENTE_API_URL }} {
 	reverse_proxy localhost:{{ ENTE_API_PORT }}
 }

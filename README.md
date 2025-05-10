@@ -33,7 +33,6 @@ _This [Ansible](https://www.ansible.com) configuration automates the setup of a 
 - **PiVPN (WireGuard)** configuration for secure remote access
 - **NextCloud** with **OnlyOffice** for file synchronization and sharing
 - **Immich** for media synchronization with fast-upload speeds
-- **Home Assistant** for home automation and IoT management
 - **Ente Auth** for a cross-platform 2FA solution
 - **Dotfiles** for a standardized environment
 
