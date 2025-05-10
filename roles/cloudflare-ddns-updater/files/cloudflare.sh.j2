@@ -9,10 +9,6 @@ zone_identifier="{{ CLOUDFLARE_ZONE_IDENTIFIER }}" # Can be found in the "Overvi
 record_name="{{ CLOUDFLARE_RECORD_NAME }}"         # Which record you want to be synced
 ttl=3600                                           # Set the DNS TTL (seconds)
 proxy="false"                                      # Set the proxy to true or false
-sitename=""                                        # Title of site "Example Site"
-slackchannel=""                                    # Slack Channel #example
-slackuri=""                                        # URI for Slack WebHook "https://hooks.slack.com/services/xxxxx"
-discorduri=""                                      # URI for Discord WebHook "https://discordapp.com/api/webhooks/xxxxx"
 
 ###########################################
 ## Check if we have a public IP
@@ -79,48 +75,16 @@ record_identifier=$(echo "$record" | sed -E 's/.*"id":"([A-Za-z0-9_]+)".*/\1/')
 ###########################################
 ## Change the IP@Cloudflare using the API
 ###########################################
-update=$(curl -s -X PATCH "https://api.cloudflare.com/client/v4/zones/$zone_identifier/dns_records/$record_identifier" \
+curl -s -X PATCH "https://api.cloudflare.com/client/v4/zones/$zone_identifier/dns_records/$record_identifier" \
   -H "X-Auth-Email: $auth_email" \
   -H "$auth_header $auth_key" \
   -H "Content-Type: application/json" \
-  --data "{\"type\":\"A\",\"name\":\"$record_name\",\"content\":\"$ip\",\"ttl\":$ttl,\"proxied\":${proxy}}")
+  --data "{\"type\":\"A\",\"name\":\"$record_name\",\"content\":\"$ip\",\"ttl\":$ttl,\"proxied\":${proxy}}"
 
 ###########################################
-## Report the status
+## Update Caddyfile for protected sites
 ###########################################
-case "$update" in
-*"\"success\":false"*)
-  echo -e "DDNS Updater: $ip $record_name DDNS failed for $record_identifier ($ip). DUMPING RESULTS:\n$update" | logger -s
-  if [[ $slackuri != "" ]]; then
-    curl -L -X POST $slackuri \
-      --data-raw '{
-      "channel": "'$slackchannel'",
-      "text" : "'"$sitename"' DDNS Update Failed: '$record_name': '$record_identifier' ('$ip')."
-    }'
-  fi
-  if [[ $discorduri != "" ]]; then
-    curl -i -H "Accept: application/json" -H "Content-Type:application/json" -X POST \
-      --data-raw '{
-      "content" : "'"$sitename"' DDNS Update Failed: '$record_name': '$record_identifier' ('$ip')."
-    }' $discorduri
-  fi
-  exit 1
-  ;;
-*)
-  logger "DDNS Updater: $ip $record_name DDNS updated."
-  if [[ $slackuri != "" ]]; then
-    curl -L -X POST $slackuri \
-      --data-raw '{
-      "channel": "'$slackchannel'",
-      "text" : "'"$sitename"' Updated: '$record_name''"'"'s'""' new IP Address is '$ip'"
-    }'
-  fi
-  if [[ $discorduri != "" ]]; then
-    curl -i -H "Accept: application/json" -H "Content-Type:application/json" -X POST \
-      --data-raw '{
-      "content" : "'"$sitename"' Updated: '$record_name''"'"'s'""' new IP Address is '$ip'"
-    }' $discorduri
-  fi
-  exit 0
-  ;;
-esac
+sed -r -i \
+  "s|^([[:space:]]*)@blocked not remote_ip [0-9]{1,3}(\.[0-9]{1,3}){3}|\1@blocked not remote_ip $ip|" \
+  /etc/caddy/Caddyfile
+systemctl restart caddy.service

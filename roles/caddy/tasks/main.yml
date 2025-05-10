@@ -47,11 +47,18 @@
         path: "{{ caddy_dir }}"
         state: directory
 
-    - name: Copy Caddyfile to Caddyfile directory
+    - name: Copy Caddyfile to Caddy directory
       ansible.builtin.template:
         src: "../files/Caddyfile.j2"
         dest: "{{ caddy_dir }}/Caddyfile"
       register: caddy_config_result
+
+    - name: Copy static error pages to Caddy directory
+      ansible.builtin.copy:
+        src: "../files/errors"
+        dest: "{{ caddy_dir }}"
+        group: caddy
+      register: caddy_error_pages_result
 
     - name: Enable and start
       ansible.builtin.systemd_service:
@@ -64,4 +71,4 @@
         name: caddy
         state: restarted
         enabled: true
-      when: caddy_config_result.changed
+      when: caddy_config_result.changed or caddy_error_pages_result.changed
