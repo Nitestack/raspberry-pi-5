@@ -1,0 +1,22 @@
+services:
+  glance:
+    container_name: glance
+    image: glanceapp/glance
+    restart: unless-stopped
+    volumes:
+      - ./config:/app/config
+      - ./assets:/app/assets
+      # For Docker Containers Widget
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      # For Server Stats Widget to work (read-only)
+      - /mnt/data:/mnt/data:ro
+      - /mnt/backup:/mnt/backup:ro
+    ports:
+      - "{{ GLANCE_PORT }}:8080"
+    environment:
+      - GITHUB_API_TOKEN="{{ GITHUB_API_TOKEN }}"
+    labels:
+      glance.name: Glance
+      glance.icon: di:glance
+      glance.url: {{ GLANCE_URL }}
+      glance.hide: false

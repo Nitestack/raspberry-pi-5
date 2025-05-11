@@ -1,0 +1,112 @@
+- name: Server
+  columns:
+    - size: small
+      widgets:
+        - type: bookmarks
+          groups:
+            - title: Services
+              links:
+                - title: Cloudflare
+                  url: https://dash.cloudflare.com
+                  icon: di:cloudflare
+                - title: Namecheap
+                  url: https://ap.www.namecheap.com/
+                  icon: di:namecheap
+            - title: Documentation
+              links:
+                - title: Ansible
+                  url: https://docs.ansible.com
+                  icon: si:ansible
+                - title: Ente
+                  url: https://help.ente.io
+                  icon: si:e
+                - title: FreshRSS
+                  url: https://freshrss.github.io/FreshRSS/en
+                  icon: di:freshrss
+                - title: Glance
+                  url: https://github.com/glanceapp/glance/blob/main/docs/configuration.md
+                  icon: di:glance
+                - title: Immich
+                  url: https://immich.app/docs
+                  icon: di:immich
+                - title: Karakeep
+                  url: https://docs.karakeep.app
+                  icon: di:karakeep
+                - title: Nextcloud
+                  url: https://github.com/nextcloud/all-in-one
+                  icon: di:nextcloud
+                - title: PiVPN
+                  url: https://docs.pivpn.io
+                  icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/webp/pivpn.webp
+                - title: Vaultwarden
+                  url: https://github.com/dani-garcia/vaultwarden/wiki
+                  icon: si:vaultwarden
+            - title: Selfhosted
+              links:
+                - title: Awesome Selfhosted
+                  url: https://awesome-selfhosted.net
+                  icon: https://awesome-selfhosted.net/_static/logo.svg
+                - title: Awesome Sysadmin
+                  url: https://github.com/awesome-foss/awesome-sysadmin
+                  icon: https://avatars.githubusercontent.com/u/20512645
+            - title: GitHub Repositories
+              links:
+                - title: Raspberry Pi 5
+                  url: https://github.com/Nitestack/raspberry-pi-5
+                  icon: si:github
+
+    - size: full
+      widgets:
+        - type: docker-containers
+          hide-by-default: true
+        - type: group
+          widgets:
+            - type: reddit
+              subreddit: selfhosted
+            - type: reddit
+              subreddit: sysadmin
+            - type: reddit
+              subreddit: homelab
+            - type: hacker-news
+            - type: lobsters
+
+        - type: videos
+          channels:
+            - UCZNhwA1B5YqiY1nLzmM0ZRg # Christian Lempa
+            - UCgdTVe88YVSrOZ9qKumhULQ # Hardware Haven
+            - UCR-DXc1voovS8nhAvccRZhg # Jeff Geerling
+            - UC9x0AN7BWHpCDHSm9NiJFJQ # NetworkChuck
+            - UCjSEJkpGbcZhvo0lr-44X_w # TechHut
+            - UCOk-gHyjcWZNj3Br4oxwh0A # Techno Tim
+            - UCsnGwSIHyoYN0kiINAGUKxg # Wolfgang's Channel
+
+    - size: small
+      widgets:
+        - type: server-stats
+          servers:
+            - name: Raspberry Pi 5
+              type: local
+              hide-mountpoints-by-default: true
+              mountpoints:
+                "/":
+                  name: Root
+                  hide: false
+                "/mnt/data":
+                  name: Data
+                  hide: false
+                "/mnt/backup":
+                  name: Backup
+                  hide: false
+        - type: releases
+          token: ${GITHUB_API_TOKEN}
+          show-source-icon: true
+          collapse-after: -1
+          repositories:
+            - ente-io/ente
+            - FreshRSS/FreshRSS
+            - glanceapp/glance
+            - immich-app/immich
+            - karakeep-app/karakeep
+            - nextcloud/all-in-one
+            - pivpn/pivpn
+            - dani-garcia/vaultwarden

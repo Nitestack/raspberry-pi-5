@@ -9,6 +9,10 @@ services:
     volumes:
       - ./museum.yml:/museum.yaml:ro
       - "{{ ente_auth_dir }}/data:/data:ro"
+    labels:
+      glance.parent: ente
+      glance.name: API
+      glance.hide: false
 
   web:
     image: ghcr.io/ente-io/web
@@ -17,6 +21,12 @@ services:
       - "127.0.0.1:{{ ENTE_AUTH_PORT }}:3003" # Auth
     environment:
       ENTE_API_ORIGIN: "{{ ENTE_API_URL }}"
+    labels:
+      glance.id: ente
+      glance.name: Ente
+      glance.icon: si:e
+      glance.url: {{ ENTE_AUTH_URL }}
+      glance.hide: false
 
   postgres:
     image: postgres:15
@@ -30,3 +40,7 @@ services:
       start_interval: 1s
     volumes:
       - "{{ ente_auth_dir }}/db:/var/lib/postgresql/data"
+    labels:
+      glance.parent: ente
+      glance.name: DB
+      glance.hide: false

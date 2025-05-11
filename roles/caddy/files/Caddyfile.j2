@@ -48,3 +48,8 @@
 	reverse_proxy localhost:{{ KARAKEEP_PORT }}
 }
 
+{{ GLANCE_URL }} {
+	import protected
+
+	reverse_proxy localhost:{{ GLANCE_PORT }}
+}
