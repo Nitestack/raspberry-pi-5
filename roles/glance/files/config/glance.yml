@@ -13,9 +13,11 @@ theme:
   custom-css-file: /assets/user.css
 
 branding:
-  hide-footer: true
-
+  custom-footer: |
+    <p>Created by <a href="https://npham.de">Nhan Pham</a> and powered by <a href="https://github.com/glanceapp/glance">Glance</a></p>
+  logo-text: Hub
 pages:
   # It's not necessary to create a new file for each page and include it, you can simply
   # put its contents here, though multiple pages are easier to manage when separated
+  !include: home.yml
   !include: server.yml

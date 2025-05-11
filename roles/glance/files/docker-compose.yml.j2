@@ -14,8 +14,14 @@ services:
     ports:
       - "{{ GLANCE_PORT }}:8080"
     environment:
-      - GITHUB_API_TOKEN="{{ GITHUB_API_TOKEN }}"
-      - WEATHER_LOCATION={{ WEATHER_LOCATION }}
+      - GITHUB_API_TOKEN={{ GITHUB_API_TOKEN }}
+      - IMMICH_URL={{ IMMICH_URL }}
+      - IMMICH_API_KEY={{ IMMICH_API_KEY }}
+      - NEXTCLOUD_URL={{ NEXTCLOUD_URL }}
+      - KARAKEEP_URL={{ KARAKEEP_URL }}
+      - FRESHRSS_URL={{ FRESHRSS_URL }}
+      - VAULTWARDEN_URL={{ VAULTWARDEN_URL }}
+      - ENTE_AUTH_URL={{ ENTE_AUTH_URL }}
     labels:
       glance.name: Glance
       glance.icon: di:glance
