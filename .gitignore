@@ -1,1 +1,2 @@
 secrets.yml
+roles/glance/files/config/home.yml
