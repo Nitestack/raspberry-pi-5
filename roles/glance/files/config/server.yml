@@ -97,6 +97,70 @@
                 "/mnt/backup":
                   name: Backup
                   hide: false
+        - type: custom-api
+          title: Immich stats
+          cache: 1d
+          url: ${IMMICH_URL}/api/server/statistics
+          headers:
+            x-api-key: ${IMMICH_API_KEY}
+            Accept: application/json
+          template: |
+            <div class="flex justify-between text-center">
+              <div data-popover-type="html">
+                {{ $photos := .JSON.Int "photos" -}}
+                <div class="color-highlight size-h3">{{ $photos | formatNumber }}</div>
+                <div class="size-h6">PHOTOS</div>
+                <div data-popover-html>
+                  <ul class="list list-gap-2">
+                    {{- range (sortByInt "photos" "des" (.JSON.Array "usageByUser")) }}
+                    {{ if ne (.Int "photos") 0 -}}
+                    <li class="flex">
+                      <div class="size-h5">{{ .String "userName" }}</div>
+                      <div class="value-separator"></div>
+                      <div class="color-highlight text-very-compact">{{ .Int "photos" }} <span class="color-base size-h5">/</span> {{ $photos }}</div>
+                    </li>
+                    {{- end }}
+                    {{- end }}
+                  </ul>
+                </div>
+              </div>
+              <div data-popover-type="html">
+                {{ $videos := .JSON.Int "videos" -}}
+                <div class="color-highlight size-h3">{{ $videos | formatNumber }}</div>
+                <div class="size-h6">VIDEOS</div>
+                <div data-popover-html>
+                  <ul class="list list-gap-2">
+                    {{- range (sortByInt "videos" "des" (.JSON.Array "usageByUser")) }}
+                    {{ if ne (.Int "videos") 0 -}}
+                    <li class="flex">
+                      <div class="size-h5">{{ .String "userName" }}</div>
+                      <div class="value-separator"></div>
+                      <div class="color-highlight text-very-compact">{{ .Int "videos" }} <span class="color-base size-h5">/</span> {{ $videos }}</div>
+                    </li>
+                    {{- end }}
+                    {{- end }}
+                  </ul>
+                </div>
+              </div>
+              <div data-popover-type="html">
+                {{ $usage := div (.JSON.Int "usage" | toFloat) 1073741824 | toInt -}}
+                <div class="color-highlight size-h3">{{ $usage | formatNumber }}<span class="color-base">GB</span></div>
+                <div class="size-h6">USAGE</div>
+                <div data-popover-html>
+                  <ul class="list list-gap-2">
+                    {{- range (sortByInt "usage" "des" (.JSON.Array "usageByUser")) }}
+                    {{ if ne (.Int "usage") 0 -}}
+                    <li class="flex">
+                      <div class="size-h5">{{ .String "userName" }}</div>
+                      <div class="value-separator"></div>
+                      <div class="color-highlight text-very-compact">{{ div (.Int "usage" | toFloat) 1073741824 | toInt }} <span class="color-base size-h5">/</span> {{ $usage }} <span class="color-base">GB</span></div>
+                    </li>
+                    {{- end }}
+                    {{- end }}
+                  </ul>
+                </div>
+              </div>
+            </div>
         - type: releases
           token: ${GITHUB_API_TOKEN}
           show-source-icon: true
