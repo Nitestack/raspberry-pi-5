@@ -36,6 +36,7 @@ _This [Ansible](https://www.ansible.com) configuration automates the setup of a 
 - **Ente Auth** for a cross-platform 2FA solution
 - **FreshRSS** for a news aggregator
 - **Karakeep** for a bookmarking solution
+- **Glance** dashboard for a unified news feed and monitoring of the home lab
 - **Dotfiles** for a standardized environment
 
 ## ⚙️ Requirements
@@ -116,6 +117,10 @@ To securely configure sensitive data, create a `secrets.yml` file in the root di
 ### Cloudflare DDNS Updater
 
 Ensure that an `A` record for your domain is set up, initially pointing to a placeholder IP (e.g., `8.8.8.8`). The DDNS script will update it with your public IP. Define the record name under `CLOUDFLARE_RECORD_NAME`.
+
+### Glance Settings
+
+Please set a GitHub personal access token with `GITHUB_API_TOKEN` (check this [article](https://docs.github.com/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)).
 
 ### Immich Settings
 

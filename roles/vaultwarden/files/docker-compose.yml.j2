@@ -10,3 +10,8 @@ services:
     environment:
       DOMAIN: "{{ VAULTWARDEN_URL }}"
       SIGNUPS_ALLOWED: "{{ VAULTWARDEN_SIGNUPS_ALLOWED }}"
+    labels:
+      glance.name: Vaultwarden
+      glance.icon: si:vaultwarden
+      glance.url: {{ VAULTWARDEN_URL }}
+      glance.hide: false
