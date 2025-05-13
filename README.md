@@ -37,6 +37,7 @@ _This [Ansible](https://www.ansible.com) configuration automates the setup of a 
 - **FreshRSS** for a news aggregator
 - **Karakeep** for a bookmarking solution
 - **Glance** dashboard for a unified news feed and monitoring of the home lab
+- **AdGuard Home** for ad-blocking and privacy protection
 - **Dotfiles** for a standardized environment
 
 ## ⚙️ Requirements

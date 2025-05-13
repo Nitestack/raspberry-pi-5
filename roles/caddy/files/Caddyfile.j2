@@ -53,3 +53,7 @@
 
 	reverse_proxy localhost:{{ GLANCE_PORT }}
 }
+
+{{ ADGUARD_HOME_URL }} {
+	reverse_proxy localhost:{{ ADGUARD_HOME_ADMIN_PORT }}
+}
