@@ -4,6 +4,7 @@
     gpg_key_tmp_file: /tmp/caddy.gpg.key
     gpg_key_file: /usr/share/keyrings/caddy-stable-archive-keyring.gpg
     caddy_dir: /etc/caddy
+    caddy_update_ip_script: /etc/caddy/update_public_ip.sh
   block:
     - name: Install dependencies
       ansible.builtin.apt:
@@ -59,6 +60,19 @@
         dest: "{{ caddy_dir }}"
         group: caddy
       register: caddy_error_pages_result
+
+    - name: Copy IP Updater script
+      ansible.builtin.template:
+        src: "../files/update_public_ip.sh"
+        dest: "{{ caddy_update_ip_script }}"
+        mode: "0755"
+
+    - name: Ensure the cron job is present
+      ansible.builtin.cron:
+        name: "Caddy Public IP Updater"
+        minute: "*/1"
+        job: "{{ caddy_update_ip_script }}"
+      become_user: "{{ ansible_user }}"
 
     - name: Enable and start
       ansible.builtin.systemd_service:
