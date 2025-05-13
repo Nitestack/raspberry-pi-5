@@ -4,15 +4,20 @@
     glance_dir: "/mnt/data/glance"
 
   block:
-    # - name: Create Glance directory
-    #   ansible.builtin.file:
-    #     path: "{{ glance_dir }}"
-    #     state: directory
+    - name: Create Glance directory
+      ansible.builtin.file:
+        path: "{{ glance_dir }}"
+        state: directory
 
     - name: Copy docker-compose.yml to Glance directory
       ansible.builtin.template:
         src: "../files/docker-compose.yml.j2"
         dest: "{{ glance_dir }}/docker-compose.yml"
+
+    - name: Copy .env to Glance directory
+      ansible.builtin.template:
+        src: "../files/.env.j2"
+        dest: "{{ glance_dir }}/.env"
 
     - name: Copy config files to Glance directory
       ansible.builtin.copy:
