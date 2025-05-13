@@ -13,9 +13,4 @@ services:
       - /mnt/backup:/mnt/backup:ro
     ports:
       - "{{ GLANCE_PORT }}:8080"
-    labels:
-      glance.name: Glance
-      glance.icon: di:glance
-      glance.url: {{ GLANCE_URL }}
-      glance.hide: false
     env_file: .env

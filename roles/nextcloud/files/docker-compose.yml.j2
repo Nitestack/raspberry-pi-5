@@ -14,11 +14,6 @@ services:
       APACHE_PORT: {{ NEXTCLOUD_PORT }}
       APACHE_IP_BINDING: 127.0.0.1
       NEXTCLOUD_DATADIR: "{{ nextcloud_dir }}/data"
-    labels:
-      glance.name: NextCloud
-      glance.icon: di:nextcloud
-      glance.url: {{ NEXTCLOUD_URL }}
-      glance.hide: false
 
 networks:
   nextcloud-aio:

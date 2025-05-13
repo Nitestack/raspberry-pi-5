@@ -15,8 +15,3 @@ services:
     environment:
       TZ: "{{ TIMEZONE }}"
       CRON_MIN: '3,33'
-    labels:
-      glance.name: FreshRSS
-      glance.icon: di:freshrss
-      glance.url: {{ FRESHRSS_URL }}
-      glance.hide: false
