@@ -97,6 +97,11 @@
                 "/mnt/backup":
                   name: Backup
                   hide: false
+        - type: dns-stats
+          service: adguard
+          url: ${ADGUARD_HOME_URL}
+          username: ${ADGUARD_HOME_USERNAME}
+          password: ${ADGUARD_HOME_PASSWORD}
         - type: custom-api
           title: Immich stats
           cache: 1d
