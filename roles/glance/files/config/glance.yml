@@ -16,9 +16,9 @@ auth:
       password: ${GLANCE_PASSWORD}
 
 branding:
-  custom-footer: |
-    <p>Created by <a href="https://npham.de">Nhan Pham</a> and powered by <a href="https://github.com/glanceapp/glance">Glance</a></p>
-  logo-text: Hub
+  logo-text: Dashboard
+  app-name: Dashboard
+  hide-footer: true
 pages:
   # It's not necessary to create a new file for each page and include it, you can simply
   # put its contents here, though multiple pages are easier to manage when separated
