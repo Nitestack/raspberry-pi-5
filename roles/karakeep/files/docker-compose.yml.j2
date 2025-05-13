@@ -1,6 +1,7 @@
 services:
   web:
     image: ghcr.io/karakeep-app/karakeep:${KARAKEEP_VERSION:-release}
+    container_name: karakeep
     restart: unless-stopped
     volumes:
       - "{{ karakeep_dir }}/data:/data"
@@ -16,14 +17,9 @@ services:
       # You almost never want to change the value of the DATA_DIR variable.
       # If you want to mount a custom directory, change the volume mapping above instead.
       DATA_DIR: /data # DON'T CHANGE THIS
-    labels:
-      glance.id: karakeep
-      glance.name: Karakeep
-      glance.icon: di:karakeep
-      glance.url: {{ KARAKEEP_URL }}
-      glance.hide: false
   chrome:
     image: gcr.io/zenika-hub/alpine-chrome:123
+    container_name: karakeep-chrome
     restart: unless-stopped
     command:
       - --no-sandbox
@@ -32,12 +28,9 @@ services:
       - --remote-debugging-address=0.0.0.0
       - --remote-debugging-port=9222
       - --hide-scrollbars
-    labels:
-      glance.parent: karakeep
-      glance.name: Chrome
-      glance.hide: false
   meilisearch:
     image: getmeili/meilisearch:v1.13.3
+    container_name: karakeep-meilisearch
     restart: unless-stopped
     env_file:
       - .env
@@ -45,10 +38,6 @@ services:
       MEILI_NO_ANALYTICS: "true"
     volumes:
       - meilisearch:/meili_data
-    labels:
-      glance.parent: karakeep
-      glance.name: Meilisearch
-      glance.hide: false
 
 volumes:
   meilisearch:

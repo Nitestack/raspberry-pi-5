@@ -1,6 +1,7 @@
 services:
   museum:
     image: ghcr.io/ente-io/server
+    container_name: ente-museum
     ports:
       - "{{ ENTE_API_PORT }}:8080"
     depends_on:
@@ -9,26 +10,18 @@ services:
     volumes:
       - ./museum.yml:/museum.yaml:ro
       - "{{ ente_auth_dir }}/data:/data:ro"
-    labels:
-      glance.parent: ente
-      glance.name: API
-      glance.hide: false
 
   web:
     image: ghcr.io/ente-io/web
+    container_name: ente-web
     ports:
       - "127.0.0.1:{{ ENTE_AUTH_PORT }}:3003" # Auth
     environment:
-    labels:
-      glance.id: ente
-      glance.name: Ente
-      glance.icon: si:e
-      glance.url: {{ ENTE_AUTH_URL }}
-      glance.hide: false
       ENTE_API_ORIGIN: "https://{{ ENTE_API_DOMAIN }}"
 
   postgres:
     image: postgres:15
+    container_name: ente-postgres
     environment:
       POSTGRES_USER: pguser
       POSTGRES_PASSWORD: "{{ ENTE_DB_PASSWORD }}"
@@ -39,7 +32,3 @@ services:
       start_interval: 1s
     volumes:
       - "{{ ente_auth_dir }}/db:/var/lib/postgresql/data"
-    labels:
-      glance.parent: ente
-      glance.name: DB
-      glance.hide: false

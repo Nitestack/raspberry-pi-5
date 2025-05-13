@@ -17,6 +17,9 @@
                 - title: Ansible
                   url: https://docs.ansible.com
                   icon: si:ansible
+                - title: AdGuard Home
+                  url: https://adguard-dns.io/kb
+                  icon: di:adguard-home
                 - title: Ente
                   url: https://help.ente.io
                   icon: si:e
@@ -58,7 +61,88 @@
     - size: full
       widgets:
         - type: docker-containers
-          hide-by-default: true
+          containers:
+            adguardhome:
+              name: AdGuard Home
+              icon: di:adguard-home
+              url: ${ADGUARD_HOME_URL}
+            ente-web:
+              name: Ente Auth
+              icon: si:e
+              url: ${ENTE_AUTH_URL}
+              id: ente
+            ente-museum:
+              name: Museum (API Server)
+              parent: ente
+            ente-postgres:
+              name: PostgreSQL
+              parent: ente
+            freshrss:
+              name: FreshRSS
+              icon: di:freshrss
+              url: ${FRESHRSS_URL}
+            glance:
+              name: Glance
+              icon: di:glance
+              url: ${GLANCE_URL}
+            immich_server:
+              name: Immich
+              icon: di:immich
+              url: ${IMMICH_URL}
+              id: immich
+            immich_machine_learning:
+              name: Machine Learning
+              parent: immich
+            immich_redis:
+              name: Valkey
+              parent: immich
+            immich_postgres:
+              name: PostgreSQL
+              parent: immich
+            karakeep:
+              name: Karakeep
+              icon: di:karakeep
+              url: ${KARAKEEP_URL}
+              id: karakeep
+            karakeep-chrome:
+              name: Chrome
+              parent: karakeep
+            karakeep-meilisearch:
+              name: Meilisearch
+              parent: karakeep
+            nextcloud-aio-nextcloud:
+              name: NextCloud
+              icon: di:nextcloud
+              url: ${NEXTCLOUD_URL}
+              id: nextcloud
+            nextcloud-aio-mastercontainer:
+              name: All-in-One
+              parent: nextcloud
+            nextcloud-aio-apache:
+              name: Apache
+              parent: nextcloud
+            nextcloud-aio-database:
+              name: Database
+              parent: nextcloud
+            nextcloud-aio-notify-push:
+              name: Notify Push
+              parent: nextcloud
+            nextcloud-aio-redis:
+              name: Redis
+              parent: nextcloud
+            nextcloud-aio-collabora:
+              name: Collabora
+              parent: nextcloud
+            nextcloud-aio-imaginary:
+              name: Imaginary
+              parent: nextcloud
+            nextcloud-aio-whiteboard:
+              name: Whiteboard
+              parent: nextcloud
+            vaultwarden:
+              name: Vaultwarden
+              icon: si:vaultwarden
+              url: ${VAULTWARDEN_URL}
         - type: group
           widgets:
             - type: reddit
