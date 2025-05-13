@@ -14,15 +14,7 @@ services:
     ports:
       - "{{ GLANCE_PORT }}:8080"
     environment:
-      - GITHUB_API_TOKEN={{ GITHUB_API_TOKEN }}
-      - IMMICH_URL={{ IMMICH_URL }}
-      - IMMICH_API_KEY={{ IMMICH_API_KEY }}
-      - NEXTCLOUD_URL={{ NEXTCLOUD_URL }}
-      - KARAKEEP_URL={{ KARAKEEP_URL }}
-      - FRESHRSS_URL={{ FRESHRSS_URL }}
-      - VAULTWARDEN_URL={{ VAULTWARDEN_URL }}
-      - ENTE_AUTH_URL={{ ENTE_AUTH_URL }}
-      - ADGUARD_HOME_URL={{ ADGUARD_HOME_URL }}
+      - ADGUARD_HOME_URL=https://{{ ADGUARD_HOME_DOMAIN }}
       - ADGUARD_HOME_USERNAME={{ ADGUARD_HOME_USERNAME }}
       - ADGUARD_HOME_PASSWORD={{ ADGUARD_HOME_PASSWORD }}
     labels:
@@ -30,3 +22,11 @@ services:
       glance.icon: di:glance
       glance.url: {{ GLANCE_URL }}
       glance.hide: false
+      - GITHUB_API_TOKEN={{ GITHUB_API_TOKEN }}
+      - IMMICH_URL=https://{{ IMMICH_DOMAIN }}
+      - IMMICH_API_KEY={{ IMMICH_API_KEY }}
+      - NEXTCLOUD_URL=https://{{ NEXTCLOUD_DOMAIN }}
+      - KARAKEEP_URL=https://{{ KARAKEEP_DOMAIN }}
+      - FRESHRSS_URL=https://{{ FRESHRSS_DOMAIN }}
+      - VAULTWARDEN_URL=https://{{ VAULTWARDEN_DOMAIN }}
+      - ENTE_AUTH_URL=https://{{ ENTE_AUTH_DOMAIN }}

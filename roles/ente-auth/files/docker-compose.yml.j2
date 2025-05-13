@@ -17,16 +17,15 @@ services:
   web:
     image: ghcr.io/ente-io/web
     ports:
-      # - 3001:3001 # Accounts
       - "127.0.0.1:{{ ENTE_AUTH_PORT }}:3003" # Auth
     environment:
-      ENTE_API_ORIGIN: "{{ ENTE_API_URL }}"
     labels:
       glance.id: ente
       glance.name: Ente
       glance.icon: si:e
       glance.url: {{ ENTE_AUTH_URL }}
       glance.hide: false
+      ENTE_API_ORIGIN: "https://{{ ENTE_API_DOMAIN }}"
 
   postgres:
     image: postgres:15
