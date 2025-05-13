@@ -10,7 +10,7 @@
 	}
 }
 
-{{ VAULTWARDEN_URL }} {
+https://{{ VAULTWARDEN_DOMAIN }} {
 	# This setting may have compatibility issues with some browsers
 	# (e.g., attachment downloading on Firefox). Try disabling this
 	# if you encounter issues.
@@ -22,38 +22,38 @@
 	}
 }
 
-{{ NEXTCLOUD_URL }} {
+{{ NEXTCLOUD_DOMAIN }} {
 	header Strict-Transport-Security max-age=31536000;
 
 	reverse_proxy localhost:{{ NEXTCLOUD_PORT }}
 }
 
-{{ IMMICH_URL }} {
+{{ IMMICH_DOMAIN }} {
 	reverse_proxy localhost:2283
 }
 
-{{ ENTE_API_URL }} {
+{{ ENTE_API_DOMAIN }} {
 	reverse_proxy localhost:{{ ENTE_API_PORT }}
 }
 
-{{ ENTE_AUTH_URL }} {
+{{ ENTE_AUTH_DOMAIN }} {
 	reverse_proxy localhost:{{ ENTE_AUTH_PORT }}
 }
 
-{{ FRESHRSS_URL }} {
+{{ FRESHRSS_DOMAIN }} {
 	reverse_proxy localhost:{{ FRESHRSS_PORT }}
 }
 
-{{ KARAKEEP_URL }} {
+{{ KARAKEEP_DOMAIN }} {
 	reverse_proxy localhost:{{ KARAKEEP_PORT }}
 }
 
-{{ GLANCE_URL }} {
+{{ GLANCE_DOMAIN }} {
 	import protected
 
 	reverse_proxy localhost:{{ GLANCE_PORT }}
 }
 
-{{ ADGUARD_HOME_URL }} {
+{{ ADGUARD_HOME_DOMAIN }} {
 	reverse_proxy localhost:{{ ADGUARD_HOME_ADMIN_PORT }}
 }

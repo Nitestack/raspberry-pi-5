@@ -100,11 +100,11 @@ To ensure remote access and proper functionality of the services, configure the 
 # PIVPN_PORT is an environment variable configurable in `secrets.yml`. The default value is `51820`.
 public:${PIVPN_PORT}/tcp -> local:${PIVPN_PORT}/tcp
 
-# Caddy (handling all the websites)
+# Caddy (handling all the websites and API's)
 public:443/tcp -> local:443/tcp
 public:443/udp -> local:443/udp
 
-# SSH (optional, if you want to access the Raspberry Pi remotely without WireGuard)
+# SSH (optional, if you want to access the Raspberry Pi with an URL)
 public:22/tcp -> local:22/tcp
 ```
 
@@ -112,12 +112,12 @@ public:22/tcp -> local:22/tcp
 
 To securely configure sensitive data, create a `secrets.yml` file in the root directory. Copy the `secrets.example.yml` file and populate the fields as required.
 
-> [!IMPORTANT]
-> All environment variables ending with `_URL` need to have a `CNAME` record pointing to the `CLOUDFLARE_RECORD_NAME` value.
-
-### Cloudflare DDNS Updater
+### Cloudflare
 
 Ensure that an `A` record for your domain is set up, initially pointing to a placeholder IP (e.g., `8.8.8.8`). The DDNS script will update it with your public IP. Define the record name under `CLOUDFLARE_RECORD_NAME`.
+
+> [!IMPORTANT]
+> You must have a `CNAME` record for `*` pointing to `${CLOUDFLARE_RECORD_NAME}`. This is essential for the reverse proxy to work correctly.
 
 ### Glance Settings
 
