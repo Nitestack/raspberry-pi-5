@@ -1,0 +1,12 @@
+services:
+  cloudflare-ddns:
+    image: favonia/cloudflare-ddns:latest
+    network_mode: host
+    restart: always
+    user: "1000:1000"
+    read_only: true
+    cap_drop: [all]
+    security_opt: [no-new-privileges:true]
+    environment:
+      - CLOUDFLARE_API_TOKEN={{ CLOUDFLARE_API_TOKEN }}
+      - DOMAINS={{ CLOUDFLARE_DOMAINS }}
