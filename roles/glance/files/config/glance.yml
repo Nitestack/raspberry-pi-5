@@ -13,7 +13,7 @@ auth:
   secret-key: ${GLANCE_SECRET}
   users:
     ${GLANCE_USER}:
-      password: ${GLANCE_PASSWORD}
+      password-hash: ${GLANCE_PASSWORD_HASH}
 
 branding:
   logo-text: Dashboard
