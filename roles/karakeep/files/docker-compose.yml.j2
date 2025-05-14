@@ -2,7 +2,7 @@ services:
   web:
     image: ghcr.io/karakeep-app/karakeep:${KARAKEEP_VERSION:-release}
     container_name: karakeep
-    restart: unless-stopped
+    restart: always
     volumes:
       - "{{ karakeep_dir }}/data:/data"
     ports:
@@ -20,7 +20,7 @@ services:
   chrome:
     image: gcr.io/zenika-hub/alpine-chrome:123
     container_name: karakeep-chrome
-    restart: unless-stopped
+    restart: always
     command:
       - --no-sandbox
       - --disable-gpu
@@ -31,7 +31,7 @@ services:
   meilisearch:
     image: getmeili/meilisearch:v1.13.3
     container_name: karakeep-meilisearch
-    restart: unless-stopped
+    restart: always
     env_file:
       - .env
     environment:

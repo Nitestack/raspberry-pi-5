@@ -3,7 +3,7 @@ services:
     image: freshrss/freshrss:latest
     container_name: freshrss
     hostname: freshrss
-    restart: unless-stopped
+    restart: always
     logging:
       options:
         max-size: 10m
