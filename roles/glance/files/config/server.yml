@@ -139,6 +139,10 @@
             nextcloud-aio-whiteboard:
               name: Whiteboard
               parent: nextcloud
+            nextcloud-aio-borgbackup:
+              hide: true
+            nextcloud-aio-watchtower:
+              hide: true
             vaultwarden:
               name: Vaultwarden
               icon: si:vaultwarden
