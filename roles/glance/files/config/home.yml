@@ -1,0 +1,129 @@
+- name: Home
+  columns:
+    - size: small
+      widgets:
+        - type: clock
+          hour-format: 24h
+          timezones:
+            - timezone: Asia/Ho_Chi_Minh
+              label: Vietnam
+
+        - $include: hidden-widgets/uni-rss.yml
+
+    - size: full
+      widgets:
+        - type: search
+          autofocus: true
+          new-tab: true
+          bangs:
+            # General
+            - title: Google Maps
+              shortcut: "!gm"
+              url: https://google.com/maps?q={QUERY}
+            - title: Spotify
+              shortcut: "!spy"
+              url: https://open.spotify.com/search/{QUERY}
+            - title: YouTube
+              shortcut: "!yt"
+              url: https://youtube.com/results?search_query={QUERY}
+            - title: Wikipedia
+              shortcut: "!w"
+              url: https://wikipedia.org/w/index.php?search={QUERY}
+
+            # Translators
+            - title: EN ➜ DE
+              shortcut: "!teg"
+              url: https://deepl.com/translator#en/de/{QUERY}
+            - title: DE ➜ EN
+              shortcut: "!tge"
+              url: https://deepl.com/translator#de/en/{QUERY}
+            - title: EN ➜ VN
+              shortcut: "!tev"
+              url: https://translate.google.com/?sl=en&tl=vi&text={QUERY}
+            - title: DE ➜ VN
+              shortcut: "!tgv"
+              url: https://translate.google.com/?sl=en&tl=vi&text={QUERY}
+            - title: VN ➜ EN
+              shortcut: "!tve"
+              url: https://translate.google.com/?sl=vi&tl=en&text={QUERY}
+            - title: VN ➜ DE
+              shortcut: "!tvg"
+              url: https://translate.google.com/?sl=vi&tl=de&text={QUERY}
+            - title: EN
+              shortcut: "!te"
+              url: https://translate.google.com/?sl=auto&tl=en&text={QUERY}
+            - title: DE
+              shortcut: "!tg"
+              url: https://translate.google.com/?sl=auto&tl=de&text={QUERY}
+            - title: VN
+              shortcut: "!tv"
+              url: https://translate.google.com/?sl=auto&tl=vi&text={QUERY}
+
+            # NixOS
+            - title: Nix Packages
+              shortcut: "!nixp"
+              url: https://search.nixos.org/packages?channel=unstable&query={QUERY}
+            - title: NixOS Options
+              shortcut: "!nixo"
+              url: https://search.nixos.org/options?channel=unstable&query={QUERY}
+            - title: NixOS Wiki
+              shortcut: "!nixw"
+              url: https://wiki.nixos.org/w/index.php?search={QUERY}
+            - title: Home Manager
+              shortcut: "!hm"
+              url: https://nix-community.github.io/home-manager/options.xhtml#opt-{QUERY}
+
+            # Package Managers
+            - title: Cargo
+              shortcut: "!cargo"
+              url: https://crates.io/search?q={QUERY}
+            - title: Homebrew
+              shortcut: "!brew"
+              url: https://duckduckgo.com/?q={QUERY}+site%3Aformulae.brew.sh
+            - title: NPM
+              shortcut: "!npm"
+              url: https://npmjs.com/search?q={QUERY}
+
+        - $include: hidden-widgets/home-links.yml
+
+    - size: small
+      widgets:
+        - type: weather
+          location: ${WEATHER_LOCATION}
+          units: metric
+          hour-format: 24h
+
+        - type: markets
+          chart-link-template: https://finance.yahoo.com/chart/{SYMBOL}
+          symbol-link-template: https://finance.yahoo.com/quote/{SYMBOL}
+          markets:
+            - symbol: SC0J.DE
+            - symbol: IS3N.DE
+            - symbol: BTC-EUR
+        - type: monitor
+          cache: 1m
+          title: Services
+          sites:
+            - title: Nhan Pham
+              url: https://npham.de
+              icon: https://npham.de/favicon.ico
+
+        - type: custom-api
+          title: Socials
+          cache: 1d
+          url: https://npham.de/api/socials
+          headers:
+            Accept: application/json
+          template: |
+            <div class="bookmarks-group">
+              <ul class="list list-gap-2">
+              {{ range .JSON.Array "socials" }}
+              <li class="flex items-center gap-10">
+                <div class="bookmarks-icon-container">
+                  <img class="bookmarks-icon" src="{{ .String "iconUrl" }}" alt="" loading="lazy">
+                </div>
+                <a href="{{ .String "url" }}" class="bookmarks-link color-highlight size-h4" target="_blank" rel="noreferrer">{{ .String "name" }}</a>
+              </li>
+              {{ end }}
+              </ul>
+            </div>
