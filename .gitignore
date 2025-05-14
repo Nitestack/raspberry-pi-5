@@ -1,2 +1,2 @@
 secrets.yml
-roles/glance/files/config/home.yml
+roles/glance/files/config/hidden-widgets
