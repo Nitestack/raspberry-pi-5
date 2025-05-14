@@ -3,6 +3,7 @@
     - size: small
       widgets:
         - type: bookmarks
+          hide-header: true
           groups:
             - title: Services
               links:
@@ -20,6 +21,9 @@
                 - title: AdGuard Home
                   url: https://adguard-dns.io/kb
                   icon: di:adguard-home
+                - title: Cloudflare DDNS
+                  url: https://github.com/favonia/cloudflare-ddns
+                  icon: di:cloudflare
                 - title: Ente
                   url: https://help.ente.io
                   icon: si:e
@@ -61,15 +65,23 @@
     - size: full
       widgets:
         - type: docker-containers
+          hide-header: true
           containers:
             adguardhome:
               name: AdGuard Home
               icon: di:adguard-home
               url: ${ADGUARD_HOME_URL}
+              description: Network-wide Ad Blocker
+            cloudflare-ddns:
+              name: Cloudflare DDNS
+              icon: di:cloudflare
+              url: https://dash.cloudflare.com
+              description: Dynamic DNS Updater
             ente-web:
               name: Ente Auth
               icon: si:e
               url: ${ENTE_AUTH_URL}
+              description: Two-factor Authenticator
               id: ente
             ente-museum:
               name: Museum (API Server)
@@ -81,14 +93,17 @@
               name: FreshRSS
               icon: di:freshrss
               url: ${FRESHRSS_URL}
+              description: RSS/Atom Feed Aggregator
             glance:
               name: Glance
               icon: di:glance
               url: ${GLANCE_URL}
+              description: Dashboard
             immich_server:
               name: Immich
               icon: di:immich
               url: ${IMMICH_URL}
+              description: Image & Video Manager
               id: immich
             immich_machine_learning:
               name: Machine Learning
@@ -103,6 +118,7 @@
               name: Karakeep
               icon: di:karakeep
               url: ${KARAKEEP_URL}
+              description: Bookmark Manager
               id: karakeep
             karakeep-chrome:
               name: Chrome
@@ -114,6 +130,7 @@
               name: NextCloud
               icon: di:nextcloud
               url: ${NEXTCLOUD_URL}
+              description: Cloud
               id: nextcloud
             nextcloud-aio-mastercontainer:
               name: All-in-One
@@ -147,6 +164,7 @@
               name: Vaultwarden
               icon: si:vaultwarden
               url: ${VAULTWARDEN_URL}
+              description: Password Manager
         - type: group
           widgets:
             - type: reddit
@@ -171,6 +189,7 @@
     - size: small
       widgets:
         - type: server-stats
+          hide-header: true
           servers:
             - name: Raspberry Pi 5
               type: local
