@@ -2,7 +2,7 @@ services:
   glance:
     container_name: glance
     image: glanceapp/glance
-    restart: unless-stopped
+    restart: always
     volumes:
       - ./config:/app/config
       - ./assets:/app/assets
