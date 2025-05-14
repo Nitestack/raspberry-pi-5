@@ -114,10 +114,7 @@ To securely configure sensitive data, create a `secrets.yml` file in the root di
 
 ### Cloudflare
 
-Ensure that an `A` record for your domain is set up, initially pointing to a placeholder IP (e.g., `8.8.8.8`). The DDNS script will update it with your public IP. Define the record name under `CLOUDFLARE_RECORD_NAME`.
-
-> [!IMPORTANT]
-> You must have a `CNAME` record for `*` pointing to `${CLOUDFLARE_RECORD_NAME}`. This is essential for the reverse proxy to work correctly.
+Please set up an API token with `CLOUDFLARE_API_TOKEN` with `Edit zone DNS` permissions. This token is used to update your dynamic IP address in Cloudflare.
 
 ### Glance Settings
 
