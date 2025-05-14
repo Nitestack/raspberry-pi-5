@@ -1,4 +1,5 @@
 server:
+  proxied: true
   assets-path: /app/assets
 
 theme:
