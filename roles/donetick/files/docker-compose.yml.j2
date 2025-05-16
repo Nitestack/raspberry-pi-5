@@ -1,0 +1,13 @@
+services:
+  donetick:
+    image: donetick/donetick
+    container_name: donetick
+    restart: always
+    ports:
+      - "{{ DONETICK_PORT }}:2021"
+    volumes:
+      - "{{ donetick_dir }}/data:/donetick-data"
+      - "{{ donetick_dir }}/config:/config"
+    environment:
+      - DT_ENV=selfhosted
+      - DT_SQLITE_PATH=/donetick-data/donetick.db

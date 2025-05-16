@@ -1,0 +1,29 @@
+---
+- name: Set up Donetick
+  vars:
+    donetick_dir: "/mnt/data/donetick"
+
+  block:
+    - name: Create Donetick directory
+      ansible.builtin.file:
+        path: "{{ donetick_dir }}"
+        state: directory
+
+    - name: Create config directory in Donetick directory
+      ansible.builtin.file:
+        path: "{{ donetick_dir }}/config"
+        state: directory
+
+    - name: Copy docker-compose.yml to Donetick directory
+      ansible.builtin.template:
+        src: "../files/docker-compose.yml.j2"
+        dest: "{{ donetick_dir }}/docker-compose.yml"
+
+    - name: Copy selfhosted.yaml to Donetick config directory
+      ansible.builtin.template:
+        src: "../files/config/selfhosted.yaml.j2"
+        dest: "{{ donetick_dir }}/config/selfhosted.yaml"
+
+    - name: Start Docker Compose
+      community.docker.docker_compose_v2:
+        project_src: "{{ donetick_dir }}"

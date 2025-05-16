@@ -39,9 +39,10 @@
     - nextcloud
     - immich
     - vaultwarden
+    - ente-auth
+    - donetick
     - karakeep
     - freshrss
-    - glance
-    - ente-auth
     - adguard-home
     - pivpn
+    - glance
