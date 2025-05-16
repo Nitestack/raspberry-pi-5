@@ -278,6 +278,8 @@
           show-source-icon: true
           collapse-after: -1
           repositories:
+            - AdguardTeam/AdGuardHome
+            - favonia/cloudflare-ddns
             - ente-io/ente
             - FreshRSS/FreshRSS
             - glanceapp/glance
