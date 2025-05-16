@@ -26,7 +26,7 @@
                   icon: di:cloudflare
                 - title: Ente
                   url: https://help.ente.io
-                  icon: si:e
+                  icon: https://raw.githubusercontent.com/ente-io/ente/refs/heads/main/auth/assets/icons/auth-icon.png
                 - title: FreshRSS
                   url: https://freshrss.github.io/FreshRSS/en
                   icon: di:freshrss
@@ -79,7 +79,7 @@
               description: Dynamic DNS Updater
             ente-web:
               name: Ente Auth
-              icon: si:e
+              icon: https://raw.githubusercontent.com/ente-io/ente/refs/heads/main/auth/assets/icons/auth-icon.png
               url: ${ENTE_AUTH_URL}
               description: Two-factor Authenticator
               id: ente
