@@ -3,6 +3,7 @@ server:
   assets-path: /app/assets
 
 theme:
+  disable-picker: true
   background-color: 240 21 15
   contrast-multiplier: 1.2
   primary-color: 217 92 83
