@@ -1,0 +1,17 @@
+services:
+  beaverhabits:
+    image: daya0576/beaverhabits:latest
+    container_name: beaverhabits
+    restart: always
+    user: 0:0 # NOTE: This is a workaround for the UID/GID issue with the beaverhabits image, will find a better solution later
+    volumes:
+      - "{{ beaverhabits_dir }}/data/:/app/.user/"
+    ports:
+      - "127.0.0.1:{{ BEAVERHABITS_PORT }}:8080"
+    environment:
+      - HABITS_STORAGE=DATABASE
+      - MAX_USER_COUNT=1
+      - INDEX_HABIT_NAME_COLUMNS=9
+      - INDEX_HABIT_DATE_COLUMNS=1
+      - INDEX_SHOW_HABIT_COUNT=true
+      - ENABLE_DAILY_BACKUP=true
