@@ -38,6 +38,7 @@ _This [Ansible](https://www.ansible.com) configuration automates the setup of a 
 - **Karakeep** for a bookmarking solution
 - **Glance** dashboard for a unified news feed and monitoring of the home lab
 - **AdGuard Home** for ad-blocking and privacy protection
+- **Beaver Habits Tracker** for habit tracking
 - **Dotfiles** for a standardized environment
 
 ## ⚙️ Requirements
