@@ -30,18 +30,12 @@
                 - title: Ente
                   url: https://help.ente.io
                   icon: https://raw.githubusercontent.com/ente-io/ente/refs/heads/main/auth/assets/icons/auth-icon.png
-                - title: FreshRSS
-                  url: https://freshrss.github.io/FreshRSS/en
-                  icon: di:freshrss
                 - title: Glance
                   url: https://github.com/glanceapp/glance/blob/main/docs/configuration.md
                   icon: di:glance
                 - title: Immich
                   url: https://immich.app/docs
                   icon: di:immich
-                - title: Karakeep
-                  url: https://docs.karakeep.app
-                  icon: di:karakeep
                 - title: Nextcloud
                   url: https://github.com/nextcloud/all-in-one
                   icon: di:nextcloud
@@ -97,11 +91,6 @@
             ente-postgres:
               name: PostgreSQL
               parent: ente
-            freshrss:
-              name: FreshRSS
-              icon: di:freshrss
-              url: ${FRESHRSS_URL}
-              description: RSS/Atom Feed Aggregator
             glance:
               name: Glance
               icon: di:glance
@@ -122,18 +111,6 @@
             immich_postgres:
               name: PostgreSQL
               parent: immich
-            karakeep:
-              name: Karakeep
-              icon: di:karakeep
-              url: ${KARAKEEP_URL}
-              description: Bookmark Manager
-              id: karakeep
-            karakeep-chrome:
-              name: Chrome
-              parent: karakeep
-            karakeep-meilisearch:
-              name: Meilisearch
-              parent: karakeep
             nextcloud-aio-nextcloud:
               name: NextCloud
               icon: di:nextcloud
@@ -290,10 +267,8 @@
             - daya0576/beaverhabits
             - favonia/cloudflare-ddns
             - ente-io/ente
-            - FreshRSS/FreshRSS
             - glanceapp/glance
             - immich-app/immich
-            - karakeep-app/karakeep
             - nextcloud/all-in-one
             - pivpn/pivpn
             - dani-garcia/vaultwarden
