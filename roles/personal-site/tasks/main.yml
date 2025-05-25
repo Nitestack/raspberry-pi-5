@@ -1,0 +1,25 @@
+---
+- name: Set up personal site
+  vars:
+    personal_site_dir: "/mnt/data/personal-site"
+
+  block:
+    - name: Download personal site
+      ansible.builtin.git:
+        dest: "{{ personal_site_dir }}"
+        repo: "https://github.com/Nitestack/personal-site.git"
+
+    - name: Copy docker-compose.yml to personal site directory
+      ansible.builtin.template:
+        src: "../files/docker-compose.yml.j2"
+        dest: "{{ personal_site_dir }}/docker-compose.yml"
+
+    - name: Copy .env to personal site directory
+      ansible.builtin.template:
+        src: "../files/.env.j2"
+        dest: "{{ personal_site_dir }}/.env"
+
+    - name: Start Docker Compose
+      community.docker.docker_compose_v2:
+        project_src: "{{ personal_site_dir }}"
+        build: always

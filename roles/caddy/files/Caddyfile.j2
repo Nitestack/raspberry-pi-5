@@ -10,6 +10,10 @@
 	}
 }
 
+{{ PERSONAL_SITE_DOMAIN }} {
+	reverse_proxy localhost:{{ PERSONAL_SITE_PORT }}
+}
+
 https://{{ VAULTWARDEN_DOMAIN }} {
 	# This setting may have compatibility issues with some browsers
 	# (e.g., attachment downloading on Firefox). Try disabling this

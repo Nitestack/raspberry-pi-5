@@ -1,0 +1,7 @@
+services:
+  web:
+    build: .
+    container_name: personal-site
+    ports:
+      - "127.0.0.1:{{ PERSONAL_SITE_PORT }}:3000"
+    env_file: .env
