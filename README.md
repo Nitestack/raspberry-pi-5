@@ -38,6 +38,7 @@ _This [Ansible](https://www.ansible.com) configuration automates the setup of a 
 - **AdGuard Home** for ad-blocking and privacy protection
 - **Beaver Habits Tracker** for habit tracking
 - **Dotfiles** for a standardized environment
+- **Personal Site** for hosting your personal website
 
 ## ⚙️ Requirements
 
@@ -130,7 +131,7 @@ Please set your timezone id (TZ identifier) with `TIMEZONE` (check this [Wikiped
 To enable secure SSH access, copy your public key to the Raspberry Pi:
 
 ```sh
-ssh-copy-id nhan@raspberrypi.local
+ssh-copy-id nhan@npham.de
 ```
 
 ### 2. Update SSH Configuration

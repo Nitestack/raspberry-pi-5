@@ -145,6 +145,11 @@
               hide: true
             nextcloud-aio-watchtower:
               hide: true
+            personal-site:
+              name: Personal Site
+              icon: https://npham.de/favicon.ico
+              url: https://npham.de
+              description: Personal Site
             vaultwarden:
               name: Vaultwarden
               icon: si:vaultwarden
