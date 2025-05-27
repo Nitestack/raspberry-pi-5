@@ -26,3 +26,4 @@ pages:
   # put its contents here, though multiple pages are easier to manage when separated
   - $include: home.yml
   - $include: server.yml
+  - $include: os.yml
