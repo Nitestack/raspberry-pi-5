@@ -24,6 +24,9 @@
                 - title: Beaver Habits Tracker
                   url: https://github.com/daya0576/beaverhabits/wiki
                   icon: di:beaver-habit-tracker-light
+                - title: Caddy
+                  url: https://caddyserver.com/docs
+                  icon: di:caddy
                 - title: Cloudflare DDNS
                   url: https://github.com/favonia/cloudflare-ddns
                   icon: di:cloudflare
