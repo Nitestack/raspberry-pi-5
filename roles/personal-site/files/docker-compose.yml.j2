@@ -2,6 +2,7 @@ services:
   web:
     build: .
     container_name: personal-site
+    restart: always
     ports:
       - "127.0.0.1:{{ PERSONAL_SITE_PORT }}:3000"
     env_file: .env
