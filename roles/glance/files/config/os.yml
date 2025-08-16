@@ -36,9 +36,6 @@
                   icon: si:wayland
             - title: Nix
               links:
-                - title: Home Manager
-                  url: https://nix-community.github.io/home-manager/options.xhtml
-                  icon: di:nixos
                 - title: Nixpkgs
                   url: https://search.nixos.org/packages
                   icon: di:nixos
@@ -54,11 +51,25 @@
                 - title: Nix Darwin
                   url: https://nix-darwin.github.io/nix-darwin/manual
                   icon: si:apple
+            - title: Nix Manuals
+              links:
+                - title: NixOS Manual
+                  url: https://nixos.org/nixos/manual/unstable
+                  icon: di:nixos
+                - title: Nixpkgs Manual
+                  url: https://nixos.org/manual/nixpkgs/unstable
+                  icon: di:nixos
+                - title: Home Manager
+                  url: https://nix-community.github.io/home-manager/options.xhtml
+                  icon: di:nixos
             - title: GitHub Repositories
               links:
                 - title: Dotfiles
                   url: https://github.com/Nitestack/dotfiles
                   icon: si:github
+        - type: rss
+          feeds:
+            - url: https://nixos.org/blog/announcements-rss.xml
 
     - size: full
       widgets:
