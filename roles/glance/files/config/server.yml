@@ -82,6 +82,10 @@
               icon: di:cloudflare
               url: https://dash.cloudflare.com
               description: Dynamic DNS Updater
+            couchdb-for-ols:
+              name: Obsidian LiveSync
+              icon: di:obsidian
+              description: Obsidian Storage
             ente-web:
               name: Ente Auth
               icon: https://raw.githubusercontent.com/ente-io/ente/refs/heads/main/auth/assets/icons/auth-icon.png

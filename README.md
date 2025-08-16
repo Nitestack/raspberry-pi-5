@@ -124,6 +124,10 @@ Please set a GitHub personal access token with `GITHUB_API_TOKEN` (check this [a
 
 Please set your timezone id (TZ identifier) with `TIMEZONE` (check this [Wikipedia article](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List)).
 
+### Obsidian LiveSync
+
+Please read [this guide](https://github.com/vrtmrz/obsidian-livesync/blob/main/docs/setup_own_server.md) to get Obsidian LiveSync working. This Ansible role just sets up the database and the server.
+
 ## 🛡️ Security
 
 ### 1. Add Your Host to Authorized Keys on the Raspberry Pi

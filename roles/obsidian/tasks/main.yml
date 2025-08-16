@@ -1,0 +1,33 @@
+---
+- name: Set up Obsidian LiveSync
+  vars:
+    ols_dir: "/mnt/data/obsidian"
+    ols_db_data_dir: "{{ ols_dir }}/couchdb-data"
+    ols_db_etc_dir: "{{ ols_dir }}/couchdb-etc"
+
+  block:
+    - name: Create Obsidian LiveSync directory
+      ansible.builtin.file:
+        path: "{{ ols_dir }}"
+        state: directory
+
+    - name: Create Obsidian LiveSync DB Data directory
+      ansible.builtin.file:
+        path: "{{ ols_db_data_dir }}"
+        state: directory
+        mode: "777"
+
+    - name: Create Obsidian LiveSync DB Etc directory
+      ansible.builtin.file:
+        path: "{{ ols_db_etc_dir }}"
+        state: directory
+        mode: "777"
+
+    - name: Copy docker-compose.yml to Obsidian LiveSync directory
+      ansible.builtin.template:
+        src: "../files/docker-compose.yml.j2"
+        dest: "{{ ols_dir }}/docker-compose.yml"
+
+    - name: Start Docker Compose
+      community.docker.docker_compose_v2:
+        project_src: "{{ ols_dir }}"

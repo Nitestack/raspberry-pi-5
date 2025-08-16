@@ -1,0 +1,14 @@
+services:
+  couchdb:
+    image: couchdb:latest
+    container_name: couchdb-for-ols
+    user: 1000:1000
+    environment:
+      - COUCHDB_USER=couchdb
+      - COUCHDB_PASSWORD={{ OBSIDIAN_DB_PASSWORD }}
+    volumes:
+      - "{{ ols_db_data_dir }}:/opt/couchdb/data"
+      - "{{ ols_db_etc_dir }}:/opt/couchdb/etc/local.d"
+    ports:
+      - "127.0.0.1:{{ OBSIDIAN_PORT }}:5984"
+    restart: always
