@@ -39,6 +39,7 @@ _This [Ansible](https://www.ansible.com) configuration automates the setup of a 
 - **Beaver Habits Tracker** for habit tracking
 - **Dotfiles** for a standardized environment
 - **Personal Site** for hosting your personal website
+- **FreshRSS** for a news aggregator
 
 ## ⚙️ Requirements
 
