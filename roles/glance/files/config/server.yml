@@ -32,7 +32,7 @@
                   icon: di:cloudflare
                 - title: Ente
                   url: https://help.ente.io
-                  icon: https://raw.githubusercontent.com/ente-io/ente/refs/heads/main/auth/assets/icons/auth-icon.png
+                  icon: https://raw.githubusercontent.com/ente-io/ente/refs/heads/main/web/apps/auth/public/images/favicon.png
                 - title: FreshRSS
                   url: https://freshrss.github.io/FreshRSS/en
                   icon: di:freshrss
@@ -87,7 +87,7 @@
               description: Dynamic DNS Updater
             ente-web:
               name: Ente Auth
-              icon: https://raw.githubusercontent.com/ente-io/ente/refs/heads/main/auth/assets/icons/auth-icon.png
+              icon: https://raw.githubusercontent.com/ente-io/ente/refs/heads/main/web/apps/auth/public/images/favicon.png
               url: ${ENTE_AUTH_URL}
               description: Two-factor Authenticator
               id: ente
@@ -99,7 +99,7 @@
               parent: ente
             freshrss:
               name: FreshRSS
-              icon: si:freshrss
+              icon: di:freshrss
               url: ${FRESHRSS_URL}
               description: Feed Aggregator
             glance:
