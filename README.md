@@ -36,7 +36,6 @@ _This [Ansible](https://www.ansible.com) configuration automates the setup of a 
 - **Ente Auth** for a cross-platform 2FA solution
 - **Glance** dashboard for a unified news feed and monitoring of the home lab
 - **AdGuard Home** for ad-blocking and privacy protection
-- **Beaver Habits Tracker** for habit tracking
 - **Dotfiles** for a standardized environment
 - **Personal Site** for hosting your personal website
 - **FreshRSS** for a news aggregator
