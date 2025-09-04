@@ -21,9 +21,6 @@
                 - title: AdGuard Home
                   url: https://adguard-dns.io/kb
                   icon: di:adguard-home
-                - title: Beaver Habits Tracker
-                  url: https://github.com/daya0576/beaverhabits/wiki
-                  icon: di:beaver-habit-tracker-light
                 - title: Caddy
                   url: https://caddyserver.com/docs
                   icon: di:caddy
@@ -75,11 +72,6 @@
               icon: di:adguard-home
               url: ${ADGUARD_HOME_URL}
               description: Network-wide Ad Blocker
-            beaverhabits:
-              name: Beaver Habits Tracker
-              icon: di:beaver-habit-tracker-light
-              url: ${BEAVERHABITS_URL}
-              description: Habit Tracker
             cloudflare-ddns:
               name: Cloudflare DDNS
               icon: di:cloudflare
@@ -280,7 +272,6 @@
           collapse-after: -1
           repositories:
             - AdguardTeam/AdGuardHome
-            - daya0576/beaverhabits
             - favonia/cloudflare-ddns
             - ente-io/ente
             - FreshRSS/FreshRSS
