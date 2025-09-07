@@ -7,27 +7,33 @@
           groups:
             - title: Documentation
               links:
-                - title: Chezmoi
-                  url: https://www.chezmoi.io/user-guide
-                  icon: https://raw.githubusercontent.com/twpayne/chezmoi/refs/heads/master/assets/images/logo_blue_144.svg
-                - title: Fastfetch
-                  url: https://github.com/fastfetch-cli/fastfetch/wiki
-                  icon: https://avatars.githubusercontent.com/u/136235211
                 - title: Hyprland
                   url: https://wiki.hyprland.org
                   icon: https://upload.wikimedia.org/wikipedia/commons/7/7e/Hyprland_logo.png
+                - title: Lazygit
+                  url: https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
+                  icon: https://user-images.githubusercontent.com/8456633/174470852-339b5011-5800-4bb9-a628-ff230aa8cd4e.png
+                - title: Lazyvim
+                  url: https://lazyvim.org
+                  icon: https://raw.githubusercontent.com/LazyVim/lazyvim.github.io/refs/heads/main/static/img/icon.svg
                 - title: Neovim
                   url: https://neovim.io/doc/user
                   icon: https://raw.githubusercontent.com/neovim/neovim.github.io/refs/heads/master/logos/neovim-mark.svg
                 - title: Nushell
                   url: https://nushell.sh/book
                   icon: https://raw.githubusercontent.com/nushell/nushell/refs/heads/main/assets/icons/nushell-original.png
+                - title: Oh My Posh
+                  url: https://ohmyposh.dev/docs
+                  icon: https://ohmyposh.dev/img/favicons.svg
                 - title: Rofi
                   url: https://davatorium.github.io/rofi
                   icon: si:wayland
                 - title: Spicetify Nix
                   url: https://gerg-l.github.io/spicetify-nix
                   icon: di:spotify
+                - title: Sway Notification Center
+                  url: https://github.com/ErikReider/SwayNotificationCenter/blob/main/src/configSchema.json
+                  icon: si:wayland
                 - title: tmux
                   url: https://github.com/tmux/tmux/wiki
                   icon: https://raw.githubusercontent.com/tmux/tmux/refs/heads/master/logo/tmux-logomark.svg
@@ -64,12 +70,33 @@
                   icon: di:nixos
             - title: GitHub Repositories
               links:
-                - title: Dotfiles
-                  url: https://github.com/Nitestack/dotfiles
+                - title: Nix Configuration
+                  url: https://github.com/Nitestack/nix-config
                   icon: si:github
-        - type: rss
-          feeds:
-            - url: https://nixos.org/blog/announcements-rss.xml
+
+        - type: releases
+          title: Neovim
+          token: ${GITHUB_API_TOKEN}
+          show-source-icon: true
+          collapse-after: -1
+          limit: 7
+          repositories:
+            - neovim/neovim
+            - LazyVim/LazyVim
+            - folke/lazy.nvim
+            - catppuccin/nvim
+            - folke/snacks.nvim
+            - nvim-mini/mini.nvim
+            - stevearc/conform.nvim
+
+        - type: releases
+          title: Nix Flakes
+          token: ${GITHUB_API_TOKEN}
+          show-source-icon: true
+          collapse-after: -1
+          limit: 1
+          repositories:
+            - gmodena/nix-flatpak
 
     - size: full
       widgets:
@@ -83,6 +110,12 @@
               subreddit: NixOS
             - type: reddit
               subreddit: neovim
+
+        - type: rss
+          feeds:
+            - url: https://nixos.org/blog/announcements-rss.xml
+            - url: https://discourse.nixos.org/c/announcements/nix-releases/51.rss
+              title: Nix Releases
 
         - type: videos
           channels:
@@ -102,33 +135,46 @@
           token: ${GITHUB_API_TOKEN}
           show-source-icon: true
           collapse-after: -1
+          limit: 15
           repositories:
+            - savedra1/clipse
             - hyprwm/Hyprland
             - hyprwm/hyprcursor
             - hyprwm/hypridle
             - hyprwm/hyprlock
             - hyprwm/hyprpicker
             - hyprwm/hyprsunset
-            - sddm/sddm
+            - GhostNaN/mpvpaper
+            - davatorium/rofi
+            - fdw/rofimoji
             - ErikReider/SwayNotificationCenter
+            - ErikReider/SwayOSD
             - LGFae/swww
             - Alexays/Waybar
+            - bugaevc/wl-clipboard
 
         - type: releases
           title: Applications
           token: ${GITHUB_API_TOKEN}
           show-source-icon: true
           collapse-after: -1
+          limit: 16
           repositories:
             - bitwarden/clients
+            - bottlesdevs/Bottles
+            - blueman-project/blueman
             - ONLYOFFICE/DesktopEditors
+            - Heroic-Games-Launcher/HeroicGamesLauncher
+            - musescore/MuseScore
             - nextcloud/desktop
-            - slgobinath/SafeEyes
+            - obsidianmd/obsidian-releases
+            - PrismLauncher/PrismLauncher
             - signalapp/Signal-Desktop
             - microsoft/vscode
             - anufrievroman/waypaper
             - xeco23/WasIstLos
             - Vencord/Vesktop
+            - virt-manager/virt-manager
             - zen-browser/desktop
 
         - type: releases
@@ -136,18 +182,25 @@
           token: ${GITHUB_API_TOKEN}
           show-source-icon: true
           collapse-after: -1
+          limit: 20
           repositories:
+            - ansible/ansible
             - sharkdp/bat
             - aristocratos/btop
             - caddyserver/caddy
             - carapace-sh/carapace
             - karlstav/cava
-            - twpayne/chezmoi
+            - muesli/duf
             - eza-community/eza
-            - fastfetch-cli/fastfetch
             - sharkdp/fd
+            - flatpak/flatpak
+            - jesseduffield/lazygit
             - neovim/neovim
+            - nix-community/nix-ld
+            - MercuryTechnologies/nix-your-shell
             - nushell/nushell
+            - JanDeDobbeleer/oh-my-posh
             - BurntSushi/ripgrep
             - spicetify/cli
             - tmux/tmux
+            - ajeetdsouza/zoxide
