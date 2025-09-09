@@ -38,6 +38,7 @@ _This [Ansible](https://www.ansible.com) configuration automates the setup of a 
 - **AdGuard Home** for ad-blocking and privacy protection
 - **Dotfiles** for a standardized environment
 - **Personal Site** for hosting your personal website
+- **Ghostfolio** for wealth management
 - **FreshRSS** for a news aggregator
 
 ## ⚙️ Requirements
