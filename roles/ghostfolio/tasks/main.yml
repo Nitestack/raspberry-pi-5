@@ -1,0 +1,23 @@
+---
+- name: Set up Ghostfolio
+  vars:
+    ghostfolio_dir: "/mnt/data/ghostfolio"
+  block:
+    - name: Create Ghostfolio directory
+      ansible.builtin.file:
+        path: "{{ ghostfolio_dir }}"
+        state: directory
+
+    - name: Copy docker-compose.yml to Ghostfolio directory
+      ansible.builtin.template:
+        src: "../files/docker-compose.yml.j2"
+        dest: "{{ ghostfolio_dir }}/docker-compose.yml"
+
+    - name: Copy .env to Ghostfolio directory
+      ansible.builtin.template:
+        src: "../files/.env.j2"
+        dest: "{{ ghostfolio_dir }}/.env"
+
+    - name: Start Docker Compose
+      community.docker.docker_compose_v2:
+        project_src: "{{ ghostfolio_dir }}"
