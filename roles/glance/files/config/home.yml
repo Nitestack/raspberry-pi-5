@@ -17,6 +17,7 @@
           hide-header: true
           autofocus: true
           new-tab: true
+          search-engine: startpage
           bangs:
             # General
             - title: Google Maps
@@ -81,7 +82,7 @@
               url: https://crates.io/search?q={QUERY}
             - title: Homebrew
               shortcut: "!brew"
-              url: https://duckduckgo.com/?q={QUERY}+site%3Aformulae.brew.sh
+              url: https://www.startpage.com/sp/search?query={QUERY}+site%3Aformulae.brew.sh
             - title: NPM
               shortcut: "!npm"
               url: https://npmjs.com/search?q={QUERY}
