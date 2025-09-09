@@ -33,6 +33,9 @@
                 - title: FreshRSS
                   url: https://freshrss.github.io/FreshRSS/en
                   icon: di:freshrss
+                - title: Ghostfolio
+                  url: https://github.com/ghostfolio/ghostfolio
+                  icon: di:ghostfolio
                 - title: Glance
                   url: https://github.com/glanceapp/glance/blob/main/docs/configuration.md
                   icon: di:glance
@@ -94,6 +97,18 @@
               icon: di:freshrss
               url: ${FRESHRSS_URL}
               description: Feed Aggregator
+            ghostfolio:
+              name: Ghostfolio
+              icon: di:ghostfolio
+              url: ${GHOSTFOLIO_URL}
+              description: Wealth Manager
+              id: ghostfolio
+            gf-postgres:
+              name: PostgreSQL
+              parent: ghostfolio
+            gf-redis:
+              name: Redis
+              parent: ghostfolio
             glance:
               name: Glance
               icon: di:glance
@@ -275,6 +290,7 @@
             - favonia/cloudflare-ddns
             - ente-io/ente
             - FreshRSS/FreshRSS
+            - ghostfolio/ghostfolio
             - glanceapp/glance
             - immich-app/immich
             - nextcloud/all-in-one
