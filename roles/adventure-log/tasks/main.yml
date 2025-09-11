@@ -1,0 +1,23 @@
+---
+- name: Set up AdventureLog
+  vars:
+    adventure_log_dir: "/mnt/data/adventure-log"
+  block:
+    - name: Create AdventureLog directory
+      ansible.builtin.file:
+        path: "{{ adventure_log_dir }}"
+        state: directory
+
+    - name: Copy docker-compose.yml to AdventureLog directory
+      ansible.builtin.template:
+        src: "../files/docker-compose.yml.j2"
+        dest: "{{ adventure_log_dir }}/docker-compose.yml"
+
+    - name: Copy .env to AdventureLog directory
+      ansible.builtin.template:
+        src: "../files/.env.j2"
+        dest: "{{ adventure_log_dir }}/.env"
+
+    - name: Start Docker Compose
+      community.docker.docker_compose_v2:
+        project_src: "{{ adventure_log_dir }}"
