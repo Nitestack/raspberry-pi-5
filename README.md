@@ -39,6 +39,7 @@ _This [Ansible](https://www.ansible.com) configuration automates the setup of a 
 - **Dotfiles** for a standardized environment
 - **Personal Site** for hosting your personal website
 - **Ghostfolio** for wealth management
+- **AdventureLog** for travel tracker and trip planner
 - **FreshRSS** for a news aggregator
 
 ## ⚙️ Requirements

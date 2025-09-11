@@ -21,6 +21,9 @@
                 - title: AdGuard Home
                   url: https://adguard-dns.io/kb
                   icon: di:adguard-home
+                - title: AdventureLog
+                  url: https://adventurelog.app/docs/intro/adventurelog_overview.html
+                  icon: di:adventure-log
                 - title: Caddy
                   url: https://caddyserver.com/docs
                   icon: di:caddy
@@ -75,6 +78,18 @@
               icon: di:adguard-home
               url: ${ADGUARD_HOME_URL}
               description: Network-wide Ad Blocker
+            adventurelog-frontend:
+              name: AdventureLog
+              icon: di:adventure-log
+              url: ${ADVENTURE_LOG_URL}
+              description: Travel Tracker
+              id: adventurelog
+            adventurelog-backend:
+              name: Backend
+              parent: adventurelog
+            adventurelog-db:
+              name: PostGIS
+              parent: adventurelog
             cloudflare-ddns:
               name: Cloudflare DDNS
               icon: di:cloudflare
@@ -287,6 +302,7 @@
           collapse-after: -1
           repositories:
             - AdguardTeam/AdGuardHome
+            - seanmorley15/AdventureLog
             - favonia/cloudflare-ddns
             - ente-io/ente
             - FreshRSS/FreshRSS
