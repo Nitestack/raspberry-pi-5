@@ -59,3 +59,12 @@ https://{{ VAULTWARDEN_DOMAIN }} {
 {{ GHOSTFOLIO_DOMAIN }} {
 	reverse_proxy localhost:{{ GHOSTFOLIO_PORT }}
 }
+
+{{ ADVENTURE_LOG_DOMAIN }} {
+	@frontend {
+    not path /media* /admin* /static* /accounts*
+	}
+	reverse_proxy @frontend localhost:{{ ADVENTURE_LOG_FRONTEND_PORT }}
+
+	reverse_proxy localhost:{{ ADVENTURE_LOG_BACKEND_PORT }}
+}
