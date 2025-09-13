@@ -1,6 +1,6 @@
 services:
   web:
-    image: ghcr.io/seanmorley15/adventurelog-frontend:latest
+    image: ghcr.io/seanmorley15/adventurelog-frontend:latest@sha256:3a1d17b7f4224bf488fba0ec9bd5447a876e5da3f8e09e5bbdc49c1e5e10c33b
     container_name: adventurelog-frontend
     restart: always
     env_file: .env
@@ -18,7 +18,7 @@ services:
       - "{{ adventure_log_dir }}/db:/var/lib/postgresql/data/"
 
   server:
-    image: ghcr.io/seanmorley15/adventurelog-backend:latest
+    image: ghcr.io/seanmorley15/adventurelog-backend:latest@sha256:a749e5a0d670277b9b3c057c3800a8eda084c33d0fe9199aed94c65c345f02b7
     container_name: adventurelog-backend
     restart: always
     env_file: .env
