@@ -10,7 +10,7 @@ services:
       - server
 
   db:
-    image: ghcr.io/baosystems/postgis:16-3.5 # until postgis/postgis on DockerHub supports linux/arm64
+    image: ghcr.io/baosystems/postgis:17-3.5 # until postgis/postgis on DockerHub supports linux/arm64
     container_name: adventurelog-db
     restart: always
     env_file: .env
