@@ -118,6 +118,13 @@ To securely configure sensitive data, create a `secrets.yml` file in the root di
 
 Please set up an API token with `CLOUDFLARE_API_TOKEN` with `Edit zone DNS` permissions. This token is used to update your dynamic IP address in Cloudflare.
 
+### AdventureLog
+
+Please set a Google Maps API key with `GOOGLE_MAPS_API_KEY`, with the **Geocoding** and **Places (New)** API's enabled.
+
+> [!IMPORTANT]
+> You have to set this environment variable before running the playbook for the first time.
+
 ### Glance Settings
 
 Please set a GitHub personal access token with `GITHUB_API_TOKEN` (check this [article](https://docs.github.com/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)).
