@@ -1,0 +1,29 @@
+{
+  "extends": [
+    "config:recommended",
+    "docker:pinDigests",
+    "docker:enableMajor",
+    ":configMigration",
+    ":pinDevDependencies",
+    "abandonments:recommended",
+    "default:automergeDigest"
+  ],
+  "labels": ["dependencies", "docker"],
+  "docker-compose": {
+    "managerFilePatterns": ["/(^|/)roles/.+/files/docker-compose\\.yml\\.j2$/"]
+  },
+  "packageRules": [
+    {
+      "matchManagers": ["docker-compose"],
+      "groupName": "Docker Compose updates for {{packageFile}}"
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "groupName": "GitHub Actions updates for {{packageFile}}"
+    },
+    {
+      "matchPackageNames": ["ghcr.io/baosystems/postgis", "postgres", "redis"],
+      "enabled": false
+    }
+  ]
+}
