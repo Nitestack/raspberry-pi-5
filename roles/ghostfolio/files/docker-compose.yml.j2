@@ -25,7 +25,7 @@ services:
       retries: 5
 
   postgres:
-    image: docker.io/library/postgres:15-alpine
+    image: docker.io/library/postgres:17-alpine
     container_name: gf-postgres
     restart: unless-stopped
     cap_drop:
