@@ -1,0 +1,23 @@
+{
+  "extends": [
+    "config:recommended",
+    "docker:pinDigests",
+    "docker:enableMajor",
+    "helpers:pinGitHubActionDigests",
+    ":configMigration",
+    ":pinDevDependencies",
+    "abandonments:recommended"
+  ],
+  "labels": ["dependencies", "docker"],
+  "repositories": ["Nitestack/raspberry-pi-5"],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/roles/.+/files/docker-compose\\.yml\\.j2$/"],
+      "matchStrings": [
+        "image:\\s*(?<depName>[^:\\s]+):(?<currentValue>[^\\s]+)"
+      ],
+      "datasourceTemplate": "docker"
+    }
+  ]
+}
