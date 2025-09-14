@@ -113,23 +113,3 @@
             - title: Nhan Pham
               url: https://npham.de
               icon: https://npham.de/favicon.ico
-
-        - type: custom-api
-          hide-header: true
-          cache: 1d
-          url: https://npham.de/api/socials
-          headers:
-            Accept: application/json
-          template: |
-            <div class="bookmarks-group">
-              <ul class="list list-gap-2">
-              {{ range .JSON.Array "socials" }}
-              <li class="flex items-center gap-10">
-                <div class="bookmarks-icon-container">
-                  <img class="bookmarks-icon" src="{{ .String "iconUrl" }}" alt="" loading="lazy">
-                </div>
-                <a href="{{ .String "url" }}" class="bookmarks-link color-highlight size-h4" target="_blank" rel="noreferrer">{{ .String "name" }}</a>
-              </li>
-              {{ end }}
-              </ul>
-            </div>
