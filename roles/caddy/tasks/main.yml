@@ -50,7 +50,7 @@
 
     - name: Copy Caddyfile to Caddy directory
       ansible.builtin.template:
-        src: "../files/Caddyfile.j2"
+        src: "../templates/Caddyfile.j2"
         dest: "{{ caddy_dir }}/Caddyfile"
       register: caddy_config_result
 

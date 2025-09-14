@@ -16,7 +16,7 @@
 
     - name: Copy .env to Immich directory
       ansible.builtin.template:
-        src: "../files/.env.j2"
+        src: "../templates/.env.j2"
         dest: "{{ immich_dir }}/.env"
 
     - name: Start Docker Compose
