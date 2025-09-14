@@ -48,12 +48,12 @@
                 - title: Nextcloud
                   url: https://github.com/nextcloud/all-in-one
                   icon: di:nextcloud
-                - title: PiVPN
-                  url: https://docs.pivpn.io
-                  icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/webp/pivpn.webp
                 - title: Vaultwarden
                   url: https://github.com/dani-garcia/vaultwarden/wiki
                   icon: si:vaultwarden
+                - title: WireGuard Easy
+                  url: https://wg-easy.github.io/wg-easy/latest
+                  icon: di:wireguard
             - title: Selfhosted
               links:
                 - title: Awesome Selfhosted
@@ -188,6 +188,11 @@
               icon: si:vaultwarden
               url: ${VAULTWARDEN_URL}
               description: Password Manager
+            wg-easy:
+              name: WireGuard Easy
+              icon: di:wireguard
+              url: ${WG_EASY_URL}
+              description: VPN
         - type: group
           widgets:
             - type: reddit
@@ -310,5 +315,5 @@
             - glanceapp/glance
             - immich-app/immich
             - nextcloud/all-in-one
-            - pivpn/pivpn
             - dani-garcia/vaultwarden
+            - wg-easy/wg-easy
