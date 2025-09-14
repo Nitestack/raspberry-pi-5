@@ -10,12 +10,12 @@
 
     - name: Copy docker-compose.yml to Ente Auth directory
       ansible.builtin.template:
-        src: "../files/docker-compose.yml.j2"
+        src: "../templates/docker-compose.yml.j2"
         dest: "{{ ente_auth_dir }}/docker-compose.yml"
 
     - name: Copy museum.yml to Ente Auth directory
       ansible.builtin.template:
-        src: "../files/museum.yml.j2"
+        src: "../templates/museum.yml.j2"
         dest: "{{ ente_auth_dir }}/museum.yml"
 
     - name: Start Docker Compose
