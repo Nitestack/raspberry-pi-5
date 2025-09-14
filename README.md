@@ -30,7 +30,7 @@ _This [Ansible](https://www.ansible.com) configuration automates the setup of a 
 - **Automated Docker Installation**
 - **Vaultwarden Deployment** for secure password management
 - **Cloudflare DDNS Updater** for dynamic IP management
-- **PiVPN (WireGuard)** configuration for secure remote access
+- **WireGuard Easy** configuration for secure remote access
 - **NextCloud** for file synchronization and sharing
 - **Immich** for media synchronization with fast-upload speeds
 - **Ente Auth** for a cross-platform 2FA solution
@@ -98,9 +98,9 @@ _This [Ansible](https://www.ansible.com) configuration automates the setup of a 
 To ensure remote access and proper functionality of the services, configure the following port forwarding rules on your router:
 
 ```plaintext
-# PiVPN (WireGuard)
-# PIVPN_PORT is an environment variable configurable in `secrets.yml`. The default value is `51820`.
-public:${PIVPN_PORT}/tcp -> local:${PIVPN_PORT}/tcp
+# WireGuard
+# WG_EASY_PORT is an environment variable configurable in `secrets.yml`. The default value is `51820`.
+public:${WG_EASY_PORT}/tcp -> local:${WG_EASY_PORT}/tcp
 
 # Caddy (handling all the websites and API's)
 public:443/tcp -> local:443/tcp

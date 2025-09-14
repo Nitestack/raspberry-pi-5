@@ -31,15 +31,16 @@
     - docker
     - caddy
     - cloudflare-ddns-updater
+    - wg-easy
 
     - nextcloud
     - immich
     - vaultwarden
-    - glance
     - ente-auth
     - ghostfolio
+    - glance
     - adguard-home
-    - freshrss
-    - pivpn
-    - personal-site
     - adventure-log
+    - freshrss
+
+    - personal-site

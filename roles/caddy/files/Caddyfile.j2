@@ -10,6 +10,10 @@
 	}
 }
 
+{{ WG_EASY_DOMAIN }} {
+	reverse_proxy localhost:{{ WG_EASY_WEB_PORT }}
+}
+
 {{ PERSONAL_SITE_DOMAIN }} {
 	reverse_proxy localhost:{{ PERSONAL_SITE_PORT }}
 }
