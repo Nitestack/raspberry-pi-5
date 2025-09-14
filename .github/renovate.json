@@ -6,7 +6,8 @@
     ":configMigration",
     ":pinDevDependencies",
     "abandonments:recommended",
-    "default:automergeDigest"
+    "default:automergeDigest",
+    "default:automergeBranchPush"
   ],
   "labels": ["dependencies", "docker"],
   "docker-compose": {
