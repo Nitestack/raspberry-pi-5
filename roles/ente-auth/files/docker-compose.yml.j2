@@ -11,6 +11,12 @@ services:
     volumes:
       - ./museum.yml:/museum.yaml:ro
       - "{{ ente_auth_dir }}/data:/data:ro"
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/ping"]
+      interval: 60s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
 
   web:
     image: ghcr.io/ente-io/web
