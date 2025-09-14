@@ -4,7 +4,7 @@ services:
       - PORT={{ WG_EASY_WEB_PORT }}
     #  - HOST=0.0.0.0
 
-    image: ghcr.io/wg-easy/wg-easy:15
+    image: ghcr.io/wg-easy/wg-easy:15@sha256:bb8152762c36f824eb42bb2f3c5ab8ad952818fbef677d584bc69ec513b251b0
     container_name: wg-easy
     networks:
       wg:
