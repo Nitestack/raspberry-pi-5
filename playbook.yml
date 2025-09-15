@@ -27,11 +27,12 @@
       when: keypair_result.changed
 
   roles:
-    - dotfiles
+    - ufw
     - docker
     - caddy
     - cloudflare-ddns-updater
     - wg-easy
+    - dotfiles
 
     - nextcloud
     - immich
