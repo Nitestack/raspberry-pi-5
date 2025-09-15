@@ -1,0 +1,23 @@
+---
+- name: Set up firewall
+  block:
+    - name: Install ufw
+      ansible.builtin.apt:
+        name: ufw
+        update_cache: true
+      when: "'ufw' not in ansible_facts.packages"
+    - name: Configure ufw
+      community.general.ufw:
+        rule: allow
+        port: "{{ item }}"
+      loop:
+        - "80" # Caddy HTTP
+        - "443" # Caddy HTTPS
+        - "{{ ADGUARD_HOME_DNS_PORT }}" # AdGuard Home DNS
+        - "{{ WG_EASY_PORT }}" # WireGuard VPN
+        - "22" # SSH
+    - name: Set ufw defaults and enable
+      community.general.ufw:
+        state: enabled
+        policy: deny
+        direction: incoming
