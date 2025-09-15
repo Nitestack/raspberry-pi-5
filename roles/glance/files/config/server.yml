@@ -293,7 +293,12 @@
                     <li class="flex">
                       <div class="size-h5">{{ .String "userName" }}</div>
                       <div class="value-separator"></div>
-                      <div class="color-highlight text-very-compact">{{ div (.Int "usage" | toFloat) 1073741824 | toInt }} <span class="color-base size-h5">/</span> {{ $usage }} <span class="color-base">GB</span></div>
+                      <div class="color-highlight text-very-compact">
+                        {{ div (.Int "usage" | toFloat) 1073741824 | toInt }}
+                        <span class="color-base size-h5">/</span>
+                        {{ $usage }}
+                        <span class="color-base">GB</span>
+                      </div>
                     </li>
                     {{- end }}
                     {{- end }}
