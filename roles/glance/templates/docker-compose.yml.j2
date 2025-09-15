@@ -12,5 +12,5 @@ services:
       - /mnt/data:/mnt/data:ro
       - /mnt/backup:/mnt/backup:ro
     ports:
-      - "{{ GLANCE_PORT }}:8080"
+      - "127.0.0.1:{{ GLANCE_PORT }}:8080"
     env_file: .env
