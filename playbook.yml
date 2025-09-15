@@ -28,6 +28,7 @@
 
   roles:
     - ufw
+    - fail2ban
     - docker
     - caddy
     - cloudflare-ddns-updater
