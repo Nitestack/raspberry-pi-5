@@ -10,17 +10,17 @@
     - fail2ban
     - docker
     - caddy
-    - cloudflare-ddns
-    - wg-easy
+    - cloudflare_ddns
+    - wg_easy
 
     - nextcloud
     - immich
     - vaultwarden
-    - ente-auth
+    - ente_auth
     - ghostfolio
     - glance
-    - adguard-home
-    - adventure-log
+    - adguard_home
+    - adventure_log
     - freshrss
 
-    - personal-site
+    - personal_site
