@@ -57,3 +57,8 @@
         key_file: "/home/{{ ansible_user }}/.ssh/id_{{ ssh_key_type }}"
       when: not dotfiles_stat.stat.exists
       become_user: "{{ ansible_user }}"
+
+- name: Display new public key for manual GitHub setup
+  ansible.builtin.debug:
+    msg: "Copy this public key into your GitHub account: {{ keypair_result.public_key }}"
+  when: keypair_result.changed
