@@ -1,18 +1,60 @@
 ---
-- name: Upgrade system
-  ansible.builtin.import_tasks: pre_tasks/upgrade_system.yml
+- name: Ensure system packages are up to date
+  ansible.builtin.apt:
+    name: "*"
+    state: latest
+    update_cache: true
 
-- name: Static IPv4
-  ansible.builtin.import_tasks: pre_tasks/ipv4.yml
+- name: Ensure static IP address is configured
+  community.general.nmcli:
+    type: ethernet
+    conn_name: "Wired connection 1"
+    ip4: "{{ common_static_ip }}"
+    gw4: "{{ common_gateway_ip }}"
+    dns4: "{{ common_dns_servers }}"
+    state: present
+    conn_reload: true
 
-- name: Gather package facts
-  ansible.builtin.import_tasks: pre_tasks/gather_facts.yml
+- name: Gather package facts for other roles to use
+  ansible.builtin.package_facts:
+    manager: apt
 
-- name: Ensure the keyrings directory exists
-  ansible.builtin.import_tasks: pre_tasks/keyrings_dir.yml
+- name: Ensure the APT keyrings directory exists
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: "0755"
 
-- name: Ensure the NVME SSDs are mounted
-  ansible.builtin.import_tasks: pre_tasks/mount_nvme_ssds.yml
+- name: Ensure mount point directories exist
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: directory
+    mode: "0755"
+  loop: "{{ common_nvme_mounts }}"
+  loop_control:
+    label: "{{ item.path }}"
 
-- name: Suppress login message
-  ansible.builtin.import_tasks: pre_tasks/suppress_login_message.yml
+- name: Format the NVMe devices if not already formatted
+  community.general.filesystem:
+    fstype: "{{ item.filesystem }}"
+    dev: "{{ item.device }}"
+  loop: "{{ common_nvme_mounts }}"
+  loop_control:
+    label: "{{ item.device }}"
+
+- name: Mount the NVMe devices
+  ansible.posix.mount:
+    path: "{{ item.path }}"
+    src: "{{ item.device }}"
+    fstype: "{{ item.filesystem }}"
+    opts: "defaults"
+    state: mounted
+  loop: "{{ common_nvme_mounts }}"
+  loop_control:
+    label: "{{ item.path }}"
+
+- name: Ensure login message is suppressed by creating .hushlogin file
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.hushlogin"
+    state: touch
+    mode: "0644"

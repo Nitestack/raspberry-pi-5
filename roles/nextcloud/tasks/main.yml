@@ -1,24 +1,24 @@
 ---
-- name: Set up NextCloud
-  vars:
-    nextcloud_dir: "/mnt/data/nextcloud"
+- name: Ensure Nextcloud data directory exists
+  ansible.builtin.file:
+    path: "{{ nextcloud_dir }}"
+    state: directory
+    mode: "0755"
 
-  block:
-    - name: Create NextCloud directory
-      ansible.builtin.file:
-        path: "{{ nextcloud_dir }}"
-        state: directory
+- name: Configure Docker daemon for Nextcloud AIO IPv6
+  ansible.builtin.copy:
+    src: "daemon.json"
+    dest: "/etc/docker/daemon.json"
+    mode: "0644"
+  notify: Restart Docker
 
-    - name: Copy docker-compose.yml to NextCloud directory
-      ansible.builtin.template:
-        src: "../templates/docker-compose.yml.j2"
-        dest: "{{ nextcloud_dir }}/docker-compose.yml"
+- name: Deploy Docker Compose file from template
+  ansible.builtin.template:
+    src: "compose.yml.j2"
+    dest: "{{ nextcloud_dir }}/compose.yml"
+    mode: "0644"
 
-    - name: Copy daemon.json to a directory
-      ansible.builtin.copy:
-        src: "../files/daemon.json"
-        dest: "/etc/docker/daemon.json"
-
-    - name: Start Docker Compose
-      community.docker.docker_compose_v2:
-        project_src: "{{ nextcloud_dir }}"
+- name: Ensure Nextcloud containers are started
+  community.docker.docker_compose_v2:
+    project_src: "{{ nextcloud_dir }}"
+    state: present

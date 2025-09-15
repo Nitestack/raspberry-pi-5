@@ -1,0 +1,2 @@
+---
+ufw_incoming_policy: "deny"

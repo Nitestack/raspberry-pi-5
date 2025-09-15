@@ -1,0 +1,2 @@
+---
+ghostfolio_dir: "{{ data_base_dir }}/{{ ghostfolio_dir_name }}"

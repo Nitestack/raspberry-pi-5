@@ -1,0 +1,12 @@
+common_static_ip: "192.168.2.210/24"
+common_gateway_ip: "192.168.2.1"
+common_dns_servers:
+  - "192.168.2.1"
+
+common_nvme_mounts:
+  - device: "/dev/nvme0n1"
+    path: "{{ data_base_dir }}" # Uses the global data_base_dir
+    filesystem: "ext4"
+  - device: "/dev/nvme1n1"
+    path: "/mnt/backup"
+    filesystem: "ext4"

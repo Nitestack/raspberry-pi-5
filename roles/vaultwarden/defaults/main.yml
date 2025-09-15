@@ -1,0 +1,4 @@
+---
+vaultwarden_dir_name: "vaultwarden"
+
+vaultwarden_signups_allowed: "false"

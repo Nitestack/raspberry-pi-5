@@ -10,65 +10,25 @@
 	}
 }
 
-{{ WG_EASY_DOMAIN }} {
-	reverse_proxy localhost:{{ WG_EASY_WEB_PORT }}
-}
-
-{{ PERSONAL_SITE_DOMAIN }} {
-	reverse_proxy localhost:{{ PERSONAL_SITE_PORT }}
-}
-
-https://{{ VAULTWARDEN_DOMAIN }} {
-	# This setting may have compatibility issues with some browsers
-	# (e.g., attachment downloading on Firefox). Try disabling this
-	# if you encounter issues.
+{% for service in services.values() %}
+{{ service.domain }} {
+{% set proxy_type = service.caddy_proxy_type | default('simple') %}
+{% if proxy_type == "simple" %}
+	reverse_proxy localhost:{{ service.port }}
+{% elif proxy_type == "vaultwarden" %}
 	encode zstd gzip
-
-	reverse_proxy localhost:{{ VAULTWARDEN_PORT }} {
-		# Send the true remote IP to Rocket, so that vaultwarden can put this in the log, so that fail2ban can ban the correct IP.
+	reverse_proxy localhost:{{ service.port }} {
 		header_up X-Real-IP {remote_host}
 	}
-}
-
-{{ NEXTCLOUD_DOMAIN }} {
-	header Strict-Transport-Security max-age=31536000;
-
-	reverse_proxy localhost:{{ NEXTCLOUD_PORT }}
-}
-
-{{ IMMICH_DOMAIN }} {
-	reverse_proxy localhost:2283
-}
-
-{{ ENTE_API_DOMAIN }} {
-	reverse_proxy localhost:{{ ENTE_API_PORT }}
-}
-
-{{ ENTE_AUTH_DOMAIN }} {
-	reverse_proxy localhost:{{ ENTE_AUTH_PORT }}
-}
-
-{{ GLANCE_DOMAIN }} {
-	reverse_proxy localhost:{{ GLANCE_PORT }}
-}
-
-{{ ADGUARD_HOME_DOMAIN }} {
-	reverse_proxy localhost:{{ ADGUARD_HOME_ADMIN_PORT }}
-}
-
-{{ FRESHRSS_DOMAIN }} {
-	reverse_proxy localhost:{{ FRESHRSS_PORT }}
-}
-
-{{ GHOSTFOLIO_DOMAIN }} {
-	reverse_proxy localhost:{{ GHOSTFOLIO_PORT }}
-}
-
-{{ ADVENTURE_LOG_DOMAIN }} {
+{% elif proxy_type == "adventure_log" %}
 	@frontend {
-    not path /media* /admin* /static* /accounts*
+		not path /media* /admin* /static* /accounts*
 	}
-	reverse_proxy @frontend localhost:{{ ADVENTURE_LOG_FRONTEND_PORT }}
-
-	reverse_proxy localhost:{{ ADVENTURE_LOG_BACKEND_PORT }}
+	reverse_proxy @frontend localhost:{{ service.frontend_port }}
+	reverse_proxy localhost:{{ service.backend_port }}
+{% elif proxy_type == "nextcloud" %}
+	header Strict-Transport-Security max-age=31536000;
+	reverse_proxy localhost:{{ service.port }}
+{% endif %}
 }
+{% endfor %}

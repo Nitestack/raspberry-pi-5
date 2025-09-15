@@ -1,0 +1,2 @@
+---
+adguard_home_dir: "{{ data_base_dir }}/{{ adguard_home_dir_name }}"

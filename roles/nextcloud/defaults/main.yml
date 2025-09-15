@@ -1,0 +1,3 @@
+---
+nextcloud_dir_name: "nextcloud"
+nextcloud_aio_port: 8080

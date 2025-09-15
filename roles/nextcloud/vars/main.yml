@@ -1,0 +1,2 @@
+---
+nextcloud_dir: "{{ data_base_dir }}/{{ nextcloud_dir_name }}"

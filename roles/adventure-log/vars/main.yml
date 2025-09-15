@@ -1,0 +1,2 @@
+---
+adventure_log_dir: "{{ data_base_dir }}/{{ adventure_log_dir_name }}"
