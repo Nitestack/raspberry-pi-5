@@ -11,7 +11,7 @@ services:
       - "{{ dns_port }}:53/udp" # DNS
       # - "67:67/udp" # DHCP Server
       # - "68:68/udp" # DHCP Server
-      - "127.0.0.1:{{ adguard_home.port }}:80/tcp" # Admin Panel
+      - "127.0.0.1:{{ services.adguard_home.port }}:80/tcp" # Admin Panel
       # - "443:443/tcp" # Admin Panel (HTTPS/DNS-over-HTTPS)
       # - "443:443/udp" # Admin Panel (HTTPS/DNS-over-HTTPS)
       - "{{ adguard_home_initial_install_port }}:3000/tcp" # Initial Web Setup Interface

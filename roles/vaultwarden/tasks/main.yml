@@ -7,7 +7,7 @@
 
 - name: Deploy Docker Compose file from template
   ansible.builtin.template:
-    src: compose.yml.j2
+    src: "compose.yml.j2"
     dest: "{{ vaultwarden_dir }}/compose.yml"
     mode: "0644"
 

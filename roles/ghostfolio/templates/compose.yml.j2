@@ -12,7 +12,7 @@ services:
     env_file:
       - .env
     ports:
-      - "127.0.0.1:{{ ghostfolio.port }}:3333"
+      - "127.0.0.1:{{ services.ghostfolio.port }}:3333"
     depends_on:
       postgres:
         condition: service_healthy
