@@ -11,7 +11,7 @@ services:
       - nextcloud_aio_mastercontainer:/mnt/docker-aio-config
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
-      APACHE_PORT: {{ nextcloud.port }}
+      APACHE_PORT: {{ services.nextcloud.port }}
       APACHE_IP_BINDING: 127.0.0.1
       APACHE_ADDITIONAL_NETWORK: ""
       SKIP_DOMAIN_VALIDATION: false

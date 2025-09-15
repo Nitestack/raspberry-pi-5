@@ -3,7 +3,7 @@
   ansible.builtin.git:
     repo: "{{ personal_site_repo_url }}"
     dest: "{{ personal_site_dir }}"
-    force: true
+    version: main
 
 - name: Deploy Docker Compose file from template
   ansible.builtin.template:

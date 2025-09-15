@@ -7,13 +7,13 @@
 
 - name: Deploy Docker Compose file from template
   ansible.builtin.template:
-    src: compose.yml.j2
+    src: "compose.yml.j2"
     dest: "{{ adventure_log_dir }}/compose.yml"
     mode: "0644"
 
 - name: Deploy .env file from template
   ansible.builtin.template:
-    src: .env.j2
+    src: ".env.j2"
     dest: "{{ adventure_log_dir }}/.env"
     mode: "0644"
 

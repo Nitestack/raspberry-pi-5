@@ -1,6 +1,5 @@
 # ── General Configuration ─────────────────────────────────────────────
 domain: "npham.de"
-smtp_host: "smtp.protonmail.ch"
 timezone: "Europe/Berlin" # TZ identifier from https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List
 data_base_dir: "/mnt/data"
 dns_port: 53
@@ -69,4 +68,5 @@ services:
 
 # ── Email Configuration ───────────────────────────────────────────────
 no_reply_mail: "noreply@{{ domain }}"
+smtp_host: "smtp.protonmail.ch"
 smtp_port: 587
