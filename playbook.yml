@@ -5,22 +5,39 @@
   gather_facts: true
 
   roles:
-    - common
-    - ufw
-    - fail2ban
-    - docker
-    - caddy
-    - cloudflare_ddns
-    - wg_easy
+    - role: common
+      tags: common
+    - role: ufw
+      tags: ufw
+    - role: fail2ban
+      tags: fail2ban
+    - role: docker
+      tags: docker
+    - role: caddy
+      tags: caddy
+    - role: cloudflare_ddns
+      tags: cloudflare_ddns
+    - role: wg_easy
+      tags: wg_easy
 
-    - nextcloud
-    - immich
-    - vaultwarden
-    - ente_auth
-    - ghostfolio
-    - glance
-    - adguard_home
-    - adventure_log
-    - freshrss
+    - role: nextcloud
+      tags: nextcloud
+    - role: immich
+      tags: immich
+    - role: vaultwarden
+      tags: vaultwarden
+    - role: ente_auth
+      tags: ente_auth
+    - role: ghostfolio
+      tags: ghostfolio
+    - role: glance
+      tags: glance
+    - role: adguard_home
+      tags: adguard_home
+    - role: adventure_log
+      tags: adventure_log
+    - role: freshrss
+      tags: freshrss
 
-    - personal_site
+    - role: personal_site
+      tags: personal_site
