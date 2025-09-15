@@ -11,7 +11,7 @@ services:
       - "{{ freshrss_dir }}/data:/var/www/FreshRSS/data"
       - "{{ freshrss_dir }}/extensions:/var/www/FreshRSS/extensions"
     ports:
-      - "127.0.0.1:{{ freshrss.port }}:80"
+      - "127.0.0.1:{{ services.freshrss.port }}:80"
     environment:
       TZ: "{{ timezone }}"
       CRON_MIN: '3,33'

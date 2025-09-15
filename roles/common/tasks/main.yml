@@ -1,9 +1,8 @@
 ---
 - name: Ensure system packages are up to date
   ansible.builtin.apt:
-    name: "*"
-    state: latest
     update_cache: true
+    upgrade: dist
 
 - name: Ensure static IP address is configured
   community.general.nmcli:

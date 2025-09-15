@@ -1,7 +1,7 @@
 services:
   wg-easy:
     environment:
-      - PORT={{ wg_easy.port }}
+      - PORT={{ services.wg_easy.port }}
     #  - HOST=0.0.0.0
 
     image: ghcr.io/wg-easy/wg-easy:15@sha256:bb8152762c36f824eb42bb2f3c5ab8ad952818fbef677d584bc69ec513b251b0
@@ -15,7 +15,7 @@ services:
       - /lib/modules:/lib/modules:ro
     ports:
       - "{{ vpn_port }}:51820/udp"
-      - "127.0.0.1:{{ wg_easy.port }}:51821/tcp"
+      - "127.0.0.1:{{ services.wg_easy.port }}:51821/tcp"
     restart: unless-stopped
     cap_add:
       - NET_ADMIN
