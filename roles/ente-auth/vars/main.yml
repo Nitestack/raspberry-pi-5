@@ -1,0 +1,2 @@
+---
+ente_auth_dir: "{{ data_base_dir }}/{{ ente_auth_dir_name }}"

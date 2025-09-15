@@ -1,19 +1,17 @@
 ---
-- name: Set up FreshRSS
-  vars:
-    freshrss_dir: "/mnt/data/freshrss"
+- name: Ensure FreshRSS data directory exists
+  ansible.builtin.file:
+    path: "{{ freshrss_dir }}"
+    state: directory
+    mode: "0755"
 
-  block:
-    - name: Create FreshRSS directory
-      ansible.builtin.file:
-        path: "{{ freshrss_dir }}"
-        state: directory
+- name: Deploy Docker Compose file from template
+  ansible.builtin.template:
+    src: "compose.yml.j2"
+    dest: "{{ freshrss_dir }}/compose.yml"
+    mode: "0644"
 
-    - name: Copy docker-compose.yml to FreshRSS directory
-      ansible.builtin.template:
-        src: "../templates/docker-compose.yml.j2"
-        dest: "{{ freshrss_dir }}/docker-compose.yml"
-
-    - name: Start Docker Compose
-      community.docker.docker_compose_v2:
-        project_src: "{{ freshrss_dir }}"
+- name: Ensure FreshRSS containers are started
+  community.docker.docker_compose_v2:
+    project_src: "{{ freshrss_dir }}"
+    state: present

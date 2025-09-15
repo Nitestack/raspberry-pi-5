@@ -1,0 +1,2 @@
+---
+personal_site_dir: "{{ data_base_dir }}/{{ personal_site_dir_name }}"

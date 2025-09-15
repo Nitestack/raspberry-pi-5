@@ -1,0 +1,3 @@
+---
+cloudflare_ddns_domains: "{{ domain }}"
+cloudflare_ddns_dir_name: "cloudflare-ddns"

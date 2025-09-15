@@ -1,0 +1,2 @@
+---
+wg_easy_dir: "{{ data_base_dir }}/{{ wg_easy_dir_name }}"

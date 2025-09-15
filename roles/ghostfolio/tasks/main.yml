@@ -1,23 +1,23 @@
 ---
-- name: Set up Ghostfolio
-  vars:
-    ghostfolio_dir: "/mnt/data/ghostfolio"
-  block:
-    - name: Create Ghostfolio directory
-      ansible.builtin.file:
-        path: "{{ ghostfolio_dir }}"
-        state: directory
+- name: Ensure Ghostfolio data directory exists
+  ansible.builtin.file:
+    path: "{{ ghostfolio_dir }}"
+    state: directory
+    mode: "0755"
 
-    - name: Copy docker-compose.yml to Ghostfolio directory
-      ansible.builtin.template:
-        src: "../templates/docker-compose.yml.j2"
-        dest: "{{ ghostfolio_dir }}/docker-compose.yml"
+- name: Deploy Docker Compose file from template
+  ansible.builtin.template:
+    src: "compose.yml.j2"
+    dest: "{{ ghostfolio_dir }}/compose.yml"
+    mode: "0644"
 
-    - name: Copy .env to Ghostfolio directory
-      ansible.builtin.template:
-        src: "../templates/.env.j2"
-        dest: "{{ ghostfolio_dir }}/.env"
+- name: Deploy .env file from template
+  ansible.builtin.template:
+    src: ".env.j2"
+    dest: "{{ ghostfolio_dir }}/.env"
+    mode: "0644"
 
-    - name: Start Docker Compose
-      community.docker.docker_compose_v2:
-        project_src: "{{ ghostfolio_dir }}"
+- name: Ensure Ghostfolio containers are started
+  community.docker.docker_compose_v2:
+    project_src: "{{ ghostfolio_dir }}"
+    state: present

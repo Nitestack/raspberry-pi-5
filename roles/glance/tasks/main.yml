@@ -1,29 +1,29 @@
 ---
-- name: Set up Glance
-  vars:
-    glance_dir: "/mnt/data/glance"
+- name: Ensure Glance data directory exists
+  ansible.builtin.file:
+    path: "{{ glance_dir }}"
+    state: directory
+    mode: "0755"
 
-  block:
-    - name: Create Glance directory
-      ansible.builtin.file:
-        path: "{{ glance_dir }}"
-        state: directory
+- name: Deploy Docker Compose file from template
+  ansible.builtin.template:
+    src: "compose.yml.j2"
+    dest: "{{ glance_dir }}/compose.yml"
+    mode: "0644"
 
-    - name: Copy docker-compose.yml to Glance directory
-      ansible.builtin.template:
-        src: "../templates/docker-compose.yml.j2"
-        dest: "{{ glance_dir }}/docker-compose.yml"
+- name: Deploy .env file from template
+  ansible.builtin.template:
+    src: ".env.j2"
+    dest: "{{ glance_dir }}/.env"
+    mode: "0644"
 
-    - name: Copy .env to Glance directory
-      ansible.builtin.template:
-        src: "../templates/.env.j2"
-        dest: "{{ glance_dir }}/.env"
+- name: Copy static config files to Glance directory
+  ansible.builtin.copy:
+    src: "config/"
+    dest: "{{ glance_dir }}/config"
+    mode: "0644"
 
-    - name: Copy config files to Glance directory
-      ansible.builtin.copy:
-        src: "../files/config"
-        dest: "{{ glance_dir }}"
-
-    - name: Start Docker Compose
-      community.docker.docker_compose_v2:
-        project_src: "{{ glance_dir }}"
+- name: Ensure Glance container is started
+  community.docker.docker_compose_v2:
+    project_src: "{{ glance_dir }}"
+    state: present

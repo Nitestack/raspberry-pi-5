@@ -1,0 +1,2 @@
+---
+freshrss_dir: "{{ data_base_dir }}/{{ freshrss_dir_name }}"

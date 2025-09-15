@@ -1,59 +1,51 @@
 ---
-- name: Install Docker
+- name: Perform Docker installation
   when: "'docker-ce' not in ansible_facts.packages"
-  vars:
-    gpg_key_file: /etc/apt/keyrings/docker.asc
   block:
-    - name: Remove conflicting packages
+    - name: Ensure conflicting packages are removed
       ansible.builtin.apt:
-        name:
-          - docker.io
-          - docker-doc
-          - docker-compose
-          - podman-docker
-          - containerd
-          - runc
+        name: "{{ docker_conflicting_packages }}"
         state: absent
         purge: true
 
-    - name: Install dependencies
+    - name: Ensure dependencies are installed
       ansible.builtin.apt:
-        name:
-          - ca-certificates
-          - gnupg
+        name: "{{ docker_dependencies }}"
+        state: present
         update_cache: true
 
-    - name: Download GPG key
+    - name: Ensure GPG keyring directory exists
+      ansible.builtin.file:
+        path: "{{ docker_gpg_keyring_path }}"
+        state: directory
+        mode: "0755"
+
+    - name: Ensure Docker GPG key is downloaded
       ansible.builtin.get_url:
-        url: https://download.docker.com/linux/debian/gpg
-        dest: "{{ gpg_key_file }}"
+        url: "{{ docker_gpg_key_url }}"
+        dest: "{{ docker_gpg_key_path }}"
         mode: "0644"
+        force: true
 
-    - name: Add GPG key to apt
-      ansible.builtin.apt_key:
-        file: "{{ gpg_key_file }}"
-
-    - name: Add Docker repository to sources list
+    - name: Ensure Docker APT repository is added
       ansible.builtin.apt_repository:
-        repo: "deb [arch=arm64 signed-by={{ gpg_key_file }}] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release | lower }} stable"
+        repo: "{{ docker_apt_repository }}"
         filename: docker
+        state: present
 
-    - name: Install
+    - name: Ensure Docker packages are installed
       ansible.builtin.apt:
-        name:
-          - docker-ce
-          - docker-ce-cli
-          - containerd.io
-          - docker-buildx-plugin
-          - docker-compose-plugin
+        name: "{{ docker_packages }}"
+        state: present
         update_cache: true
 
-    - name: Ensure docker group exists
-      ansible.builtin.group:
-        name: docker
+- name: Ensure the 'docker' group exists
+  ansible.builtin.group:
+    name: docker
+    state: present
 
-    - name: Add user to docker group
-      ansible.builtin.user:
-        name: "{{ ansible_user }}"
-        groups: docker
-        append: true
+- name: Ensure ansible user is added to the 'docker' group
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"
+    groups: docker
+    append: true
