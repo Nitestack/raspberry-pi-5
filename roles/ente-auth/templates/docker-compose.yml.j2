@@ -4,7 +4,7 @@ services:
     container_name: ente-museum
     restart: always
     ports:
-      - "{{ ENTE_API_PORT }}:8080"
+      - "127.0.0.1:{{ ENTE_API_PORT }}:8080"
     depends_on:
       postgres:
         condition: service_healthy
