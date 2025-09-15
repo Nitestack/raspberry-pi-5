@@ -13,9 +13,9 @@
 ![GitHub Repo Stars](https://img.shields.io/github/stars/Nitestack/raspberry-pi-5?style=for-the-badge)
 ![Github Created At](https://img.shields.io/github/created-at/Nitestack/raspberry-pi-5?style=for-the-badge)
 
-[Features](#-features) • [Requirements](#️-requirements) • [Getting Started](#-getting-started) • [Port Forwarding](#-port-forwarding) • [Environment Variables](#-environment-variables) • [Security](#-security) • [License](#-license)
+[Features](#-features) • [Requirements](#️-requirements) • [Getting Started](#-getting-started) • [Configuration](#%EF%B8%8F-configuration) • [Port Forwarding](#-port-forwarding) • [Security](#%EF%B8%8F-security) • [License](#-license)
 
-_This [Ansible](https://www.ansible.com) configuration automates the setup of a Raspberry Pi Home Server running [Raspberry Pi OS](https://www.raspberrypi.com/software). It deploys essential services, enhances security, and ensures consistency across the server environment._
+_This [Ansible](https://www.ansible.com) configuration automates the setup of a Raspberry Pi Home Server running [Raspberry Pi OS](https://www.raspberrypi.com/software). It deploys essential services using a modern, secure, and declarative best-practice architecture._
 
 <p>
   <strong>If you find this repository useful, please <a href="#" title="star">⭐️</a> or fork it!</strong>
@@ -27,27 +27,27 @@ _This [Ansible](https://www.ansible.com) configuration automates the setup of a 
 > [!Warning]
 > This setup requires your domain to be fully managed by Cloudflare DNS.
 
-- **Automated Docker Installation**
-- **Vaultwarden Deployment** for secure password management
-- **Cloudflare DDNS Updater** for dynamic IP management
-- **WireGuard Easy** configuration for secure remote access
-- **NextCloud** for file synchronization and sharing
-- **Immich** for media synchronization with fast-upload speeds
-- **Ente Auth** for a cross-platform 2FA solution
-- **Glance** dashboard for a unified news feed and monitoring of the home lab
-- **AdGuard Home** for ad-blocking and privacy protection
-- **Dotfiles** for a standardized environment
-- **Personal Site** for hosting your personal website
-- **Ghostfolio** for wealth management
-- **AdventureLog** for travel tracker and trip planner
-- **FreshRSS** for a news aggregator
+- **Automated Docker Installation** following the latest security best practices.
+- **Dynamic Firewall Configuration** with UFW that automatically adapts to your services.
+- **Vaultwarden** for secure password management.
+- **Cloudflare DDNS Updater** for dynamic IP management.
+- **WireGuard Easy** for secure remote access.
+- **NextCloud** for file synchronization and sharing.
+- **Immich** for media synchronization with fast-upload speeds.
+- **Ente Auth** for a cross-platform 2FA solution.
+- **Glance** dashboard for a unified news feed and monitoring of the home lab.
+- **AdGuard Home** for ad-blocking and privacy protection.
+- **Personal Site** for hosting your personal website.
+- **Ghostfolio** for wealth management.
+- **AdventureLog** for a travel tracker and trip planner.
+- **FreshRSS** for a news aggregator.
 
 ## ⚙️ Requirements
 
 1. **Raspberry Pi OS Lite (64-bit)**: Ensure your Raspberry Pi is running the latest version.
 2. **Ansible**: Install Ansible on your local machine.
 3. **Cloudflare-managed domain**: Required for dynamic DNS updates and subdomain routing.
-4. **Ethernet connection**: Use a wired connection for your Raspberry Pi to ensure stable performance.
+4. **Ethernet connection**: Use a wired connection for your Raspberry Pi for stable performance.
 
 > [!Important]
 > When flashing your SD card, enable SSH and select the `Use password authentication` option.
@@ -55,97 +55,101 @@ _This [Ansible](https://www.ansible.com) configuration automates the setup of a 
 > [!Note]
 > If you choose a custom hostname or user, remember to update the `inventory.ini` file accordingly.
 
-5. **Static IPv4 configuration**: Your Raspberry Pi should have a static IP on your local network. To set the IP to `192.168.2.210`, use:
-
-   ```sh
-   sudo nmcli con mod "Wired connection 1" ipv4.addresses "192.168.2.210/24" \
-     ipv4.gateway "192.168.2.1" \
-     ipv4.dns "192.168.2.1" \
-     ipv4.method manual && \
-   sudo nmcli con up "Wired connection 1"
-   ```
-
-   This is a one-time setup. The Ansible playbook will manage IP persistence afterward.
-
-> [!Note]
-> Ensure Avahi is installed and running for `.local` domain resolution. Alternatively, access the Pi using its IP address directly.
-
 ## 🏁 Getting Started
 
 1. **Clone the repository**:
 
    ```sh
-   git clone https://github.com/Nitestack/raspberry-pi-5.git ~/raspberry-pi-5
-   ```
+   git clone [https://github.com/Nitestack/raspberry-pi-5.git](https://github.com/Nitestack/raspberry-pi-5.git) ~/raspberry-pi-5
 
 2. **Install required Ansible Galaxy collections**:
 
-   ```sh
-   ansible-galaxy install -r requirements.yml --force # to ensure the latest versions
-   ```
+    ```sh
+    ansible-galaxy install -r requirements.yml
+    ```
 
-3. **Run the playbook**:
+3. **Configure Your Server**: Follow the steps in the [Configuration](#%EF%B8%8F-configuration) section below to set up your variables.
 
-   ```sh
-   ansible-playbook -i inventory.ini playbook.yml
-   ```
+4. **Run the playbook**:
+
+    ```sh
+    ansible-playbook -i inventory.ini playbook.yml --ask-vault-pass
+    ```
 
 > [!IMPORTANT]
-> This only works if you have set up password-less authentication on your Raspberry Pi. Please look at the [Security](#-security) section for more details.
+> This only works if you have set up password-less SSH authentication on your Raspberry Pi. Please look at the [Security](#%EF%B8%8F-security) section for more details.
+
+## 🛠️ Configuration
+
+This project uses Ansible's best practices for variable management, separating public configuration from private secrets.
+
+### 1. Public Configuration (`group_vars/all/main.yml`)
+
+This file contains all non-sensitive configuration for your server, such as domain names, ports, and feature flags. Open `group_vars/all/main.yml` and customize the settings to match your environment.
+
+**Key settings to change:**
+
+- `domain`: Your root domain (e.g., "example.com").
+- `data_base_dir`: The base path where all service data will be stored.
+- `common_static_ip`: The static IP address for your Raspberry Pi.
+- `services`: The dictionary where you can customize the domain and ports for each individual service.
+
+### 2. Secret Management (`group_vars/all/vault.yml`)
+
+All sensitive data (API keys, passwords, secrets) is stored in an encrypted Ansible Vault file.
+
+**To set up your secrets:**
+
+1. **Copy the example file:** Create your vault file by copying the provided template.
+
+    ```sh
+    cp vault.yml.example group_vars/all/vault.yml
+    ```
+
+2. **Fill in your secrets:** Open `group_vars/all/vault.yml` with your favorite text editor and fill in all the required secret values.
+
+3. **Encrypt the file:** Once you have filled in your secrets, encrypt the file. You will be prompted to create a vault password. **Do not lose this password!**
+
+    ```sh
+    ansible-vault encrypt group_vars/all/vault.yml
+    ```
+
+4. **Edit the file later:** To edit the secrets file in the future, use:
+
+    ```sh
+    ansible-vault edit group_vars/all/vault.yml
+    ```
 
 ## 🔌 Port Forwarding
 
-To ensure remote access and proper functionality of the services, configure the following port forwarding rules on your router:
+To ensure remote access and proper functionality, configure the following port forwarding rules on your router. The playbook will automatically configure the server's firewall (UFW) based on these variables.
 
 ```plaintext
-# WireGuard
-# WG_EASY_PORT is an environment variable configurable in `secrets.yml`. The default value is `51820`.
-public:${WG_EASY_PORT}/tcp -> local:${WG_EASY_PORT}/tcp
-
-# Caddy (handling all the websites and API's)
+# Caddy (handling all websites and APIs)
+public:80/tcp -> local:80/tcp
 public:443/tcp -> local:443/tcp
 public:443/udp -> local:443/udp
 
-# SSH (optional, if you want to access the Raspberry Pi with an URL)
+# WireGuard (value from 'wg_easy_udp_port' in main.yml)
+public:{{ wg_easy_udp_port }}/udp -> local:{{ wg_easy_udp_port }}/udp
+
+# SSH (optional, if you want to access the Pi with a URL)
 public:22/tcp -> local:22/tcp
 ```
-
-## 🛠️ Environment Variables
-
-To securely configure sensitive data, create a `secrets.yml` file in the root directory. Copy the `secrets.example.yml` file and populate the fields as required.
-
-### Cloudflare
-
-Please set up an API token with `CLOUDFLARE_API_TOKEN` with `Edit zone DNS` permissions. This token is used to update your dynamic IP address in Cloudflare.
-
-### AdventureLog
-
-Please set a Google Maps API key with `GOOGLE_MAPS_API_KEY`, with the **Geocoding** and **Places (New)** API's enabled.
-
-> [!IMPORTANT]
-> You have to set this environment variable before running the playbook for the first time.
-
-### Glance Settings
-
-Please set a GitHub personal access token with `GITHUB_API_TOKEN` (check this [article](https://docs.github.com/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)).
-
-### Immich Settings
-
-Please set your timezone id (TZ identifier) with `TIMEZONE` (check this [Wikipedia article](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List)).
 
 ## 🛡️ Security
 
 ### 1. Add Your Host to Authorized Keys on the Raspberry Pi
 
-To enable secure SSH access, copy your public key to the Raspberry Pi:
+To enable secure, password-less SSH access for Ansible, copy your public SSH key to the Raspberry Pi:
 
 ```sh
-ssh-copy-id nhan@npham.de
+ssh-copy-id your_user@your_pi_ip_or_hostname
 ```
 
 ### 2. Update SSH Configuration
 
-Edit the `/etc/ssh/sshd_config` file on the Raspberry Pi to strengthen security. Update the following settings:
+Edit the `/etc/ssh/sshd_config` file on the Raspberry Pi to disable password authentication and strengthen security. Update the following settings:
 
 ```plaintext
 PasswordAuthentication no
