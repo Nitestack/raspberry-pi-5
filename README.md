@@ -73,7 +73,7 @@ _This [Ansible](https://www.ansible.com) configuration automates the setup of a 
 4. **Run the playbook**:
 
     ```sh
-    ansible-playbook -i inventory.ini playbook.yml --ask-vault-pass
+    ansible-playbook playbook.yml
     ```
 
 > [!IMPORTANT]
@@ -96,29 +96,26 @@ This file contains all non-sensitive configuration for your server, such as doma
 
 ### 2. Secret Management (`group_vars/all/vault.yml`)
 
-All sensitive data (API keys, passwords, secrets) is stored in an encrypted Ansible Vault file.
+All sensitive data (API keys, passwords, secrets) is stored in an encrypted Ansible Vault file. For convenience, we will store the vault password in a local, git-ignored file.
 
 **To set up your secrets:**
 
-1. **Copy the example file:** Create your vault file by copying the provided template.
+1. **Create your vault password file:** Create a file named `.vault_pass` in the project root containing only your vault password.
 
-    ```sh
-    cp vault.yml.example group_vars/all/vault.yml
-    ```
+```sh
+echo "YOUR_SUPER_SECRET_VAULT_PASSWORD" > .vault_pass
+chmod 600 .vault_pass # Set restrictive file permissions (read/write for your user only)
+```
 
-2. **Fill in your secrets:** Open `group_vars/all/vault.yml` with your favorite text editor and fill in all the required secret values.
+2. **Create and fill your vault:** Copy the `vault.yml.example` file to `group_vars/all/vault.yml`, fill in your secrets, and then encrypt it. Ansible will automatically use your `.vault_pass` file.
 
-3. **Encrypt the file:** Once you have filled in your secrets, encrypt the file. You will be prompted to create a vault password. **Do not lose this password!**
+```sh
+cp vault.yml.example group_vars/all/vault.yml # copy template
 
-    ```sh
-    ansible-vault encrypt group_vars/all/vault.yml
-    ```
+# -- NOW, EDIT group_vars/all/vault.yml AND ADD YOUR SECRETS --
 
-4. **Edit the file later:** To edit the secrets file in the future, use:
-
-    ```sh
-    ansible-vault edit group_vars/all/vault.yml
-    ```
+ansible-vault encrypt group_vars/all/vault.yml # encrypt file
+```
 
 ## 🔌 Port Forwarding
 

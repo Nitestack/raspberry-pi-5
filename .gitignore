@@ -1,2 +1,2 @@
-secrets.yml
+.vault_pass
 roles/glance/files/config/hidden-widgets
