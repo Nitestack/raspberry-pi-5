@@ -17,7 +17,10 @@ docker_gpg_key_path: "{{ docker_gpg_keyring_path }}/docker.asc"
 
 docker_gpg_key_url: "https://download.docker.com/linux/debian/gpg"
 
-docker_apt_repository: "deb [arch={{ ansible_architecture }} signed-by={{ docker_gpg_key_path }}] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release | lower }} stable"
+docker_apt_repository: "deb [arch={{ ansible_architecture }} \
+  signed-by={{ docker_gpg_key_path }}] \
+  https://download.docker.com/linux/{{ ansible_distribution | lower }} \
+  {{ ansible_distribution_release | lower }} stable"
 
 docker_packages:
   - docker-ce
