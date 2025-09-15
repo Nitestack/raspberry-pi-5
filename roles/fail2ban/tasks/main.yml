@@ -1,0 +1,19 @@
+---
+- name: Set up fail2ban
+  block:
+    - name: Install fail2ban
+      ansible.builtin.apt:
+        name: fail2ban
+        update_cache: true
+
+    - name: Configure fail2ban for SSH
+      ansible.builtin.template:
+        src: jail.local.j2
+        dest: /etc/fail2ban/jail.local
+      notify: restart fail2ban
+
+    - name: Ensure fail2ban service is started and enabled
+      ansible.builtin.service:
+        name: fail2ban
+        state: started
+        enabled: true
