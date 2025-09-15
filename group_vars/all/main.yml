@@ -1,0 +1,72 @@
+# ── General Configuration ─────────────────────────────────────────────
+domain: "npham.de"
+smtp_host: "smtp.protonmail.ch"
+timezone: "Europe/Berlin" # TZ identifier from https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List
+data_base_dir: "/mnt/data"
+dns_port: 53
+vpn_port: 51820
+allowed_ports:
+  - 22 # SSH
+  - 80 # Caddy HTTP
+  - 443 # Caddy HTTPS
+  - "{{ dns_port }}" # DNS
+  - "{{ vpn_port }}" # VPN
+
+# ── Service Configuration ─────────────────────────────────────────────
+services:
+  # AdGuard Home
+  adguard_home:
+    domain: "adguard.{{ domain }}"
+    port: 3000
+    dns_port: 53
+  # AdventureLog
+  adventure_log:
+    caddy_proxy_type: "adventure_log"
+    domain: "travel.{{ domain }}"
+    frontend_port: 8015
+    backend_port: 8016
+  # Ente Auth
+  ente_auth:
+    domain: "auth.{{ domain }}"
+    port: 3003
+  ente_api:
+    domain: "ente-api.{{ domain }}"
+    port: 8081
+  # FreshRSS
+  freshrss:
+    domain: "feed.{{ domain }}"
+    port: 8082
+  # Ghostfolio
+  ghostfolio:
+    domain: "wealth.{{ domain }}"
+    port: 3333
+  # Glance
+  glance:
+    domain: "dash.{{ domain }}"
+    port: 8083
+  # Immich
+  immich:
+    domain: "media.{{ domain }}"
+    port: 2283
+  # NextCloud
+  nextcloud:
+    caddy_proxy_type: "nextcloud"
+    domain: "cloud.{{ domain }}"
+    port: 11000
+  # Personal Site
+  personal_site:
+    domain: "{{ domain }}"
+    port: 3001
+  # Vaultwarden
+  vaultwarden:
+    caddy_proxy_type: "vaultwarden"
+    domain: "vault.{{ domain }}"
+    port: 11001
+  # WireGuard Easy
+  wg_easy:
+    domain: "vpn.{{ domain }}"
+    port: 51821
+
+# ── Email Configuration ───────────────────────────────────────────────
+no_reply_mail: "noreply@{{ domain }}"
+smtp_port: 587

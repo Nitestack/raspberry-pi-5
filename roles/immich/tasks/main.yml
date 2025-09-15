@@ -1,24 +1,23 @@
 ---
-- name: Set up Immich
-  vars:
-    immich_dir: "/mnt/data/immich"
+- name: Ensure Immich data directory exists
+  ansible.builtin.file:
+    path: "{{ immich_dir }}"
+    state: directory
+    mode: "0755"
 
-  block:
-    - name: Create Immich directory
-      ansible.builtin.file:
-        path: "{{ immich_dir }}"
-        state: directory
+- name: Download the latest docker-compose.yml for Immich
+  ansible.builtin.get_url:
+    url: "https://github.com/immich-app/immich/releases/latest/download/docker-compose.yml"
+    dest: "{{ immich_dir }}/compose.yml"
+    mode: "0644"
 
-    - name: Download docker-compose.yml
-      ansible.builtin.get_url:
-        url: "https://github.com/immich-app/immich/releases/latest/download/docker-compose.yml"
-        dest: "{{ immich_dir }}/docker-compose.yml"
+- name: Deploy .env file from template
+  ansible.builtin.template:
+    src: ".env.j2"
+    dest: "{{ immich_dir }}/.env"
+    mode: "0644"
 
-    - name: Copy .env to Immich directory
-      ansible.builtin.template:
-        src: "../templates/.env.j2"
-        dest: "{{ immich_dir }}/.env"
-
-    - name: Start Docker Compose
-      community.docker.docker_compose_v2:
-        project_src: "{{ immich_dir }}"
+- name: Ensure Immich containers are started
+  community.docker.docker_compose_v2:
+    project_src: "{{ immich_dir }}"
+    state: present

@@ -1,0 +1,23 @@
+services:
+  adguardhome:
+    image: adguard/adguardhome:latest@sha256:d765078d2140b464ce837128a4f536f80b4c9ab7fd5b6833ae690b72fae40897
+    container_name: adguardhome
+    restart: always
+    volumes:
+      - "{{ adguard_home_dir }}/data:/opt/adguardhome/work"
+      - "{{ adguard_home_dir }}/config:/opt/adguardhome/conf"
+    ports:
+      - "{{ dns_port }}:53/tcp" # DNS
+      - "{{ dns_port }}:53/udp" # DNS
+      # - "67:67/udp" # DHCP Server
+      # - "68:68/udp" # DHCP Server
+      - "127.0.0.1:{{ adguard_home.port }}:80/tcp" # Admin Panel
+      # - "443:443/tcp" # Admin Panel (HTTPS/DNS-over-HTTPS)
+      # - "443:443/udp" # Admin Panel (HTTPS/DNS-over-HTTPS)
+      - "{{ adguard_home_initial_install_port }}:3000/tcp" # Initial Web Setup Interface
+      # - "853:853/tcp" # DNS-over-TLS
+      # - "784:784/udp" # DNS-over-QUIC
+      # - "853:853/udp" # DNS-over-QUIC
+      # - "8853:8853/udp" # DNS-over-QUIC
+      # - "5443:5443/tcp" # DNSCrypt
+      # - "5443:5443/udp" # DNSCrypt

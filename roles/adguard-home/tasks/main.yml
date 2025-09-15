@@ -1,19 +1,17 @@
 ---
-- name: Set up AdGuard Home
-  vars:
-    adguard_dir: "/mnt/data/adguard-home"
+- name: Ensure AdGuard Home data directory exists
+  ansible.builtin.file:
+    path: "{{ adguard_home_dir }}"
+    state: directory
+    mode: "0755"
 
-  block:
-    - name: Create AdGuard Home directory
-      ansible.builtin.file:
-        path: "{{ adguard_dir }}"
-        state: directory
+- name: Deploy Docker Compose file from template
+  ansible.builtin.template:
+    src: "compose.yml.j2"
+    dest: "{{ adguard_home_dir }}/compose.yml"
+    mode: "0644"
 
-    - name: Copy docker-compose.yml to AdGuard Home directory
-      ansible.builtin.template:
-        src: "../templates/docker-compose.yml.j2"
-        dest: "{{ adguard_dir }}/docker-compose.yml"
-
-    - name: Start Docker Compose
-      community.docker.docker_compose_v2:
-        project_src: "{{ adguard_dir }}"
+- name: Ensure AdGuard Home containers are started
+  community.docker.docker_compose_v2:
+    project_src: "{{ adguard_home_dir }}"
+    state: present

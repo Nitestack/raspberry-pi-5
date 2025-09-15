@@ -4,18 +4,14 @@
   become: true
   gather_facts: true
 
-  vars_files:
-    - secrets.yml
-
   roles:
     - common
     - ufw
     - fail2ban
     - docker
     - caddy
-    - cloudflare-ddns-updater
+    - cloudflare-ddns
     - wg-easy
-    - dotfiles
 
     - nextcloud
     - immich

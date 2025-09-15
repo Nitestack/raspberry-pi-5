@@ -1,0 +1,2 @@
+---
+vaultwarden_dir: "{{ data_base_dir }}/{{ vaultwarden_dir_name }}"

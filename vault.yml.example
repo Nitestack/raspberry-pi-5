@@ -1,0 +1,42 @@
+# Global Secrets
+smtp_password: ""
+
+# Service Secrets
+
+# AdventureLog
+adventure_log_db_password: ""
+adventure_log_secret_key: ""
+adventure_log_admin_password: ""
+adventure_log_google_maps_api_key: "" # Geocoding and Places (New) API
+
+# Cloudflare DDNS
+cloudflare_ddns_api_token: "" # `Edit zone DNS` template
+
+# Ente Auth
+ente_jwt_secret: "" # head -c 32 /dev/urandom | base64 | tr -d '\n' | tr '+/' '-_'
+ente_db_password: "" # head -c 21 /dev/urandom | base64 | tr -d '\n'
+
+# Ghostfolio
+ghostfolio_db_password: ""
+ghostfolio_redis_password: ""
+ghostfolio_salt: ""
+ghostfolio_jwt_secret: ""
+
+# Glance
+glance_user: ""
+glance_secret: "" # docker run --rm glanceapp/glance secret:make
+glance_password_hash: "" # docker run --rm glanceapp/glance password:hash <password>
+glance_weather_location: "Berlin, Germany"
+
+adguard_home_username: ""
+adguard_home_password: ""
+immich_api_key: ""
+github_api_token: ""
+
+# Immich
+immich_db_password: "" # Please only use the characters `A-Za-z0-9`, without special characters or spaces
+
+# Personal Site
+personal_site_github_api_token: ""
+personal_site_notion_secret: ""
+personal_site_notion_db_id: ""

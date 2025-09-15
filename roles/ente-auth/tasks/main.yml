@@ -1,23 +1,23 @@
 ---
-- name: Set up Ente Auth
-  vars:
-    ente_auth_dir: "/mnt/data/ente-auth"
-  block:
-    - name: Create Ente Auth directory
-      ansible.builtin.file:
-        path: "{{ ente_auth_dir }}"
-        state: directory
+- name: Ensure Ente Auth data directory exists
+  ansible.builtin.file:
+    path: "{{ ente_auth_dir }}"
+    state: directory
+    mode: "0755"
 
-    - name: Copy docker-compose.yml to Ente Auth directory
-      ansible.builtin.template:
-        src: "../templates/docker-compose.yml.j2"
-        dest: "{{ ente_auth_dir }}/docker-compose.yml"
+- name: Deploy Docker Compose file from template
+  ansible.builtin.template:
+    src: compose.yml.j2
+    dest: "{{ ente_auth_dir }}/compose.yml"
+    mode: "0644"
 
-    - name: Copy museum.yml to Ente Auth directory
-      ansible.builtin.template:
-        src: "../templates/museum.yml.j2"
-        dest: "{{ ente_auth_dir }}/museum.yml"
+- name: Deploy museum.yml file from template
+  ansible.builtin.template:
+    src: museum.yml.j2
+    dest: "{{ ente_auth_dir }}/museum.yml"
+    mode: "0644"
 
-    - name: Start Docker Compose
-      community.docker.docker_compose_v2:
-        project_src: "{{ ente_auth_dir }}"
+- name: Ensure Ente containers are started
+  community.docker.docker_compose_v2:
+    project_src: "{{ ente_auth_dir }}"
+    state: present
