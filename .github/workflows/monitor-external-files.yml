@@ -89,7 +89,7 @@ jobs:
         uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e # v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "Update external file digests"
+          commit-message: "chore(deps): update external file digests"
           title: "chore(deps): update external file digests"
           body: |
             This PR contains the following updates:
@@ -110,6 +110,8 @@ jobs:
             ### 🔍 Files Updated:
             All digest comments have been automatically updated to the latest values. You can merge this PR immediately if the external changes don't require template modifications.
           branch: external-file-updates
-          labels: dependencies,external-files,ready-to-merge
+          labels: |
+            dependencies
+            external files
           delete-branch: true
           reviewers: Nitestack
