@@ -3,6 +3,7 @@
     "config:recommended",
     "docker:pinDigests",
     "docker:enableMajor",
+    "helpers:pinGitHubActionDigests",
     ":configMigration",
     ":pinDevDependencies",
     "abandonments:recommended"
