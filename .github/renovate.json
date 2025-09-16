@@ -9,16 +9,10 @@
     "abandonments:recommended"
   ],
   "reviewers": ["Nitestack"],
-  "labels": ["dependencies", "docker"],
   "docker-compose": {
     "managerFilePatterns": ["/(^|/)(?:docker-)?compose[^/]*\\.ya?ml(\\.j2)?$/"]
   },
   "packageRules": [
-    {
-      "matchUpdateTypes": ["patch", "digest"],
-      "automerge": true,
-      "platformAutomerge": true
-    },
     {
       "matchManagers": ["docker-compose"],
       "groupName": "Docker Compose updates for {{packageFile}}"
