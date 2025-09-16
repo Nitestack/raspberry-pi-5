@@ -112,3 +112,4 @@ jobs:
           branch: external-file-updates
           labels: dependencies,external-files,ready-to-merge
           delete-branch: true
+          reviewers: Nitestack
