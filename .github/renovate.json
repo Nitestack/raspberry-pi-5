@@ -5,15 +5,18 @@
     "docker:enableMajor",
     ":configMigration",
     ":pinDevDependencies",
-    "abandonments:recommended",
-    "default:automergeDigest",
-    ":automergeBranch"
+    "abandonments:recommended"
   ],
   "labels": ["dependencies", "docker"],
   "docker-compose": {
-    "managerFilePatterns": ["/(^|/)roles/.+/files/docker-compose\\.yml\\.j2$/"]
+    "managerFilePatterns": ["/(^|/)(?:docker-)?compose[^/]*\\.ya?ml(\\.j2)?$/"]
   },
   "packageRules": [
+    {
+      "matchUpdateTypes": ["patch", "digest"],
+      "automerge": true,
+      "platformAutomerge": true
+    },
     {
       "matchManagers": ["docker-compose"],
       "groupName": "Docker Compose updates for {{packageFile}}"
