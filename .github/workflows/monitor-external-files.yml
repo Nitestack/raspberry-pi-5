@@ -1,0 +1,127 @@
+name: Monitor External Files
+
+on:
+  schedule:
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+
+jobs:
+  monitor:
+    permissions:
+      contents: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: check-changes
+        run: |
+          #!/usr/bin/env bash
+          set -e
+
+          changes_found=false
+          changes_report=""
+
+          # Create temp files to store results from subshell
+          echo "false" > /tmp/changes_found
+          echo "" > /tmp/changes_report
+
+          # Find all files with external file tracking comments
+          find . -regextype posix-extended -regex '.*/(docker-)?compose[^/]*\.ya?ml(\.j2)?$' -o -regex '.*/\.env(\.j2)?$' | while read -r file; do
+            if grep -q "# external-file:" "$file"; then
+              echo "Checking $file..."
+
+              # Extract URL and stored digest
+              url=$(grep "# external-file:" "$file" | sed 's/# external-file: //')
+              stored_digest=$(grep "# digest:" "$file" | sed 's/# digest: //')
+              filename=$(basename "$file")
+
+              if [ -n "$url" ] && [ -n "$stored_digest" ]; then
+                # Get current digest
+                current_digest=$(curl -s "$url" | sha256sum | cut -d' ' -f1)
+
+                if [ "$stored_digest" != "$current_digest" ]; then
+                  echo "❌ $filename: digest mismatch"
+                  echo "  File: $file"
+                  echo "  URL: $url"
+                  echo "  Stored:  $stored_digest"
+                  echo "  Current: $current_digest"
+
+                  # Update temp files
+                  echo "true" > /tmp/changes_found
+                  echo "
+          **$filename**
+          - File: \`$file\`
+          - URL: $url
+          - Stored digest: \`$stored_digest\`
+          - Current digest: \`$current_digest\`" >> /tmp/changes_report
+                else
+                  echo "✅ $filename: up to date"
+                fi
+              fi
+            fi
+          done
+
+          # Read results from temp files
+          changes_found=$(cat /tmp/changes_found)
+          changes_report=$(cat /tmp/changes_report)
+
+          # Save results for next step
+          if [ "$changes_found" = "true" ]; then
+            echo "changes=true" >> $GITHUB_OUTPUT
+            echo "CHANGES_REPORT<<EOF" >> $GITHUB_ENV
+            echo "$changes_report" >> $GITHUB_ENV
+            echo "EOF" >> $GITHUB_ENV
+            echo "Changes detected! Will create PR."
+          else
+            echo "changes=false" >> $GITHUB_OUTPUT
+            echo "No changes detected."
+          fi
+
+      - if: steps.check-changes.outputs.changes == 'true'
+        run: |
+          #!/usr/bin/env bash
+          find . -regextype posix-extended -regex '.*/(docker-)?compose[^/]*\.ya?ml(\.j2)?$' -o -regex '.*/\.env(\.j2)?$' | while read -r file; do
+            if grep -q "# external-file:" "$file"; then
+              url=$(grep "# external-file:" "$file" | sed 's/# external-file: //')
+              stored_digest=$(grep "# digest:" "$file" | sed 's/# digest: //')
+
+              if [ -n "$url" ] && [ -n "$stored_digest" ]; then
+                current_digest=$(curl -s "$url" | sha256sum | cut -d' ' -f1)
+
+                if [ "$stored_digest" != "$current_digest" ]; then
+                  echo "Updating digest in $file"
+                  sed -i "s/# digest: .*/# digest: $current_digest/" "$file"
+                fi
+              fi
+            fi
+          done
+
+      - if: steps.check-changes.outputs.changes == 'true'
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Update external file digests"
+          title: "🔄 External Docker Compose/Config File Updates"
+          body: |
+            ## External File Changes Detected & Digests Updated
+
+            The following external files have been updated and their digests have been automatically updated in this PR:
+
+            ${{ env.CHANGES_REPORT }}
+
+            ## ✅ What This PR Does:
+            - **Automatically updated** all digest comments to match current external file content
+            - **Ready to merge** after you review the external changes
+            - **No manual digest updates needed**
+
+            ## 📋 Action Required:
+            1. **Review the external file changes** by visiting the URLs above to understand what changed
+            2. **Update your Ansible templates** if the external file structure changed significantly
+            3. **Merge this PR** once you're satisfied with the changes
+
+            ## 🔍 Files Updated:
+            All digest comments have been automatically updated to the latest values. You can merge this PR immediately if the external changes don't require template modifications.
+          branch: external-file-updates
+          labels: dependencies,external-files,ready-to-merge
+          delete-branch: true
