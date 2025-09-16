@@ -75,7 +75,7 @@ jobs:
               stored_digest=$(grep "# digest:" "$file" | sed 's/# digest: //')
 
               if [ -n "$url" ] && [ -n "$stored_digest" ]; then
-                current_digest=$(curl -s "$url" | sha256sum | cut -d' ' -f1)
+                current_digest=$(curl -sL "$url" | sha256sum | cut -d' ' -f1)
 
                 if [ "$stored_digest" != "$current_digest" ]; then
                   echo "Updating digest in $file"
