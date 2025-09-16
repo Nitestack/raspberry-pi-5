@@ -11,6 +11,19 @@
   "docker-compose": {
     "managerFilePatterns": ["/(^|/)(?:docker-)?compose[^/]*\\.ya?ml(\\.j2)?$/"]
   },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "/(^|/)(?:docker-)?compose[^/]*\\.ya?ml(\\.j2)?$/",
+        "/\\.env(\\.j2)?$/"
+      ],
+      "matchStrings": [
+        "# renovate: datasource=url depName=(?<depName>[^\\s]+) registryUrl=(?<registryUrl>https?://[^\\s]+) versioning=digest\\s*\\n# digest: (?<currentValue>sha256:[a-f0-9]{64})"
+      ],
+      "datasourceTemplate": "url"
+    }
+  ],
   "packageRules": [
     {
       "matchUpdateTypes": ["patch", "digest"],
