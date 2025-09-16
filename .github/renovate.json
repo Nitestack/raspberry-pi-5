@@ -7,16 +7,21 @@
     ":pinDevDependencies",
     "abandonments:recommended"
   ],
-  "labels": ["dependencies", "docker"],
+  "labels": [
+    "dependencies",
+    "docker"
+  ],
   "docker-compose": {
-    "managerFilePatterns": ["/(^|/)(?:docker-)?compose[^/]*\\.ya?ml(\\.j2)?$/"]
+    "managerFilePatterns": [
+      "/(^|/)(?:docker-)?compose[^/]*\\.ya?ml(\\.j2)?$/"
+    ]
   },
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": [
-        "/(^|/)(?:docker-)?compose[^/]*\\.ya?ml(\\.j2)?$/",
-        "/\\.env(\\.j2)?$/"
+      "managerFilePatterns": [
+        "//(^|/)(?:docker-)?compose[^/]*\\.ya?ml(\\.j2)?$//",
+        "//\\.env(\\.j2)?$//"
       ],
       "matchStrings": [
         "# renovate: datasource=url depName=(?<depName>[^\\s]+) registryUrl=(?<registryUrl>https?://[^\\s]+) versioning=digest\\s*\\n# digest: (?<currentValue>sha256:[a-f0-9]{64})"
@@ -26,20 +31,31 @@
   ],
   "packageRules": [
     {
-      "matchUpdateTypes": ["patch", "digest"],
+      "matchUpdateTypes": [
+        "patch",
+        "digest"
+      ],
       "automerge": true,
       "platformAutomerge": true
     },
     {
-      "matchManagers": ["docker-compose"],
+      "matchManagers": [
+        "docker-compose"
+      ],
       "groupName": "Docker Compose updates for {{packageFile}}"
     },
     {
-      "matchManagers": ["github-actions"],
+      "matchManagers": [
+        "github-actions"
+      ],
       "groupName": "GitHub Actions updates for {{packageFile}}"
     },
     {
-      "matchPackageNames": ["ghcr.io/baosystems/postgis", "postgres", "redis"],
+      "matchPackageNames": [
+        "ghcr.io/baosystems/postgis",
+        "postgres",
+        "redis"
+      ],
       "enabled": false
     }
   ]
