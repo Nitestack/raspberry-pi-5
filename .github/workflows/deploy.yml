@@ -1,0 +1,45 @@
+name: Deploy to Raspberry Pi 5
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+      - id: changed-files
+        uses: tj-actions/changed-files@24d32ffd492484c1d75e0c0b894501ddb9d30d62 # v47
+      - id: set-tags
+        run: |
+          run_all=false
+          tags=""
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            if [[ $file == roles/* ]]; then
+              role=$(echo "$file" | cut -d/ -f2)
+              if [[ ! " $tags " =~ " $role " ]]; then
+                tags="$tags,$role"
+              fi
+            else
+              run_all=true
+              break
+            fi
+          done
+
+          if [[ "$run_all" = true || -z "$tags" ]]; then
+            echo "ansible_tags=all" >> $GITHUB_OUTPUT
+          else
+            echo "ansible_tags=${tags:1}" >> $GITHUB_OUTPUT
+          fi
+      - uses: arillso/action.playbook@master
+        with:
+          playbook: playbook.yml
+          inventory: inventory.ini
+          galaxy_file: requirements.yml
+          private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          vault_password: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
+          user: nhan
+          become: true
+          tags: ${{ steps.set-tags.outputs.ansible_tags }}
