@@ -33,13 +33,14 @@ jobs:
           else
             echo "ansible_tags=${tags:1}" >> $GITHUB_OUTPUT
           fi
-      - uses: arillso/action.playbook@master
+      - uses: dawidd6/action-ansible-playbook@v4
         with:
           playbook: playbook.yml
-          inventory: inventory.ini
-          galaxy_file: requirements.yml
-          private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          requirements: requirements.yml
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          inventory: |
+            [raspberrypi]
+            npham.de ansible_user=nhan ansible_python_interpreter=auto_silent
           vault_password: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
-          user: nhan
-          become: true
-          tags: ${{ steps.set-tags.outputs.ansible_tags }}
+          options: |
+            --tags ${{ steps.set-tags.outputs.ansible_tags }}
