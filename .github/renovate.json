@@ -8,9 +8,14 @@
     ":pinDevDependencies",
     "abandonments:recommended"
   ],
+  "labels": ["dependencies"],
   "reviewers": ["Nitestack"],
   "docker-compose": {
-    "managerFilePatterns": ["/(^|/)(?:docker-)?compose[^/]*\\.ya?ml(\\.j2)?$/"]
+    "managerFilePatterns": ["/(^|/)(?:docker-)?compose[^/]*\\.ya?ml(\\.j2)?$/"],
+    "addLabels": ["docker"]
+  },
+  "github-actions": {
+    "addLabels": ["github actions"]
   },
   "packageRules": [
     {
