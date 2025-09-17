@@ -1,3 +1,6 @@
+# external-file: https://github.com/immich-app/immich/releases/latest/download/docker-compose.yml
+# digest: 7bccc6cc28a88b38b14eb61ce839d6aae7638e08f6bfa502fa8ecf9ee7b3747e
+
 ---
 - name: Ensure Immich data directory exists
   ansible.builtin.file:
