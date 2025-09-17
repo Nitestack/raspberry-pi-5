@@ -14,26 +14,30 @@ jobs:
         uses: tj-actions/changed-files@24d32ffd492484c1d75e0c0b894501ddb9d30d62 # v47
       - id: set-tags
         run: |
+          tags_list=()
           run_all=false
-          tags=""
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            if [[ $file == roles/* ]]; then
-              role=$(echo "$file" | cut -d/ -f2)
-              if [[ ! " $tags " =~ " $role " ]]; then
-                tags="$tags,$role"
-              fi
-            else
+            if [[ "$file" == "playbook.yml" || "$file" == group_vars/* ]]; then
               run_all=true
               break
+            elif [[ "$file" == roles/* ]]; then
+              role=$(echo "$file" | cut -d'/' -f2)
+              if ! [[ " ${tags_list[*]} " =~ " ${role} " ]]; then
+                tags_list+=("$role")
+              fi
             fi
           done
 
-          if [[ "$run_all" = true || -z "$tags" ]]; then
+          if [[ "$run_all" == true ]]; then
             echo "ansible_tags=all" >> $GITHUB_OUTPUT
+          elif [[ ${#tags_list[@]} -gt 0 ]]; then
+            tags=$(IFS=,; echo "${tags_list[*]}")
+            echo "ansible_tags=$tags" >> $GITHUB_OUTPUT
           else
-            echo "ansible_tags=${tags:1}" >> $GITHUB_OUTPUT
+            echo "ansible_tags=none" >> $GITHUB_OUTPUT
           fi
-      - uses: dawidd6/action-ansible-playbook@v4
+      - if: steps.set-tags.outputs.ansible_tags != 'none'
+        uses: dawidd6/action-ansible-playbook@v4
         with:
           playbook: playbook.yml
           requirements: requirements.yml
@@ -42,5 +46,6 @@ jobs:
             [raspberrypi]
             npham.de ansible_user=nhan ansible_python_interpreter=auto_silent
           vault_password: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
+          sudo: true
           options: |
             --tags ${{ steps.set-tags.outputs.ansible_tags }}
