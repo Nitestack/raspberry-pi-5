@@ -3,3 +3,9 @@ collections:
   - name: ansible.posix
   - name: community.general
   - name: community.docker
+
+roles:
+  - name: stefangweichinger.ansible_rclone
+  - name: angristan.restic
+    src: https://github.com/angristan/ansible-restic
+    version: master
