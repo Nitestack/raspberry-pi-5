@@ -70,3 +70,22 @@ services:
 no_reply_mail: "noreply@{{ domain }}"
 smtp_host: "smtp.protonmail.ch"
 smtp_port: 587
+
+# ── Backup Configuration ──────────────────────────────────────────────
+rclone_arch: "arm64"
+rclone_configs:
+  - name: "onedrive"
+    properties:
+      type: "onedrive"
+      token: ' {{ rclone_onedrive_token }}'
+      drive_id: "{{ rclone_onedrive_drive_id }}"
+      drive_type: "personal"
+  # - name: "proton-drive"
+  #   properties:
+  #     type: "protondrive"
+  #     username: "{{ rclone_proton_username }}"
+  #     password: "{{ rclone_proton_password }}"
+  #     client_uid: "{{ rclone_proton_client_uid }}"
+  #     client_access_token: "{{ rclone_proton_client_access_token }}"
+  #     client_refresh_token: "{{ rclone_proton_client_refresh_token }}"
+  #     client_salted_key_pass: "{{ rclone_proton_client_salted_key_pass }}"

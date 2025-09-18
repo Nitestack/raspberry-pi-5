@@ -1,4 +1,4 @@
-name: Deploy to Raspberry Pi 5
+name: Deployment
 
 on:
   push:
