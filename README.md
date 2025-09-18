@@ -13,7 +13,7 @@
 ![GitHub Repo Stars](https://img.shields.io/github/stars/Nitestack/raspberry-pi-5?style=for-the-badge)
 ![Github Created At](https://img.shields.io/github/created-at/Nitestack/raspberry-pi-5?style=for-the-badge)
 
-[Features](#-features) • [Requirements](#️-requirements) • [Getting Started](#-getting-started) • [Configuration](#%EF%B8%8F-configuration) • [Port Forwarding](#-port-forwarding) • [Security](#%EF%B8%8F-security) • [License](#-license)
+[Features](#-features) • [Requirements](#️-requirements) • [Getting Started](#-getting-started) • [Configuration](#%EF%B8%8F-configuration) • [Port Forwarding](#-port-forwarding) • [Security](#%EF%B8%8F-security) • [Backups](#-backups) • [License](#-license)
 
 _This [Ansible](https://www.ansible.com) configuration automates the setup of a Raspberry Pi Home Server running [Raspberry Pi OS](https://www.raspberrypi.com/software). It deploys essential services using a modern, secure, and declarative best-practice architecture._
 
@@ -41,6 +41,7 @@ _This [Ansible](https://www.ansible.com) configuration automates the setup of a 
 - **Ghostfolio** for wealth management.
 - **AdventureLog** for a travel tracker and trip planner.
 - **FreshRSS** for a news aggregator.
+- **Automated Backups** with Restic and Rclone for off-site storage.
 
 ## ⚙️ Requirements
 
@@ -60,7 +61,7 @@ _This [Ansible](https://www.ansible.com) configuration automates the setup of a 
 1. **Clone the repository**:
 
    ```sh
-   git clone [https://github.com/Nitestack/raspberry-pi-5.git](https://github.com/Nitestack/raspberry-pi-5.git) ~/raspberry-pi-5
+   git clone https://github.com/Nitestack/raspberry-pi-5.git ~/raspberry-pi-5
 
 2. **Install required Ansible Galaxy collections**:
 
@@ -160,6 +161,20 @@ Apply the changes by reloading the SSH service:
 ```sh
 sudo systemctl reload ssh
 ```
+
+## 💾 Backups
+
+This setup includes an automated backup solution using **Restic** and **Rclone**.
+
+- **Remote Backups**: Stored on OneDrive or Proton Drive
+
+Backups are performed daily via a cron job and can also be triggered via the "Backup" GitHub Actions workflow.
+
+### Configuration
+
+1. **Install `rclone`** on your local machine.
+2. **Configure `rclone`**: Run `rclone config` and follow the steps to set up a new remote.
+3. **Update `vault.yml`**: Fill in your secrets (`rclone_...`). You can get the config by running `rclone config show <your_remote_name>`.
 
 ## 📝 License
 
