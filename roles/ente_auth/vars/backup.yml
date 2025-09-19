@@ -1,0 +1,3 @@
+---
+restic_include_paths:
+  - "{{ ente_auth_data_dir }}/db"
