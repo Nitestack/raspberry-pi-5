@@ -1,0 +1,3 @@
+---
+restic_include_paths:
+  - "{{ immich_data_dir }}"
