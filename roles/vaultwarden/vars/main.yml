@@ -1,2 +1,3 @@
 ---
-vaultwarden_dir: "{{ data_base_dir }}/{{ vaultwarden_dir_name }}"
+vaultwarden_data_dir: "{{ data_base_dir }}/{{ vaultwarden_dir_name }}"
+vaultwarden_service_dir: "{{ service_base_dir }}/{{ vaultwarden_dir_name }}"

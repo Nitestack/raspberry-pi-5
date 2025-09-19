@@ -1,7 +1,7 @@
 ---
-- name: Ensure Nextcloud data directory exists
+- name: Ensure Nextcloud service directory exists
   ansible.builtin.file:
-    path: "{{ nextcloud_dir }}"
+    path: "{{ nextcloud_service_dir }}"
     state: directory
     mode: "0755"
 
@@ -11,14 +11,15 @@
     dest: "/etc/docker/daemon.json"
     mode: "0644"
   notify: Restart Docker
+  become: true
 
 - name: Deploy Docker Compose file from template
   ansible.builtin.template:
     src: "compose.yml.j2"
-    dest: "{{ nextcloud_dir }}/compose.yml"
+    dest: "{{ nextcloud_service_dir }}/compose.yml"
     mode: "0644"
 
 - name: Ensure Nextcloud containers are started
   community.docker.docker_compose_v2:
-    project_src: "{{ nextcloud_dir }}"
+    project_src: "{{ nextcloud_service_dir }}"
     state: present

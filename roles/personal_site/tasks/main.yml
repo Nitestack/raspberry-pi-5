@@ -2,23 +2,23 @@
 - name: Ensure latest version of personal site is cloned
   ansible.builtin.git:
     repo: "{{ personal_site_repo_url }}"
-    dest: "{{ personal_site_dir }}"
+    dest: "{{ personal_site_service_dir }}"
     version: master
 
 - name: Deploy Docker Compose file from template
   ansible.builtin.template:
     src: "compose.yml.j2"
-    dest: "{{ personal_site_dir }}/compose.yml"
+    dest: "{{ personal_site_service_dir }}/compose.yml"
     mode: "0644"
 
 - name: Deploy .env file from template
   ansible.builtin.template:
     src: ".env.j2"
-    dest: "{{ personal_site_dir }}/.env"
+    dest: "{{ personal_site_service_dir }}/.env"
     mode: "0644"
 
 - name: Ensure personal site container is built and started
   community.docker.docker_compose_v2:
-    project_src: "{{ personal_site_dir }}"
+    project_src: "{{ personal_site_service_dir }}"
     state: present
     build: always

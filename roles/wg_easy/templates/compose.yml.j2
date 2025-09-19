@@ -14,7 +14,7 @@ services:
         ipv4_address: 10.42.42.42
         ipv6_address: fdcc:ad94:bacf:61a3::2a
     volumes:
-      - "{{ wg_easy_dir }}/data:/etc/wireguard"
+      - "{{ wg_easy_data_dir }}/data:/etc/wireguard"
       - /lib/modules:/lib/modules:ro
     ports:
       - "{{ vpn_port }}:51820/udp"

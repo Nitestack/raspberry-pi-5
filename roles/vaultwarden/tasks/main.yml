@@ -1,17 +1,17 @@
 ---
-- name: Ensure Vaultwarden data directory exists
+- name: Ensure Vaultwarden service directory exists
   ansible.builtin.file:
-    path: "{{ vaultwarden_dir }}"
+    path: "{{ vaultwarden_service_dir }}"
     state: directory
     mode: "0755"
 
 - name: Deploy Docker Compose file from template
   ansible.builtin.template:
     src: "compose.yml.j2"
-    dest: "{{ vaultwarden_dir }}/compose.yml"
+    dest: "{{ vaultwarden_service_dir }}/compose.yml"
     mode: "0644"
 
 - name: Ensure Vaultwarden containers are started
   community.docker.docker_compose_v2:
-    project_src: "{{ vaultwarden_dir }}"
+    project_src: "{{ vaultwarden_service_dir }}"
     state: present

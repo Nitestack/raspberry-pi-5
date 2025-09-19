@@ -18,7 +18,7 @@ services:
     restart: always
     env_file: .env
     volumes:
-      - "{{ adventure_log_dir }}/db:/var/lib/postgresql/data/"
+      - "{{ adventure_log_data_dir }}/db:/var/lib/postgresql/data/"
 
   server:
     image: ghcr.io/seanmorley15/adventurelog-backend:latest@sha256:53fdd2f3b281e805c7ef1cd56003eee02060f016e50951023ee30c27f275ccab
@@ -30,4 +30,4 @@ services:
     depends_on:
       - db
     volumes:
-      - "{{ adventure_log_dir }}/data:/code/media/"
+      - "{{ adventure_log_data_dir }}/data:/code/media/"

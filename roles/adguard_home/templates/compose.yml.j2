@@ -4,8 +4,8 @@ services:
     container_name: adguardhome
     restart: always
     volumes:
-      - "{{ adguard_home_dir }}/data:/opt/adguardhome/work"
-      - "{{ adguard_home_dir }}/config:/opt/adguardhome/conf"
+      - "{{ adguard_home_data_dir }}/data:/opt/adguardhome/work"
+      - "{{ adguard_home_data_dir }}/config:/opt/adguardhome/conf"
     ports:
       - "{{ dns_port }}:53/tcp" # DNS
       - "{{ dns_port }}:53/udp" # DNS

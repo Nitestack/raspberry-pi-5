@@ -1,2 +1,3 @@
 ---
-immich_dir: "{{ data_base_dir }}/{{ immich_dir_name }}"
+immich_data_dir: "{{ data_base_dir }}/{{ immich_dir_name }}"
+immich_service_dir: "{{ service_base_dir }}/{{ immich_dir_name }}"
