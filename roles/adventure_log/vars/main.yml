@@ -1,2 +1,3 @@
 ---
-adventure_log_dir: "{{ data_base_dir }}/{{ adventure_log_dir_name }}"
+adventure_log_data_dir: "{{ data_base_dir }}/{{ adventure_log_dir_name }}"
+adventure_log_service_dir: "{{ service_base_dir }}/{{ adventure_log_dir_name }}"

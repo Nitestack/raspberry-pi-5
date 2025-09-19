@@ -2,6 +2,7 @@
 domain: "npham.de"
 timezone: "Europe/Berlin" # TZ identifier from https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List
 data_base_dir: "/mnt/data"
+service_base_dir: "~/services"
 dns_port: 53
 vpn_port: 51820
 allowed_ports:

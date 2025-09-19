@@ -13,7 +13,7 @@ services:
         condition: service_healthy
     volumes:
       - ./museum.yml:/museum.yaml:ro
-      - "{{ ente_auth_dir }}/data:/data:ro"
+      - "{{ ente_auth_data_dir }}/data:/data:ro"
     healthcheck:
       test: ["CMD", "curl", "--fail", "http://localhost:8080/ping"]
       interval: 60s
@@ -43,4 +43,4 @@ services:
       start_period: 40s
       start_interval: 1s
     volumes:
-      - "{{ ente_auth_dir }}/db:/var/lib/postgresql/data"
+      - "{{ ente_auth_data_dir }}/db:/var/lib/postgresql/data"

@@ -7,8 +7,8 @@ services:
     image: glanceapp/glance@sha256:6df86a7e8868d1eda21f35205134b1962c422957e42a0c44d4717c8e8f741b1a
     restart: always
     volumes:
-      - ./config:/app/config
-      - ./assets:/app/assets
+      - "{{ glance_service_dir }}/config:/app/config"
+      - "{{ glance_service_dir }}/assets:/app/assets"
       - /etc/localtime:/etc/localtime:ro
       # For Docker Containers Widget
       - /var/run/docker.sock:/var/run/docker.sock:ro

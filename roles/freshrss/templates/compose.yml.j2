@@ -11,8 +11,8 @@ services:
       options:
         max-size: 10m
     volumes:
-      - "{{ freshrss_dir }}/data:/var/www/FreshRSS/data"
-      - "{{ freshrss_dir }}/extensions:/var/www/FreshRSS/extensions"
+      - "{{ freshrss_data_dir }}/data:/var/www/FreshRSS/data"
+      - "{{ freshrss_data_dir }}/extensions:/var/www/FreshRSS/extensions"
     ports:
       - "127.0.0.1:{{ services.freshrss.port }}:80"
     environment:

@@ -18,7 +18,7 @@ services:
       APACHE_IP_BINDING: 127.0.0.1
       APACHE_ADDITIONAL_NETWORK: ""
       SKIP_DOMAIN_VALIDATION: false
-      NEXTCLOUD_DATADIR: "{{ nextcloud_dir }}/data"
+      NEXTCLOUD_DATADIR: "{{ nextcloud_data_dir }}/data"
 
 networks:
   nextcloud-aio:
