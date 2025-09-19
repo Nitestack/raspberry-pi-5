@@ -49,6 +49,5 @@ jobs:
             [raspberrypi]
             npham.de ansible_user=nhan ansible_python_interpreter=auto_silent
           vault_password: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
-          sudo: true
           options: |
             --tags ${{ steps.set-tags.outputs.ansible_tags }}

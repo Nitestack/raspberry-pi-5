@@ -1,7 +1,6 @@
 ---
 - name: Dynamically build restic inclusion list
   delegate_to: localhost
-  become: false
   run_once: true
   check_mode: false
   block:
@@ -22,18 +21,21 @@
       ansible.builtin.set_fact:
         restic_inclusion_list: "{{ loaded_vars.results | map(attribute='ansible_facts.restic_include_paths') | select('defined') | flatten }}"
 
-- name: Include rclone role
-  include_role:
-    name: stefangweichinger.ansible_rclone
+- name: Install and configure backup tools
+  become: true
+  block:
+    - name: Include rclone role
+      include_role:
+        name: stefangweichinger.ansible_rclone
 
-- name: Include restic role
-  include_role:
-    name: angristan.restic
-  vars:
-    restic_ssh_enabled: false
-    restic_repository: "rclone:onedrive:backup"
-    # restic_repository: "rclone:proton-drive:backup"
-    restic_default_folders: []
-    restic_folders: "{{ restic_inclusion_list | map('community.general.dict_kv', 'path') | list }}"
-    restic_systemd_timer_on_calender: "*-*-* 03:00:00"
-    restic_forget_keep_within: "30d"
+    - name: Include restic role
+      include_role:
+        name: angristan.restic
+      vars:
+        restic_ssh_enabled: false
+        restic_repository: "rclone:onedrive:backup"
+        # restic_repository: "rclone:proton-drive:backup"
+        restic_default_folders: []
+        restic_folders: "{{ restic_inclusion_list | map('community.general.dict_kv', 'path') | list }}"
+        restic_systemd_timer_on_calender: "*-*-* 03:00:00"
+        restic_forget_keep_within: "30d"
