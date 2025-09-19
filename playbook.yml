@@ -42,16 +42,5 @@
     - role: personal_site
       tags: personal_site
 
-    - role: stefangweichinger.ansible_rclone
-      tags: backup, rclone
-    - role: angristan.restic
-      tags: backup, restic
-      vars:
-        restic_ssh_enabled: false
-        # restic_repository: "rclone:proton-drive:backup"
-        restic_repository: "rclone:onedrive:backup"
-        restic_default_folders: []
-        restic_folders:
-          - { path: "/mnt/data", exclude: "--exclude '/mnt/data/nextcloud'" }
-        restic_systemd_timer_on_calender: "*-*-* 03:00:00"
-        restic_forget_keep_within: "30d"
+    - role: backup
+      tags: backup
