@@ -1,51 +1,54 @@
 ---
-- name: Perform Docker installation
-  when: "'docker-ce' not in ansible_facts.packages"
+- name: Install Docker and configure user
+  become: true
   block:
-    - name: Ensure conflicting packages are removed
-      ansible.builtin.apt:
-        name: "{{ docker_conflicting_packages }}"
-        state: absent
-        purge: true
+    - name: Perform Docker installation
+      when: "'docker-ce' not in ansible_facts.packages"
+      block:
+        - name: Ensure conflicting packages are removed
+          ansible.builtin.apt:
+            name: "{{ docker_conflicting_packages }}"
+            state: absent
+            purge: true
 
-    - name: Ensure dependencies are installed
-      ansible.builtin.apt:
-        name: "{{ docker_dependencies }}"
+        - name: Ensure dependencies are installed
+          ansible.builtin.apt:
+            name: "{{ docker_dependencies }}"
+            state: present
+            update_cache: true
+
+        - name: Ensure GPG keyring directory exists
+          ansible.builtin.file:
+            path: "{{ docker_gpg_keyring_path }}"
+            state: directory
+            mode: "0755"
+
+        - name: Ensure Docker GPG key is downloaded
+          ansible.builtin.get_url:
+            url: "{{ docker_gpg_key_url }}"
+            dest: "{{ docker_gpg_key_path }}"
+            mode: "0644"
+            force: true
+
+        - name: Ensure Docker APT repository is added
+          ansible.builtin.apt_repository:
+            repo: "{{ docker_apt_repository }}"
+            filename: docker
+            state: present
+
+        - name: Ensure Docker packages are installed
+          ansible.builtin.apt:
+            name: "{{ docker_packages }}"
+            state: present
+            update_cache: true
+
+    - name: Ensure the 'docker' group exists
+      ansible.builtin.group:
+        name: docker
         state: present
-        update_cache: true
 
-    - name: Ensure GPG keyring directory exists
-      ansible.builtin.file:
-        path: "{{ docker_gpg_keyring_path }}"
-        state: directory
-        mode: "0755"
-
-    - name: Ensure Docker GPG key is downloaded
-      ansible.builtin.get_url:
-        url: "{{ docker_gpg_key_url }}"
-        dest: "{{ docker_gpg_key_path }}"
-        mode: "0644"
-        force: true
-
-    - name: Ensure Docker APT repository is added
-      ansible.builtin.apt_repository:
-        repo: "{{ docker_apt_repository }}"
-        filename: docker
-        state: present
-
-    - name: Ensure Docker packages are installed
-      ansible.builtin.apt:
-        name: "{{ docker_packages }}"
-        state: present
-        update_cache: true
-
-- name: Ensure the 'docker' group exists
-  ansible.builtin.group:
-    name: docker
-    state: present
-
-- name: Ensure ansible user is added to the 'docker' group
-  ansible.builtin.user:
-    name: "{{ ansible_user }}"
-    groups: docker
-    append: true
+    - name: Ensure ansible user is added to the 'docker' group
+      ansible.builtin.user:
+        name: "{{ ansible_user }}"
+        groups: docker
+        append: true

@@ -1,72 +1,74 @@
 ---
-- name: Perform Caddy installation
-  when: "'caddy' not in ansible_facts.packages"
+- name: Install and Configure Caddy
+  become: true
   block:
-    - name: Ensure Caddy dependencies are installed
-      ansible.builtin.apt:
-        name: "{{ caddy_dependencies }}"
-        state: present
-        update_cache: true
+    - name: Perform Caddy installation
+      when: "'caddy' not in ansible_facts.packages"
+      block:
+        - name: Ensure Caddy dependencies are installed
+          ansible.builtin.apt:
+            name: "{{ caddy_dependencies }}"
+            state: present
+            update_cache: true
 
-    - name: Download Caddy GPG key to a temporary file
-      ansible.builtin.get_url:
-        url: "{{ caddy_gpg_key_url }}"
-        dest: "/tmp/caddy_gpg_key.asc"
+        - name: Download Caddy GPG key to a temporary file
+          ansible.builtin.get_url:
+            url: "{{ caddy_gpg_key_url }}"
+            dest: "/tmp/caddy_gpg_key.asc"
+            mode: "0644"
+
+        - name: De-armor the GPG key to the final destination
+          ansible.builtin.command:
+            cmd: "gpg --dearmor -o {{ caddy_gpg_keyring_path }} /tmp/caddy_gpg_key.asc"
+            creates: "{{ caddy_gpg_keyring_path }}" # This makes the task idempotent
+
+        - name: Ensure Caddy APT sources list is downloaded
+          ansible.builtin.get_url:
+            url: "{{ caddy_apt_sources_url }}"
+            dest: "{{ caddy_apt_sources_path }}"
+            mode: "0644"
+
+        - name: Ensure Caddy package is installed
+          ansible.builtin.apt:
+            name: caddy
+            state: present
+            update_cache: true
+
+    - name: Ensure Caddy configuration directory exists
+      ansible.builtin.file:
+        path: "{{ caddy_config_dir }}"
+        state: directory
+        mode: "0755"
+
+    - name: Deploy Caddyfile from template
+      ansible.builtin.template:
+        src: "Caddyfile.j2"
+        dest: "{{ caddy_config_dir }}/Caddyfile"
         mode: "0644"
+      notify: Restart Caddy
 
-    - name: De-armor the GPG key to the final destination
-      ansible.builtin.command:
-        cmd: "gpg --dearmor -o {{ caddy_gpg_keyring_path }} /tmp/caddy_gpg_key.asc"
-        creates: "{{ caddy_gpg_keyring_path }}" # This makes the task idempotent
-
-    - name: Ensure Caddy APT sources list is downloaded
-      ansible.builtin.get_url:
-        url: "{{ caddy_apt_sources_url }}"
-        dest: "{{ caddy_apt_sources_path }}"
+    - name: Copy static error pages to Caddy directory
+      ansible.builtin.copy:
+        src: "errors"
+        dest: "{{ caddy_config_dir }}"
+        group: caddy
         mode: "0644"
+      notify: Restart Caddy
 
-    - name: Ensure Caddy package is installed
-      ansible.builtin.apt:
+    - name: Deploy public IP updater script
+      ansible.builtin.copy:
+        src: "update_public_ip.sh"
+        dest: "{{ caddy_ip_updater_script_path }}"
+        mode: "0755"
+
+    - name: Ensure cron job for public IP updater is present
+      ansible.builtin.cron:
+        name: "Caddy Public IP Updater"
+        minute: "*/1"
+        job: "{{ caddy_ip_updater_script_path }}"
+
+    - name: Ensure Caddy service is started and enabled
+      ansible.builtin.systemd_service:
         name: caddy
-        state: present
-        update_cache: true
-
-- name: Ensure Caddy configuration directory exists
-  ansible.builtin.file:
-    path: "{{ caddy_config_dir }}"
-    state: directory
-    mode: "0755"
-
-- name: Deploy Caddyfile from template
-  ansible.builtin.template:
-    src: "Caddyfile.j2"
-    dest: "{{ caddy_config_dir }}/Caddyfile"
-    mode: "0644"
-  notify: Restart Caddy
-
-- name: Copy static error pages to Caddy directory
-  ansible.builtin.copy:
-    src: "errors"
-    dest: "{{ caddy_config_dir }}"
-    group: caddy
-    mode: "0644"
-  notify: Restart Caddy
-
-- name: Deploy public IP updater script
-  # Use the 'copy' module for static files
-  ansible.builtin.copy:
-    src: "update_public_ip.sh"
-    dest: "{{ caddy_ip_updater_script_path }}"
-    mode: "0755"
-
-- name: Ensure cron job for public IP updater is present
-  ansible.builtin.cron:
-    name: "Caddy Public IP Updater"
-    minute: "*/1"
-    job: "{{ caddy_ip_updater_script_path }}"
-
-- name: Ensure Caddy service is started and enabled
-  ansible.builtin.systemd_service:
-    name: caddy
-    state: started
-    enabled: true
+        state: started
+        enabled: true
