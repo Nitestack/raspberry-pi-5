@@ -50,7 +50,7 @@ services:
       timeout: 5s
       retries: 5
     volumes:
-      - "{{ ghostfolio_dir }}/db:/var/lib/postgresql/data"
+      - "{{ ghostfolio_data_dir }}/db:/var/lib/postgresql/data"
 
   redis:
     image: redis:alpine

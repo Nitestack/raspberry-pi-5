@@ -1,2 +1,3 @@
 ---
-freshrss_dir: "{{ data_base_dir }}/{{ freshrss_dir_name }}"
+freshrss_data_dir: "{{ data_base_dir }}/{{ freshrss_dir_name }}"
+freshrss_service_dir: "{{ service_base_dir }}/{{ freshrss_dir_name }}"

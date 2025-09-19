@@ -1,17 +1,17 @@
 ---
-- name: Ensure Cloudflare DDNS data directory exists
+- name: Ensure Cloudflare DDNS service directory exists
   ansible.builtin.file:
-    path: "{{ cloudflare_ddns_dir }}"
+    path: "{{ cloudflare_ddns_service_dir }}"
     state: directory
     mode: "0755"
 
 - name: Deploy Docker Compose file from template
   ansible.builtin.template:
     src: "compose.yml.j2"
-    dest: "{{ cloudflare_ddns_dir }}/compose.yml"
+    dest: "{{ cloudflare_ddns_service_dir }}/compose.yml"
     mode: "0644"
 
 - name: Ensure Cloudflare DDNS containers are started
   community.docker.docker_compose_v2:
-    project_src: "{{ cloudflare_ddns_dir }}"
+    project_src: "{{ cloudflare_ddns_service_dir }}"
     state: present

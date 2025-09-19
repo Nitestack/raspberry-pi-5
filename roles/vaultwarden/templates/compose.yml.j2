@@ -6,7 +6,7 @@ services:
     ports:
       - "127.0.0.1:{{ services.vaultwarden.port }}:80"
     volumes:
-      - "{{ vaultwarden_dir }}/data:/data"
+      - "{{ vaultwarden_data_dir }}/data:/data"
     environment:
       DOMAIN: "https://{{ services.vaultwarden.domain }}"
       SIGNUPS_ALLOWED: "{{ vaultwarden_signups_allowed }}"

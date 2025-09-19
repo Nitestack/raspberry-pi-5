@@ -1,2 +1,2 @@
 ---
-glance_dir: "{{ data_base_dir }}/{{ glance_dir_name }}"
+glance_service_dir: "{{ service_base_dir }}/{{ glance_dir_name }}"

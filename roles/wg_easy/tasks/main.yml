@@ -1,17 +1,17 @@
 ---
-- name: Ensure WireGuard Easy data directory exists
+- name: Ensure WireGuard Easy service directory exists
   ansible.builtin.file:
-    path: "{{ wg_easy_dir }}"
+    path: "{{ wg_easy_service_dir }}"
     state: directory
     mode: "0755"
 
 - name: Deploy Docker Compose file from template
   ansible.builtin.template:
     src: "compose.yml.j2"
-    dest: "{{ wg_easy_dir }}/compose.yml"
+    dest: "{{ wg_easy_service_dir }}/compose.yml"
     mode: "0644"
 
 - name: Ensure WireGuard Easy containers are started
   community.docker.docker_compose_v2:
-    project_src: "{{ wg_easy_dir }}"
+    project_src: "{{ wg_easy_service_dir }}"
     state: present
