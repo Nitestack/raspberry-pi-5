@@ -1,0 +1,3 @@
+---
+restic_include_paths:
+  - "{{ vaultwarden_data_dir }}/data"
