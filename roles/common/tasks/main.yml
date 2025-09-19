@@ -1,59 +1,68 @@
 ---
-- name: Ensure system packages are up to date
-  ansible.builtin.apt:
-    update_cache: true
-    upgrade: dist
+- name: Perform system-level configuration
+  become: true
+  block:
+    - name: Ensure system packages are up to date
+      ansible.builtin.apt:
+        update_cache: true
+        upgrade: dist
 
-- name: Ensure static IP address is configured
-  community.general.nmcli:
-    type: ethernet
-    conn_name: "Wired connection 1"
-    ip4: "{{ common_static_ip }}"
-    gw4: "{{ common_gateway_ip }}"
-    dns4: "{{ common_dns_servers }}"
-    state: present
-    conn_reload: true
+    - name: Ensure static IP address is configured
+      community.general.nmcli:
+        type: ethernet
+        conn_name: "Wired connection 1"
+        ip4: "{{ common_static_ip }}"
+        gw4: "{{ common_gateway_ip }}"
+        dns4: "{{ common_dns_servers }}"
+        state: present
+        conn_reload: true
 
-- name: Gather package facts for other roles to use
-  ansible.builtin.package_facts:
-    manager: apt
+    - name: Gather package facts for other roles to use
+      ansible.builtin.package_facts:
+        manager: apt
 
-- name: Ensure the APT keyrings directory exists
-  ansible.builtin.file:
-    path: /etc/apt/keyrings
-    state: directory
-    mode: "0755"
+    - name: Ensure the APT keyrings directory exists
+      ansible.builtin.file:
+        path: /etc/apt/keyrings
+        state: directory
+        mode: "0755"
 
-- name: Ensure mount point directories exist
-  ansible.builtin.file:
-    path: "{{ item.path }}"
-    state: directory
-    mode: "0755"
-  loop: "{{ common_nvme_mounts }}"
-  loop_control:
-    label: "{{ item.path }}"
+    - name: Ensure mount point directories exist
+      ansible.builtin.file:
+        path: "{{ item.path }}"
+        state: directory
+        mode: "0755"
+      loop: "{{ common_nvme_mounts }}"
+      loop_control:
+        label: "{{ item.path }}"
 
-- name: Format the NVMe devices if not already formatted
-  community.general.filesystem:
-    fstype: "{{ item.filesystem }}"
-    dev: "{{ item.device }}"
-  loop: "{{ common_nvme_mounts }}"
-  loop_control:
-    label: "{{ item.device }}"
+    - name: Format the NVMe devices if not already formatted
+      community.general.filesystem:
+        fstype: "{{ item.filesystem }}"
+        dev: "{{ item.device }}"
+      loop: "{{ common_nvme_mounts }}"
+      loop_control:
+        label: "{{ item.device }}"
 
-- name: Mount the NVMe devices
-  ansible.posix.mount:
-    path: "{{ item.path }}"
-    src: "{{ item.device }}"
-    fstype: "{{ item.filesystem }}"
-    opts: "defaults"
-    state: mounted
-  loop: "{{ common_nvme_mounts }}"
-  loop_control:
-    label: "{{ item.path }}"
+    - name: Mount the NVMe devices
+      ansible.posix.mount:
+        path: "{{ item.path }}"
+        src: "{{ item.device }}"
+        fstype: "{{ item.filesystem }}"
+        opts: "defaults"
+        state: mounted
+      loop: "{{ common_nvme_mounts }}"
+      loop_control:
+        label: "{{ item.path }}"
 
 - name: Ensure login message is suppressed by creating .hushlogin file
   ansible.builtin.file:
-    path: "/home/{{ ansible_user }}/.hushlogin"
+    path: "~/.hushlogin"
     state: touch
     mode: "0644"
+
+- name: Ensure service directory exists
+  ansible.builtin.file:
+    path: "{{ service_base_dir }}"
+    state: directory
+    mode: "0755"

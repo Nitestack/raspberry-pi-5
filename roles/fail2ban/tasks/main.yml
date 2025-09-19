@@ -1,19 +1,22 @@
 ---
-- name: Ensure fail2ban package is installed
-  ansible.builtin.apt:
-    name: fail2ban
-    state: present
-    update_cache: true
+- name: Install and configure Fail2Ban
+  become: true
+  block:
+    - name: Ensure fail2ban package is installed
+      ansible.builtin.apt:
+        name: fail2ban
+        state: present
+        update_cache: true
 
-- name: Deploy fail2ban local jail configuration from template
-  ansible.builtin.template:
-    src: "jail.local.j2"
-    dest: "/etc/fail2ban/jail.local"
-    mode: "0644"
-  notify: Restart fail2ban
+    - name: Deploy fail2ban local jail configuration from template
+      ansible.builtin.template:
+        src: "jail.local.j2"
+        dest: "/etc/fail2ban/jail.local"
+        mode: "0644"
+      notify: Restart fail2ban
 
-- name: Ensure fail2ban service is started and enabled
-  ansible.builtin.service:
-    name: fail2ban
-    state: started
-    enabled: true
+    - name: Ensure fail2ban service is started and enabled
+      ansible.builtin.service:
+        name: fail2ban
+        state: started
+        enabled: true

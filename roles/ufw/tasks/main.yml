@@ -1,19 +1,22 @@
 ---
-- name: Ensure ufw is installed
-  ansible.builtin.apt:
-    name: ufw
-    update_cache: true
+- name: Configure Firewall with UFW
+  become: true
+  block:
+    - name: Ensure ufw is installed
+      ansible.builtin.apt:
+        name: ufw
+        update_cache: true
 
-- name: Set default firewall policy and enable ufw
-  community.general.ufw:
-    state: enabled
-    policy: "{{ ufw_incoming_policy }}"
-    direction: incoming
+    - name: Set default firewall policy and enable ufw
+      community.general.ufw:
+        state: enabled
+        policy: "{{ ufw_incoming_policy }}"
+        direction: incoming
 
-- name: Allow specified incoming ports
-  community.general.ufw:
-    rule: allow
-    port: "{{ item }}"
-  loop: "{{ allowed_ports }}"
-  loop_control:
-    label: "port {{ item }}"
+    - name: Allow specified incoming ports
+      community.general.ufw:
+        rule: allow
+        port: "{{ item }}"
+      loop: "{{ allowed_ports }}"
+      loop_control:
+        label: "port {{ item }}"

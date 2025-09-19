@@ -1,7 +1,6 @@
 ---
 - name: Raspberry Pi 5
   hosts: raspberrypi
-  become: true
   gather_facts: true
 
   roles:
