@@ -226,10 +226,10 @@
                 "/":
                   name: Root
                   hide: false
-                "/mnt/data":
+                "${DATA_BASE_DIR}":
                   name: Data
                   hide: false
-                "/mnt/backup":
+                "${BACKUP_BASE_DIR}":
                   name: Backup
                   hide: false
         - type: dns-stats
