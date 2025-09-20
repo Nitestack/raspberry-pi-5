@@ -1,0 +1,3 @@
+---
+backrest_data_dir: "{{ data_base_dir }}/{{ backrest_dir_name }}"
+backrest_service_dir: "{{ service_base_dir }}/{{ backrest_dir_name }}"
