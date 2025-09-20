@@ -1,0 +1,21 @@
+services:
+  backrest:
+    image: garethgeorge/backrest:latest@sha256:f8306faef0a3cbedc7daa55756f1d4c105d8c104aa773656bdad4fa8553dab5a
+    container_name: backrest
+    restart: always
+    volumes:
+      - "{{ backrest_data_dir }}/data:/data"
+      - "{{ backrest_data_dir }}/config:/config"
+      - "{{ backrest_data_dir }}/cache:/cache"
+      - "{{ backrest_data_dir }}/tmp:/tmp"
+      - "/root/.config/rclone:/root/.config/rclone"
+      - "{{ backup_base_dir }}:{{ backup_base_dir }}:ro"
+    environment:
+      - BACKREST_DATA=/data
+      - BACKREST_CONFIG=/config/config.json
+      - RESTIC_PASSWORD={{ restic_password }}
+      - XDG_CACHE_HOME=/cache
+      - TMPDIR=/tmp
+      - TZ={{ timezone }}
+    ports:
+      - "127.0.0.1:{{ services.backrest.port }}:9898"
