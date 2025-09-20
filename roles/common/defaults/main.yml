@@ -5,8 +5,8 @@ common_dns_servers:
 
 common_nvme_mounts:
   - device: "/dev/nvme0n1"
-    path: "{{ data_base_dir }}" # Uses the global data_base_dir
+    path: "{{ data_base_dir }}"
     filesystem: "ext4"
   - device: "/dev/nvme1n1"
-    path: "/mnt/backup"
+    path: "{{ backup_base_dir }}"
     filesystem: "ext4"

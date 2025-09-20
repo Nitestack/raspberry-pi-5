@@ -13,8 +13,8 @@ services:
       # For Docker Containers Widget
       - /var/run/docker.sock:/var/run/docker.sock:ro
       # For Server Stats Widget to work (read-only)
-      - /mnt/data:/mnt/data:ro
-      - /mnt/backup:/mnt/backup:ro
+      - "{{ data_base_dir }}:{{ data_base_dir }}:ro"
+      - "{{ backup_base_dir }}:{{ backup_base_dir }}:ro"
     ports:
       - "127.0.0.1:{{ services.glance.port }}:8080"
     env_file: .env
