@@ -26,6 +26,10 @@ services:
     domain: "travel.{{ domain }}"
     frontend_port: 8015
     backend_port: 8016
+  # Backrest
+  backrest:
+    domain: "backup.{{ domain }}"
+    port: 9898
   # Ente Auth
   ente_auth:
     domain: "auth.{{ domain }}"

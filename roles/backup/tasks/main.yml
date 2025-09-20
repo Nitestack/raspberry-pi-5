@@ -1,39 +1,11 @@
 ---
-- name: Dynamically build restic inclusion list
-  delegate_to: localhost
-  run_once: true
-  check_mode: false
-  block:
-    - name: Find all role-defined backup configuration files
-      ansible.builtin.find:
-        paths: "{{ playbook_dir }}/roles"
-        patterns: "backup.yml"
-        recurse: true
-      register: backup_var_files
-
-    - name: Load inclusion variables from each role
-      ansible.builtin.include_vars:
-        file: "{{ item.path }}"
-      loop: "{{ backup_var_files.files }}"
-      register: loaded_vars
-
-    - name: Combine all inclusion paths and set as a fact
-      ansible.builtin.set_fact:
-        backup_inclusion_list: "{{ loaded_vars.results | map(attribute='ansible_facts.backup_include_paths') | select('defined') | flatten }}"
-
-- name: Install and configure backup tools
+- name: Install and configure rclone
   become: true
   block:
     - name: Include rclone role
       include_role:
         name: stefangweichinger.ansible_rclone
 
-    - name: Include restic role
-      include_role:
-        name: angristan.restic
-      vars:
-        restic_ssh_enabled: false
-        restic_default_folders: []
-        restic_folders: "{{ backup_inclusion_list | map('community.general.dict_kv', 'path') | list }}"
-        restic_systemd_timer_on_calender: "*-*-* 03:00:00"
-        restic_forget_keep_within: "30d"
+- name: Include Backrest role
+  include_role:
+    name: backrest

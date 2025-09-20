@@ -6,6 +6,3 @@ collections:
 
 roles:
   - name: stefangweichinger.ansible_rclone
-  - name: angristan.restic
-    src: https://github.com/angristan/ansible-restic
-    version: master

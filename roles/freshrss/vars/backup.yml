@@ -1,3 +1,0 @@
----
-backup_include_paths:
-  - "{{ freshrss_data_dir }}/data"
