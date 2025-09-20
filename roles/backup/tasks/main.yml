@@ -19,7 +19,7 @@
 
     - name: Combine all inclusion paths and set as a fact
       ansible.builtin.set_fact:
-        restic_inclusion_list: "{{ loaded_vars.results | map(attribute='ansible_facts.restic_include_paths') | select('defined') | flatten }}"
+        backup_inclusion_list: "{{ loaded_vars.results | map(attribute='ansible_facts.backup_include_paths') | select('defined') | flatten }}"
 
 - name: Install and configure backup tools
   become: true
@@ -33,9 +33,7 @@
         name: angristan.restic
       vars:
         restic_ssh_enabled: false
-        restic_repository: "rclone:onedrive:backup"
-        # restic_repository: "rclone:proton-drive:backup"
         restic_default_folders: []
-        restic_folders: "{{ restic_inclusion_list | map('community.general.dict_kv', 'path') | list }}"
+        restic_folders: "{{ backup_inclusion_list | map('community.general.dict_kv', 'path') | list }}"
         restic_systemd_timer_on_calender: "*-*-* 03:00:00"
         restic_forget_keep_within: "30d"
