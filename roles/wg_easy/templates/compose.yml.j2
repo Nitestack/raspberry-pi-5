@@ -4,8 +4,7 @@
 services:
   wg-easy:
     environment:
-      - PORT={{ services.wg_easy.port }}
-    #  - HOST=0.0.0.0
+      PORT: {{ services.wg_easy.port }}
 
     image: ghcr.io/wg-easy/wg-easy:15@sha256:bb8152762c36f824eb42bb2f3c5ab8ad952818fbef677d584bc69ec513b251b0
     container_name: wg-easy
