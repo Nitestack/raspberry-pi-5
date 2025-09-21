@@ -30,6 +30,11 @@ services:
   backrest:
     domain: "backup.{{ domain }}"
     port: 9898
+  # Beszel
+  beszel:
+    caddy_proxy_type: "beszel"
+    domain: "monitor.{{ domain }}"
+    port: 8090
   # Ente Auth
   ente_auth:
     domain: "auth.{{ domain }}"

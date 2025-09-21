@@ -26,6 +26,15 @@
 	}
 	reverse_proxy @frontend localhost:{{ service.frontend_port }}
 	reverse_proxy localhost:{{ service.backend_port }}
+{% elif proxy_type == "beszel" %}
+	request_body {
+		max_size 10MB
+	}
+	reverse_proxy localhost:{{ service.port }} {
+		transport http {
+			read_timeout 360s
+		}
+	}
 {% elif proxy_type == "nextcloud" %}
 	header Strict-Transport-Security max-age=31536000;
 	reverse_proxy localhost:{{ service.port }}

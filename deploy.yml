@@ -31,6 +31,8 @@
       tags: ghostfolio
     - role: glance
       tags: glance
+    - role: beszel
+      tags: beszel
     - role: adguard_home
       tags: adguard_home
     - role: adventure_log

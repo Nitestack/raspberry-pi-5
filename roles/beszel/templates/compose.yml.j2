@@ -1,0 +1,38 @@
+services:
+  beszel:
+    image: henrygd/beszel:latest@sha256:919f0c000deaa32447aa9fac532cd358e100996b5dfeea2a69a1765d29c0d87f
+    container_name: beszel
+    restart: always
+    ports:
+      - "{{ services.beszel.port }}:8090"
+    volumes:
+      - "{{ beszel_data_dir }}/data:/beszel_data"
+      - "{{ beszel_data_dir }}/socket:/beszel_socket"
+    environment:
+      APP_URL: "https://{{ services.beszel.domain }}"
+      USER_EMAIL: "{{ beszel_email }}"
+      USER_PASSWORD: "{{ beszel_password }}"
+    healthcheck:
+      test: ['CMD', '/beszel', 'health', '--url', 'http://localhost:8090']
+      start_period: 5s
+      interval: 120s
+
+  beszel-agent:
+    image: henrygd/beszel-agent:latest@sha256:f26072f3c1b5a3dd40c0faddb7ba54f78869f78b8518227d67cb3354eaf5a242
+    container_name: beszel-agent
+    restart: always
+    network_mode: host
+    volumes:
+      - "{{ beszel_data_dir }}/agent:/var/lib/beszel-agent"
+      - "{{ beszel_data_dir }}/socket:/beszel_socket"
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - "{{ data_base_dir }}/.beszel:/extra-filesystems/nvme0n1:ro"
+      - "{{ backup_base_dir }}/.beszel:/extra-filesystems/nvme1n1:ro"
+    environment:
+      LISTEN: "/beszel_socket/beszel.sock"
+      HUB_URL: "https://{{ services.beszel.domain }}"
+      TOKEN: "{{ beszel_agent_token }}"
+      KEY: "{{ beszel_agent_key }}"
+    healthcheck:
+      test: ['CMD', '/agent', 'health']
+      interval: 120s

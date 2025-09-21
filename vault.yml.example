@@ -24,6 +24,12 @@ adventure_log_secret_key: ""
 adventure_log_admin_password: ""
 adventure_log_google_maps_api_key: "" # Geocoding and Places (New) API
 
+# Beszel
+beszel_email: ""
+beszel_password: ""
+beszel_agent_token: ""
+beszel_agent_key: ""
+
 # Cloudflare DDNS
 cloudflare_ddns_api_token: "" # `Edit zone DNS` template
 
