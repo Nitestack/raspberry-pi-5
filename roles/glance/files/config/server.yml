@@ -27,6 +27,9 @@
                 - title: Backrest
                   url: https://garethgeorge.github.io/backrest
                   icon: di:backrest
+                - title: Beszel
+                  url: https://beszel.dev/guide
+                  icon: di:beszel
                 - title: Caddy
                   url: https://caddyserver.com/docs
                   icon: di:caddy
@@ -98,6 +101,15 @@
               icon: di:backrest
               url: ${BACKREST_URL}
               description: Backup Manager
+            beszel:
+              name: Beszel
+              icon: di:beszel
+              url: ${BESZEL_URL}
+              description: Server Monitoring
+              id: beszel
+            beszel-agent:
+              name: Agent
+              parent: beszel
             cloudflare-ddns:
               name: Cloudflare DDNS
               icon: di:cloudflare
@@ -323,6 +335,7 @@
             - AdguardTeam/AdGuardHome
             - seanmorley15/AdventureLog
             - garethgeorge/backrest
+            - henrygd/beszel
             - favonia/cloudflare-ddns
             - ente-io/ente
             - FreshRSS/FreshRSS

@@ -36,6 +36,7 @@ _This [Ansible](https://www.ansible.com) configuration automates the setup of a 
 - **AdGuard Home**: Network-wide Ad Blocker
 - **AdventureLog**: Travel Tracker
 - **Backrest**: Backup Manager (with `restic`)
+- **Beszel**: Server Monitoring
 - **Cloudflare DDNS**: Dynamic DNS Updater
 - **Ente Auth**: Two-factor Authenticator
 - **FreshRSS**: Feed Aggregator
