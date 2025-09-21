@@ -52,3 +52,17 @@
         name: "{{ ansible_user }}"
         groups: docker
         append: true
+
+    - name: Read the content of cmdline.txt
+      ansible.builtin.slurp:
+        src: /boot/firmware/cmdline.txt
+      register: cmdline_content
+
+    - name: Ensure cgroup memory options are set for Docker stats
+      ansible.builtin.lineinfile:
+        path: /boot/firmware/cmdline.txt
+        regexp: "^(.*)$"
+        line: '\1 cgroup_enable=cpuset cgroup_enable=memory cgroup_memory=1'
+        backrefs: true
+      when: "'cgroup_enable=memory' not in cmdline_content.content | b64decode"
+      notify: Reboot for kernel changes
