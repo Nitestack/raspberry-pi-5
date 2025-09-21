@@ -24,6 +24,9 @@
                 - title: AdventureLog
                   url: https://adventurelog.app/docs/intro/adventurelog_overview.html
                   icon: di:adventure-log
+                - title: Backrest
+                  url: https://garethgeorge.github.io/backrest
+                  icon: di:backrest
                 - title: Caddy
                   url: https://caddyserver.com/docs
                   icon: di:caddy
@@ -90,6 +93,11 @@
             adventurelog-db:
               name: PostGIS
               parent: adventurelog
+            backrest:
+              name: Backrest
+              icon: di:backrest
+              url: ${BACKREST_URL}
+              description: Backup Manager
             cloudflare-ddns:
               name: Cloudflare DDNS
               icon: di:cloudflare
@@ -310,9 +318,11 @@
           token: ${GITHUB_API_TOKEN}
           show-source-icon: true
           collapse-after: -1
+          limit: 12
           repositories:
             - AdguardTeam/AdGuardHome
             - seanmorley15/AdventureLog
+            - garethgeorge/backrest
             - favonia/cloudflare-ddns
             - ente-io/ente
             - FreshRSS/FreshRSS
