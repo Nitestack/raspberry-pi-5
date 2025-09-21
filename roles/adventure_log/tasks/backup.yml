@@ -1,0 +1,15 @@
+---
+- name: AdventureLog Backup
+  ansible.builtin.include_role:
+    name: service_backup
+  vars:
+    service_name: "AdventureLog"
+    service_dir_name: "{{ adventure_log_dir_name }}"
+    run_service_name: "db"
+    run_command_env:
+      PGHOST: "{{ adventure_log_db_host }}"
+      PGDATABASE: "{{ adventure_log_db_name }}"
+      PGUSER: "{{ adventure_log_db_user }}"
+      PGPASSWORD: "{{ adventure_log_db_password }}"
+    data_paths:
+      - "data/"

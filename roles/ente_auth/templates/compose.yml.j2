@@ -35,11 +35,11 @@ services:
     container_name: ente-postgres
     restart: always
     environment:
-      POSTGRES_USER: pguser
+      POSTGRES_USER: "{{ ente_db_user }}"
       POSTGRES_PASSWORD: "{{ ente_db_password }}"
-      POSTGRES_DB: ente_db
+      POSTGRES_DB: "{{ ente_db_name }}"
     healthcheck:
-      test: pg_isready -q -d ente_db -U pguser
+      test: pg_isready -q -d {{ ente_db_name }} -U {{ ente_db_user }}
       start_period: 40s
       start_interval: 1s
     volumes:

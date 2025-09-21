@@ -74,7 +74,7 @@ _This [Ansible](https://www.ansible.com) configuration automates the setup of a 
 4. **Run the playbook**:
 
     ```sh
-    ansible-playbook playbook.yml
+    ansible-playbook deploy.yml
     ```
 
 > [!IMPORTANT]

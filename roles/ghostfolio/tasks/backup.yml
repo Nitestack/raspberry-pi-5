@@ -1,0 +1,12 @@
+---
+- name: Ghostfolio Backup
+  ansible.builtin.include_role:
+    name: service_backup
+  vars:
+    service_name: "Ghostfolio"
+    service_dir_name: "{{ ghostfolio_dir_name }}"
+    run_service_name: "postgres"
+    run_command_env:
+      PGDATABASE: "{{ ghostfolio_db_name }}"
+      PGUSER: "{{ ghostfolio_db_user }}"
+      PGPASSWORD: "{{ ghostfolio_db_password }}"

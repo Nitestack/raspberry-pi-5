@@ -1,0 +1,45 @@
+---
+- name: Discover Backup Roles
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Find all backup tasks in local roles directory
+      ansible.builtin.find:
+        paths: "{{ playbook_dir }}/roles"
+        patterns: "backup.yml"
+        recurse: true
+      register: backup_files
+
+    - name: Create a list of roles that have backup tasks
+      ansible.builtin.set_fact:
+        backup_roles: "{{ backup_files.files | map(attribute='path') | map('dirname') | map('dirname') | map('basename') | list }}"
+
+- name: Execute Backups and Cleanup
+  hosts: raspberrypi
+  gather_facts: true
+  vars:
+    backup_retention_days: 7
+  tasks:
+    - name: Run backup tasks
+      ansible.builtin.include_role:
+        name: "{{ item }}"
+        tasks_from: backup.yml
+      loop: "{{ hostvars['localhost']['backup_roles'] }}"
+      loop_control:
+        label: "{{ item }}"
+
+    - name: Clean up old backups
+      ansible.builtin.find:
+        paths: "{{ backup_base_dir }}"
+        age: "{{ backup_retention_days }}d"
+        file_type: directory
+      register: old_backups
+
+    - name: Remove old backup directories
+      ansible.builtin.file:
+        path: "{{ item.path }}"
+        state: absent
+      loop: "{{ old_backups.files }}"
+      loop_control:
+        label: "{{ item.path }}"
+      become: true

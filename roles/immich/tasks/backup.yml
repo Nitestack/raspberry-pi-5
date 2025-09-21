@@ -1,0 +1,14 @@
+---
+- name: Immich Backup
+  ansible.builtin.include_role:
+    name: service_backup
+  vars:
+    service_name: "Immich"
+    service_dir_name: "{{ immich_dir_name }}"
+    run_service_name: "database"
+    run_command_env:
+      PGDATABASE: "immich"
+      PGUSER: "postgres"
+      PGPASSWORD: "{{ immich_db_password }}"
+    data_paths:
+      - "library/"
