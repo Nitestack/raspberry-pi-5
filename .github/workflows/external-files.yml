@@ -16,9 +16,6 @@ jobs:
 
       - id: check-changes
         run: |
-          #!/usr/bin/env bash
-          set -e
-
           changes_found=false
 
           echo "| File | Digest Change | URL |" > /tmp/changes_report
@@ -68,7 +65,6 @@ jobs:
 
       - if: steps.check-changes.outputs.changes == 'true'
         run: |
-          #!/usr/bin/env bash
           find . -regextype posix-extended -regex '.*/(docker-)?compose[^/]*\.ya?ml(\.j2)?$' -o -regex '.*/\.env(\.j2)?$' | while read -r file; do
             if grep -q "# external-file:" "$file"; then
               url=$(grep "# external-file:" "$file" | sed 's/# external-file: //')
