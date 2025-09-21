@@ -9,5 +9,5 @@ services:
     cap_drop: [all]
     security_opt: [no-new-privileges:true]
     environment:
-      - CLOUDFLARE_API_TOKEN={{ cloudflare_ddns_api_token }}
-      - DOMAINS={{ cloudflare_ddns_domains }}
+      CLOUDFLARE_API_TOKEN: "{{ cloudflare_ddns_api_token }}"
+      DOMAINS: "{{ cloudflare_ddns_domains }}"
