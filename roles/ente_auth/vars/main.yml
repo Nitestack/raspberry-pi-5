@@ -1,6 +1,5 @@
 ---
 ente_auth_data_dir: "{{ data_base_dir }}/{{ ente_auth_dir_name }}"
-ente_auth_service_dir: "{{ service_base_dir }}/{{ ente_auth_dir_name }}"
 ente_db_host: "postgres"
 ente_db_name: "ente_db"
 ente_db_user: "pguser"

@@ -5,20 +5,9 @@
     dest: "{{ personal_site_service_dir }}"
     version: master
 
-- name: Deploy Docker Compose file from template
-  ansible.builtin.template:
-    src: "compose.yml.j2"
-    dest: "{{ personal_site_service_dir }}/compose.yml"
-    mode: "0644"
-
-- name: Deploy .env file from template
-  ansible.builtin.template:
-    src: ".env.j2"
-    dest: "{{ personal_site_service_dir }}/.env"
-    mode: "0644"
-
-- name: Ensure personal site container is built and started
-  community.docker.docker_compose_v2:
-    project_src: "{{ personal_site_service_dir }}"
-    state: present
-    build: always
+- name: Deploy Personal Site
+  ansible.builtin.include_role:
+    name: service_deploy
+  vars:
+    service_name: "Personal Site"
+    service_dir_name: "{{ personal_site_dir_name }}"

@@ -1,23 +1,10 @@
 ---
-- name: Ensure Ente Auth service directory exists
-  ansible.builtin.file:
-    path: "{{ ente_auth_service_dir }}"
-    state: directory
-    mode: "0755"
-
-- name: Deploy Docker Compose file from template
-  ansible.builtin.template:
-    src: "compose.yml.j2"
-    dest: "{{ ente_auth_service_dir }}/compose.yml"
-    mode: "0644"
-
-- name: Deploy museum.yml file from template
-  ansible.builtin.template:
-    src: "museum.yml.j2"
-    dest: "{{ ente_auth_service_dir }}/museum.yml"
-    mode: "0644"
-
-- name: Ensure Ente containers are started
-  community.docker.docker_compose_v2:
-    project_src: "{{ ente_auth_service_dir }}"
-    state: present
+- name: Deploy Ente Auth
+  ansible.builtin.include_role:
+    name: service_deploy
+  vars:
+    service_name: "Ente Auth"
+    service_dir_name: "{{ ente_auth_dir_name }}"
+    service_templates:
+      - src: "museum.yml.j2"
+        dest: "museum.yml"

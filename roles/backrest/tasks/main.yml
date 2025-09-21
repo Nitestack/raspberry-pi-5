@@ -1,17 +1,7 @@
 ---
-- name: Ensure Backrest service directory exists
-  ansible.builtin.file:
-    path: "{{ backrest_service_dir }}"
-    state: directory
-    mode: "0755"
-
-- name: Deploy Docker Compose file from template
-  ansible.builtin.template:
-    src: "compose.yml.j2"
-    dest: "{{ backrest_service_dir }}/compose.yml"
-    mode: "0644"
-
-- name: Ensure Backrest containers are started
-  community.docker.docker_compose_v2:
-    project_src: "{{ backrest_service_dir }}"
-    state: present
+- name: Deploy Backrest
+  ansible.builtin.include_role:
+    name: service_deploy
+  vars:
+    service_name: "Backrest"
+    service_dir_name: "{{ backrest_dir_name }}"

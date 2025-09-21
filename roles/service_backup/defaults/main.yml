@@ -1,6 +1,6 @@
 ---
 # The display name for the service
-service_name: "{{ backup_service_dir_name | replace('-', ' ') | title }}"
+service_name: "{{ service_dir_name | replace('-', ' ') | title }}"
 
 # The directory name for the service
 service_dir_name: ""

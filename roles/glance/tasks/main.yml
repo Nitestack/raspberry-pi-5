@@ -1,29 +1,10 @@
 ---
-- name: Ensure Glance service directory exists
-  ansible.builtin.file:
-    path: "{{ glance_service_dir }}"
-    state: directory
-    mode: "0755"
-
-- name: Deploy Docker Compose file from template
-  ansible.builtin.template:
-    src: "compose.yml.j2"
-    dest: "{{ glance_service_dir }}/compose.yml"
-    mode: "0644"
-
-- name: Deploy .env file from template
-  ansible.builtin.template:
-    src: ".env.j2"
-    dest: "{{ glance_service_dir }}/.env"
-    mode: "0644"
-
-- name: Copy static config files to Glance directory
-  ansible.builtin.copy:
-    src: "config/"
-    dest: "{{ glance_service_dir }}/config"
-    mode: "0644"
-
-- name: Ensure Glance container is started
-  community.docker.docker_compose_v2:
-    project_src: "{{ glance_service_dir }}"
-    state: present
+- name: Deploy Glance
+  ansible.builtin.include_role:
+    name: service_deploy
+  vars:
+    service_name: "Glance"
+    service_dir_name: "{{ glance_dir_name }}"
+    service_files:
+      - src: "config/"
+        dest: "config"
