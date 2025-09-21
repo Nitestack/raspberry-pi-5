@@ -40,6 +40,8 @@ jobs:
             echo "ansible_tags=none" >> $GITHUB_OUTPUT
           fi
       - if: steps.set-tags.outputs.ansible_tags != 'none'
+        run: echo ${{ secrets.ANSIBLE_VAULT_PASSWORD }} > .vault_pass
+      - if: steps.set-tags.outputs.ansible_tags != 'none'
         uses: ansible/ansible-lint@main
         with:
           requirements_file: requirements.yml
