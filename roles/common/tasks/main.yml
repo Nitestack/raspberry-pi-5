@@ -58,7 +58,7 @@
 - name: Ensure login message is suppressed by creating .hushlogin file
   ansible.builtin.file:
     path: "~/.hushlogin"
-    state: touch
+    state: file
     mode: "0644"
 
 - name: Ensure service directory exists
