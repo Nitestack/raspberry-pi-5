@@ -11,11 +11,11 @@ services:
       - "/root/.config/rclone:/root/.config/rclone"
       - "{{ backup_base_dir }}:{{ backup_base_dir }}:ro"
     environment:
-      - BACKREST_DATA=/data
-      - BACKREST_CONFIG=/config/config.json
-      - RESTIC_PASSWORD={{ restic_password }}
-      - XDG_CACHE_HOME=/cache
-      - TMPDIR=/tmp
-      - TZ={{ timezone }}
+      BACKREST_DATA: "/data"
+      BACKREST_CONFIG: "/config/config.json"
+      RESTIC_PASSWORD: "{{ restic_password }}"
+      XDG_CACHE_HOME: "/cache"
+      TMPDIR: "/tmp"
+      TZ: "{{ timezone }}"
     ports:
       - "127.0.0.1:{{ services.backrest.port }}:9898"
