@@ -3,9 +3,9 @@
   become: true
   block:
     - name: Include rclone role
-      include_role:
+      ansible.builtin.include_role:
         name: stefangweichinger.ansible_rclone
 
 - name: Include Backrest role
-  include_role:
+  ansible.builtin.include_role:
     name: backrest

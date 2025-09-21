@@ -1,0 +1,6 @@
+---
+exclude_paths:
+  - .github
+
+warn_list:
+  - var-naming[no-role-prefix]

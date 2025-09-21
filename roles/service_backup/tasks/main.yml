@@ -5,7 +5,7 @@
     data_dir: "{{ data_base_dir }}/{{ service_dir_name }}"
     backup_dir: "{{ backup_base_dir }}/{{ service_dir_name }}/{{ ansible_date_time.iso8601 }}"
   block:
-    - name: "Create {{ service_name }} backup directory"
+    - name: "Create backup directory for {{ service_name }}"
       ansible.builtin.file:
         path: "{{ backup_dir }}"
         state: directory
@@ -29,7 +29,7 @@
       when: run_command_produces_stdout and command_result.stdout is defined and command_result.stdout | length > 0
       become: true
 
-    - name: "Copy {{ service_name }} data"
+    - name: "Copy data for {{ service_name }}"
       ansible.builtin.copy:
         src: "{{ data_dir }}/{{ path }}"
         dest: "{{ backup_dir }}/{{ path }}"
