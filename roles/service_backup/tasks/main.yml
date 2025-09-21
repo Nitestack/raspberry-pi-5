@@ -1,41 +1,35 @@
 ---
-- name: "Perform a of {{ service_name }}"
-  vars:
-    service_dir: "{{ service_base_dir }}/{{ service_dir_name }}"
-    data_dir: "{{ data_base_dir }}/{{ service_dir_name }}"
-    backup_dir: "{{ backup_base_dir }}/{{ service_dir_name }}/{{ ansible_date_time.iso8601 }}"
-  block:
-    - name: "Create backup directory for {{ service_name }}"
-      ansible.builtin.file:
-        path: "{{ backup_dir }}"
-        state: directory
-        mode: "0755"
-      become: true
+- name: "Create backup directory for {{ service_name }}"
+  ansible.builtin.file:
+    path: "{{ backup_dir }}"
+    state: directory
+    mode: "0755"
+  become: true
 
-    - name: "Run backup command for {{ service_name }}"
-      community.docker.docker_compose_v2_exec:
-        project_src: "{{ service_dir }}"
-        service: "{{ run_service_name }}"
-        command: "{{ run_command }}"
-        env: "{{ run_command_env }}"
-      register: command_result
-      when: run_command != ""
+- name: "Run backup command for {{ service_name }}"
+  community.docker.docker_compose_v2_exec:
+    project_src: "{{ service_dir }}"
+    service: "{{ run_service_name }}"
+    command: "{{ run_command }}"
+    env: "{{ run_command_env }}"
+  register: command_result
+  when: run_command != ""
 
-    - name: "Save command output if any (for database dumps)"
-      ansible.builtin.copy:
-        content: "{{ command_result.stdout }}"
-        dest: "{{ backup_dir }}/{{ service_dir_name | replace('-', '_') }}_dump.sql"
-        mode: "0644"
-      when: run_command_produces_stdout and command_result.stdout is defined and command_result.stdout | length > 0
-      become: true
+- name: "Save command output if any (for database dumps)"
+  ansible.builtin.copy:
+    content: "{{ command_result.stdout }}"
+    dest: "{{ backup_dir }}/{{ service_dir_name | replace('-', '_') }}_dump.sql"
+    mode: "0644"
+  when: run_command_produces_stdout and command_result.stdout is defined and command_result.stdout | length > 0
+  become: true
 
-    - name: "Copy data for {{ service_name }}"
-      ansible.builtin.copy:
-        src: "{{ data_dir }}/{{ path }}"
-        dest: "{{ backup_dir }}/{{ path }}"
-        remote_src: true
-        mode: "0755"
-      loop: "{{ data_paths }}"
-      loop_control:
-        loop_var: path
-      become: true
+- name: "Copy data for {{ service_name }}"
+  ansible.builtin.copy:
+    src: "{{ data_dir }}/{{ path }}"
+    dest: "{{ backup_dir }}/{{ path }}"
+    remote_src: true
+    mode: "0755"
+  loop: "{{ data_paths }}"
+  loop_control:
+    loop_var: path
+  become: true
