@@ -15,7 +15,7 @@
 
 [Features](#-features) • [Requirements](#️-requirements) • [Getting Started](#-getting-started) • [Configuration](#%EF%B8%8F-configuration) • [Port Forwarding](#-port-forwarding) • [Security](#%EF%B8%8F-security) • [Backups](#-backups) • [License](#-license)
 
-_This [Ansible](https://www.ansible.com) configuration automates the setup of a Raspberry Pi Home Server running [Raspberry Pi OS](https://www.raspberrypi.com/software). It deploys essential services using a modern, secure, and declarative best-practice architecture._
+_This [Ansible](https://www.ansible.com) configuration automates the setup of a Home Server running [Raspberry Pi OS](https://www.raspberrypi.com/software). It deploys essential services using a modern, secure, and declarative best-practice architecture._
 
 <p>
   <strong>If you find this repository useful, please <a href="#" title="star">⭐️</a> or fork it!</strong>
@@ -24,24 +24,27 @@ _This [Ansible](https://www.ansible.com) configuration automates the setup of a 
 
 ## 🚀 Features
 
-> [!Warning]
-> This setup requires your domain to be fully managed by Cloudflare DNS.
+### Setup
 
-- **Automated Docker Installation** following the latest security best practices.
-- **Dynamic Firewall Configuration** with UFW that automatically adapts to your services.
-- **Vaultwarden** for secure password management.
-- **Cloudflare DDNS Updater** for dynamic IP management.
-- **WireGuard Easy** for secure remote access.
-- **NextCloud** for file synchronization and sharing.
-- **Immich** for media synchronization with fast-upload speeds.
-- **Ente Auth** for a cross-platform 2FA solution.
-- **Glance** dashboard for a unified news feed and monitoring of the home lab.
-- **AdGuard Home** for ad-blocking and privacy protection.
-- **Personal Site** for hosting your personal website.
-- **Ghostfolio** for wealth management.
-- **AdventureLog** for a travel tracker and trip planner.
-- **FreshRSS** for a news aggregator.
-- **Automated Backups** with Restic and Rclone for off-site storage.
+- **Caddy**: Reverse Proxy & TLS
+- **fail2ban**: IP Address Banning
+- **UFW**: Firewall Configuration
+- **restic** & **rclone**: Backup Solution with Remote Support
+
+### Docker Services
+
+- **AdGuard Home**: Network-wide Ad Blocker
+- **AdventureLog**: Travel Tracker
+- **Backrest**: Backup Manager (with `restic`)
+- **Cloudflare DDNS**: Dynamic DNS Updater
+- **Ente Auth**: Two-factor Authenticator
+- **FreshRSS**: Feed Aggregator
+- **Ghostfolio**: Wealth Manager
+- **Glance**: Dashboard
+- **Immich**: Image & Video Manager
+- **NextCloud**: Cloud
+- **Vaultwarden**: Password Manager
+- **WireGuard Easy**: VPN (with Web GUI)
 
 ## ⚙️ Requirements
 
@@ -88,13 +91,6 @@ This project uses Ansible's best practices for variable management, separating p
 
 This file contains all non-sensitive configuration for your server, such as domain names, ports, and feature flags. Open `group_vars/all/main.yml` and customize the settings to match your environment.
 
-**Key settings to change:**
-
-- `domain`: Your root domain (e.g., "example.com").
-- `data_base_dir`: The base path where all service data will be stored.
-- `common_static_ip`: The static IP address for your Raspberry Pi.
-- `services`: The dictionary where you can customize the domain and ports for each individual service.
-
 ### 2. Secret Management (`group_vars/all/vault.yml`)
 
 All sensitive data (API keys, passwords, secrets) is stored in an encrypted Ansible Vault file. For convenience, we will store the vault password in a local, git-ignored file.
@@ -128,7 +124,7 @@ public:80/tcp -> local:80/tcp
 public:443/tcp -> local:443/tcp
 public:443/udp -> local:443/udp
 
-# WireGuard (value from 'vpn_port' in main.yml)
+# WireGuard (value from 'vpn_port' in main.yml, default is 51820)
 public:{{ vpn_port }}/udp -> local:{{ vpn_port }}/udp
 
 # SSH (optional, if you want to access the Pi with a URL)
