@@ -1,2 +1,0 @@
----
-cloudflare_ddns_service_dir: "{{ service_base_dir }}/{{ cloudflare_ddns_dir_name }}"

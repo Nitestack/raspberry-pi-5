@@ -1,3 +1,2 @@
 ---
 wg_easy_data_dir: "{{ data_base_dir }}/{{ wg_easy_dir_name }}"
-wg_easy_service_dir: "{{ service_base_dir }}/{{ wg_easy_dir_name }}"

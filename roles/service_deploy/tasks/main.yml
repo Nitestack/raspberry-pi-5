@@ -1,0 +1,62 @@
+---
+- name: "Ensure service directory exists for {{ service_name }}"
+  ansible.builtin.file:
+    path: "{{ service_dir }}"
+    state: directory
+    mode: "0755"
+
+- name: "Download Docker Compose file from URL for {{ service_name }}"
+  ansible.builtin.get_url:
+    url: "{{ compose_url }}"
+    dest: "{{ service_dir }}/compose.yml"
+    mode: "0644"
+  when: compose_url != ""
+
+- name: "Check for compose.yml file"
+  ansible.builtin.stat:
+    path: "{{ ansible_parent_role_paths[-1] }}/templates/compose.yml.j2"
+  delegate_to: localhost
+  register: compose_template
+
+- name: "Deploy compose.yml from template for {{ service_name }}"
+  ansible.builtin.template:
+    src: "{{ ansible_parent_role_paths[-1] }}/templates/compose.yml.j2"
+    dest: "{{ service_dir }}/compose.yml"
+    mode: "0644"
+  when: compose_template.stat.exists
+
+- name: "Check for .env file"
+  ansible.builtin.stat:
+    path: "{{ ansible_parent_role_paths[-1] }}/templates/.env.j2"
+  delegate_to: localhost
+  register: env_template
+
+- name: "Deploy .env file from template for {{ service_name }}"
+  ansible.builtin.template:
+    src: "{{ ansible_parent_role_paths[-1] }}/templates/.env.j2"
+    dest: "{{ service_dir }}/.env"
+    mode: "0644"
+  when: env_template.stat.exists
+
+- name: "Deploy additional templates for {{ service_name }}"
+  ansible.builtin.template:
+    src: "{{ ansible_parent_role_paths[-1] }}/templates/{{ item.src }}"
+    dest: "{{ service_dir }}/{{ item.dest }}"
+    mode: "0644"
+  loop: "{{ service_templates }}"
+  loop_control:
+    label: "{{ item.dest }}"
+
+- name: "Copy additional files for {{ service_name }}"
+  ansible.builtin.copy:
+    src: "{{ ansible_parent_role_paths[-1] }}/files/{{ item.src }}"
+    dest: "{{ service_dir }}/{{ item.dest }}"
+    mode: "0644"
+  loop: "{{ service_files }}"
+  loop_control:
+    label: "{{ item.dest }}"
+
+- name: "Ensure containers are started for {{ service_name }}"
+  community.docker.docker_compose_v2:
+    project_src: "{{ service_dir }}"
+    state: present

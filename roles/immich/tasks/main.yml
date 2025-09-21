@@ -2,25 +2,10 @@
 # digest: 7bccc6cc28a88b38b14eb61ce839d6aae7638e08f6bfa502fa8ecf9ee7b3747e
 
 ---
-- name: Ensure Immich service directory exists
-  ansible.builtin.file:
-    path: "{{ immich_service_dir }}"
-    state: directory
-    mode: "0755"
-
-- name: Download the latest docker-compose.yml for Immich
-  ansible.builtin.get_url:
-    url: "https://github.com/immich-app/immich/releases/latest/download/docker-compose.yml"
-    dest: "{{ immich_service_dir }}/compose.yml"
-    mode: "0644"
-
-- name: Deploy .env file from template
-  ansible.builtin.template:
-    src: ".env.j2"
-    dest: "{{ immich_service_dir }}/.env"
-    mode: "0644"
-
-- name: Ensure Immich containers are started
-  community.docker.docker_compose_v2:
-    project_src: "{{ immich_service_dir }}"
-    state: present
+- name: Deploy Immich
+  ansible.builtin.include_role:
+    name: service_deploy
+  vars:
+    service_name: "Immich"
+    service_dir_name: "{{ immich_dir_name }}"
+    compose_url: "https://github.com/immich-app/immich/releases/latest/download/docker-compose.yml"

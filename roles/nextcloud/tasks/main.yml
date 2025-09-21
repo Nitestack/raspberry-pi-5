@@ -1,11 +1,5 @@
 ---
-- name: Ensure Nextcloud service directory exists
-  ansible.builtin.file:
-    path: "{{ nextcloud_service_dir }}"
-    state: directory
-    mode: "0755"
-
-- name: Configure Docker daemon for Nextcloud AIO IPv6
+- name: Configure Docker daemon for IPv6
   ansible.builtin.copy:
     src: "daemon.json"
     dest: "/etc/docker/daemon.json"
@@ -13,13 +7,9 @@
   notify: Restart Docker
   become: true
 
-- name: Deploy Docker Compose file from template
-  ansible.builtin.template:
-    src: "compose.yml.j2"
-    dest: "{{ nextcloud_service_dir }}/compose.yml"
-    mode: "0644"
-
-- name: Ensure Nextcloud containers are started
-  community.docker.docker_compose_v2:
-    project_src: "{{ nextcloud_service_dir }}"
-    state: present
+- name: Deploy NextCloud
+  ansible.builtin.include_role:
+    name: service_deploy
+  vars:
+    service_name: "NextCloud"
+    service_dir_name: "{{ nextcloud_dir_name }}"

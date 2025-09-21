@@ -1,0 +1,15 @@
+---
+# The display name for the service
+service_name: "{{ service_dir_name | replace('-', ' ') | title }}"
+
+# The directory name for the service
+service_dir_name: ""
+
+# List of additional templates to copy
+service_templates: []
+
+# Optional Docker compose URL
+compose_url: ""
+
+# List of additional files/directories to copy
+service_files: []

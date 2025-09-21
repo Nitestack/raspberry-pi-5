@@ -1,6 +1,5 @@
 ---
 adventure_log_data_dir: "{{ data_base_dir }}/{{ adventure_log_dir_name }}"
-adventure_log_service_dir: "{{ service_base_dir }}/{{ adventure_log_dir_name }}"
 adventure_log_db_host: "db"
 adventure_log_db_name: "database"
 adventure_log_db_user: "adventure"
