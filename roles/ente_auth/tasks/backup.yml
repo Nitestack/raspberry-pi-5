@@ -1,0 +1,15 @@
+---
+- name: Ente Auth Backup
+  ansible.builtin.include_role:
+    name: service_backup
+  vars:
+    service_name: "Ente Auth"
+    service_dir_name: "{{ ente_auth_dir_name }}"
+    run_service_name: "postgres"
+    run_command_env:
+      PGHOST: "{{ ente_db_host }}"
+      PGDATABASE: "{{ ente_db_name }}"
+      PGUSER: "{{ ente_db_user }}"
+      PGPASSWORD: "{{ ente_db_password }}"
+    data_paths:
+      - "data/"

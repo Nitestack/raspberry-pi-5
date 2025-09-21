@@ -1,5 +1,5 @@
 ---
-- name: Raspberry Pi 5
+- name: Deploy Services
   hosts: raspberrypi
   gather_facts: true
 
