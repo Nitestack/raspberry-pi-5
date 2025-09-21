@@ -1,0 +1,25 @@
+name: Backup
+
+on:
+  schedule:
+    - cron: "0 2 * * *"
+  workflow_dispatch:
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+      - id: changed-files
+        uses: tj-actions/changed-files@24d32ffd492484c1d75e0c0b894501ddb9d30d62 # v47
+      - uses: dawidd6/action-ansible-playbook@93764e7048f4dd16117d134dadb4b36e8ee73227 # v4
+        with:
+          playbook: backup.yml
+          requirements: requirements.yml
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          inventory: |
+            [raspberrypi]
+            npham.de ansible_user=nhan ansible_python_interpreter=auto_silent
+          vault_password: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
+          options: |
+            --tags backup

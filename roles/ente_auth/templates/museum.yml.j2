@@ -2,8 +2,8 @@ jwt:
   secret: "{{ ente_jwt_secret }}"
 
 db:
-  host: postgres
+  host: {{ ente_db_host }}
   port: 5432
-  name: ente_db
-  user: pguser
+  name: {{ ente_db_name }}
+  user: {{ ente_db_user }}
   password: "{{ ente_db_password }}"

@@ -1,0 +1,13 @@
+---
+- name: FreshRSS Backup
+  ansible.builtin.include_role:
+    name: service_backup
+  vars:
+    service_name: "FreshRSS"
+    service_dir_name: "{{ freshrss_dir_name }}"
+    run_service_name: "freshrss"
+    run_command: "cli/db-backup.php"
+    run_command_produces_stdout: false
+    data_paths:
+      - "data/"
+      - "extensions/"
