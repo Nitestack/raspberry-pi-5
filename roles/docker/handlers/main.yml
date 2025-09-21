@@ -1,0 +1,5 @@
+---
+- name: Reboot for kernel changes
+  ansible.builtin.reboot:
+    msg: "Rebooting to apply kernel arguments for Docker stats"
+  listen: "Reboot for kernel changes"
