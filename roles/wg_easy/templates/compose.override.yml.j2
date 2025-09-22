@@ -1,0 +1,12 @@
+# external-file: https://raw.githubusercontent.com/wg-easy/wg-easy/refs/heads/master/docker-compose.yml
+# digest: 5b0dc49f13d79d51bfef7c9a4f5c71ffa84ed5526783c4bc16b155e70e61598d
+
+services:
+  wg-easy:
+    image: ghcr.io/wg-easy/wg-easy:15@sha256:bb8152762c36f824eb42bb2f3c5ab8ad952818fbef677d584bc69ec513b251b0
+    volumes:
+      - "{{ wg_easy_data_dir }}/data:/etc/wireguard"
+    ports: !override
+      - "{{ vpn_port }}:51820/udp"
+      - "127.0.0.1:{{ services.wg_easy.port }}:51821/tcp"
+    restart: always

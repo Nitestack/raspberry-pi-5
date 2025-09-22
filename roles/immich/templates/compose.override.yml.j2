@@ -1,0 +1,4 @@
+services:
+  immich-server:
+    ports: !override
+      - "127.0.0.1:{{ services.immich.port }}:2283"

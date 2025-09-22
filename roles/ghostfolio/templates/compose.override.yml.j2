@@ -1,0 +1,22 @@
+# external-file: https://raw.githubusercontent.com/ghostfolio/ghostfolio/refs/heads/main/docker/docker-compose.yml
+# digest: 15883c8dfa24e4fdb4ac501b3614e5eb85963b7bca96b6418546e5c706e614f2
+
+services:
+  ghostfolio:
+    image: ghostfolio/ghostfolio:2.200.0
+    restart: always
+    env_file: !override .env
+    ports: !override
+      - "127.0.0.1:{{ services.ghostfolio.port }}:3333"
+
+  postgres:
+    image: postgres:15-alpine
+    restart: always
+    env_file: !override .env
+    volumes:
+      - "{{ ghostfolio_data_dir }}/db:/var/lib/postgresql/data"
+
+  redis:
+    image: redis:alpine
+    restart: always
+    env_file: !override .env
