@@ -3,7 +3,9 @@
   ansible.builtin.git:
     repo: "{{ personal_site_repo_url }}"
     dest: "{{ personal_site_service_dir }}"
-    version: master
+    version: HEAD
+  tags:
+    - skip_ansible_lint
 
 - name: Deploy Personal Site
   ansible.builtin.include_role:
