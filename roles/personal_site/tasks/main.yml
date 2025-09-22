@@ -1,5 +1,5 @@
 ---
-- name: Ensure latest version of personal site is cloned
+- name: Clone or update personal site repository
   ansible.builtin.git:
     repo: "{{ personal_site_repo_url }}"
     dest: "{{ personal_site_service_dir }}"

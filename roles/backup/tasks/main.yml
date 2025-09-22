@@ -6,6 +6,6 @@
       ansible.builtin.include_role:
         name: stefangweichinger.ansible_rclone
 
-- name: Include Backrest role
+- name: Deploy Backrest
   ansible.builtin.include_role:
     name: backrest
