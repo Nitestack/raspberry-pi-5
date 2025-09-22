@@ -1,5 +1,5 @@
 # external-file: https://github.com/immich-app/immich/releases/latest/download/docker-compose.yml
-# digest: 7bccc6cc28a88b38b14eb61ce839d6aae7638e08f6bfa502fa8ecf9ee7b3747e
+# digest: 22864ad0dcc4aefcfde39d804a20ea0e065841450dfb7902edc7963b61ff3dfe
 
 ---
 - name: Deploy Immich
