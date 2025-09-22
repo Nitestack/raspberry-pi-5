@@ -28,7 +28,7 @@
       loop_control:
         label: "{{ item }}"
 
-    - name: Find backup directories older than {{ backup_retention_days }} days
+    - name: "Find backup directories older than the following days: {{ backup_retention_days }}"
       ansible.builtin.find:
         paths: "{{ backup_base_dir }}"
         age: "{{ backup_retention_days }}d"

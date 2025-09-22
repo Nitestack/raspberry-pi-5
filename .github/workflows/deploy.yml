@@ -46,14 +46,11 @@ jobs:
         with:
           requirements_file: requirements.yml
       - if: steps.set-tags.outputs.ansible_tags != 'none'
-        uses: dawidd6/action-ansible-playbook@93764e7048f4dd16117d134dadb4b36e8ee73227 # v4
+        uses: arillso/action.playbook@main
         with:
+          galaxy_file: requirements.yml
+          inventory: inventory.ini
           playbook: deploy.yml
-          requirements: requirements.yml
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          inventory: |
-            [raspberrypi]
-            npham.de ansible_user=nhan ansible_python_interpreter=auto_silent
+          tags: ${{ steps.set-tags.outputs.ansible_tags }}
           vault_password: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
-          options: |
-            --tags ${{ steps.set-tags.outputs.ansible_tags }}
+          private_key: ${{ secrets.SSH_PRIVATE_KEY }}
