@@ -3,7 +3,7 @@
 
 services:
   museum:
-    image: ghcr.io/ente-io/server@sha256:3c922f9f6dca7b6510449b9eb2d2fb012e4749df25e005db96a92f70626af626
+    image: ghcr.io/ente-io/server:latest
     container_name: ente-museum
     restart: always
     ports:
@@ -22,7 +22,7 @@ services:
       start_period: 5s
 
   web:
-    image: ghcr.io/ente-io/web@sha256:791459f639001064512653fc5c7fa9887221c64cce8728dc5724c67d0e4381c0
+    image: ghcr.io/ente-io/web:latest
     container_name: ente-web
     restart: always
     ports:
