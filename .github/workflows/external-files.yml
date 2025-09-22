@@ -23,7 +23,7 @@ jobs:
 
           echo "false" > /tmp/changes_found
 
-          find . -regextype posix-extended -regex '.*/(docker-)?compose[^/]*\.ya?ml(\.j2)?$' -o -regex '.*/\.env(\.j2)?$' | while read -r file; do
+          find roles/ -path '*/.ansible' -prune -o -type f -print | while read -r file; do
             if grep -q "# external-file:" "$file"; then
               echo "Checking $file..."
 
@@ -65,7 +65,7 @@ jobs:
 
       - if: steps.check-changes.outputs.changes == 'true'
         run: |
-          find . -regextype posix-extended -regex '.*/(docker-)?compose[^/]*\.ya?ml(\.j2)?$' -o -regex '.*/\.env(\.j2)?$' | while read -r file; do
+          find roles/ -path '*/.ansible' -prune -o -type f -print | while read -r file; do
             if grep -q "# external-file:" "$file"; then
               url=$(grep "# external-file:" "$file" | sed 's/# external-file: //')
               stored_digest=$(grep "# digest:" "$file" | sed 's/# digest: //')
