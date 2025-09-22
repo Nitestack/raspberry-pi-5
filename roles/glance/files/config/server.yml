@@ -330,7 +330,7 @@
           token: ${GITHUB_API_TOKEN}
           show-source-icon: true
           collapse-after: -1
-          limit: 12
+          limit: 13
           repositories:
             - AdguardTeam/AdGuardHome
             - seanmorley15/AdventureLog
