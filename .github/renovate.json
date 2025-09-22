@@ -25,10 +25,6 @@
     {
       "matchManagers": ["github-actions"],
       "groupName": "GitHub Actions updates for {{packageFile}}"
-    },
-    {
-      "matchPackageNames": ["ghcr.io/baosystems/postgis", "postgres", "redis"],
-      "enabled": false
     }
   ]
 }
