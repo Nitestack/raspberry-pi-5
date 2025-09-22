@@ -15,7 +15,7 @@
   register: command_result
   when: run_command != ""
 
-- name: "Save command output if any (for database dumps)"
+- name: "Save data dump for {{ service_name }}"
   ansible.builtin.copy:
     content: "{{ command_result.stdout }}"
     dest: "{{ backup_dir }}/{{ service_dir_name | replace('-', '_') }}_dump.sql"
@@ -23,7 +23,7 @@
   when: run_command_produces_stdout and command_result.stdout is defined and command_result.stdout | length > 0
   become: true
 
-- name: "Copy data for {{ service_name }}"
+- name: "Copy data to backup directory for {{ service_name }}"
   ansible.builtin.copy:
     src: "{{ data_dir }}/{{ path }}"
     dest: "{{ backup_dir }}/{{ path }}"

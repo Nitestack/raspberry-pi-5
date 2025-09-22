@@ -1,5 +1,5 @@
 ---
-- name: Configure Docker daemon for IPv6
+- name: Enable IPv6 for Docker daemon
   ansible.builtin.copy:
     src: "daemon.json"
     dest: "/etc/docker/daemon.json"

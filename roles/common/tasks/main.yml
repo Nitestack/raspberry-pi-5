@@ -2,12 +2,12 @@
 - name: Perform system-level configuration
   become: true
   block:
-    - name: Ensure system packages are up to date
+    - name: Update and upgrade system packages
       ansible.builtin.apt:
         update_cache: true
         upgrade: dist
 
-    - name: Ensure static IP address is configured
+    - name: Configure static IP address
       community.general.nmcli:
         type: ethernet
         conn_name: "Wired connection 1"
@@ -17,17 +17,17 @@
         state: present
         conn_reload: true
 
-    - name: Gather package facts for other roles to use
+    - name: Gather package facts
       ansible.builtin.package_facts:
         manager: apt
 
-    - name: Ensure the APT keyrings directory exists
+    - name: Create APT keyrings directory
       ansible.builtin.file:
         path: /etc/apt/keyrings
         state: directory
         mode: "0755"
 
-    - name: Ensure mount point directories exist
+    - name: Create mount point directories for NVMe devices
       ansible.builtin.file:
         path: "{{ item.path }}"
         state: directory
@@ -36,7 +36,7 @@
       loop_control:
         label: "{{ item.path }}"
 
-    - name: Format the NVMe devices if not already formatted
+    - name: Format NVMe devices
       community.general.filesystem:
         fstype: "{{ item.filesystem }}"
         dev: "{{ item.device }}"
@@ -44,7 +44,7 @@
       loop_control:
         label: "{{ item.device }}"
 
-    - name: Mount the NVMe devices
+    - name: Mount NVMe devices
       ansible.posix.mount:
         path: "{{ item.path }}"
         src: "{{ item.device }}"
@@ -55,13 +55,13 @@
       loop_control:
         label: "{{ item.path }}"
 
-- name: Ensure login message is suppressed by creating .hushlogin file
+- name: Suppress login message
   ansible.builtin.file:
     path: "~/.hushlogin"
     state: file
     mode: "0644"
 
-- name: Ensure service directory exists
+- name: Create base directory for all services
   ansible.builtin.file:
     path: "{{ service_base_dir }}"
     state: directory
