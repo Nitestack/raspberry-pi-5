@@ -4,30 +4,25 @@
 services:
   web:
     image: ghcr.io/seanmorley15/adventurelog-frontend:latest@sha256:32f7ea8f99da78ee77ff1729018549b2a5cd4fec1d34a8a237b05f4d3f33da70
-    container_name: adventurelog-frontend
     restart: always
-    env_file: .env
-    ports:
-      - "127.0.0.1:${FRONTEND_PORT:-8015}:3000"
-    depends_on:
-      - server
+    env_file:
+      - .env
+      - .env.override
 
   db:
     image: ghcr.io/baosystems/postgis:16-3.5 # until postgis/postgis on DockerHub supports linux/arm64
-    container_name: adventurelog-db
     restart: always
-    env_file: .env
     volumes:
       - "{{ adventure_log_data_dir }}/db:/var/lib/postgresql/data/"
+    env_file:
+      - .env
+      - .env.override
 
   server:
     image: ghcr.io/seanmorley15/adventurelog-backend:latest@sha256:1b67bf6732046b4b82b96c0e2dfad65fcf8684cd07ce9cfed422b484e562b3b5
-    container_name: adventurelog-backend
     restart: always
-    env_file: .env
-    ports:
-      - "127.0.0.1:${BACKEND_PORT:-8016}:80"
-    depends_on:
-      - db
     volumes:
       - "{{ adventure_log_data_dir }}/data:/code/media/"
+    env_file:
+      - .env
+      - .env.override

@@ -10,6 +10,8 @@ service_templates: []
 
 # Optional Docker compose URL
 compose_url: ""
+# Optional .env URL
+env_url: ""
 
 # List of additional files/directories to copy
 service_files: []
