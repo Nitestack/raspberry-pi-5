@@ -9,6 +9,7 @@
     "abandonments:recommended"
   ],
   "labels": ["dependencies"],
+  "gitAuthor": "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>",
   "reviewers": ["Nitestack"],
   "docker-compose": {
     "managerFilePatterns": ["/(^|/)(?:docker-)?compose[^/]*\\.ya?ml(\\.j2)?$/"],
