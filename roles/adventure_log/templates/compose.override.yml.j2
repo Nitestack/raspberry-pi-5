@@ -10,7 +10,7 @@ services:
       - .env.override
 
   db:
-    image: ghcr.io/baosystems/postgis:16-3.5 # until postgis/postgis on DockerHub supports linux/arm64
+    image: ghcr.io/baosystems/postgis:16-3.5@sha256:0d390f7658da9d48b176aa5a00ef291b618261cd28ed1d39c1858d7191b8ecaa # until postgis/postgis on DockerHub supports linux/arm64
     restart: always
     volumes:
       - "{{ adventure_log_data_dir }}/db:/var/lib/postgresql/data/"
