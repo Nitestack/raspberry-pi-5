@@ -1,4 +1,10 @@
+# external-file: https://github.com/immich-app/immich/releases/latest/download/docker-compose.yml
+# digest: 22864ad0dcc4aefcfde39d804a20ea0e065841450dfb7902edc7963b61ff3dfe
+
 services:
   immich-server:
+    image: ghcr.io/immich-app/immich-server:v1.143.0
     ports: !override
       - "127.0.0.1:{{ services.immich.port }}:2283"
+  immich-machine-learning:
+    image: ghcr.io/immich-app/immich-machine-learning:v1.143.0

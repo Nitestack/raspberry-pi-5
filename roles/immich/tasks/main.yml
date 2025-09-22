@@ -1,6 +1,3 @@
-# external-file: https://github.com/immich-app/immich/releases/latest/download/docker-compose.yml
-# digest: 22864ad0dcc4aefcfde39d804a20ea0e065841450dfb7902edc7963b61ff3dfe
-
 ---
 - name: Deploy Immich
   ansible.builtin.include_role:
