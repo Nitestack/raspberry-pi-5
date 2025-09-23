@@ -110,10 +110,13 @@
             beszel-agent:
               name: Agent
               parent: beszel
+            caddy:
+              name: Caddy
+              icon: di:caddy
+              description: HTTPS Server
             cloudflare-ddns:
               name: Cloudflare DDNS
               icon: di:cloudflare
-              url: https://dash.cloudflare.com
               description: Dynamic DNS Updater
             ente-web:
               name: Ente Auth
@@ -330,12 +333,13 @@
           token: ${GITHUB_API_TOKEN}
           show-source-icon: true
           collapse-after: -1
-          limit: 13
+          limit: 14
           repositories:
             - AdguardTeam/AdGuardHome
             - seanmorley15/AdventureLog
             - garethgeorge/backrest
             - henrygd/beszel
+            - caddyserver/caddy
             - favonia/cloudflare-ddns
             - ente-io/ente
             - FreshRSS/FreshRSS
