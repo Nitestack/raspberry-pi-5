@@ -1,0 +1,15 @@
+services:
+  caddy:
+    image: caddy:latest
+    container_name: caddy
+    restart: always
+    # ports:
+    #   - "80:80"
+    #   - "443:443"
+    #   - "443:443/udp"
+    volumes:
+      - "{{ caddy_service_dir }}/Caddyfile:/etc/caddy/Caddyfile:ro"
+      - "{{ caddy_service_dir }}/static:/srv:ro"
+      - "{{ caddy_data_dir }}/data:/data"
+      - "{{ caddy_data_dir }}/config:/config"
+    network_mode: host
