@@ -31,7 +31,7 @@ services:
       ENTE_API_ORIGIN: "https://{{ services.ente_api.domain }}"
 
   postgres:
-    image: postgres:15@sha256:1cd9dd548427751dc0fabb24a3bdf96a6dd08c0025a167ecbb5c14bec21ff94c
+    image: postgres:17@sha256:feff5b24fedd610975a1f5e743c51a4b360437f4dc3a11acf740dcd708f413f6
     container_name: ente-postgres
     restart: always
     environment:
