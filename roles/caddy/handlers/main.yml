@@ -1,0 +1,5 @@
+---
+- name: "Restart Caddy"
+  community.docker.docker_compose_v2:
+    project_src: "{{ caddy_service_dir }}"
+    state: restarted
