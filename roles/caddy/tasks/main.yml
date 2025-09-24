@@ -1,10 +1,24 @@
 ---
-- name: Deploy Caddy
-  ansible.builtin.include_role:
-    name: service_deploy
-  vars:
-    service_name: "Caddy"
-    service_dir_name: "{{ caddy_dir_name }}"
-    service_templates:
-      - src: "Caddyfile.j2"
-        dest: "Caddyfile"
+- name: "Create service directory for Caddy"
+  ansible.builtin.file:
+    path: "{{ caddy_service_dir }}"
+    state: directory
+    mode: "0755"
+
+- name: "Deploy compose.yml from template for Caddy"
+  ansible.builtin.template:
+    src: "compose.yml.j2"
+    dest: "{{ caddy_service_dir }}/compose.yml"
+    mode: "0644"
+
+- name: "Deploy Caddyfile from template for Caddy"
+  ansible.builtin.template:
+    src: "Caddyfile.j2"
+    dest: "{{ caddy_service_dir }}/Caddyfile"
+    mode: "0644"
+  notify: "Restart Caddy"
+
+- name: "Start Docker containers for Caddy"
+  community.docker.docker_compose_v2:
+    project_src: "{{ caddy_service_dir }}"
+    state: present
