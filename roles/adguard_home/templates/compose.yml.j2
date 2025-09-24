@@ -1,23 +1,26 @@
 services:
-  adguardhome:
+  adguard-home:
     image: adguard/adguardhome:v0.107.66@sha256:cc8757742e547c722bb0bd9a3b11fce22771a75a5b0e07ce9a789ad62a2bfd37
-    container_name: adguardhome
+    container_name: "{{ services.adguard_home.container_name }}"
     restart: always
+    networks:
+      - caddy
     volumes:
       - "{{ adguard_home_data_dir }}/data:/opt/adguardhome/work"
       - "{{ adguard_home_data_dir }}/config:/opt/adguardhome/conf"
     ports:
-      - "{{ dns_port }}:53/tcp" # DNS
-      - "{{ dns_port }}:53/udp" # DNS
+      - "53:53/tcp" # DNS
+      - "53:53/udp" # DNS
       # - "67:67/udp" # DHCP Server
       # - "68:68/udp" # DHCP Server
-      - "127.0.0.1:{{ services.adguard_home.port }}:80/tcp" # Admin Panel
-      # - "443:443/tcp" # Admin Panel (HTTPS/DNS-over-HTTPS)
-      # - "443:443/udp" # Admin Panel (HTTPS/DNS-over-HTTPS)
-      - "{{ adguard_home_initial_install_port }}:3000/tcp" # Initial Web Setup Interface
+      # - "{{ adguard_home_initial_install_port }}:3000/tcp" # Initial Web Setup Interface
       # - "853:853/tcp" # DNS-over-TLS
       # - "784:784/udp" # DNS-over-QUIC
       # - "853:853/udp" # DNS-over-QUIC
       # - "8853:8853/udp" # DNS-over-QUIC
       # - "5443:5443/tcp" # DNSCrypt
       # - "5443:5443/udp" # DNSCrypt
+
+networks:
+  caddy:
+    external: true

@@ -3,13 +3,18 @@ services:
     image: caddy:latest@sha256:87aa104ed6c658991e1b0672be271206b7cd9fec452d1bf3ed9ad6f8ab7a2348
     container_name: caddy
     restart: always
-    # ports:
-    #   - "80:80"
-    #   - "443:443"
-    #   - "443:443/udp"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    networks:
+      - caddy
     volumes:
       - "{{ caddy_service_dir }}/Caddyfile:/etc/caddy/Caddyfile:ro"
       - "{{ caddy_service_dir }}/static:/srv:ro"
       - "{{ caddy_data_dir }}/data:/data"
       - "{{ caddy_data_dir }}/config:/config"
-    network_mode: host
+
+networks:
+  caddy:
+    name: caddy
