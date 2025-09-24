@@ -1,5 +1,5 @@
 (protected) {
-	@blocked not remote_ip 192.168.0.0/16
+	@blocked not remote_ip private_ranges
 	error @blocked 403
 
 	handle_errors 403 {
