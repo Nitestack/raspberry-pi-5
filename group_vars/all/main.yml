@@ -12,7 +12,8 @@ allowed_ports:
   - 51820 # VPN
 
 # ── Service Configuration ─────────────────────────────────────────────
-# WARNING: do not modify the ports
+# WARNING: modification of any ports won't work
+# the only customizable port is the NextCloud port, but it's recommended to keep it untouched
 services:
   # AdGuard Home
   adguard_home:
@@ -73,6 +74,11 @@ services:
     domain: "cloud.{{ domain }}"
     container_name: "nextcloud-aio-apache"
     port: 11000
+  nextcloud_aio:
+    caddy_proxy_type: "nextcloud-aio"
+    domain: "nextcloud-aio.{{ domain }}"
+    container_name: "nextcloud-aio-mastercontainer"
+    port: 8080
   # Personal Site
   personal_site:
     domain: "{{ domain }}"
