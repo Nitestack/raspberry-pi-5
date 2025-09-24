@@ -1,10 +1,10 @@
 services:
   vaultwarden:
     image: vaultwarden/server:latest@sha256:84fd8a47f58d79a1ad824c27be0a9492750c0fa5216b35c749863093bfa3c3d7
-    container_name: vaultwarden
+    container_name: "{{ services.vaultwarden.container_name }}"
     restart: always
-    ports:
-      - "127.0.0.1:{{ services.vaultwarden.port }}:80"
+    networks:
+      - caddy
     volumes:
       - "{{ vaultwarden_data_dir }}/data:/data"
     environment:
@@ -16,3 +16,7 @@ services:
       SMTP_FROM: "{{ no_reply_mail }}"
       SMTP_USERNAME: "{{ no_reply_mail }}"
       SMTP_PASSWORD: "{{ smtp_password }}"
+
+networks:
+  caddy:
+    external: true

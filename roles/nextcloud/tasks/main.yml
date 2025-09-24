@@ -1,12 +1,4 @@
 ---
-- name: Enable IPv6 for Docker daemon
-  ansible.builtin.copy:
-    src: "daemon.json"
-    dest: "/etc/docker/daemon.json"
-    mode: "0644"
-  notify: Restart Docker
-  become: true
-
 - name: Deploy NextCloud
   ansible.builtin.include_role:
     name: service_deploy

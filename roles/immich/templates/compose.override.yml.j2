@@ -4,7 +4,14 @@
 services:
   immich-server:
     image: ghcr.io/immich-app/immich-server:v1.143.0@sha256:6676551f3beb41bf8d25dd5b72ad9837249182571c1b60791ea1acd30d450621
-    ports: !override
-      - "127.0.0.1:{{ services.immich.port }}:2283"
+    container_name: "{{ services.immich.container_name }}"
+    networks:
+      - default
+      - caddy
+    ports: !reset []
   immich-machine-learning:
     image: ghcr.io/immich-app/immich-machine-learning:v1.143.0@sha256:2bbf70037b99bf67ffab3f836101653370dcc2284165ce958ec33ffa97cd2214
+
+networks:
+  caddy:
+    external: true

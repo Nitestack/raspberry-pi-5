@@ -79,7 +79,7 @@
         - type: docker-containers
           hide-header: true
           containers:
-            adguardhome:
+            adguard-home:
               name: AdGuard Home
               icon: di:adguard-home
               url: ${ADGUARD_HOME_URL}
@@ -188,8 +188,8 @@
             nextcloud-aio-redis:
               name: Redis
               parent: nextcloud
-            nextcloud-aio-collabora:
-              name: Collabora
+            nextcloud-aio-onlyoffice:
+              name: OnlyOffice
               parent: nextcloud
             nextcloud-aio-imaginary:
               name: Imaginary

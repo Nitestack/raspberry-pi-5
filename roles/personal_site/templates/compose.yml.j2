@@ -1,8 +1,12 @@
 services:
   web:
     build: .
-    container_name: personal-site
+    container_name: "{{ services.personal_site.container_name }}"
     restart: always
-    ports:
-      - "127.0.0.1:{{ services.personal_site.port }}:3000"
+    networks:
+      - caddy
     env_file: .env
+
+networks:
+  caddy:
+    external: true

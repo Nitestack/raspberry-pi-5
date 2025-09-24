@@ -129,8 +129,8 @@ public:80/tcp -> local:80/tcp
 public:443/tcp -> local:443/tcp
 public:443/udp -> local:443/udp
 
-# WireGuard (value from 'vpn_port' in main.yml, default is 51820)
-public:{{ vpn_port }}/udp -> local:{{ vpn_port }}/udp
+# WireGuard
+public:51820/udp -> local:51820/udp
 
 # SSH (optional, if you want to access the Pi with a URL)
 public:22/tcp -> local:22/tcp

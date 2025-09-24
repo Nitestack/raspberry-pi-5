@@ -1,10 +1,11 @@
 services:
   beszel:
     image: henrygd/beszel:0.12.10@sha256:2c8d150e5af967595f511522af235c11c508085c518dfb3f94077af155f8f81e
-    container_name: beszel
+    container_name: "{{ services.beszel.container_name }}"
     restart: always
-    ports:
-      - "{{ services.beszel.port }}:8090"
+    networks:
+      - default
+      - caddy
     volumes:
       - "{{ beszel_data_dir }}/data:/beszel_data"
       - "{{ beszel_data_dir }}/socket:/beszel_socket"
@@ -36,3 +37,7 @@ services:
     healthcheck:
       test: ['CMD', '/agent', 'health']
       interval: 120s
+
+networks:
+  caddy:
+    external: true
