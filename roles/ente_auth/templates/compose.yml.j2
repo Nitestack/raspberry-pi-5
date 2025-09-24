@@ -4,15 +4,16 @@
 services:
   museum:
     image: ghcr.io/ente-io/server:latest@sha256:3c922f9f6dca7b6510449b9eb2d2fb012e4749df25e005db96a92f70626af626
-    container_name: ente-museum
+    container_name: "{{ services.ente_api.container_name }}"
     restart: always
-    ports:
-      - "127.0.0.1:{{ services.ente_api.port }}:8080"
     depends_on:
       postgres:
         condition: service_healthy
+    networks:
+      - default
+      - caddy
     volumes:
-      - ./museum.yml:/museum.yaml:ro
+      - "{{ ente_auth_service_dir }}/museum.yml:/museum.yaml:ro"
       - "{{ ente_auth_data_dir }}/data:/data:ro"
     healthcheck:
       test: ["CMD", "curl", "--fail", "http://localhost:8080/ping"]
@@ -23,10 +24,11 @@ services:
 
   web:
     image: ghcr.io/ente-io/web:latest@sha256:791459f639001064512653fc5c7fa9887221c64cce8728dc5724c67d0e4381c0
-    container_name: ente-web
+    container_name: "{{ services.ente_auth.container_name }}"
     restart: always
-    ports:
-      - "127.0.0.1:{{ services.ente_auth.port }}:3003" # Auth
+    networks:
+      - default
+      - caddy
     environment:
       ENTE_API_ORIGIN: "https://{{ services.ente_api.domain }}"
 
@@ -44,3 +46,7 @@ services:
       start_interval: 1s
     volumes:
       - "{{ ente_auth_data_dir }}/db:/var/lib/postgresql/data"
+
+networks:
+  caddy:
+    external: true

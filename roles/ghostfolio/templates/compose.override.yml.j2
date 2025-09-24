@@ -4,10 +4,13 @@
 services:
   ghostfolio:
     image: ghostfolio/ghostfolio:2.200.0@sha256:b7686e6ff8dfaa2a76bd1a0f853c151b3923de38209d1185828d2e062b6377ac
+    container_name: "{{ services.ghostfolio.container_name }}"
     restart: always
+    networks:
+      - default
+      - caddy
     env_file: !override .env
-    ports: !override
-      - "127.0.0.1:{{ services.ghostfolio.port }}:3333"
+    ports: !reset []
 
   postgres:
     image: postgres:15-alpine@sha256:3a4cda59817ef228718290e6886e87fb1ad3da44985aea3503d840ecf8a7e302
@@ -20,3 +23,7 @@ services:
     image: redis:alpine@sha256:987c376c727652f99625c7d205a1cba3cb2c53b92b0b62aade2bd48ee1593232
     restart: always
     env_file: !override .env
+
+networks:
+  caddy:
+    external: true

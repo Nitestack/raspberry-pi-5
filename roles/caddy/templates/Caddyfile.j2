@@ -14,30 +14,30 @@
 {{ service.domain }} {
 {% set proxy_type = service.caddy_proxy_type | default('simple') %}
 {% if proxy_type == "simple" %}
-	reverse_proxy localhost:{{ service.port }}
+	reverse_proxy {{ service.container_name }}:{{ service.port }}
 {% elif proxy_type == "vaultwarden" %}
 	encode zstd gzip
-	reverse_proxy localhost:{{ service.port }} {
+	reverse_proxy {{ service.container_name }}:{{ service.port }} {
 		header_up X-Real-IP {remote_host}
 	}
 {% elif proxy_type == "adventure_log" %}
 	@frontend {
 		not path /media* /admin* /static* /accounts*
 	}
-	reverse_proxy @frontend localhost:{{ service.frontend_port }}
-	reverse_proxy localhost:{{ service.backend_port }}
+	reverse_proxy @frontend {{ service.frontend_container_name }}:{{ service.frontend_port }}
+	reverse_proxy {{ service.backend_container_name }}:{{ service.backend_port }}
 {% elif proxy_type == "beszel" %}
 	request_body {
 		max_size 10MB
 	}
-	reverse_proxy localhost:{{ service.port }} {
+	reverse_proxy {{ service.container_name }}:{{ service.port }} {
 		transport http {
 			read_timeout 360s
 		}
 	}
 {% elif proxy_type == "nextcloud" %}
 	header Strict-Transport-Security max-age=31536000;
-	reverse_proxy localhost:{{ service.port }}
+	reverse_proxy {{ service.container_name }}:{{ service.port }}
 {% endif %}
 }
 {% endfor %}

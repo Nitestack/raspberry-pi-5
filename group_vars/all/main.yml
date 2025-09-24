@@ -4,77 +4,90 @@ timezone: "Europe/Berlin" # TZ identifier from https://en.wikipedia.org/wiki/Lis
 data_base_dir: "/mnt/data"
 backup_base_dir: "/mnt/backup"
 service_base_dir: "~/services"
-dns_port: 53
-vpn_port: 51820
 allowed_ports:
   - 22 # SSH
+  - 53 # DNS
   - 80 # Caddy HTTP
   - 443 # Caddy HTTPS
-  - "{{ dns_port }}" # DNS
-  - "{{ vpn_port }}" # VPN
+  - 51820 # VPN
 
 # ── Service Configuration ─────────────────────────────────────────────
+# WARNING: do not modify the ports
 services:
   # AdGuard Home
   adguard_home:
     domain: "adguard.{{ domain }}"
-    port: 3000
-    dns_port: 53
+    container_name: "adguard-home"
+    port: 80
   # AdventureLog
   adventure_log:
     caddy_proxy_type: "adventure_log"
     domain: "travel.{{ domain }}"
-    frontend_port: 8015
-    backend_port: 8016
+    frontend_container_name: "adventurelog-frontend"
+    backend_container_name: "adventurelog-backend"
+    frontend_port: 3000
+    backend_port: 80
   # Backrest
   backrest:
     domain: "backup.{{ domain }}"
+    container_name: "backrest"
     port: 9898
   # Beszel
   beszel:
     caddy_proxy_type: "beszel"
     domain: "monitor.{{ domain }}"
+    container_name: "beszel"
     port: 8090
   # Ente Auth
   ente_auth:
     domain: "auth.{{ domain }}"
+    container_name: "ente-web"
     port: 3003
   ente_api:
     domain: "ente-api.{{ domain }}"
-    port: 8081
+    container_name: "ente-museum"
+    port: 8080
   # FreshRSS
   freshrss:
     domain: "feed.{{ domain }}"
-    port: 8082
+    container_name: "freshrss"
+    port: 80
   # Ghostfolio
   ghostfolio:
     domain: "wealth.{{ domain }}"
+    container_name: "ghostfolio"
     port: 3333
   # Glance
   glance:
     domain: "dash.{{ domain }}"
-    port: 8083
+    container_name: "glance"
+    port: 8080
   # Immich
   immich:
     domain: "media.{{ domain }}"
+    container_name: "immich_server"
     port: 2283
   # NextCloud
   nextcloud:
     caddy_proxy_type: "nextcloud"
     domain: "cloud.{{ domain }}"
+    container_name: "nextcloud-aio-apache"
     port: 11000
   # Personal Site
   personal_site:
     domain: "{{ domain }}"
-    port: 3001
+    container_name: "personal-site"
+    port: 3000
   # Vaultwarden
   vaultwarden:
     caddy_proxy_type: "vaultwarden"
     domain: "vault.{{ domain }}"
-    port: 11001
+    container_name: "vaultwarden"
+    port: 80
   # WireGuard Easy
   wg_easy:
     domain: "vpn.{{ domain }}"
+    container_name: "wg-easy"
     port: 51821
 
 # ── Email Configuration ───────────────────────────────────────────────
@@ -89,7 +102,7 @@ rclone_configs:
   - name: "onedrive"
     properties:
       type: "onedrive"
-      token: ' {{ rclone_onedrive_token }}'
+      token: " {{ rclone_onedrive_token }}"
       drive_id: "{{ rclone_onedrive_drive_id }}"
       drive_type: "personal"
   # - name: "proton-drive"

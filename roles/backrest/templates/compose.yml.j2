@@ -1,8 +1,10 @@
 services:
   backrest:
     image: garethgeorge/backrest:v1.9.2@sha256:f8306faef0a3cbedc7daa55756f1d4c105d8c104aa773656bdad4fa8553dab5a
-    container_name: backrest
+    container_name: "{{ services.backrest.container_name }}"
     restart: always
+    networks:
+      - caddy
     volumes:
       - "{{ backrest_data_dir }}/data:/data"
       - "{{ backrest_data_dir }}/config:/config"
@@ -17,5 +19,7 @@ services:
       XDG_CACHE_HOME: "/cache"
       TMPDIR: "/tmp"
       TZ: "{{ timezone }}"
-    ports:
-      - "127.0.0.1:{{ services.backrest.port }}:9898"
+
+networks:
+  caddy:
+    external: true

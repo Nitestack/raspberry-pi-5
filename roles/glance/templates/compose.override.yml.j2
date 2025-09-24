@@ -5,6 +5,9 @@ services:
   glance:
     image: glanceapp/glance:v0.8.4@sha256:6df86a7e8868d1eda21f35205134b1962c422957e42a0c44d4717c8e8f741b1a
     restart: always
+    networks:
+      - default
+      - caddy
     volumes:
       - "{{ glance_service_dir }}/config:/app/config"
       - "{{ glance_service_dir }}/assets:/app/assets"
@@ -12,5 +15,8 @@ services:
       - "{{ backup_base_dir }}:{{ backup_base_dir }}:ro"
       # Optionally, also mount docker socket if you want to use the docker containers widget
       - /var/run/docker.sock:/var/run/docker.sock:ro
-    ports: !override
-      - "127.0.0.1:{{ services.glance.port }}:8080"
+    ports: !reset []
+
+networks:
+  caddy:
+    external: true
