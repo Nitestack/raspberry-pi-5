@@ -26,6 +26,12 @@
 {% elif proxy_type == "nextcloud" %}
 	header Strict-Transport-Security max-age=31536000;
 	reverse_proxy {{ service.container_name }}:{{ service.port }}
+{% elif proxy_type == "nextcloud-aio" %}
+	reverse_proxy {{ service.container_name }}:{{ service.port }} {
+		transport http {
+			tls_insecure_skip_verify
+		}
+	}
 {% endif %}
 }
 {% endfor %}

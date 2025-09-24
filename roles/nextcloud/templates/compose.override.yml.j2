@@ -2,17 +2,14 @@
 # digest: b4d0dcbf10a908082e531b6ad6264d47b1bb15de3b6a43b994e923b947c1a23d
 
 services:
-  nextcloud:
+  nextcloud-aio-mastercontainer:
     image: nextcloud/all-in-one:latest@sha256:2e0d2eaa187e3139f1d7d7676cf1369a20ff7e4f70df3ecd516fdb0fd8d5dc5a
-    init: true
     restart: always
-    container_name: nextcloud-aio-mastercontainer
-    network_mode: bridge
-    ports:
-      - "{{ nextcloud_aio_port }}:8080"
-    volumes:
-      - nextcloud_aio_mastercontainer:/mnt/docker-aio-config
-      - /var/run/docker.sock:/var/run/docker.sock:ro
+    container_name: "{{ services.nextcloud_aio.container_name }}"
+    network_mode: !reset null
+    networks:
+      - caddy
+    ports: !reset []
     environment:
       APACHE_PORT: {{ services.nextcloud.port }}
       APACHE_IP_BINDING: "127.0.0.1"
@@ -23,7 +20,3 @@ services:
 networks:
   caddy:
     external: true
-
-volumes:
-  nextcloud_aio_mastercontainer:
-    name: nextcloud_aio_mastercontainer
