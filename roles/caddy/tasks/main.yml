@@ -11,11 +11,3 @@
     service_files:
       - src: "static/"
         dest: "static"
-      - src: "update_public_ip.sh"
-        dest: "update_public_ip.sh"
-
-- name: Create cron job for public IP updating
-  ansible.builtin.cron:
-    name: "Caddy Public IP Updater"
-    minute: "*/1"
-    job: "{{ caddy_service_dir }}/update_public_ip.sh"

@@ -26,7 +26,6 @@ _This [Ansible](https://www.ansible.com) configuration automates the setup of a 
 
 ### Core Infrastructure
 
-- **Caddy**: Reverse Proxy & TLS
 - **fail2ban**: IP Address Banning
 - **UFW**: Firewall Configuration
 - **restic** & **rclone**: Backup Solution with Remote Support
@@ -37,6 +36,7 @@ _This [Ansible](https://www.ansible.com) configuration automates the setup of a 
 - **AdventureLog**: Travel Tracker
 - **Backrest**: Backup Manager (Web GUI for `restic`)
 - **Beszel**: Server Monitoring
+- **Caddy**: Reverse Proxy & TLS
 - **Cloudflare DDNS**: Dynamic DNS Updater
 - **Ente Auth**: Two-factor Authenticator
 - **FreshRSS**: Feed Aggregator
@@ -83,6 +83,10 @@ _This [Ansible](https://www.ansible.com) configuration automates the setup of a 
 
 > [!IMPORTANT]
 > This only works if you have set up password-less SSH authentication on your Raspberry Pi. Please look at the [Security](#%EF%B8%8F-security) section for more details.
+
+> [!IMPORTANT]
+> Ensure DNS Rewrites has an entry, where your domain (and all subdomains) redirect to your server's IP (`192.168.2.210` for this setup).
+> ![DNS Rewrites](assets/dns-rewrites.png)
 
 ## 🛠️ Configuration
 
