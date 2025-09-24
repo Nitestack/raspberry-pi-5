@@ -8,6 +8,3 @@
     service_templates:
       - src: "Caddyfile.j2"
         dest: "Caddyfile"
-    service_files:
-      - src: "static/"
-        dest: "static"

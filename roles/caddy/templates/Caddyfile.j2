@@ -1,15 +1,3 @@
-(protected) {
-	@blocked not remote_ip private_ranges
-	error @blocked 403
-
-	handle_errors 403 {
-		rewrite * /403.html
-		file_server {
-			root /srv/errors
-		}
-	}
-}
-
 {% for service in services.values() %}
 {{ service.domain }} {
 {% set proxy_type = service.caddy_proxy_type | default('simple') %}
