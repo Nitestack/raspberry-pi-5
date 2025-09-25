@@ -14,79 +14,26 @@ jobs:
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
 
+      - run: |
+          chmod +x .github/scripts/check_external_files.sh
+          chmod +x .github/scripts/update_commit_hashes.sh
+
       - id: check-changes
-        run: |
-          changes_found=false
-
-          echo "| File | Digest Change | URL |" > /tmp/changes_report
-          echo "|---|---|---|" >> /tmp/changes_report
-
-          echo "false" > /tmp/changes_found
-
-          find roles/ -path '*/.ansible' -prune -o -type f -print | while read -r file; do
-            if grep -q "# external-file:" "$file"; then
-              echo "Checking $file..."
-
-              url=$(grep "# external-file:" "$file" | sed 's/# external-file: //')
-              stored_digest=$(grep "# digest:" "$file" | sed 's/# digest: //')
-
-              if [ -n "$url" ] && [ -n "$stored_digest" ]; then
-                current_digest=$(curl -sL "$url" | sha256sum | cut -d' ' -f1)
-
-                if [ "$stored_digest" != "$current_digest" ]; then
-                  echo "❌ Digest mismatch for $file"
-                  echo "true" > /tmp/changes_found
-
-                  short_stored=$(echo "$stored_digest" | cut -c1-7)
-                  short_current=$(echo "$current_digest" | cut -c1-7)
-
-                  echo "| \`$file\` | \`$short_stored\` → \`$short_current\` | [Link]($url) |" >> /tmp/changes_report
-
-                else
-                  echo "✅ $file: up to date"
-                fi
-              fi
-            fi
-          done
-
-          changes_found=$(cat /tmp/changes_found)
-
-          if [ "$changes_found" = "true" ]; then
-            echo "changes=true" >> $GITHUB_OUTPUT
-            changes_report_body=$(cat /tmp/changes_report)
-            echo "CHANGES_REPORT<<EOF" >> $GITHUB_ENV
-            echo "$changes_report_body" >> $GITHUB_ENV
-            echo "EOF" >> $GITHUB_ENV
-            echo "Changes detected! Will create PR."
-          else
-            echo "changes=false" >> $GITHUB_OUTPUT
-            echo "No changes detected."
-          fi
+        run: .github/scripts/check_external_files.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - if: steps.check-changes.outputs.changes == 'true'
-        run: |
-          find roles/ -path '*/.ansible' -prune -o -type f -print | while read -r file; do
-            if grep -q "# external-file:" "$file"; then
-              url=$(grep "# external-file:" "$file" | sed 's/# external-file: //')
-              stored_digest=$(grep "# digest:" "$file" | sed 's/# digest: //')
-
-              if [ -n "$url" ] && [ -n "$stored_digest" ]; then
-                current_digest=$(curl -sL "$url" | sha256sum | cut -d' ' -f1)
-
-                if [ "$stored_digest" != "$current_digest" ]; then
-                  echo "Updating digest in $file"
-                  sed -i "s/# digest: .*/# digest: $current_digest/" "$file"
-                fi
-              fi
-            fi
-          done
+        run: .github/scripts/update_commit_hashes.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - if: steps.check-changes.outputs.changes == 'true'
         uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e # v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "chore(deps): update external file digests"
-          title: "chore(deps): update external file digests"
+          commit-message: "chore(deps): update external file commit hashes"
+          title: "chore(deps): update external file commit hashes"
           body: |
             This PR contains the following updates:
 
@@ -95,16 +42,13 @@ jobs:
             ---
 
             ### ✅ What This PR Does:
-            - **Automatically updates** all digest comments to match current external file content
-            - **Ready to merge** after you review the external changes
+            - **Automatically updates** all commit hash comments to match the latest commit of the external files.
+            - **Ready to merge** after you review the external changes.
 
             ### 📋 Action Required:
-            1. **Review the external file changes** by visiting the URLs above to understand what changed
-            2. **Update your Ansible templates** if the external file structure changed significantly
-            3. **Merge this PR** once you're satisfied with the changes
-
-            ### 🔍 Files Updated:
-            All digest comments have been automatically updated to the latest values. You can merge this PR immediately if the external changes don't require template modifications.
+            1. **Review the diffs** to understand what changed.
+            2. **Update your Ansible templates** if the external file structure changed significantly.
+            3. **Merge this PR** once you're satisfied with the changes.
           branch: external-file-updates
           labels: |
             dependencies
