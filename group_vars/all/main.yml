@@ -22,7 +22,6 @@ services:
     port: 80
   # AdventureLog
   adventure_log:
-    caddy_proxy_type: "adventure_log"
     domain: "travel.{{ domain }}"
     frontend_container_name: "adventurelog-frontend"
     backend_container_name: "adventurelog-backend"
@@ -35,7 +34,6 @@ services:
     port: 9898
   # Beszel
   beszel:
-    caddy_proxy_type: "beszel"
     domain: "monitor.{{ domain }}"
     container_name: "beszel"
     port: 8090
@@ -70,12 +68,10 @@ services:
     port: 2283
   # NextCloud
   nextcloud:
-    caddy_proxy_type: "nextcloud"
     domain: "cloud.{{ domain }}"
     container_name: "nextcloud-aio-apache"
     port: 11000
   nextcloud_aio:
-    caddy_proxy_type: "nextcloud-aio"
     domain: "nextcloud-aio.{{ domain }}"
     container_name: "nextcloud-aio-mastercontainer"
     port: 8080
@@ -86,7 +82,6 @@ services:
     port: 3000
   # Vaultwarden
   vaultwarden:
-    caddy_proxy_type: "vaultwarden"
     domain: "vault.{{ domain }}"
     container_name: "vaultwarden"
     port: 80
