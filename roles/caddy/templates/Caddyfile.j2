@@ -29,6 +29,22 @@
 	reverse_proxy {{ service.container_name }}:{{ service.port }} {
 		header_up X-Real-IP {remote_host}
 	}
+{% elif name == "wger" %}
+	encode
+
+	reverse_proxy {{ service.container_name }}:{{ service.port }} {
+		header_up X-Real-IP {remote_host}
+	}
+
+	handle /static/* {
+		root * /srv/wger
+		file_server
+	}
+
+	handle /media/* {
+		root * /srv/wger
+		file_server
+	}
 {% else %}
 	reverse_proxy {{ service.container_name }}:{{ service.port }}
 {% endif %}

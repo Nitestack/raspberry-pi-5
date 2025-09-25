@@ -29,6 +29,8 @@
       tags: ente_auth
     - role: ghostfolio
       tags: ghostfolio
+    - role: wger
+      tags: wger
     - role: glance
       tags: glance
     - role: beszel

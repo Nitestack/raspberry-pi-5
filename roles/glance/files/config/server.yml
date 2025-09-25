@@ -57,6 +57,9 @@
                 - title: Vaultwarden
                   url: https://github.com/dani-garcia/vaultwarden/wiki
                   icon: si:vaultwarden
+                - title: wger
+                  url: https://wger.readthedocs.io
+                  icon: di:wger
                 - title: WireGuard Easy
                   url: https://wg-easy.github.io/wg-easy/latest
                   icon: di:wireguard
@@ -216,6 +219,24 @@
               icon: di:wireguard
               url: ${WG_EASY_URL}
               description: VPN
+            wger-web:
+              name: wger
+              icon: di:wger
+              url: ${WGER_URL}
+              description: Fitness Tracker
+              id: wger
+            wger-postgres:
+              name: PostgreSQL
+              parent: wger
+            wger-redis:
+              name: Redis
+              parent: wger
+            wger-celery-worker:
+              name: Celery Worker
+              parent: wger
+            wger-celery-beat:
+              name: Celery Beat
+              parent: wger
         - type: group
           widgets:
             - type: reddit
@@ -333,7 +354,7 @@
           token: ${GITHUB_API_TOKEN}
           show-source-icon: true
           collapse-after: -1
-          limit: 14
+          limit: 15
           repositories:
             - AdguardTeam/AdGuardHome
             - seanmorley15/AdventureLog
@@ -349,3 +370,4 @@
             - nextcloud/all-in-one
             - dani-garcia/vaultwarden
             - wg-easy/wg-easy
+            - wger-project/wger

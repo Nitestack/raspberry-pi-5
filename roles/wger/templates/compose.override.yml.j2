@@ -1,0 +1,72 @@
+# external-file
+# owner: wger-project
+# repo: docker
+# path: docker-compose.yml
+# commit-hash: 736e78f89b6d6f773de2583271176b19149947ae
+
+services:
+  web:
+    image: wger/server:2.4-dev
+    container_name: "{{ services.wger.container_name }}"
+    env_file: !override
+      - .env
+      - .env.override
+    networks:
+      - default
+      - caddy
+    volumes:
+      - "{{ wger_data_dir }}/static:/home/wger/static"
+      - "{{ wger_data_dir }}/media:/home/wger/media"
+    expose: !reset null
+    restart: always
+
+  nginx: !reset null
+
+  db:
+    image: postgres:15-alpine
+    container_name: "wger-postgres"
+    environment:
+      - POSTGRES_PASSWORD={{ wger_db_password }}
+      - TZ={{ timezone }}
+    volumes:
+      - "{{ wger_data_dir }}/db:/var/lib/postgresql/data/"
+    expose: !reset null
+    restart: always
+
+  cache:
+    image: redis:8.2.1
+    container_name: "wger-redis"
+    expose: !reset null
+    user: "1000:1000"
+    volumes:
+      - "{{ wger_service_dir }}/redis.conf:/usr/local/etc/redis/redis.conf"
+      - "{{ wger_data_dir }}/redis:/data"
+    restart: always
+
+    # You probably want to limit the memory usage of the cache, otherwise it might
+    # hog all the available memory. Remove or change according to your needs.
+    #mem_limit: 5gb
+
+  celery_worker:
+    image: wger/server:2.4-dev
+    container_name: "wger-celery-worker"
+    env_file: !override
+      - .env
+      - .env.override
+    volumes:
+      - "{{ wger_data_dir }}/media:/home/wger/media"
+    restart: always
+
+  celery_beat:
+    image: wger/server:2.4-dev
+    container_name: "wger-celery-beat"
+    env_file: !override
+      - .env
+      - .env.override
+    volumes:
+      - "{{ wger_data_dir }}/beat:/home/wger/beat/"
+    restart: always
+
+networks:
+  caddy:
+    external: true
