@@ -1,0 +1,36 @@
+---
+- name: "Create and set permissions for wger data directories"
+  ansible.builtin.file:
+    path: "{{ wger_data_dir }}/{{ item }}"
+    state: directory
+    owner: 1000
+    group: 1000
+    mode: "0755"
+  loop:
+    - "static"
+    - "media"
+    - "db"
+    - "redis"
+    - "beat"
+  become: true
+
+- name: "Create service directory for wger"
+  ansible.builtin.file:
+    path: "{{ wger_service_dir }}"
+    state: directory
+    mode: "0755"
+
+- name: "Download redis.conf file for wger"
+  ansible.builtin.get_url:
+    url: "https://raw.githubusercontent.com/wger-project/docker/refs/heads/master/config/redis.conf"
+    dest: "{{ wger_service_dir }}/redis.conf"
+    mode: "0644"
+
+- name: Deploy wger
+  ansible.builtin.include_role:
+    name: service_deploy
+  vars:
+    service_name: "wger"
+    service_dir_name: "{{ wger_dir_name }}"
+    compose_url: "https://raw.githubusercontent.com/wger-project/docker/refs/heads/master/docker-compose.yml"
+    env_url: "https://raw.githubusercontent.com/wger-project/docker/refs/heads/master/config/prod.env"
