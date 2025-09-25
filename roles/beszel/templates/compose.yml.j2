@@ -34,6 +34,7 @@ services:
       HUB_URL: "https://{{ services.beszel.domain }}"
       TOKEN: "{{ beszel_agent_token }}"
       KEY: "{{ beszel_agent_key }}"
+      SENSORS: "-nvme_sensor_*"
     healthcheck:
       test: ['CMD', '/agent', 'health']
       interval: 120s
