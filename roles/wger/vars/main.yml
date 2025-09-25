@@ -1,0 +1,3 @@
+---
+wger_data_dir: "{{ data_base_dir }}/{{ wger_dir_name }}"
+wger_service_dir: "{{ service_base_dir }}/{{ wger_dir_name }}"

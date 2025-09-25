@@ -90,6 +90,11 @@ services:
     domain: "vpn.{{ domain }}"
     container_name: "wg-easy"
     port: 51821
+  # wger
+  wger:
+    domain: "fit.{{ domain }}"
+    container_name: "wger-web"
+    port: 8000
 
 # ── Email Configuration ───────────────────────────────────────────────
 no_reply_mail: "noreply@{{ domain }}"
