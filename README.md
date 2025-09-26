@@ -45,6 +45,7 @@ _This [Ansible](https://www.ansible.com) configuration automates the setup of a 
 - **Immich**: Image & Video Manager
 - **NextCloud**: Cloud
 - **Vaultwarden**: Password Manager
+- **wger Workout Manager**: Fitness Tracker
 - **WireGuard Easy**: VPN (with Web GUI)
 
 ## ⚙️ Requirements
