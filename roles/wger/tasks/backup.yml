@@ -1,0 +1,13 @@
+---
+- name: wger Backup
+  ansible.builtin.include_role:
+    name: service_backup
+  vars:
+    service_name: "wger"
+    service_dir_name: "{{ wger_dir_name }}"
+    run_service_name: "db"
+    run_command_env:
+      PGHOST: "db"
+      PGDATABASE: "wger"
+      PGUSER: "wger"
+      PGPASSWORD: "{{ wger_db_password }}"
