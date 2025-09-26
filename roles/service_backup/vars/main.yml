@@ -2,3 +2,4 @@
 service_dir: "{{ service_base_dir }}/{{ service_dir_name }}"
 data_dir: "{{ data_base_dir }}/{{ service_dir_name }}"
 backup_dir: "{{ backup_base_dir }}/{{ service_dir_name }}/{{ ansible_date_time.iso8601 }}"
+dump_path: "{{ backup_dir }}/{{ service_dir_name | replace('-', '_') }}_dump.sql"
