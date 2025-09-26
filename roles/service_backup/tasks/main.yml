@@ -18,10 +18,20 @@
 - name: "Save data dump for {{ service_name }}"
   ansible.builtin.copy:
     content: "{{ command_result.stdout }}"
-    dest: "{{ backup_dir }}/{{ service_dir_name | replace('-', '_') }}_dump.sql"
+    dest: "{{ dump_path }}"
     mode: "0644"
   when: run_command_produces_stdout and command_result.stdout is defined and command_result.stdout | length > 0
   become: true
+
+- name: "Compress data dump for {{ service_name }}"
+  community.general.archive:
+    path: "{{ dump_path }}"
+    dest: "{{ dump_path }}.gz"
+    format: gz
+    remove: true
+    mode: "0644"
+  become: true
+  when: run_command_produces_stdout and command_result.stdout is defined and command_result.stdout | length > 0
 
 - name: "Copy data to backup directory for {{ service_name }}"
   ansible.builtin.copy:
