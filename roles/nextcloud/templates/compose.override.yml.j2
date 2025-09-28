@@ -6,7 +6,7 @@
 
 services:
   nextcloud-aio-mastercontainer:
-    image: nextcloud/all-in-one:latest@sha256:2e0d2eaa187e3139f1d7d7676cf1369a20ff7e4f70df3ecd516fdb0fd8d5dc5a
+    image: nextcloud/all-in-one:latest@sha256:9be7362a88a21bb1c11d6d5085317685d57ea8b28b7375be39fd71e66340cbf3
     restart: always
     container_name: "{{ services.nextcloud_aio.container_name }}"
     network_mode: !reset null
