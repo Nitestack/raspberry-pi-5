@@ -12,4 +12,7 @@
       PGUSER: "{{ adventure_log_db_user }}"
       PGPASSWORD: "{{ adventure_log_db_password }}"
     data_paths:
-      - "data/"
+      - "data/images/"
+    stop_services:
+      - "web"
+      - "server"

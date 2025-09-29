@@ -11,5 +11,10 @@
       PGDATABASE: "wger"
       PGUSER: "wger"
       PGPASSWORD: "{{ wger_db_password }}"
+    stop_services:
+      - "web"
+      - "cache"
+      - "celery_worker"
+      - "celery_beat"
   tags:
     - skip_ansible_lint
