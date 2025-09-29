@@ -13,3 +13,6 @@
       PGPASSWORD: "{{ ente_db_password }}"
     data_paths:
       - "data/"
+    stop_services:
+      - "museum"
+      - "web"

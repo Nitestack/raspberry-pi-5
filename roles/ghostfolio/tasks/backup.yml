@@ -10,3 +10,6 @@
       PGDATABASE: "{{ ghostfolio_db_name }}"
       PGUSER: "{{ ghostfolio_db_user }}"
       PGPASSWORD: "{{ ghostfolio_db_password }}"
+    stop_services:
+      - "ghostfolio"
+      - "redis"

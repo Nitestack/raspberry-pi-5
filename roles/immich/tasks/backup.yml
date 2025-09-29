@@ -11,4 +11,10 @@
       PGUSER: "postgres"
       PGPASSWORD: "{{ immich_db_password }}"
     data_paths:
-      - "library/"
+      - "library/library/"
+      - "library/upload/"
+      - "library/profile/"
+    stop_services:
+      - "immich-server"
+      - "immich-machine-learning"
+      - "redis"

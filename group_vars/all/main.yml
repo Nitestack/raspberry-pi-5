@@ -23,10 +23,12 @@ services:
   # AdventureLog
   adventure_log:
     domain: "travel.{{ domain }}"
-    frontend_container_name: "adventurelog-frontend"
-    backend_container_name: "adventurelog-backend"
-    frontend_port: 3000
-    backend_port: 80
+    container_names:
+      frontend: "adventurelog-frontend"
+      backend: "adventurelog-backend"
+    ports:
+      frontend: 3000
+      backend: 80
   # Backrest
   backrest:
     domain: "backup.{{ domain }}"

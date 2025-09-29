@@ -4,8 +4,8 @@
 	@frontend {
 		not path /media* /admin* /static* /accounts*
 	}
-	reverse_proxy @frontend {{ service.frontend_container_name }}:{{ service.frontend_port }}
-	reverse_proxy {{ service.backend_container_name }}:{{ service.backend_port }}
+	reverse_proxy @frontend {{ service.container_names.frontend }}:{{ service.ports.frontend }}
+	reverse_proxy {{ service.container_names.backend }}:{{ service.ports.backend }}
 {% elif name == "beszel" %}
 	request_body {
 		max_size 10MB
