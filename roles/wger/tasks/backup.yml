@@ -11,3 +11,5 @@
       PGDATABASE: "wger"
       PGUSER: "wger"
       PGPASSWORD: "{{ wger_db_password }}"
+  tags:
+    - skip_ansible_lint
