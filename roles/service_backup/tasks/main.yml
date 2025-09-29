@@ -6,14 +6,30 @@
     mode: "0755"
   become: true
 
-- name: "Run backup command for {{ service_name }}"
-  community.docker.docker_compose_v2_exec:
-    project_src: "{{ service_dir }}"
-    service: "{{ run_service_name }}"
-    command: "{{ run_command }}"
-    env: "{{ run_command_env }}"
-  register: command_result
-  when: run_command != ""
+- name: "Backup {{ service_name }}"
+  block:
+    - name: "Stop services for {{ service_name }}"
+      community.docker.docker_compose_v2:
+        project_src: "{{ service_dir }}"
+        services: "{{ stop_services }}"
+        state: stopped
+      when: stop_services | length > 0
+
+    - name: "Run backup command for {{ service_name }}"
+      community.docker.docker_compose_v2_exec:
+        project_src: "{{ service_dir }}"
+        service: "{{ run_service_name }}"
+        command: "{{ run_command }}"
+        env: "{{ run_command_env }}"
+      register: command_result
+      when: run_command != ""
+
+  always:
+    - name: "Start services for {{ service_name }}"
+      community.docker.docker_compose_v2:
+        project_src: "{{ service_dir }}"
+        state: present
+      when: stop_services | length > 0
 
 - name: "Save data dump for {{ service_name }}"
   ansible.builtin.copy:

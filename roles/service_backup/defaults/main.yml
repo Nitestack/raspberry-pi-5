@@ -19,3 +19,6 @@ run_command_produces_stdout: true
 
 # List of specific directory paths to back up
 data_paths: []
+
+# List of services to stop before backup
+stop_services: []
