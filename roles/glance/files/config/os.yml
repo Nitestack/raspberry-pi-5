@@ -9,7 +9,7 @@
               links:
                 - title: Hyprland
                   url: https://wiki.hyprland.org
-                  icon: https://upload.wikimedia.org/wikipedia/commons/7/7e/Hyprland_logo.png
+                  icon: di:hyprland
                 - title: Lazygit
                   url: https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
                   icon: https://user-images.githubusercontent.com/8456633/174470852-339b5011-5800-4bb9-a628-ff230aa8cd4e.png
@@ -24,7 +24,7 @@
                   icon: https://raw.githubusercontent.com/nushell/nushell/refs/heads/main/assets/icons/nushell-original.png
                 - title: Oh My Posh
                   url: https://ohmyposh.dev/docs
-                  icon: https://ohmyposh.dev/img/favicons.svg
+                  icon: di:oh-my-posh
                 - title: Rofi
                   url: https://davatorium.github.io/rofi
                   icon: si:wayland

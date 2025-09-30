@@ -5,7 +5,7 @@
   Home Server
   <br/>
   <sup>
-    <sub>Powered by <a href="https://www.ansible.com/" target="_blank">Ansible</a></sub>
+    <sub>Powered by <a href="https://ansible.com/" target="_blank">Ansible</a></sub>
   </sup>
 </h1>
 
@@ -15,7 +15,7 @@
 
 [Features](#-features) • [Requirements](#️-requirements) • [Getting Started](#-getting-started) • [Configuration](#%EF%B8%8F-configuration) • [Port Forwarding](#-port-forwarding) • [Security](#%EF%B8%8F-security) • [Backups](#-backups) • [License](#-license)
 
-_This [Ansible](https://www.ansible.com) configuration automates the setup of a Home Server running [Raspberry Pi OS](https://www.raspberrypi.com/software). It deploys essential services using a modern, secure, and declarative best-practice architecture._
+_This [Ansible](https://ansible.com) configuration automates the setup of a Home Server running [Raspberry Pi OS](https://raspberrypi.com/software). It deploys essential services using a modern, secure, and declarative best-practice architecture._
 
 <p>
   <strong>If you find this repository useful, please <a href="#" title="star">⭐️</a> or fork it!</strong>
