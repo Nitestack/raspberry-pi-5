@@ -7,7 +7,7 @@
 services:
   web:
     image: ghcr.io/seanmorley15/adventurelog-frontend:latest@sha256:eeff34a4a7d8e9b0942c257fd7a50d47b3adbe141c7eba78df36cd3b441c0eaf
-    container_name: "{{ services.adventure_log.frontend_container_name }}"
+    container_name: "{{ services.adventure_log.container_names.frontend }}"
     restart: always
     env_file:
       - .env
@@ -28,7 +28,7 @@ services:
 
   server:
     image: ghcr.io/seanmorley15/adventurelog-backend:latest@sha256:280e768c736555b2488b9d7d3e211587906f4d190e9ea25e78e5b69747e76433
-    container_name: "{{ services.adventure_log.backend_container_name }}"
+    container_name: "{{ services.adventure_log.container_names.backend }}"
     restart: always
     volumes:
       - "{{ adventure_log_data_dir }}/data:/code/media/"
