@@ -18,7 +18,7 @@ services:
       - caddy
 
   db:
-    image: ghcr.io/baosystems/postgis:16-3.5@sha256:dfc954fa9e432d03e711e22d10bf8a7eafbcf2ca6c4427d1a832418ba3042b3d # until postgis/postgis on DockerHub supports linux/arm64
+    image: ghcr.io/baosystems/postgis:16-3.5@sha256:10a16e95dc5f5b093d009783ceeb7c2c0dc7e47ed29b05976b6a7853f24864a8 # until postgis/postgis on DockerHub supports linux/arm64
     restart: always
     volumes:
       - "{{ adventure_log_data_dir }}/db:/var/lib/postgresql/data/"
