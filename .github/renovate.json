@@ -11,6 +11,7 @@
   ],
   "labels": ["dependencies"],
   "reviewers": ["Nitestack"],
+  "separateMinorPatch": true,
   "docker-compose": {
     "managerFilePatterns": ["/(^|/)(?:docker-)?compose[^/]*\\.ya?ml(\\.j2)?$/"],
     "addLabels": ["docker"]
@@ -21,11 +22,15 @@
   "packageRules": [
     {
       "matchManagers": ["docker-compose"],
-      "groupName": "Docker Compose updates for {{packageFile}}"
+      "groupName": "Docker Compose updates for {{packageFile}}",
+      "matchUpdateTypes": ["patch", "digest"],
+      "automerge": true
     },
     {
       "matchManagers": ["github-actions"],
-      "groupName": "GitHub Actions updates for {{packageFile}}"
+      "groupName": "GitHub Actions updates for {{packageFile}}",
+      "matchUpdateTypes": ["patch", "digest"],
+      "automerge": true
     }
   ]
 }
