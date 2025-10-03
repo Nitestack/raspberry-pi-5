@@ -6,8 +6,7 @@
     "helpers:pinGitHubActionDigests",
     ":configMigration",
     ":pinDevDependencies",
-    "abandonments:recommended",
-    ":disableDependencyDashboard"
+    "abandonments:recommended"
   ],
   "labels": ["dependencies"],
   "reviewers": ["Nitestack"],
