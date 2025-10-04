@@ -47,5 +47,7 @@
     - role: personal_site
       tags: personal_site
 
+    - role: backrest
+      tags: backup,backrest
     - role: backup
       tags: backup
