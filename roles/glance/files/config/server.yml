@@ -51,6 +51,9 @@
                 - title: Immich
                   url: https://immich.app/docs
                   icon: di:immich
+                - title: n8n
+                  url: https://docs.n8n.io/
+                  icon: di:n8n
                 - title: Nextcloud
                   url: https://github.com/nextcloud/all-in-one
                   icon: di:nextcloud
@@ -170,6 +173,11 @@
             immich_postgres:
               name: PostgreSQL
               parent: immich
+            n8n:
+              name: n8n
+              icon: di:n8n
+              url: ${N8N_URL}
+              description: Workflow Automation
             nextcloud-aio-nextcloud:
               name: NextCloud
               icon: di:nextcloud
@@ -354,7 +362,7 @@
           token: ${GITHUB_API_TOKEN}
           show-source-icon: true
           collapse-after: -1
-          limit: 15
+          limit: 16
           repositories:
             - AdguardTeam/AdGuardHome
             - seanmorley15/AdventureLog
@@ -367,6 +375,7 @@
             - ghostfolio/ghostfolio
             - glanceapp/glance
             - immich-app/immich
+            - n8n-io/n8n
             - nextcloud/all-in-one
             - dani-garcia/vaultwarden
             - wg-easy/wg-easy
