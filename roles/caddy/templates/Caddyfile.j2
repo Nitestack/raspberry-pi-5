@@ -15,6 +15,10 @@
 			read_timeout 360s
 		}
 	}
+{% elif name == "n8n" %}
+	reverse_proxy {{ service.container_name }}:{{ service.port }} {
+		flush_interval -1
+	}
 {% elif name == "nextcloud" %}
 	header Strict-Transport-Security max-age=31536000;
 	reverse_proxy {{ service.container_name }}:{{ service.port }}

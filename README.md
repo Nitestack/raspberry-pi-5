@@ -43,6 +43,7 @@ _This [Ansible](https://ansible.com) configuration automates the setup of a Home
 - **Ghostfolio**: Wealth Manager
 - **Glance**: Dashboard
 - **Immich**: Image & Video Manager
+- **n8n**: Workflow Automation
 - **NextCloud**: Cloud
 - **Vaultwarden**: Password Manager
 - **wger Workout Manager**: Fitness Tracker
