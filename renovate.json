@@ -3,11 +3,15 @@
     "config:recommended",
     "docker:pinDigests",
     "docker:enableMajor",
-    "helpers:pinGitHubActionDigests",
-    ":configMigration",
-    ":pinDevDependencies",
     "abandonments:recommended",
-    ":disableDependencyDashboard"
+    "helpers:pinGitHubActionDigests",
+    "schedule:daily",
+    ":automergeBranch",
+    ":automergeDigest",
+    ":automergePatch",
+    ":configMigration",
+    ":disableDependencyDashboard",
+    ":pinDevDependencies"
   ],
   "labels": ["dependencies"],
   "reviewers": ["Nitestack"],
@@ -19,18 +23,15 @@
   "github-actions": {
     "addLabels": ["github actions"]
   },
+  "timezone": "Europe/Berlin",
   "packageRules": [
     {
       "matchManagers": ["docker-compose"],
-      "groupName": "Docker Compose updates for {{packageFile}}",
-      "matchUpdateTypes": ["patch", "digest"],
-      "automerge": true
+      "groupName": "Docker Compose updates for {{packageFile}}"
     },
     {
       "matchManagers": ["github-actions"],
-      "groupName": "GitHub Actions updates for {{packageFile}}",
-      "matchUpdateTypes": ["patch", "digest"],
-      "automerge": true
+      "groupName": "GitHub Actions updates for {{packageFile}}"
     }
   ]
 }
