@@ -7,13 +7,11 @@
         update_cache: true
         upgrade: dist
 
-    - name: Configure static IP address
+    - name: Configure network for DHCP
       community.general.nmcli:
         type: ethernet
         conn_name: "Wired connection 1"
-        ip4: "{{ common_static_ip }}"
-        gw4: "{{ common_gateway_ip }}"
-        dns4: "{{ common_dns_servers }}"
+        method4: auto
         state: present
         conn_reload: true
 
