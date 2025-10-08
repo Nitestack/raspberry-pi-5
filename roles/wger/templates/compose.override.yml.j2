@@ -6,7 +6,7 @@
 
 services:
   web:
-    image: wger/server:2.4-dev
+    image: wger/server:2.4-dev@sha256:be958af0978e9070fd20e5469ad3488376ffd881bdb6b0ae53af046571a2a301
     container_name: "{{ services.wger.container_name }}"
     env_file: !override
       - .env
@@ -23,7 +23,7 @@ services:
   nginx: !reset null
 
   db:
-    image: postgres:15-alpine
+    image: postgres:15-alpine@sha256:52af010baaeb34a287e7b5ea9696720727bd5bace64f9c18068ee187a6d6a4b2
     container_name: "wger-postgres"
     environment:
       - POSTGRES_PASSWORD={{ wger_db_password }}
@@ -34,7 +34,7 @@ services:
     restart: always
 
   cache:
-    image: redis:8.2.1
+    image: redis:8.2.2@sha256:f0957bcaa75fd58a9a1847c1f07caf370579196259d69ac07f2e27b5b389b021
     container_name: "wger-redis"
     expose: !reset null
     user: "1000:1000"
@@ -48,7 +48,7 @@ services:
     #mem_limit: 5gb
 
   celery_worker:
-    image: wger/server:2.4-dev
+    image: wger/server:2.4-dev@sha256:be958af0978e9070fd20e5469ad3488376ffd881bdb6b0ae53af046571a2a301
     container_name: "wger-celery-worker"
     env_file: !override
       - .env
@@ -58,7 +58,7 @@ services:
     restart: always
 
   celery_beat:
-    image: wger/server:2.4-dev
+    image: wger/server:2.4-dev@sha256:be958af0978e9070fd20e5469ad3488376ffd881bdb6b0ae53af046571a2a301
     container_name: "wger-celery-beat"
     env_file: !override
       - .env
