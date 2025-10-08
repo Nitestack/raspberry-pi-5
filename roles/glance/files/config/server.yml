@@ -10,6 +10,9 @@
                 - title: Cloudflare
                   url: https://dash.cloudflare.com
                   icon: di:cloudflare
+                - title: FRITZ!Box
+                  url: http://fritz.box
+                  icon: di:fritzbox
                 - title: Namecheap
                   url: https://ap.www.namecheap.com/
                   icon: di:namecheap
