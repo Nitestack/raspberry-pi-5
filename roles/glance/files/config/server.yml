@@ -11,7 +11,7 @@
                   url: https://dash.cloudflare.com
                   icon: di:cloudflare
                 - title: FRITZ!Box
-                  url: http://fritz.box
+                  url: http://192.168.178.1
                   icon: di:fritzbox
                 - title: Namecheap
                   url: https://ap.www.namecheap.com/
