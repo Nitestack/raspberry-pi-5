@@ -16,7 +16,7 @@ services:
     ports: !reset []
 
   postgres:
-    image: postgres:15-alpine@sha256:52af010baaeb34a287e7b5ea9696720727bd5bace64f9c18068ee187a6d6a4b2
+    image: postgres:18-alpine@sha256:fe5874a6484052c5353272650bb0b21f35082465f82907df4dfb1fe25f042610
     restart: always
     env_file: !override .env
     volumes:
