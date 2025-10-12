@@ -202,8 +202,8 @@
             nextcloud-aio-redis:
               name: Redis
               parent: nextcloud
-            nextcloud-aio-onlyoffice:
-              name: OnlyOffice
+            nextcloud-aio-collabora:
+              name: Collabora
               parent: nextcloud
             nextcloud-aio-imaginary:
               name: Imaginary
