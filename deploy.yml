@@ -19,6 +19,8 @@
     - role: wg_easy
       tags: wg_easy
 
+    - role: authentik
+      tags: authentik
     - role: nextcloud
       tags: nextcloud
     - role: immich
