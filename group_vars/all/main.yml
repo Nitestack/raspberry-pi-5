@@ -29,6 +29,11 @@ services:
     ports:
       frontend: 3000
       backend: 80
+  # Authentik
+  authentik:
+    domain: "sso.{{ domain }}"
+    container_name: "authentik-server"
+    port: 9000
   # Backrest
   backrest:
     domain: "backup.{{ domain }}"
