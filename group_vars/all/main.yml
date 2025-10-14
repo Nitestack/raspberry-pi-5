@@ -17,11 +17,13 @@ allowed_ports:
 services:
   # AdGuard Home
   adguard_home:
+    enabled: true
     domain: "adguard.{{ domain }}"
     container_name: "adguard-home"
     port: 80
   # AdventureLog
   adventure_log:
+    enabled: true
     domain: "travel.{{ domain }}"
     container_names:
       frontend: "adventurelog-frontend"
@@ -31,79 +33,95 @@ services:
       backend: 80
   # Authentik
   authentik:
+    enabled: false
     domain: "auth.{{ domain }}"
     container_name: "authentik-server"
     port: 9000
   # Backrest
   backrest:
+    enabled: true
     domain: "backup.{{ domain }}"
     container_name: "backrest"
     port: 9898
   # Beszel
   beszel:
+    enabled: true
     domain: "monitor.{{ domain }}"
     container_name: "beszel"
     port: 8090
   # Ente Auth
   ente_auth:
+    enabled: true
     domain: "2fa.{{ domain }}"
     container_name: "ente-web"
     port: 3003
   ente_api:
+    enabled: true
     domain: "ente-api.{{ domain }}"
     container_name: "ente-museum"
     port: 8080
   # FreshRSS
   freshrss:
+    enabled: true
     domain: "feed.{{ domain }}"
     container_name: "freshrss"
     port: 80
   # Ghostfolio
   ghostfolio:
+    enabled: true
     domain: "wealth.{{ domain }}"
     container_name: "ghostfolio"
     port: 3333
   # Glance
   glance:
+    enabled: true
     domain: "dash.{{ domain }}"
     container_name: "glance"
     port: 8080
   # Immich
   immich:
+    enabled: true
     domain: "media.{{ domain }}"
     container_name: "immich_server"
     port: 2283
   # n8n
   n8n:
+    enabled: false
     domain: "automation.{{ domain }}"
     container_name: "n8n"
     port: 5678
   # NextCloud
   nextcloud:
+    enabled: true
     domain: "cloud.{{ domain }}"
     container_name: "nextcloud-aio-apache"
     port: 11000
   nextcloud_aio:
+    enabled: true
     domain: "nextcloud-aio.{{ domain }}"
     container_name: "nextcloud-aio-mastercontainer"
     port: 8080
   # Personal Site
   personal_site:
+    enabled: true
     domain: "{{ domain }}"
     container_name: "personal-site"
     port: 3000
   # Vaultwarden
   vaultwarden:
+    enabled: true
     domain: "vault.{{ domain }}"
     container_name: "vaultwarden"
     port: 80
   # WireGuard Easy
   wg_easy:
+    enabled: true
     domain: "vpn.{{ domain }}"
     container_name: "wg-easy"
     port: 51821
   # wger
   wger:
+    enabled: false
     domain: "fit.{{ domain }}"
     container_name: "wger-web"
     port: 8000

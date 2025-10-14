@@ -1,4 +1,5 @@
 {% for name, service in services.items() %}
+{% if service.enabled %}
 {{ service.domain }} {
 {% if name == "adventure_log" %}
 	@frontend {
@@ -53,4 +54,5 @@
 	reverse_proxy {{ service.container_name }}:{{ service.port }}
 {% endif %}
 }
+{% endif %}
 {% endfor %}
