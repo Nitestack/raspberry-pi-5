@@ -42,6 +42,7 @@ _This [Ansible](https://ansible.com) configuration automates the setup of a Home
 - **Ente Auth**: Two-factor Authenticator
 - **FreshRSS**: Feed Aggregator
 - **Ghostfolio**: Wealth Manager
+- **Gitea**: Development Platform
 - **Glance**: Dashboard
 - **Immich**: Image & Video Manager
 - **n8n**: Workflow Automation
