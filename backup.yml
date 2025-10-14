@@ -27,6 +27,7 @@
       loop: "{{ hostvars['localhost']['backup_roles'] }}"
       loop_control:
         label: "{{ item }}"
+      when: services[item].enabled
 
     - name: "Find backup directories older than the following days: {{ backup_retention_days }}"
       ansible.builtin.find:

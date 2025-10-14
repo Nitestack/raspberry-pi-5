@@ -18,6 +18,10 @@ rclone_onedrive_token: '{"access_token":"...","token_type":"...","refresh_token"
 
 # Service Secrets
 
+# Authentik
+authentik_db_password: "" # openssl rand -base64 36 | tr -d '\n'
+authentik_secret_key: "" # openssl rand -base64 60 | tr -d '\n'
+
 # AdventureLog
 adventure_log_db_password: ""
 adventure_log_secret_key: ""
@@ -60,3 +64,9 @@ immich_db_password: "" # Please only use the characters `A-Za-z0-9`, without spe
 personal_site_github_api_token: ""
 personal_site_notion_secret: ""
 personal_site_notion_db_id: ""
+
+# wger
+wger_secret_key: "" # https://djecrety.ir
+wger_signing_key: ""
+wger_db_password: ""
+wger_celery_flower_password: ""
