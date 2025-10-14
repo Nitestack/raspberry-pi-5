@@ -31,7 +31,7 @@ services:
       backend: 80
   # Authentik
   authentik:
-    domain: "sso.{{ domain }}"
+    domain: "auth.{{ domain }}"
     container_name: "authentik-server"
     port: 9000
   # Backrest
@@ -46,7 +46,7 @@ services:
     port: 8090
   # Ente Auth
   ente_auth:
-    domain: "auth.{{ domain }}"
+    domain: "2fa.{{ domain }}"
     container_name: "ente-web"
     port: 3003
   ente_api:
