@@ -1,0 +1,4 @@
+---
+gitea_dir_name: "gitea"
+gitea_disable_registration: "true"
+gitea_ssh_port: 222

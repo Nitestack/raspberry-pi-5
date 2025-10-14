@@ -1,0 +1,7 @@
+---
+- name: Deploy Gitea
+  ansible.builtin.include_role:
+    name: service_deploy
+  vars:
+    service_name: "Gitea"
+    service_dir_name: "{{ gitea_dir_name }}"

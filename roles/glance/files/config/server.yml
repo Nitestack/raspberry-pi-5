@@ -51,6 +51,9 @@
                 - title: Ghostfolio
                   url: https://github.com/ghostfolio/ghostfolio
                   icon: di:ghostfolio
+                - title: Gitea
+                  url: https://docs.gitea.com
+                  icon: di:gitea
                 - title: Glance
                   url: https://github.com/glanceapp/glance/blob/main/docs/configuration.md
                   icon: di:glance
@@ -174,6 +177,11 @@
             gf-redis:
               name: Redis
               parent: ghostfolio
+            gitea:
+              name: Gitea
+              icon: di:gitea
+              url: ${GITEA_URL}
+              description: Development Platform
             glance:
               name: Glance
               icon: di:glance
@@ -383,7 +391,7 @@
           token: ${GITHUB_API_TOKEN}
           show-source-icon: true
           collapse-after: -1
-          limit: 17
+          limit: 18
           repositories:
             - AdguardTeam/AdGuardHome
             - seanmorley15/AdventureLog
@@ -395,6 +403,7 @@
             - ente-io/ente
             - FreshRSS/FreshRSS
             - ghostfolio/ghostfolio
+            - go-gitea/gitea
             - glanceapp/glance
             - immich-app/immich
             - n8n-io/n8n
