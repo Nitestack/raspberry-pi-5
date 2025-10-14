@@ -19,53 +19,37 @@
 
     - role: wg_easy
       tags: wg_easy
-      when: services.wg_easy.enabled
     - role: authentik
       tags: authentik
-      when: services.authentik.enabled
     - role: nextcloud
       tags: nextcloud
-      when: services.nextcloud.enabled
     - role: immich
       tags: immich
-      when: services.immich.enabled
     - role: vaultwarden
       tags: vaultwarden
-      when: services.vaultwarden.enabled
     - role: ente_auth
       tags: ente_auth
-      when: services.ente_auth.enabled
     - role: ghostfolio
       tags: ghostfolio
-      when: services.ghostfolio.enabled
     - role: n8n
       tags: n8n
-      when: services.n8n.enabled
     - role: wger
       tags: wger
-      when: services.wger.enabled
     - role: glance
       tags: glance
-      when: services.glance.enabled
     - role: beszel
       tags: beszel
-      when: services.beszel.enabled
     - role: adguard_home
       tags: adguard_home
-      when: services.adguard_home.enabled
     - role: adventure_log
       tags: adventure_log
-      when: services.adventure_log.enabled
     - role: freshrss
       tags: freshrss
-      when: services.freshrss.enabled
 
     - role: personal_site
       tags: personal_site
-      when: services.personal_site.enabled
 
     - role: backrest
       tags: backup,backrest
-      when: services.backrest.enabled
     - role: backup
       tags: backup
