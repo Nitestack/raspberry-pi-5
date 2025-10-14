@@ -72,6 +72,12 @@ services:
     domain: "wealth.{{ domain }}"
     container_name: "ghostfolio"
     port: 3333
+  # Gitea
+  gitea:
+    enabled: true
+    domain: "git.{{ domain }}"
+    container_name: "gitea"
+    port: 3000
   # Glance
   glance:
     enabled: true

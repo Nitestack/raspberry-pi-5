@@ -1,0 +1,2 @@
+---
+gitea_data_dir: "{{ data_base_dir }}/{{ gitea_dir_name }}"

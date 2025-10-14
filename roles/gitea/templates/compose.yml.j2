@@ -1,0 +1,31 @@
+services:
+  server:
+    image: gitea/gitea:1.24.6@sha256:2edc102cbb636ae1ddac5fa0c715aa5b03079dee13ac6800b2cef6d4e912e718
+    container_name: "{{ services.gitea.container_name }}"
+    environment:
+      USER_UID: 1000
+      USER_GID: 1000
+      GITEA__server__ROOT_URL: "https://{{ services.gitea.domain }}"
+      GITEA__server__SSH_PORT: {{ gitea_ssh_port }}
+      GITEA__service__DISABLE_REGISTRATION: {{ gitea_disable_registration }}
+      GITEA__repository__DISABLE_STARS: true
+      GITEA__mailer__ENABLED: true
+      GITEA__mailer__FROM: "{{ no_reply_mail }}"
+      GITEA__mailer__PROTOCOL: "smtp+starttls"
+      GITEA__mailer__SMTP_ADDR: {{ smtp_host }}
+      GITEA__mailer__SMTP_PORT: {{ smtp_port }}
+      GITEA__mailer__USER: "{{ no_reply_mail }}"
+      GITEA__mailer__PASSWD: "{{ smtp_password }}"
+    restart: always
+    networks:
+      - caddy
+    volumes:
+      - "{{ gitea_data_dir }}/data:/data"
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "{{ gitea_ssh_port }}:22"
+
+networks:
+  caddy:
+    external: true
