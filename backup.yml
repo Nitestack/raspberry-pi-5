@@ -29,11 +29,13 @@
         label: "{{ item }}"
       when: services[item].enabled
 
-    - name: "Find backup directories older than the following days: {{ backup_retention_days }}"
+    - name: Find old backup directories
       ansible.builtin.find:
         paths: "{{ backup_base_dir }}"
         age: "{{ backup_retention_days }}d"
         file_type: directory
+        recurse: true
+        depth: 2
       register: old_backups
 
     - name: Remove old backup directories
