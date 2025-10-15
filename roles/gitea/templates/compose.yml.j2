@@ -5,10 +5,20 @@ services:
     environment:
       USER_UID: 1000
       USER_GID: 1000
+      # Server
       GITEA__server__ROOT_URL: "https://{{ services.gitea.domain }}"
       GITEA__server__SSH_PORT: {{ gitea_ssh_port }}
+      GITEA__server__LANDING_PAGE: "/Nitestack"
+      # Service
       GITEA__service__DISABLE_REGISTRATION: {{ gitea_disable_registration }}
+      # Repository
       GITEA__repository__DISABLE_STARS: true
+      GITEA__repository__ENABLE_PUSH_CREATE_USER: true
+      GITEA__repository.pull-request__DEFAULT_MERGE_STYLE: "rebase"
+      # UI
+      GITEA__ui__THEMES: "gitea-auto, gitea-light, gitea-dark, github-auto, github-light, github-dark, github-soft-dark"
+      GITEA__ui__DEFAULT_THEME: "github-auto"
+      # Mailer
       GITEA__mailer__ENABLED: true
       GITEA__mailer__FROM: "{{ no_reply_mail }}"
       GITEA__mailer__PROTOCOL: "smtp+starttls"
@@ -16,6 +26,9 @@ services:
       GITEA__mailer__SMTP_PORT: {{ smtp_port }}
       GITEA__mailer__USER: "{{ no_reply_mail }}"
       GITEA__mailer__PASSWD: "{{ smtp_password }}"
+      # Other
+      GITEA__other__SHOW_FOOTER_VERSION: false
+      GITEA__other__SHOW_FOOTER_TEMPLATE_LOAD_TIME: false
     restart: always
     networks:
       - caddy

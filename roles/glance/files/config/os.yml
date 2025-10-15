@@ -68,11 +68,11 @@
                 - title: Home Manager
                   url: https://nix-community.github.io/home-manager/options.xhtml
                   icon: di:nixos
-            - title: GitHub Repositories
+            - title: Repositories
               links:
                 - title: Nix Configuration
-                  url: https://github.com/Nitestack/nix-config
-                  icon: si:github
+                  url: https://git.npham.de/Nitestack/nix-config
+                  icon: di:gitea
 
         - type: releases
           title: Neovim

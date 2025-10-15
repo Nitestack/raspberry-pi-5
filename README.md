@@ -13,7 +13,7 @@
 ![GitHub Repo Stars](https://img.shields.io/github/stars/Nitestack/raspberry-pi-5?style=for-the-badge)
 ![Github Created At](https://img.shields.io/github/created-at/Nitestack/raspberry-pi-5?style=for-the-badge)
 
-[Features](#-features) • [Requirements](#️-requirements) • [Getting Started](#-getting-started) • [Configuration](#%EF%B8%8F-configuration) • [Port Forwarding](#-port-forwarding) • [Security](#%EF%B8%8F-security) • [Backups](#-backups) • [License](#-license)
+[Features](#-features) • [Requirements](#️-requirements) • [Getting Started](#-getting-started) • [Configuration](#-configuration) • [Port Forwarding](#-port-forwarding) • [Security](#%EF%B8%8F-security) • [Backups](#-backups) • [License](#-license)
 
 _This [Ansible](https://ansible.com) configuration automates the setup of a Home Server running [Raspberry Pi OS](https://raspberrypi.com/software). It deploys essential services using a modern, secure, and declarative best-practice architecture._
 
@@ -69,7 +69,7 @@ _This [Ansible](https://ansible.com) configuration automates the setup of a Home
 1. **Clone the repository**:
 
    ```sh
-   git clone https://github.com/Nitestack/raspberry-pi-5.git ~/raspberry-pi-5
+   git clone https://git.npham.de/Nitestack/raspberry-pi-5.git ~/raspberry-pi-5
 
 2. **Install required Ansible Galaxy collections**:
 
@@ -77,7 +77,7 @@ _This [Ansible](https://ansible.com) configuration automates the setup of a Home
     ansible-galaxy install -r requirements.yml
     ```
 
-3. **Configure Your Server**: Follow the steps in the [Configuration](#%EF%B8%8F-configuration) section below to set up your variables.
+3. **Configure Your Server**: Follow the steps in the [Configuration](#-configuration) section below to set up your variables.
 
 4. **Run the playbook**:
 
