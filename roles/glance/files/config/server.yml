@@ -83,11 +83,11 @@
                 - title: Awesome Sysadmin
                   url: https://github.com/awesome-foss/awesome-sysadmin
                   icon: https://avatars.githubusercontent.com/u/20512645
-            - title: GitHub Repositories
+            - title: Repositories
               links:
                 - title: Raspberry Pi 5
-                  url: https://github.com/Nitestack/raspberry-pi-5
-                  icon: si:github
+                  url: https://git.npham.de/Nitestack/raspberry-pi-5
+                  icon: di:gitea
 
     - size: full
       widgets:

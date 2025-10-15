@@ -5,3 +5,20 @@
   vars:
     service_name: "Gitea"
     service_dir_name: "{{ gitea_dir_name }}"
+
+- name: Create Gitea theme directory
+  ansible.builtin.file:
+    path: "{{ gitea_custom_themes_dir }}"
+    state: directory
+    mode: "0755"
+
+- name: Download and extract Gitea GitHub theme
+  ansible.builtin.unarchive:
+    src: "https://github.com/lutinglt/gitea-github-theme/releases/latest/download/theme-github-base.tar.gz"
+    dest: "{{ gitea_custom_themes_dir }}"
+    extra_opts: [--strip-components=1]
+    owner: "1000"
+    group: "1000"
+    remote_src: true
+  become: true
+  notify: "Restart Gitea"
