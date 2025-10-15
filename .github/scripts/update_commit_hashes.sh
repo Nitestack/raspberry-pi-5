@@ -11,8 +11,20 @@ find roles/ -path '*/.ansible' -prune -o -type f -print | while read -r file; do
     current_commit=$(curl -sL -H "Authorization: token $GITHUB_TOKEN" "$api_url" | jq -r '.[0].sha')
 
     if [[ -n "$owner" && -n "$repo" && -n "$path" && -n "$stored_commit" && "$stored_commit" != "$current_commit" ]]; then
-      echo "Updating commit hash in $file"
+      echo "Update found for $file. Stored: $stored_commit, Latest: $current_commit"
+
       sed -i "s/# commit-hash: .*/# commit-hash: $current_commit/" "$file"
+      echo "Updated commit hash comment in $file"
+
+      role_dir=$(dirname "$file" | sed 's|/templates$||' | sed 's|/files$||')
+      tasks_file="$role_dir/tasks/main.yml"
+
+      if [ -f "$tasks_file" ]; then
+        if grep -q "$stored_commit" "$tasks_file"; then
+          echo "Updating pinned URL in $tasks_file"
+          sed -i "s/$stored_commit/$current_commit/g" "$tasks_file"
+        fi
+      fi
     fi
   fi
 done

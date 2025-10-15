@@ -5,6 +5,6 @@
   vars:
     service_name: "n8n"
     service_dir_name: "{{ n8n_dir_name }}"
-    compose_url: "https://raw.githubusercontent.com/n8n-io/n8n-hosting/refs/heads/main/docker-caddy/docker-compose.yml"
+    compose_url: "https://raw.githubusercontent.com/n8n-io/n8n-hosting/ce750c945123bd5784a2985003c251b76372d783/docker-caddy/docker-compose.yml"
   tags:
     - skip_ansible_lint
