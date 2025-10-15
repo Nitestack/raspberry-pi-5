@@ -32,5 +32,5 @@
   vars:
     service_name: "wger"
     service_dir_name: "{{ wger_dir_name }}"
-    compose_url: "https://raw.githubusercontent.com/wger-project/docker/refs/heads/master/docker-compose.yml"
-    env_url: "https://raw.githubusercontent.com/wger-project/docker/refs/heads/master/config/prod.env"
+    compose_url: "https://raw.githubusercontent.com/wger-project/docker/b450305f141247494b43d94ca21a900810f9ee93/docker-compose.yml"
+    env_url: "https://raw.githubusercontent.com/wger-project/docker/5545c354c4196321833a6f28d7559525946d805d/config/prod.env"

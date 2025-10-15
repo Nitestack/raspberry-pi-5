@@ -5,5 +5,5 @@
   vars:
     service_name: "AdventureLog"
     service_dir_name: "{{ adventure_log_dir_name }}"
-    compose_url: "https://raw.githubusercontent.com/seanmorley15/AdventureLog/main/docker-compose.yml"
-    env_url: "https://raw.githubusercontent.com/seanmorley15/AdventureLog/main/.env.example"
+    compose_url: "https://raw.githubusercontent.com/seanmorley15/AdventureLog/19baf6ab351430395f0d5167fe8d667c364fcd34/docker-compose.yml"
+    env_url: "https://raw.githubusercontent.com/seanmorley15/AdventureLog/a3f0eda63f9e14af3a67af8d2d67d404d6bfdeb5/.env.example"

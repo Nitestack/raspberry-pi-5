@@ -5,7 +5,7 @@
   vars:
     service_name: "Glance"
     service_dir_name: "{{ glance_dir_name }}"
-    compose_url: "https://raw.githubusercontent.com/glanceapp/docker-compose-template/refs/heads/main/root/docker-compose.yml"
+    compose_url: "https://raw.githubusercontent.com/glanceapp/docker-compose-template/1b0af54f831f26bc01873514a52be3d393665e06/root/docker-compose.yml"
     service_files:
       - src: "config/"
         dest: "config"
