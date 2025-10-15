@@ -5,4 +5,4 @@
   vars:
     service_name: "Ghostfolio"
     service_dir_name: "{{ ghostfolio_dir_name }}"
-    compose_url: "https://raw.githubusercontent.com/ghostfolio/ghostfolio/refs/heads/main/docker/docker-compose.yml"
+    compose_url: "https://raw.githubusercontent.com/ghostfolio/ghostfolio/aca4c3d46dce1169bf7cbe8542521dfb9d12e796/docker/docker-compose.yml"
