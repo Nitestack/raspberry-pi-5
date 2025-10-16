@@ -1,0 +1,21 @@
+name: Renovate
+
+on:
+  schedule:
+    - cron: "0 2 * * *"
+  workflow_dispatch:
+
+jobs:
+  renovate:
+    runs-on: ubuntu-latest
+    container: renovate/renovate:41.151.0
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+      - run: renovate
+        env:
+          RENOVATE_TOKEN: ${{ secrets.RENOVATE_TOKEN }}
+          RENOVATE_ENDPOINT: "${{ gitea.server_url }}/api/v1"
+          RENOVATE_PLATFORM: gitea
+          RENOVATE_GIT_AUTHOR: "Renovate Bot <renovate@bot.com>"
+          RENOVATE_GITHUB_COM_TOKEN: ${{ secrets.RENOVATE_GH_TOKEN }}
+          RENOVATE_REPOSITORIES: ${{ gitea.repository }}
