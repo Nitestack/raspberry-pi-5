@@ -1,8 +1,11 @@
-name: Renovate
+name: Dependency Updates
 
 on:
   schedule:
     - cron: "0 2 * * *"
+  push:
+    branches:
+      - "renovate/**"
   workflow_dispatch:
 
 jobs:
