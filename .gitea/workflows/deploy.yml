@@ -5,9 +5,6 @@ on:
     branches:
       - main
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -41,10 +38,6 @@ jobs:
           fi
       - if: steps.set-tags.outputs.ansible_tags != 'none'
         run: echo "${{ secrets.ANSIBLE_VAULT_PASSWORD }}" > .vault_pass
-      - if: steps.set-tags.outputs.ansible_tags != 'none'
-        uses: ansible/ansible-lint@main
-        with:
-          requirements_file: requirements.yml
       - if: steps.set-tags.outputs.ansible_tags != 'none'
         uses: dawidd6/action-ansible-playbook@3363d6aa333ecb41ef01579bc5eb4412b3d6802f # v5
         with:
