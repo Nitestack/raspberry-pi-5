@@ -11,7 +11,7 @@ on:
 jobs:
   renovate:
     runs-on: ubuntu-latest
-    container: renovate/renovate:41.151.0
+    container: renovate/renovate:41.151.0@sha256:45e1185d112c6d2ca1067ee462f42034955be801529b480e0404a265e6e783db
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
       - run: renovate
