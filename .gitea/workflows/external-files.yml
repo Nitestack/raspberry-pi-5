@@ -15,40 +15,32 @@ jobs:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
 
       - id: check-changes
-        run: .github/scripts/check_external_files.sh
+        run: .gitea/scripts/check_external_files.sh
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - if: steps.check-changes.outputs.changes == 'true'
-        run: .github/scripts/update_commit_hashes.sh
+        run: .gitea/scripts/update_commit_hashes.sh
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - if: steps.check-changes.outputs.changes == 'true'
-        uses: Mai0313/create-pull-request@95b41bb74c7689393eaf7c540f02702d8d41e3e6 # v7
-        with:
-          github-server-url: ${{ gitea.server_url }}
-          token: ${{ secrets.GT_TOKEN }}
-          commit-message: "chore(deps): update external file commit hashes"
-          title: "chore(deps): update external file commit hashes"
-          body: |
-            This PR contains the following updates:
+        run: |
+          JSON_PAYLOAD=$(cat <<EOF
+          {
+            "base": "main",
+            "head": "external-file-updates",
+            "title": "chore(deps): update external file commit hashes",
+            "body": "This PR contains the following updates:\n\n${{ env.CHANGES_REPORT }}\n\n---\n\n### ✅ What This PR Does:\n- **Automatically updates** all commit hash comments to match the latest commit of the external files.\n- **Ready to merge** after you review the external changes.\n\n### 📋 Action Required:\n1. **Review the diffs** to understand what changed.\n2. **Update your Ansible templates** if the external file structure changed significantly.\n3. **Merge this PR** once you're satisfied with the changes.",
+            "reviewers": [
+              "Nitestack"
+            ]
+          }
+          EOF
+          )
 
-            ${{ env.CHANGES_REPORT }}
-
-            ---
-
-            ### ✅ What This PR Does:
-            - **Automatically updates** all commit hash comments to match the latest commit of the external files.
-            - **Ready to merge** after you review the external changes.
-
-            ### 📋 Action Required:
-            1. **Review the diffs** to understand what changed.
-            2. **Update your Ansible templates** if the external file structure changed significantly.
-            3. **Merge this PR** once you're satisfied with the changes.
-          branch: external-file-updates
-          labels: |
-            dependencies
-            external files
-          delete-branch: true
-          reviewers: Nitestack
+          curl --fail -X POST \
+            -H "Authorization: token ${{ secrets.GT_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d "${JSON_PAYLOAD}" \
+            "${{ gitea.server_url }}/api/v1/repos/${{ gitea.repository }}/pulls"
