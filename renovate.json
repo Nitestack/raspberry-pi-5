@@ -5,7 +5,6 @@
     "docker:enableMajor",
     "abandonments:recommended",
     "helpers:pinGitHubActionDigests",
-    "schedule:daily",
     ":automergeBranch",
     ":automergeDigest",
     ":automergePatch",
@@ -23,7 +22,6 @@
   "github-actions": {
     "addLabels": ["github actions"]
   },
-  "timezone": "Europe/Berlin",
   "packageRules": [
     {
       "matchManagers": ["docker-compose"],
