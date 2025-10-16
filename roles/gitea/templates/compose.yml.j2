@@ -31,6 +31,7 @@ services:
       GITEA__other__SHOW_FOOTER_TEMPLATE_LOAD_TIME: false
     restart: always
     networks:
+      - default
       - caddy
     volumes:
       - "{{ gitea_data_dir }}/data:/data"
@@ -38,6 +39,16 @@ services:
       - /etc/localtime:/etc/localtime:ro
     ports:
       - "{{ gitea_ssh_port }}:22"
+  runner:
+    image: gitea/act_runner:0.2.13@sha256:8477d5b61b655caad4449888bae39f1f34bebd27db56cb15a62dccb3dcf3a944
+    container_name: "gitea-action-runner"
+    environment:
+      GITEA_INSTANCE_URL: "https://{{ services.gitea.domain }}"
+      GITEA_RUNNER_REGISTRATION_TOKEN: "{{ gitea_runner_registration_token }}"
+      GITEA_RUNNER_NAME: "Raspberry Pi 5"
+    volumes:
+      - "{{ gitea_act_runner_data_dir }}/data:/data"
+      - /var/run/docker.sock:/var/run/docker.sock
 
 networks:
   caddy:
