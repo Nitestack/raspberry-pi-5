@@ -182,6 +182,10 @@
               icon: di:gitea
               url: ${GITEA_URL}
               description: Development Platform
+              id: gitea
+            gitea-action-runner:
+              name: Act Runner
+              parent: gitea
             glance:
               name: Glance
               icon: di:glance
