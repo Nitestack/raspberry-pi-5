@@ -1,4 +1,4 @@
-name: External Files
+name: External File Updates
 
 on:
   schedule:
@@ -17,17 +17,18 @@ jobs:
       - id: check-changes
         run: .github/scripts/check_external_files.sh
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - if: steps.check-changes.outputs.changes == 'true'
         run: .github/scripts/update_commit_hashes.sh
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - if: steps.check-changes.outputs.changes == 'true'
-        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e # v7
+        uses: Mai0313/create-pull-request@95b41bb74c7689393eaf7c540f02702d8d41e3e6 # v7
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          github-server-url: ${{ gitea.server_url }}
+          token: ${{ secrets.GT_TOKEN }}
           commit-message: "chore(deps): update external file commit hashes"
           title: "chore(deps): update external file commit hashes"
           body: |
