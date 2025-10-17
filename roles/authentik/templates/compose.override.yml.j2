@@ -24,7 +24,7 @@ services:
     networks:
       - default
       - caddy
-    ports: !reset null
+    ports: !reset []
     volumes:
       - "{{ authentik_data_dir }}/media:/media"
       - "{{ authentik_data_dir }}/templates:/templates"
