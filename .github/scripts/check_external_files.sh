@@ -16,7 +16,7 @@ find roles/ -path '*/.ansible' -prune -o -type f -print | while read -r file; do
 
     api_url="https://api.github.com/repos/$owner/$repo/commits?path=$path"
 
-    current_commit=$(curl -sL -H "Authorization: token $GH_TOKEN" "$api_url" | jq -r '.[0].sha')
+    current_commit=$(curl -sL -H "Authorization: token $GITHUB_TOKEN" "$api_url" | jq -r '.[0].sha')
 
     if [[ -n "$owner" && -n "$repo" && -n "$path" && -n "$stored_commit" && "$stored_commit" != "$current_commit" ]]; then
       echo "❌ Commit mismatch for $file"
