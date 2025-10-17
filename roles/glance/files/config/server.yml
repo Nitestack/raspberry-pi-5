@@ -171,10 +171,10 @@
               url: ${GHOSTFOLIO_URL}
               description: Wealth Manager
               id: ghostfolio
-            gf-postgres:
+            ghostfolio-postgres:
               name: PostgreSQL
               parent: ghostfolio
-            gf-redis:
+            ghostfolio-redis:
               name: Redis
               parent: ghostfolio
             gitea:

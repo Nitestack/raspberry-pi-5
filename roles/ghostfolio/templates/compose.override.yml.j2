@@ -17,6 +17,7 @@ services:
 
   postgres:
     image: postgres:15-alpine@sha256:6bd113a3de3274beda0f056ebf0d75cf060dc4a493b72bea6f9d810dce63f897
+    container_name: "ghostfolio-postgres"
     restart: always
     env_file: !override .env
     volumes:
@@ -24,6 +25,7 @@ services:
 
   redis:
     image: redis:alpine@sha256:59b6e694653476de2c992937ebe1c64182af4728e54bb49e9b7a6c26614d8933
+    container_name: "ghostfolio-redis"
     restart: always
     env_file: !override .env
 
