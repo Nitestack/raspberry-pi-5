@@ -37,11 +37,11 @@ jobs:
 
             ---
 
-            ### ? What This PR Does:
+            ### ✅ What This PR Does:
             - **Automatically updates** all commit hash comments to match the latest commit of the external files.
             - **Ready to merge** after you review the external changes.
 
-            ### ?? Action Required:
+            ### 📋 Action Required:
             1. **Review the diffs** to understand what changed.
             2. **Update your Ansible templates** if the external file structure changed significantly.
             3. **Merge this PR** once you're satisfied with the changes.
