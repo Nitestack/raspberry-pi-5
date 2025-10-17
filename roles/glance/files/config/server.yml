@@ -86,8 +86,8 @@
             - title: Repositories
               links:
                 - title: Raspberry Pi 5
-                  url: https://git.npham.de/Nitestack/raspberry-pi-5
-                  icon: di:gitea
+                  url: https://github.com/Nitestack/raspberry-pi-5
+                  icon: di:github
 
     - size: full
       widgets:

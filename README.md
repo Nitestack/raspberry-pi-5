@@ -69,7 +69,7 @@ _This [Ansible](https://ansible.com) configuration automates the setup of a Home
 1. **Clone the repository**:
 
    ```sh
-   git clone https://git.npham.de/Nitestack/raspberry-pi-5.git ~/raspberry-pi-5
+   git clone https://github.com/Nitestack/raspberry-pi-5.git ~/raspberry-pi-5
 
 2. **Install required Ansible Galaxy collections**:
 
