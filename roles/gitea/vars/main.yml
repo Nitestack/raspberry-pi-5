@@ -1,5 +1,4 @@
 ---
 gitea_data_dir: "{{ data_base_dir }}/{{ gitea_dir_name }}"
-gitea_act_runner_data_dir: "{{ data_base_dir }}/{{ gitea_dir_name }}-runner"
 gitea_service_dir: "{{ service_base_dir }}/{{ gitea_dir_name }}"
 gitea_custom_themes_dir: "{{ gitea_data_dir }}/data/gitea/public/assets/css"

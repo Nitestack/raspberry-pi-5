@@ -47,9 +47,6 @@ ghostfolio_redis_password: ""
 ghostfolio_salt: ""
 ghostfolio_jwt_secret: ""
 
-# Gitea
-gitea_runner_registration_token: ""
-
 # Glance
 glance_user: ""
 glance_secret: "" # docker run --rm glanceapp/glance secret:make
