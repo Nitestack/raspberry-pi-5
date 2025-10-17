@@ -1,0 +1,24 @@
+# external-file
+# owner: ofkm
+# repo: arcane
+# path: examples/compose.basic.yaml
+# commit-hash: 2d65952525b5a94c19e107579aa817148cb3e068
+
+services:
+  arcane:
+    image: ghcr.io/ofkm/arcane:v1.5.2@sha256:bd3ea6d6b3309eaf405fb1df4b1ba80a384850006bebf94428bda85dfc97a801
+    container_name: "{{ services.arcane.container_name }}"
+    restart: always
+    networks:
+      - caddy
+    ports: !reset []
+    volumes:
+      - "{{ arcane_data_dir }}/data:/app/data"
+      - "{{ service_base_dir }}:/app/data/projects"
+    environment:
+      - ENCRYPTION_KEY={{ arcane_encryption_key }}
+      - JWT_SECRET={{ arcane_jwt_secret }}
+
+networks:
+  caddy:
+    external: true

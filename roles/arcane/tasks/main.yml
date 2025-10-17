@@ -1,0 +1,8 @@
+---
+- name: Deploy Arcane
+  ansible.builtin.include_role:
+    name: service_deploy
+  vars:
+    service_name: "Arcane"
+    service_dir_name: "{{ arcane_dir_name }}"
+    compose_url: "https://raw.githubusercontent.com/ofkm/arcane/2d65952525b5a94c19e107579aa817148cb3e068/examples/compose.basic.yaml"

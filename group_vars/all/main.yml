@@ -32,6 +32,12 @@ services:
     ports:
       frontend: 3000
       backend: 80
+  # Arcane
+  arcane:
+    enabled: true
+    domain: "docker.{{ domain }}"
+    container_name: "arcane"
+    port: 3552
   # Authentik
   authentik:
     enabled: false

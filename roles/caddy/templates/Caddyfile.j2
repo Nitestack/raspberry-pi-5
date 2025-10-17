@@ -7,6 +7,13 @@
 	}
 	reverse_proxy @frontend {{ service.container_names.frontend }}:{{ service.ports.frontend }}
 	reverse_proxy {{ service.container_names.backend }}:{{ service.ports.backend }}
+{% elif name == "arcane" %}
+	header {
+		X-Frame-Options "*"
+		X-Robots-Tag "noindex, nofollow"
+	}
+
+	reverse_proxy {{ service.container_name }}:{{ service.port }}
 {% elif name == "beszel" %}
 	request_body {
 		max_size 10MB

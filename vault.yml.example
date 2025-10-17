@@ -18,15 +18,19 @@ rclone_onedrive_token: '{"access_token":"...","token_type":"...","refresh_token"
 
 # Service Secrets
 
-# Authentik
-authentik_db_password: "" # openssl rand -base64 36 | tr -d '\n'
-authentik_secret_key: "" # openssl rand -base64 60 | tr -d '\n'
-
 # AdventureLog
 adventure_log_db_password: ""
 adventure_log_secret_key: ""
 adventure_log_admin_password: ""
 adventure_log_google_maps_api_key: "" # Geocoding and Places (New) API
+
+# Arcane
+arcane_encryption_key: ""
+arcane_jwt_secret: ""
+
+# Authentik
+authentik_db_password: "" # openssl rand -base64 36 | tr -d '\n'
+authentik_secret_key: "" # openssl rand -base64 60 | tr -d '\n'
 
 # Beszel
 beszel_email: ""
