@@ -71,8 +71,8 @@
             - title: Repositories
               links:
                 - title: Nix Configuration
-                  url: https://git.npham.de/Nitestack/nix-config
-                  icon: di:gitea
+                  url: https://github.com/Nitestack/nix-config
+                  icon: di:github
 
         - type: releases
           title: Neovim

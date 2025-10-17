@@ -8,7 +8,6 @@ services:
       # Server
       GITEA__server__ROOT_URL: "https://{{ services.gitea.domain }}"
       GITEA__server__SSH_PORT: {{ gitea_ssh_port }}
-      GITEA__server__LANDING_PAGE: "/Nitestack"
       # Service
       GITEA__service__DISABLE_REGISTRATION: {{ gitea_disable_registration }}
       # Repository
