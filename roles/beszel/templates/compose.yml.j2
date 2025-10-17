@@ -27,8 +27,8 @@ services:
       - "{{ beszel_data_dir }}/agent:/var/lib/beszel-agent"
       - "{{ beszel_data_dir }}/socket:/beszel_socket"
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - "{{ data_base_dir }}/.beszel:/extra-filesystems/nvme0n1:ro"
-      - "{{ backup_base_dir }}/.beszel:/extra-filesystems/nvme1n1:ro"
+      - "{{ data_base_dir }}/.beszel:/extra-filesystems/nvme0n1__Data:ro"
+      - "{{ backup_base_dir }}/.beszel:/extra-filesystems/nvme1n1__Backup:ro"
     environment:
       LISTEN: "/beszel_socket/beszel.sock"
       HUB_URL: "https://{{ services.beszel.domain }}"
