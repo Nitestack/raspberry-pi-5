@@ -1,0 +1,22 @@
+---
+- name: "Create books directory for Calibre Web"
+  ansible.builtin.file:
+    path: "{{ calibre_web_data_dir }}/books"
+    state: directory
+    mode: "0755"
+    owner: 1000
+    group: 1000
+  become: true
+
+- name: "Download metadata.db file for Calibre Web"
+  ansible.builtin.get_url:
+    url: "https://github.com/janeczku/calibre-web/raw/master/library/metadata.db"
+    dest: "{{ calibre_web_data_dir }}/books/metadata.db"
+    mode: "0644"
+
+- name: Deploy Calibre Web
+  ansible.builtin.include_role:
+    name: service_deploy
+  vars:
+    service_name: "Calibre Web"
+    service_dir_name: "{{ calibre_web_dir_name }}"

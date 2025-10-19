@@ -38,6 +38,7 @@ _This [Ansible](https://ansible.com) configuration automates the setup of a Home
 - **Backrest**: Backup Manager (Web GUI for `restic`)
 - **Beszel**: Server Monitoring
 - **Caddy**: Reverse Proxy & TLS
+- **Calibre Web**: eBook Manager
 - **Cloudflare DDNS**: Dynamic DNS Updater
 - **Ente Auth**: Two-factor Authenticator
 - **FreshRSS**: Feed Aggregator

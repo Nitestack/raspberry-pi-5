@@ -39,6 +39,9 @@
                 - title: Caddy
                   url: https://caddyserver.com/docs
                   icon: di:caddy
+                - title: Calibre Web
+                  url: https://github.com/janeczku/calibre-web/wiki
+                  icon: di:calibre-web
                 - title: Cloudflare DDNS
                   url: https://github.com/favonia/cloudflare-ddns
                   icon: di:cloudflare
@@ -144,6 +147,11 @@
               name: Caddy
               icon: di:caddy
               description: HTTPS Server
+            calibre-web:
+              name: Calibre Web
+              icon: di:calibre-web
+              url: ${CALIBRE_WEB_URL}
+              description: eBook Manager
             cloudflare-ddns:
               name: Cloudflare DDNS
               icon: di:cloudflare
@@ -392,7 +400,7 @@
           token: ${GITHUB_API_TOKEN}
           show-source-icon: true
           collapse-after: -1
-          limit: 18
+          limit: 19
           repositories:
             - AdguardTeam/AdGuardHome
             - seanmorley15/AdventureLog
@@ -400,6 +408,7 @@
             - garethgeorge/backrest
             - henrygd/beszel
             - caddyserver/caddy
+            - janeczku/calibre-web
             - favonia/cloudflare-ddns
             - ente-io/ente
             - FreshRSS/FreshRSS
