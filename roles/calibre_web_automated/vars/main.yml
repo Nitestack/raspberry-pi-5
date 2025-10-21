@@ -1,0 +1,2 @@
+---
+calibre_web_automated_data_dir: "{{ data_base_dir }}/{{ calibre_web_automated_dir_name }}"

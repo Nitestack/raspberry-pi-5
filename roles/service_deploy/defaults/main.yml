@@ -5,6 +5,9 @@ service_name: "{{ service_dir_name | replace('-', ' ') | title }}"
 # The directory name for the service
 service_dir_name: ""
 
+# Directories to create for the service
+data_dirs: []
+
 # List of additional templates to copy
 service_templates: []
 

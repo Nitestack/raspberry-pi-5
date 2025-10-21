@@ -50,11 +50,11 @@ services:
     domain: "monitor.{{ domain }}"
     container_name: "beszel"
     port: 8090
-  # Calibre Web
-  calibre_web:
+  # Calibre Web Automated
+  calibre_web_automated:
     enabled: true
-    domain: "books.{{ domain }}"
-    container_name: "calibre-web"
+    domain: "lib.{{ domain }}"
+    container_name: "calibre-web-automated"
     port: 8083
   # Ente Auth
   ente_auth:

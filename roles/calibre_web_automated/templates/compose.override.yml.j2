@@ -1,0 +1,26 @@
+# external-file
+# owner: crocodilestick
+# repo: Calibre-Web-Automated
+# path: docker-compose.yml
+# commit-hash: 3fd97431ca3270b159c6587c9cb190c99b11c8ec
+
+services:
+  calibre-web-automated:
+    image: crocodilestick/calibre-web-automated:V3.1.4@sha256:577e846f104fd21453ef306eefb4a95dd95b3b9ddd2463a150944494284da0fd
+    container_name: "{{ services.calibre_web_automated.container_name }}"
+    restart: always
+    networks:
+      - caddy
+    environment:
+      - TZ={{ timezone }}
+      - HARDCOVER_TOKEN={{ calibre_web_automated_hardcover_token }}
+    volumes:
+      - "{{ calibre_web_automated_data_dir }}/config:/config"
+      - "{{ calibre_web_automated_data_dir }}/upload:/cwa-book-ingest"
+      - "{{ calibre_web_automated_data_dir }}/library:/calibre-library"
+      - "{{ calibre_web_automated_data_dir }}/plugins:/config/.config/calibre/plugins"
+    ports: !reset []
+
+networks:
+  caddy:
+    external: true

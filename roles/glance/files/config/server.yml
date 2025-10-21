@@ -39,8 +39,8 @@
                 - title: Caddy
                   url: https://caddyserver.com/docs
                   icon: di:caddy
-                - title: Calibre Web
-                  url: https://github.com/janeczku/calibre-web/wiki
+                - title: Calibre Web Automated
+                  url: https://github.com/crocodilestick/Calibre-Web-Automated/wiki
                   icon: di:calibre-web
                 - title: Cloudflare DDNS
                   url: https://github.com/favonia/cloudflare-ddns
@@ -147,10 +147,10 @@
               name: Caddy
               icon: di:caddy
               description: HTTPS Server
-            calibre-web:
-              name: Calibre Web
+            calibre-web-automated:
+              name: Calibre Web Automated
               icon: di:calibre-web
-              url: ${CALIBRE_WEB_URL}
+              url: ${CALIBRE_WEB_AUTOMATED_URL}
               description: eBook Manager
             cloudflare-ddns:
               name: Cloudflare DDNS
@@ -408,7 +408,7 @@
             - garethgeorge/backrest
             - henrygd/beszel
             - caddyserver/caddy
-            - janeczku/calibre-web
+            - crocodilestick/Calibre-Web-Automated
             - favonia/cloudflare-ddns
             - ente-io/ente
             - FreshRSS/FreshRSS

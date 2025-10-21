@@ -8,6 +8,27 @@
         state: directory
         mode: "0755"
 
+    - name: "Create data directory for {{ service_name }}"
+      ansible.builtin.file:
+        path: "{{ data_dir }}"
+        state: directory
+        owner: 1000
+        group: 1000
+        mode: "0755"
+      become: true
+
+    - name: "Create and set permissions for additional data directories"
+      ansible.builtin.file:
+        path: "{{ data_dir }}/{{ item }}"
+        state: directory
+        owner: 1000
+        group: 1000
+        mode: "0755"
+      loop: "{{ data_dirs }}"
+      loop_control:
+        label: "{{ item }}"
+      become: true
+
     - name: "Download compose.yml file for {{ service_name }}"
       ansible.builtin.get_url:
         url: "{{ compose_url }}"

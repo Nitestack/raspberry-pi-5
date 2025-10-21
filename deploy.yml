@@ -41,8 +41,8 @@
       tags: glance
     - role: beszel
       tags: beszel
-    - role: calibre_web
-      tags: calibre_web
+    - role: calibre_web_automated
+      tags: calibre_web_automated
     - role: adguard_home
       tags: adguard_home
     - role: adventure_log
