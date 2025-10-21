@@ -19,7 +19,7 @@ services:
   # AdGuard Home
   adguard_home:
     enabled: true
-    domain: "adguard.{{ domain }}"
+    domain: "dns.{{ domain }}"
     container_name: "adguard-home"
     port: 80
   # AdventureLog
@@ -47,7 +47,7 @@ services:
   # Beszel
   beszel:
     enabled: true
-    domain: "monitor.{{ domain }}"
+    domain: "status.{{ domain }}"
     container_name: "beszel"
     port: 8090
   # Calibre Web Automated
@@ -64,7 +64,7 @@ services:
     port: 3003
   ente_api:
     enabled: true
-    domain: "ente-api.{{ domain }}"
+    domain: "ente.{{ domain }}"
     container_name: "ente-museum"
     port: 8080
   # FreshRSS
@@ -100,7 +100,7 @@ services:
   # n8n
   n8n:
     enabled: false
-    domain: "automation.{{ domain }}"
+    domain: "automate.{{ domain }}"
     container_name: "n8n"
     port: 5678
   # NextCloud
@@ -111,7 +111,7 @@ services:
     port: 11000
   nextcloud_aio:
     enabled: true
-    domain: "nextcloud-aio.{{ domain }}"
+    domain: "nc-aio.{{ domain }}"
     container_name: "nextcloud-aio-mastercontainer"
     port: 8080
   # Personal Site
@@ -135,7 +135,7 @@ services:
   # wger
   wger:
     enabled: false
-    domain: "fit.{{ domain }}"
+    domain: "health.{{ domain }}"
     container_name: "wger-web"
     port: 8000
 

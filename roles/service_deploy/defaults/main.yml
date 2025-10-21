@@ -8,6 +8,9 @@ service_dir_name: ""
 # Directories to create for the service
 data_dirs: []
 
+# Additional downloads
+service_downloads: []
+
 # List of additional templates to copy
 service_templates: []
 

@@ -16,6 +16,7 @@
         group: 1000
         mode: "0755"
       become: true
+      when: data_dirs | length > 0
 
     - name: "Create and set permissions for additional data directories"
       ansible.builtin.file:
@@ -42,6 +43,15 @@
         dest: "{{ service_dir }}/.env"
         mode: "0644"
       when: env_url != ""
+
+    - name: "Download additional files"
+      ansible.builtin.get_url:
+        url: "{{ item.url }}"
+        dest: "{{ service_dir }}/{{ item.dest }}"
+        mode: "0644"
+      loop: "{{ service_downloads }}"
+      loop_control:
+        label: "{{ item.dest }}"
 
     - name: "Check for compose.yml template for {{ service_name }}"
       ansible.builtin.stat:
