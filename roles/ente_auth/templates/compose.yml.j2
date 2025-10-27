@@ -26,7 +26,7 @@ services:
       start_period: 5s
 
   web:
-    image: ghcr.io/ente-io/web:latest@sha256:355e1619781ced88343bf73726effde9fa5e2cea685d4e9c9c499faaf49b508a
+    image: ghcr.io/ente-io/web:latest@sha256:9d2cfbfd242c50d4fb2c8b94e10ab49bc91844227ae39c3f614cf979e9627a79
     container_name: "{{ services.ente_auth.container_name }}"
     restart: always
     networks:
@@ -36,7 +36,7 @@ services:
       ENTE_API_ORIGIN: "https://{{ services.ente_api.domain }}"
 
   postgres:
-    image: postgres:15@sha256:c189d272e4fcdd1ac419adee675d30be3d389c22ee770d593f15819d22a68a0d
+    image: postgres:15@sha256:424e79b81868f5fc5cf515eaeac69d288692ebcca7db86d98f91b50d4bce64bb
     container_name: ente-postgres
     restart: always
     environment:
