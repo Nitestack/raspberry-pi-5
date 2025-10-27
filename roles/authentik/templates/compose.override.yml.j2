@@ -6,7 +6,7 @@
 
 services:
   postgresql:
-    image: postgres:16-alpine@sha256:9d4951e6dc70422022512ff05ac86e0ae360da051c563accbed85d6f654c3357
+    image: postgres:16-alpine@sha256:029660641a0cfc575b14f336ba448fb8a75fd595d42e1fa316b9fb4378742297
     container_name: "authentik-postgres"
     restart: always
     volumes:
@@ -18,7 +18,7 @@ services:
     volumes:
       - "{{ authentik_data_dir }}/redis:/data"
   server:
-    image: authentik/server:2025.8.4@sha256:a10398480e7f8292dbcc27b64fe572f6abed6220bd40f4b6d28e9c12d4b78dca
+    image: authentik/server:2025.10.0@sha256:a283f44eefd68bcfc25cdfbdc0372e6384b60468ca042278bde0a4bd8af4680f
     container_name: "{{ services.authentik.container_name }}"
     restart: always
     networks:
@@ -29,7 +29,7 @@ services:
       - "{{ authentik_data_dir }}/media:/media"
       - "{{ authentik_data_dir }}/templates:/templates"
   worker:
-    image: authentik/server:2025.8.4@sha256:a10398480e7f8292dbcc27b64fe572f6abed6220bd40f4b6d28e9c12d4b78dca
+    image: authentik/server:2025.10.0@sha256:a283f44eefd68bcfc25cdfbdc0372e6384b60468ca042278bde0a4bd8af4680f
     container_name: "authentik-worker"
     restart: always
     volumes:
