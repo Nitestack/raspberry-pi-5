@@ -26,6 +26,10 @@
   "timezone": "Europe/Berlin",
   "packageRules": [
     {
+      "matchUpdateTypes": ["minor", "major"],
+      "automerge": false
+    },
+    {
       "matchManagers": ["docker-compose"],
       "groupName": "Docker Compose updates for {{packageFile}}"
     },
