@@ -1,6 +1,3 @@
 # ── Ansible ───────────────────────────────────────────────────────────
 .ansible/
 .vault_pass
-
-# ── Custom directories ────────────────────────────────────────────────
-roles/glance/files/config/hidden-widgets

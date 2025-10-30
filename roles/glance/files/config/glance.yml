@@ -1,6 +1,5 @@
 server:
   proxied: true
-  assets-path: /app/assets
 
 theme:
   disable-picker: true
@@ -9,7 +8,6 @@ theme:
   primary-color: 217 92 83
   positive-color: 115 54 76
   negative-color: 347 70 65
-  custom-css-file: /assets/user.css
 
 auth:
   secret-key: ${GLANCE_SECRET}
@@ -22,8 +20,4 @@ branding:
   app-name: Dashboard
   hide-footer: true
 pages:
-  # It's not necessary to create a new file for each page and include it, you can simply
-  # put its contents here, though multiple pages are easier to manage when separated
   - $include: home.yml
-  - $include: server.yml
-  - $include: os.yml
