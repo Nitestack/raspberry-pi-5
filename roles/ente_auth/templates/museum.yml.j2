@@ -2,8 +2,18 @@ jwt:
   secret: "{{ ente_jwt_secret }}"
 
 db:
-  host: {{ ente_db_host }}
+  host: "{{ ente_db_host }}"
   port: 5432
-  name: {{ ente_db_name }}
-  user: {{ ente_db_user }}
+  name: "{{ ente_db_name }}"
+  user: "{{ ente_db_user }}"
   password: "{{ ente_db_password }}"
+
+internal:
+  disable-registration: {{ ente_auth_disable_registration }}
+
+smtp:
+  host: "{{ smtp_host }}"
+  port: {{ smtp_port }}
+  username: "{{ no_reply_mail }}"
+  password: "{{ smtp_password }}"
+  email: "{{ no_reply_mail }}"
