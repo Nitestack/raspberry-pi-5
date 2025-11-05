@@ -24,7 +24,7 @@ services:
       - "{{ ghostfolio_data_dir }}/db:/var/lib/postgresql/data"
 
   redis:
-    image: redis:alpine@sha256:59b6e694653476de2c992937ebe1c64182af4728e54bb49e9b7a6c26614d8933
+    image: redis:alpine@sha256:28c9c4d7596949a24b183eaaab6455f8e5d55ecbf72d02ff5e2c17fe72671d31
     container_name: "ghostfolio-redis"
     restart: always
     env_file: !override .env
