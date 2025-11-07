@@ -18,7 +18,7 @@ services:
       - caddy
 
   db:
-    image: ghcr.io/baosystems/postgis:16-3.5@sha256:7bb38e249b8c4fc1b58cee7770965f73b632f60f7cf363bf16ffef372e6943bc # until postgis/postgis on DockerHub supports linux/arm64
+    image: ghcr.io/baosystems/postgis:16-3.5@sha256:e102227742284c57a28205a90a29f62d3111e121672d5ef79297d520a0c7dff7 # until postgis/postgis on DockerHub supports linux/arm64
     restart: always
     volumes:
       - "{{ adventure_log_data_dir }}/db:/var/lib/postgresql/data/"
@@ -27,7 +27,7 @@ services:
       - .env.override
 
   server:
-    image: ghcr.io/seanmorley15/adventurelog-backend:latest@sha256:25e2a971dc4cfa63baa3b3da5f6761a7df3a43eb965cc655e859729ee1201bad
+    image: ghcr.io/seanmorley15/adventurelog-backend:latest@sha256:e2eedf37e5d228e2f99f907de3269b4fadf0833c785a961b1aa7cb7a0b8e2be8
     container_name: "{{ services.adventure_log.container_names.backend }}"
     restart: always
     volumes:
