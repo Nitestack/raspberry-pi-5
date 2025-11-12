@@ -1,6 +1,6 @@
 services:
   beszel:
-    image: henrygd/beszel:0.15.4@sha256:37858df37c29cc532d9af103b90a4f2645bc7555f6a291ed3f15c9096a00731e
+    image: henrygd/beszel:0.16.0@sha256:358d452b97e0e1714f0acab3442f753528c3ec006df513710315c9c96dff4b87
     container_name: "{{ services.beszel.container_name }}"
     restart: always
     networks:
@@ -19,7 +19,7 @@ services:
       interval: 120s
 
   beszel-agent:
-    image: henrygd/beszel-agent:0.15.4@sha256:ea26afb054c84c7c9e6ba4d86381cd7bad5fc8f828419d9a5ae63d6cea35fab3
+    image: henrygd/beszel-agent:0.16.0@sha256:db66ebd4dce47395ea9ca1919a0244147809311ec83440aed266e263ff8c7cff
     container_name: beszel-agent
     restart: always
     network_mode: host
