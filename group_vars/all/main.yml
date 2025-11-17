@@ -81,7 +81,7 @@ services:
     port: 3333
   # Gitea
   gitea:
-    enabled: true
+    enabled: false
     domain: "git.{{ domain }}"
     container_name: "gitea"
     port: 3000
