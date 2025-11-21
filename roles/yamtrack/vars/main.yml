@@ -1,0 +1,2 @@
+---
+yamtrack_data_dir: "{{ data_base_dir }}/{{ yamtrack_dir_name }}"

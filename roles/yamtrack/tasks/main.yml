@@ -1,0 +1,8 @@
+---
+- name: Deploy Yamtrack
+  ansible.builtin.include_role:
+    name: service_deploy
+  vars:
+    service_name: "Yamtrack"
+    service_dir_name: "{{ yamtrack_dir_name }}"
+    compose_url: "https://raw.githubusercontent.com/FuzzyGrim/Yamtrack/23750cc6141f1032876f49b42d18f5177733abac/docker-compose.yml"

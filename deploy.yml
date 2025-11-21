@@ -41,6 +41,8 @@
       tags: glance
     - role: beszel
       tags: beszel
+    - role: yamtrack
+      tags: yamtrack
     - role: calibre_web_automated
       tags: calibre_web_automated
     - role: adguard_home

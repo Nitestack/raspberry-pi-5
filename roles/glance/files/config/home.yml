@@ -79,6 +79,9 @@
                 - title: WireGuard Easy
                   url: https://wg-easy.github.io/wg-easy/latest
                   icon: di:wireguard
+                - title: Yamtrack
+                  url: https://github.com/FuzzyGrim/Yamtrack/wiki
+                  icon: di:yamtrack
             - title: Selfhosted
               links:
                 - title: Awesome Selfhosted
@@ -284,6 +287,15 @@
             wger-celery-beat:
               name: Celery Beat
               parent: wger
+            yamtrack:
+              name: Yamtrack
+              icon: di:yamtrack
+              url: ${YAMTRACK_URL}
+              description: Media Tracker
+              id: yamtrack
+            yamtrack-redis:
+              name: Redis
+              parent: yamtrack
         - type: group
           widgets:
             - type: reddit
@@ -385,7 +397,7 @@
           token: ${GITHUB_API_TOKEN}
           show-source-icon: true
           collapse-after: -1
-          limit: 19
+          limit: 20
           repositories:
             - AdguardTeam/AdGuardHome
             - seanmorley15/AdventureLog
@@ -406,3 +418,4 @@
             - dani-garcia/vaultwarden
             - wg-easy/wg-easy
             - wger-project/wger
+            - FuzzyGrim/Yamtrack

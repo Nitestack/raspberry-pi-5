@@ -51,6 +51,7 @@ _This [Ansible](https://ansible.com) configuration automates the setup of a Home
 - **Vaultwarden**: Password Manager
 - **wger Workout Manager**: Fitness Tracker
 - **WireGuard Easy**: VPN (with Web GUI)
+- **Yamtrack**: Media Tracker (TV Shows, TV Seasons, Movies, Anime, Manga, Games, Books, Comics)
 
 ## ⚙️ Requirements
 

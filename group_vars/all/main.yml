@@ -138,6 +138,12 @@ services:
     domain: "health.{{ domain }}"
     container_name: "wger-web"
     port: 8000
+  # Yamtrack
+  yamtrack:
+    enabled: true
+    domain: "track.{{ domain }}"
+    container_name: "yamtrack"
+    port: 8000
 
 # ── Email Configuration ───────────────────────────────────────────────
 no_reply_mail: "noreply@{{ domain }}"
