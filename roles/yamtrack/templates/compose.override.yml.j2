@@ -23,7 +23,7 @@ services:
     ports: !reset []
 
   redis:
-    image: redis:7-alpine
+    image: redis:7-alpine@sha256:ee64a64eaab618d88051c3ade8f6352d11531fcf79d9a4818b9b183d8c1d18ba
     restart: always
     volumes:
       - "{{ yamtrack_data_dir }}/redis:/data"
