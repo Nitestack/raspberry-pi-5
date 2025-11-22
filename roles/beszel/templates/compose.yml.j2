@@ -19,7 +19,7 @@ services:
       interval: 120s
 
   beszel-agent:
-    image: henrygd/beszel-agent:0.16.1@sha256:dee59d68ac327a755aec7651dd31b9f9a6d7db3da6f093e16e8c36c1f71a18cd
+    image: henrygd/beszel-agent:0.16.1-alpine@sha256:17b342a95ddd2e77aad2ee28443f739e1e64d92ba974e116681644d9f3c87573
     container_name: beszel-agent
     restart: always
     network_mode: host
@@ -30,6 +30,12 @@ services:
       - /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket:ro
       - "{{ data_base_dir }}/.beszel:/extra-filesystems/nvme0n1__Data:ro"
       - "{{ backup_base_dir }}/.beszel:/extra-filesystems/nvme1n1__Backup:ro"
+    devices:
+      - /dev/nvme0:/dev/nvme0
+      - /dev/nvme1:/dev/nvme1
+    cap_add:
+      - SYS_RAWIO # required for S.M.A.R.T. data
+      - SYS_ADMIN # required for NVMe S.M.A.R.T. data
     environment:
       LISTEN: "/beszel_socket/beszel.sock"
       HUB_URL: "https://{{ services.beszel.domain }}"
