@@ -3,7 +3,9 @@
   ansible.builtin.git:
     repo: "{{ personal_site_repo_url }}"
     dest: "{{ personal_site_service_dir }}"
-    version: HEAD
+    update: true
+    force: true
+    version: main
   tags:
     - skip_ansible_lint
 

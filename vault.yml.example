@@ -66,7 +66,7 @@ immich_db_password: "" # Please only use the characters `A-Za-z0-9`, without spe
 # Personal Site
 personal_site_github_api_token: ""
 personal_site_notion_secret: ""
-personal_site_notion_db_id: ""
+personal_site_notion_datasource_id: ""
 
 # wger
 wger_secret_key: "" # https://djecrety.ir
