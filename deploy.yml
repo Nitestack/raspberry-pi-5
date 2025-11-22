@@ -23,6 +23,8 @@
       tags: wg_easy
     - role: authentik
       tags: authentik
+    - role: pocket_id
+      tags: pocket_id
     - role: nextcloud
       tags: nextcloud
     - role: immich

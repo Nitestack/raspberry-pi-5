@@ -48,6 +48,7 @@ _This [Ansible](https://ansible.com) configuration automates the setup of a Home
 - **Immich**: Image & Video Manager
 - **n8n**: Workflow Automation
 - **NextCloud**: Cloud
+- **Pocket ID**: OIDC Provider
 - **Vaultwarden**: Password Manager
 - **wger Workout Manager**: Fitness Tracker
 - **WireGuard Easy**: VPN (with Web GUI)

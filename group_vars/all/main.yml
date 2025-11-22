@@ -120,6 +120,12 @@ services:
     domain: "{{ domain }}"
     container_name: "personal-site"
     port: 3000
+  # Pocket ID
+  pocket_id:
+    enabled: true
+    domain: "id.{{ domain }}"
+    container_name: "pocket-id"
+    port: 1411
   # Vaultwarden
   vaultwarden:
     enabled: true

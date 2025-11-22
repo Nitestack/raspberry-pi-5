@@ -68,6 +68,10 @@ personal_site_github_api_token: ""
 personal_site_notion_secret: ""
 personal_site_notion_datasource_id: ""
 
+# Pocket ID
+pocket_id_encryption_key: "" # openssl rand -base64 32
+pocket_id_maxmind_license_key: ""
+
 # wger
 wger_secret_key: "" # https://djecrety.ir
 wger_signing_key: ""

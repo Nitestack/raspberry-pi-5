@@ -70,6 +70,9 @@
                 - title: Nextcloud
                   url: https://github.com/nextcloud/all-in-one
                   icon: di:nextcloud
+                - title: Pocket ID
+                  url: https://pocket-id.org/docs
+                  icon: di:pocket-id
                 - title: Vaultwarden
                   url: https://github.com/dani-garcia/vaultwarden/wiki
                   icon: si:vaultwarden
@@ -259,6 +262,11 @@
               icon: https://npham.de/favicon.ico
               url: https://npham.de
               description: Personal Site
+            pocket-id:
+              name: Pocket ID
+              icon: di:pocket-id
+              url: ${POCKET_ID_URL}
+              description: OIDC Provider
             vaultwarden:
               name: Vaultwarden
               icon: si:vaultwarden
@@ -397,7 +405,7 @@
           token: ${GITHUB_API_TOKEN}
           show-source-icon: true
           collapse-after: -1
-          limit: 20
+          limit: 21
           repositories:
             - AdguardTeam/AdGuardHome
             - seanmorley15/AdventureLog
@@ -415,6 +423,7 @@
             - immich-app/immich
             - n8n-io/n8n
             - nextcloud/all-in-one
+            - pocket-id/pocket-id
             - dani-garcia/vaultwarden
             - wg-easy/wg-easy
             - wger-project/wger

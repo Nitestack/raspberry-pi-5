@@ -1,0 +1,3 @@
+---
+pocket_id_dir_name: "pocket-id"
+pocket_id_allow_user_signups: "disabled" # `disabled`, `withToken`, `open`

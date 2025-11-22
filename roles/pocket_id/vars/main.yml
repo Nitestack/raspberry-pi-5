@@ -1,0 +1,2 @@
+---
+pocket_id_data_dir: "{{ data_base_dir }}/{{ pocket_id_dir_name }}"
