@@ -32,7 +32,6 @@ _This [Ansible](https://ansible.com) configuration automates the setup of a Home
 
 ### Docker Services
 
-- **Authentik**: Identity Provider & Single Sign On
 - **AdGuard Home**: Network-wide Ad Blocker
 - **AdventureLog**: Travel Tracker
 - **Backrest**: Backup Manager (Web GUI for `restic`)

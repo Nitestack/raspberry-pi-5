@@ -24,10 +24,6 @@ adventure_log_secret_key: ""
 adventure_log_admin_password: ""
 adventure_log_google_maps_api_key: "" # Geocoding and Places (New) API
 
-# Authentik
-authentik_db_password: "" # openssl rand -base64 36 | tr -d '\n'
-authentik_secret_key: "" # openssl rand -base64 60 | tr -d '\n'
-
 # Beszel
 beszel_email: ""
 beszel_password: ""

@@ -1,8 +1,0 @@
----
-- name: Deploy Authentik
-  ansible.builtin.include_role:
-    name: service_deploy
-  vars:
-    service_name: "Authentik"
-    service_dir_name: "{{ authentik_dir_name }}"
-    compose_url: "https://docs.goauthentik.io/docker-compose.yml"

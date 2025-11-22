@@ -32,12 +32,6 @@ services:
     ports:
       frontend: 3000
       backend: 80
-  # Authentik
-  authentik:
-    enabled: false
-    domain: "auth.{{ domain }}"
-    container_name: "authentik-server"
-    port: 9000
   # Backrest
   backrest:
     enabled: true

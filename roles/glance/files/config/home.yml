@@ -28,9 +28,6 @@
                 - title: AdventureLog
                   url: https://adventurelog.app/docs/intro/adventurelog_overview.html
                   icon: di:adventure-log
-                - title: Authentik
-                  url: https://docs.goauthentik.io
-                  icon: di:authentik
                 - title: Backrest
                   url: https://garethgeorge.github.io/backrest
                   icon: di:backrest
@@ -121,21 +118,6 @@
             adventurelog-db:
               name: PostGIS
               parent: adventurelog
-            authentik-server:
-              name: Authentik
-              icon: di:authentik
-              url: ${AUTHENTIK_URL}
-              description: IdP & SSO
-              id: authentik
-            authentik-postgres:
-              name: PostgreSQL
-              parent: authentik
-            authentik-redis:
-              name: Redis
-              parent: authentik
-            authentik-worker:
-              name: Worker
-              parent: authentik
             backrest:
               name: Backrest
               icon: di:backrest
@@ -405,11 +387,10 @@
           token: ${GITHUB_API_TOKEN}
           show-source-icon: true
           collapse-after: -1
-          limit: 21
+          limit: 20
           repositories:
             - AdguardTeam/AdGuardHome
             - seanmorley15/AdventureLog
-            - goauthentik/authentik
             - garethgeorge/backrest
             - henrygd/beszel
             - caddyserver/caddy

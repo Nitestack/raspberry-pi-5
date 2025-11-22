@@ -1,2 +1,0 @@
----
-authentik_data_dir: "{{ data_base_dir }}/{{ authentik_dir_name }}"
