@@ -13,6 +13,7 @@ services:
       APP_URL: "https://{{ services.beszel.domain }}"
       USER_EMAIL: "{{ beszel_email }}"
       USER_PASSWORD: "{{ beszel_password }}"
+      DISABLE_PASSWORD_AUTH: {{ sso_enabled }}
     healthcheck:
       test: ['CMD', '/beszel', 'health', '--url', 'http://localhost:8090']
       start_period: 5s

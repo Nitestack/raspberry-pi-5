@@ -15,6 +15,10 @@ services:
       URLS: "https://{{ services.yamtrack.domain }}"
       REGISTRATION: "{{ yamtrack_enable_registration }}"
       TMDB_NSFW: "True"
+      SOCIAL_PROVIDERS: "allauth.socialaccount.providers.openid_connect"
+      SOCIALACCOUNT_PROVIDERS: '{"openid_connect":{"OAUTH_PKCE_ENABLED":true,"APPS":[{"provider_id":"pocketid","name":"Pocket ID","client_id":"{{ yamtrack_oidc_client_id }}","secret":"{{ yamtrack_oidc_secret }}","settings":{"server_url":"https://{{ services.pocket_id.domain }}/.well-known/openid-configuration"}}]}}'
+      SOCIALACCOUNT_ONLY: "{{ sso_enabled }}"
+      REDIRECT_LOGIN_TO_SSO: "{{ sso_enabled }}"
     networks:
       - default
       - caddy

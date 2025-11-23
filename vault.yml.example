@@ -76,3 +76,5 @@ wger_celery_flower_password: ""
 
 # Yamtrack
 yamtrack_secret_key: "" # https://djecrety.ir
+yamtrack_oidc_client_id: ""
+yamtrack_oidc_secret: ""

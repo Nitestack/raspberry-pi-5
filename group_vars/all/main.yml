@@ -1,4 +1,6 @@
+---
 # ── General Configuration ─────────────────────────────────────────────
+sso_enabled: true
 domain: "npham.de"
 timezone: "Europe/Berlin" # TZ identifier from https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List
 data_base_dir: "/mnt/data"
@@ -116,7 +118,7 @@ services:
     port: 3000
   # Pocket ID
   pocket_id:
-    enabled: true
+    enabled: "{{ sso_enabled | bool }}"
     domain: "id.{{ domain }}"
     container_name: "pocket-id"
     port: 1411
@@ -157,7 +159,7 @@ rclone_configs:
   - name: "onedrive"
     properties:
       type: "onedrive"
-      token: " {{ rclone_onedrive_token }}"
+      token: ' {{ rclone_onedrive_token }}'
       drive_id: "{{ rclone_onedrive_drive_id }}"
       drive_type: "personal"
   # - name: "proton-drive"
