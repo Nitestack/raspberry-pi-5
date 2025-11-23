@@ -10,7 +10,6 @@ allowed_ports:
   - 22 # SSH
   - 53 # DNS
   - 80 # Caddy HTTP
-  - 222 # Gitea SSH
   - 443 # Caddy HTTPS
   - 51820 # VPN
 
@@ -75,12 +74,6 @@ services:
     domain: "wealth.{{ domain }}"
     container_name: "ghostfolio"
     port: 3333
-  # Gitea
-  gitea:
-    enabled: false
-    domain: "git.{{ domain }}"
-    container_name: "gitea"
-    port: 3000
   # Glance
   glance:
     enabled: true
@@ -159,7 +152,7 @@ rclone_configs:
   - name: "onedrive"
     properties:
       type: "onedrive"
-      token: ' {{ rclone_onedrive_token }}'
+      token: " {{ rclone_onedrive_token }}"
       drive_id: "{{ rclone_onedrive_drive_id }}"
       drive_type: "personal"
   # - name: "proton-drive"

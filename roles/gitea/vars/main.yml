@@ -1,4 +1,0 @@
----
-gitea_data_dir: "{{ data_base_dir }}/{{ gitea_dir_name }}"
-gitea_service_dir: "{{ service_base_dir }}/{{ gitea_dir_name }}"
-gitea_custom_themes_dir: "{{ gitea_data_dir }}/data/gitea/public/assets/css"

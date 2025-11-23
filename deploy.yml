@@ -17,8 +17,6 @@
     - role: cloudflare_ddns
       tags: cloudflare_ddns
 
-    - role: gitea
-      tags: gitea
     - role: wg_easy
       tags: wg_easy
     - role: pocket_id

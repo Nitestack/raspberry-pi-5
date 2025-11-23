@@ -42,7 +42,6 @@ _This [Ansible](https://ansible.com) configuration automates the setup of a Home
 - **Ente Auth**: Two-factor Authenticator
 - **FreshRSS**: Feed Aggregator
 - **Ghostfolio**: Wealth Manager
-- **Gitea**: Development Platform
 - **Glance**: Dashboard
 - **Immich**: Image & Video Manager
 - **n8n**: Workflow Automation
@@ -136,9 +135,6 @@ public:51820/udp -> local:51820/udp
 
 # SSH (optional, if you want to access the Pi with a URL)
 public:22/tcp -> local:22/tcp
-
-# Gitea
-public:222/tcp -> local:222/tcp
 ```
 
 ## 🛡️ Security
