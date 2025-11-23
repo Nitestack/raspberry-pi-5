@@ -28,21 +28,3 @@
       loop_control:
         label: "{{ item }}"
       when: services[item].enabled
-
-    - name: Find old backup directories
-      ansible.builtin.find:
-        paths: "{{ backup_base_dir }}"
-        age: "{{ backup_retention_days }}d"
-        file_type: directory
-        recurse: true
-        depth: 2
-      register: old_backups
-
-    - name: Remove old backup directories
-      ansible.builtin.file:
-        path: "{{ item.path }}"
-        state: absent
-      loop: "{{ old_backups.files }}"
-      loop_control:
-        label: "{{ item.path }}"
-      become: true

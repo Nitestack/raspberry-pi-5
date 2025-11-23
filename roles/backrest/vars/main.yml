@@ -1,2 +1,0 @@
----
-backrest_data_dir: "{{ data_base_dir }}/{{ backrest_dir_name }}"

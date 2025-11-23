@@ -28,9 +28,6 @@
                 - title: AdventureLog
                   url: https://adventurelog.app/docs/intro/adventurelog_overview.html
                   icon: di:adventure-log
-                - title: Backrest
-                  url: https://garethgeorge.github.io/backrest
-                  icon: di:backrest
                 - title: Beszel
                   url: https://beszel.dev/guide
                   icon: di:beszel
@@ -79,6 +76,9 @@
                 - title: Yamtrack
                   url: https://github.com/FuzzyGrim/Yamtrack/wiki
                   icon: di:yamtrack
+                - title: Zerobyte
+                  url: https://github.com/nicotsx/zerobyte
+                  icon: https://raw.githubusercontent.com/nicotsx/zerobyte/main/public/images/favicon/favicon.svg
             - title: Selfhosted
               links:
                 - title: Awesome Selfhosted
@@ -115,11 +115,6 @@
             adventurelog-db:
               name: PostGIS
               parent: adventurelog
-            backrest:
-              name: Backrest
-              icon: di:backrest
-              url: ${BACKREST_URL}
-              description: Backup Manager
             beszel:
               name: Beszel
               icon: di:beszel
@@ -277,6 +272,11 @@
             yamtrack-redis:
               name: Redis
               parent: yamtrack
+            zerobyte:
+              name: Zerobyte
+              icon: https://raw.githubusercontent.com/nicotsx/zerobyte/main/public/images/favicon/favicon.svg
+              url: ${ZEROBYTE_URL}
+              description: Backup Manager
         - type: group
           widgets:
             - type: reddit
@@ -382,7 +382,6 @@
           repositories:
             - AdguardTeam/AdGuardHome
             - seanmorley15/AdventureLog
-            - garethgeorge/backrest
             - henrygd/beszel
             - caddyserver/caddy
             - crocodilestick/Calibre-Web-Automated
@@ -399,3 +398,4 @@
             - wg-easy/wg-easy
             - wger-project/wger
             - FuzzyGrim/Yamtrack
+            - nicotsx/zerobyte

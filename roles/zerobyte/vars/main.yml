@@ -1,0 +1,2 @@
+---
+zerobyte_data_dir: "{{ data_base_dir }}/{{ zerobyte_dir_name }}"

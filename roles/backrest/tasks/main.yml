@@ -1,7 +1,0 @@
----
-- name: Deploy Backrest
-  ansible.builtin.include_role:
-    name: service_deploy
-  vars:
-    service_name: "Backrest"
-    service_dir_name: "{{ backrest_dir_name }}"

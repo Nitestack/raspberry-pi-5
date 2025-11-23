@@ -53,7 +53,7 @@
     - role: personal_site
       tags: personal_site
 
-    - role: backrest
-      tags: backup,backrest
+    - role: zerobyte
+      tags: backup,zerobyte
     - role: backup
       tags: backup

@@ -34,7 +34,6 @@ _This [Ansible](https://ansible.com) configuration automates the setup of a Home
 
 - **AdGuard Home**: Network-wide Ad Blocker
 - **AdventureLog**: Travel Tracker
-- **Backrest**: Backup Manager (Web GUI for `restic`)
 - **Beszel**: Server Monitoring
 - **Caddy**: Reverse Proxy & TLS
 - **Calibre Web Automated**: eBook Manager
@@ -51,6 +50,7 @@ _This [Ansible](https://ansible.com) configuration automates the setup of a Home
 - **wger Workout Manager**: Fitness Tracker
 - **WireGuard Easy**: VPN (with Web GUI)
 - **Yamtrack**: Media Tracker (TV Shows, TV Seasons, Movies, Anime, Manga, Games, Books, Comics)
+- **Zerobyte**: Backup Manager (Web GUI for `restic`)
 
 ## ⚙️ Requirements
 

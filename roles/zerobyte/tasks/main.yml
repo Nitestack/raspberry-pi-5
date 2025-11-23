@@ -1,0 +1,7 @@
+---
+- name: Deploy Zerobyte
+  ansible.builtin.include_role:
+    name: service_deploy
+  vars:
+    service_name: "Zerobyte"
+    service_dir_name: "{{ zerobyte_dir_name }}"

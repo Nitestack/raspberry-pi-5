@@ -33,12 +33,6 @@ services:
     ports:
       frontend: 3000
       backend: 80
-  # Backrest
-  backrest:
-    enabled: true
-    domain: "backup.{{ domain }}"
-    container_name: "backrest"
-    port: 9898
   # Beszel
   beszel:
     enabled: true
@@ -139,6 +133,12 @@ services:
     domain: "track.{{ domain }}"
     container_name: "yamtrack"
     port: 8000
+  # Zerobyte
+  zerobyte:
+    enabled: true
+    domain: "backup.{{ domain }}"
+    container_name: "zerobyte"
+    port: 4096
 
 # ── Email Configuration ───────────────────────────────────────────────
 no_reply_mail: "noreply@{{ domain }}"

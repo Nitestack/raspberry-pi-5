@@ -1,0 +1,20 @@
+services:
+  zerobyte:
+    image: ghcr.io/nicotsx/zerobyte:v0.13.0@sha256:a14f96aa51fa8133465b17a09304651994678e1e9e72d0b25432b57a80fe8e75
+    container_name: "{{ services.zerobyte.container_name }}"
+    restart: always
+    networks:
+      - caddy
+    cap_add:
+      - SYS_ADMIN
+    devices:
+      - /dev/fuse:/dev/fuse
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - "{{ zerobyte_data_dir }}/data:/var/lib/zerobyte"
+      - "/root/.config/rclone:/root/.config/rclone"
+      - "{{ backup_base_dir }}:{{ backup_base_dir }}"
+
+networks:
+  caddy:
+    external: true
