@@ -14,8 +14,8 @@
       tags: docker
     - role: caddy
       tags: caddy
-    - role: cloudflare_ddns
-      tags: cloudflare_ddns
+    - role: cloudflare_tunnel
+      tags: cloudflare_tunnel
 
     - role: wg_easy
       tags: wg_easy

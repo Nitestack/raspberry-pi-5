@@ -1,58 +1,85 @@
 {% for name, service in services.items() %}
-{% if service.enabled %}
-{{ service.domain }} {
-{% if name == "adventure_log" %}
-	@frontend {
-		not path /media* /admin* /static* /accounts*
-	}
-	reverse_proxy @frontend {{ service.container_names.frontend }}:{{ service.ports.frontend }}
-	reverse_proxy {{ service.container_names.backend }}:{{ service.ports.backend }}
-{% elif name == "beszel" %}
-	request_body {
-		max_size 10MB
-	}
-	reverse_proxy {{ service.container_name }}:{{ service.port }} {
-		transport http {
-			read_timeout 360s
-		}
-	}
-{% elif name == "n8n" %}
-	reverse_proxy {{ service.container_name }}:{{ service.port }} {
-		flush_interval -1
-	}
-{% elif name == "nextcloud" %}
-	header Strict-Transport-Security max-age=31536000;
+{% if service.enabled and service.domain == domain %}
+{{ domain }} {
 	reverse_proxy {{ service.container_name }}:{{ service.port }}
-{% elif name == "nextcloud_aio" %}
-	reverse_proxy {{ service.container_name }}:{{ service.port }} {
-		transport http {
-			tls_insecure_skip_verify
-		}
-	}
-{% elif name == "vaultwarden" %}
-	encode zstd gzip
-	reverse_proxy {{ service.container_name }}:{{ service.port }} {
-		header_up X-Real-IP {remote_host}
-	}
-{% elif name == "wger" %}
-	encode
-
-	reverse_proxy {{ service.container_name }}:{{ service.port }} {
-		header_up X-Real-IP {remote_host}
-	}
-
-	handle /static/* {
-		root * /srv/wger
-		file_server
-	}
-
-	handle /media/* {
-		root * /srv/wger
-		file_server
-	}
-{% else %}
-	reverse_proxy {{ service.container_name }}:{{ service.port }}
-{% endif %}
 }
 {% endif %}
 {% endfor %}
+
+*.{{ domain }} {
+	tls internal
+
+	{% for name, service in services.items() %}
+	{% if service.enabled and service.domain == domain %}
+	@www host www.{{ domain }}
+
+	redir @www {scheme}://{{ domain }}/{uri} permanent
+
+	{% endif %}
+	{% endfor %}
+
+	{% for name, service in services.items() %}
+	{% if service.enabled and service.domain != domain %}
+	@{{ name }} host {{ service.domain }}
+
+	handle @{{ name }} {
+	{% if name == "adventure_log" %}
+		@frontend {
+			not path /media* /admin* /static* /accounts*
+		}
+		reverse_proxy @frontend {{ service.container_names.frontend }}:{{ service.ports.frontend }}
+		reverse_proxy {{ service.container_names.backend }}:{{ service.ports.backend }}
+	{% elif name == "beszel" %}
+		request_body {
+			max_size 10MB
+		}
+		reverse_proxy {{ service.container_name }}:{{ service.port }} {
+			transport http {
+				read_timeout 360s
+			}
+		}
+	{% elif name == "n8n" %}
+		reverse_proxy {{ service.container_name }}:{{ service.port }} {
+			flush_interval -1
+		}
+	{% elif name == "nextcloud" %}
+		header Strict-Transport-Security max-age=31536000;
+		reverse_proxy {{ service.container_name }}:{{ service.port }}
+	{% elif name == "nextcloud_aio" %}
+		reverse_proxy {{ service.container_name }}:{{ service.port }} {
+			transport http {
+				tls_insecure_skip_verify
+			}
+		}
+	{% elif name == "vaultwarden" %}
+		encode zstd gzip
+		reverse_proxy {{ service.container_name }}:{{ service.port }} {
+			header_up X-Real-IP {remote_host}
+		}
+	{% elif name == "wger" %}
+		encode
+
+		reverse_proxy {{ service.container_name }}:{{ service.port }} {
+			header_up X-Real-IP {remote_host}
+		}
+
+		handle /static/* {
+			root * /srv/wger
+			file_server
+		}
+
+		handle /media/* {
+			root * /srv/wger
+			file_server
+		}
+	{% else %}
+		reverse_proxy {{ service.container_name }}:{{ service.port }}
+	{% endif %}
+	}
+	{% endif %}
+	{% endfor %}
+
+	handle {
+		redir https://{{ domain }}{uri}
+	}
+}

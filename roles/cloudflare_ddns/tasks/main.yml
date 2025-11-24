@@ -1,7 +1,0 @@
----
-- name: Deploy Cloudflare DDNS
-  ansible.builtin.include_role:
-    name: service_deploy
-  vars:
-    service_name: "Cloudflare DDNS"
-    service_dir_name: "{{ cloudflare_ddns_dir_name }}"

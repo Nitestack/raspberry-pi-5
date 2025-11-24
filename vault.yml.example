@@ -33,8 +33,8 @@ beszel_agent_key: ""
 # Calibre Web Automated
 calibre_web_automated_hardcover_token: ""
 
-# Cloudflare DDNS
-cloudflare_ddns_api_token: "" # `Edit zone DNS` template
+# Cloudflared
+cloudflared_token: ""
 
 # Ente Auth
 ente_jwt_secret: "" # head -c 32 /dev/urandom | base64 | tr -d '\n' | tr '+/' '-_'

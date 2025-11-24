@@ -7,10 +7,7 @@ data_base_dir: "/mnt/data"
 backup_base_dir: "/mnt/backup"
 service_base_dir: "~/services"
 allowed_ports:
-  - 22 # SSH
   - 53 # DNS
-  - 80 # Caddy HTTP
-  - 443 # Caddy HTTPS
   - 51820 # VPN
 
 # ── Service Configuration ─────────────────────────────────────────────

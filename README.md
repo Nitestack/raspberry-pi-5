@@ -37,7 +37,6 @@ _This [Ansible](https://ansible.com) configuration automates the setup of a Home
 - **Beszel**: Server Monitoring
 - **Caddy**: Reverse Proxy & TLS
 - **Calibre Web Automated**: eBook Manager
-- **Cloudflare DDNS**: Dynamic DNS Updater
 - **Ente Auth**: Two-factor Authenticator
 - **FreshRSS**: Feed Aggregator
 - **Ghostfolio**: Wealth Manager
@@ -56,8 +55,9 @@ _This [Ansible](https://ansible.com) configuration automates the setup of a Home
 
 1. **Raspberry Pi OS Lite (64-bit)**: Ensure your Raspberry Pi is running the latest version.
 2. **Ansible**: Install Ansible on your local machine.
-3. **Cloudflare-managed domain**: Required for dynamic DNS updates and subdomain routing.
-4. **Ethernet connection**: Use a wired connection for your Raspberry Pi for stable performance.
+3. **Cloudflare Account**: Required for dynamic DNS updates and subdomain routing. Sign up for a [Cloudflare account](https://dash.cloudflare.com/sign-up).
+4. **Cloudflare Zero Trust**: Required for secure access via Cloudflare Tunnel. Create a [Zero Trust Organization](https://developers.cloudflare.com/cloudflare-one/setup/#create-a-zero-trust-organization).
+5. **Ethernet connection**: Use a wired connection for your Raspberry Pi for stable performance.
 
 > [!Important]
 > When flashing your SD card, enable SSH and select the `Use password authentication` option.
@@ -125,16 +125,8 @@ ansible-vault encrypt group_vars/all/vault.yml # encrypt file
 To ensure remote access and proper functionality, configure the following port forwarding rules on your router. The playbook will automatically configure the server's firewall (UFW) based on these variables.
 
 ```plaintext
-# Caddy (handling all websites and APIs)
-public:80/tcp -> local:80/tcp
-public:443/tcp -> local:443/tcp
-public:443/udp -> local:443/udp
-
 # WireGuard
 public:51820/udp -> local:51820/udp
-
-# SSH (optional, if you want to access the Pi with a URL)
-public:22/tcp -> local:22/tcp
 ```
 
 ## 🛡️ Security

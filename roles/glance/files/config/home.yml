@@ -37,8 +37,8 @@
                 - title: Calibre Web Automated
                   url: https://github.com/crocodilestick/Calibre-Web-Automated/wiki
                   icon: di:calibre-web
-                - title: Cloudflare DDNS
-                  url: https://github.com/favonia/cloudflare-ddns
+                - title: Cloudflared
+                  url: https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel
                   icon: di:cloudflare
                 - title: Ente
                   url: https://help.ente.io
@@ -133,10 +133,10 @@
               icon: di:calibre-web
               url: ${CALIBRE_WEB_AUTOMATED_URL}
               description: eBook Manager
-            cloudflare-ddns:
-              name: Cloudflare DDNS
+            cloudflared:
+              name: Cloudflared
               icon: di:cloudflare
-              description: Dynamic DNS Updater
+              description: Cloudflare Tunnel
             ente-web:
               name: Ente Auth
               icon: https://cdn.jsdelivr.net/gh/selfhst/icons/webp/ente-auth.webp
@@ -385,7 +385,7 @@
             - henrygd/beszel
             - caddyserver/caddy
             - crocodilestick/Calibre-Web-Automated
-            - favonia/cloudflare-ddns
+            - cloudflare/cloudflared
             - ente-io/ente
             - FreshRSS/FreshRSS
             - ghostfolio/ghostfolio

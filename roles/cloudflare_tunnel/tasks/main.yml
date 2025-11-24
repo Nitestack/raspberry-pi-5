@@ -1,0 +1,7 @@
+---
+- name: Deploy client for Cloudflare Tunnel
+  ansible.builtin.include_role:
+    name: service_deploy
+  vars:
+    service_name: "Cloudflare Tunnel"
+    service_dir_name: "{{ cloudflared_dir_name }}"
