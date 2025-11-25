@@ -6,9 +6,6 @@ timezone: "Europe/Berlin" # TZ identifier from https://en.wikipedia.org/wiki/Lis
 data_base_dir: "/mnt/data"
 backup_base_dir: "/mnt/backup"
 service_base_dir: "~/services"
-allowed_ports:
-  - 53 # DNS
-  - 51820 # VPN
 
 # ── Service Configuration ─────────────────────────────────────────────
 # WARNING: modification of any ports won't work
@@ -112,12 +109,6 @@ services:
     domain: "vault.{{ domain }}"
     container_name: "vaultwarden"
     port: 80
-  # WireGuard Easy
-  wg_easy:
-    enabled: true
-    domain: "vpn.{{ domain }}"
-    container_name: "wg-easy"
-    port: 51821
   # wger
   wger:
     enabled: false

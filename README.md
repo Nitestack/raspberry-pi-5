@@ -13,7 +13,7 @@
 ![GitHub Repo Stars](https://img.shields.io/github/stars/Nitestack/raspberry-pi-5?style=for-the-badge)
 ![Github Created At](https://img.shields.io/github/created-at/Nitestack/raspberry-pi-5?style=for-the-badge)
 
-[Features](#-features) • [Requirements](#️-requirements) • [Getting Started](#-getting-started) • [Configuration](#-configuration) • [Port Forwarding](#-port-forwarding) • [Security](#%EF%B8%8F-security) • [Backups](#-backups) • [License](#-license)
+[Features](#-features) • [Requirements](#️-requirements) • [Getting Started](#-getting-started) • [Configuration](#-configuration) • [Security](#%EF%B8%8F-security) • [Backups](#-backups) • [License](#-license)
 
 _This [Ansible](https://ansible.com) configuration automates the setup of a Home Server running [Raspberry Pi OS](https://raspberrypi.com/software). It deploys essential services using a modern, secure, and declarative best-practice architecture._
 
@@ -47,7 +47,6 @@ _This [Ansible](https://ansible.com) configuration automates the setup of a Home
 - **Pocket ID**: OIDC Provider
 - **Vaultwarden**: Password Manager
 - **wger Workout Manager**: Fitness Tracker
-- **WireGuard Easy**: VPN (with Web GUI)
 - **Yamtrack**: Media Tracker (TV Shows, TV Seasons, Movies, Anime, Manga, Games, Books, Comics)
 - **Zerobyte**: Backup Manager (Web GUI for `restic`)
 
@@ -118,15 +117,6 @@ cp vault.yml.example group_vars/all/vault.yml # copy template
 # -- NOW, EDIT group_vars/all/vault.yml AND ADD YOUR SECRETS --
 
 ansible-vault encrypt group_vars/all/vault.yml # encrypt file
-```
-
-## 🔌 Port Forwarding
-
-To ensure remote access and proper functionality, configure the following port forwarding rules on your router. The playbook will automatically configure the server's firewall (UFW) based on these variables.
-
-```plaintext
-# WireGuard
-public:51820/udp -> local:51820/udp
 ```
 
 ## 🛡️ Security

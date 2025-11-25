@@ -7,16 +7,45 @@
         name: ufw
         update_cache: true
 
-    - name: Set default UFW policy and enable firewall
+    - name: Set default policies
       community.general.ufw:
         state: enabled
-        policy: "{{ ufw_incoming_policy }}"
+
+    - name: Deny incoming
+      community.general.ufw:
+        policy: deny
         direction: incoming
 
-    - name: Allow incoming traffic on specified ports
+    - name: Deny routed (forward)
+      community.general.ufw:
+        policy: deny
+        direction: routed
+
+    - name: Allow outgoing
+      community.general.ufw:
+        policy: allow
+        direction: outgoing
+
+    - name: Allow incoming SSH traffic
       community.general.ufw:
         rule: allow
-        port: "{{ item }}"
-      loop: "{{ allowed_ports }}"
-      loop_control:
-        label: "port {{ item }}"
+        port: ssh
+
+    - name: Allow incoming SSH traffic
+      community.general.ufw:
+        rule: allow
+        port: ssh
+
+    - name: Allow incoming DNS traffic over TCP
+      community.general.ufw:
+        rule: allow
+        port: 53
+        proto: tcp
+      when: services.adguard_home.enabled
+
+    - name: Allow incoming DNS traffic over UDP
+      community.general.ufw:
+        rule: allow
+        port: 53
+        proto: udp
+      when: services.adguard_home.enabled

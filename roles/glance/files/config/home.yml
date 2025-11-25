@@ -70,9 +70,6 @@
                 - title: wger
                   url: https://wger.readthedocs.io
                   icon: di:wger
-                - title: WireGuard Easy
-                  url: https://wg-easy.github.io/wg-easy/latest
-                  icon: di:wireguard
                 - title: Yamtrack
                   url: https://github.com/FuzzyGrim/Yamtrack/wiki
                   icon: di:yamtrack
@@ -240,11 +237,6 @@
               icon: si:vaultwarden
               url: ${VAULTWARDEN_URL}
               description: Password Manager
-            wg-easy:
-              name: WireGuard Easy
-              icon: di:wireguard
-              url: ${WG_EASY_URL}
-              description: VPN
             wger-web:
               name: wger
               icon: di:wger
@@ -395,7 +387,6 @@
             - nextcloud/all-in-one
             - pocket-id/pocket-id
             - dani-garcia/vaultwarden
-            - wg-easy/wg-easy
             - wger-project/wger
             - FuzzyGrim/Yamtrack
             - nicotsx/zerobyte

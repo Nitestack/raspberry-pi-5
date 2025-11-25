@@ -1,8 +1,0 @@
----
-- name: Deploy WireGuard Easy
-  ansible.builtin.include_role:
-    name: service_deploy
-  vars:
-    service_name: "WireGuard Easy"
-    service_dir_name: "{{ wg_easy_dir_name }}"
-    compose_url: "https://raw.githubusercontent.com/wg-easy/wg-easy/0f6f07161b7a824b5b7f0a2f599a949dbae3355b/docker-compose.yml"
