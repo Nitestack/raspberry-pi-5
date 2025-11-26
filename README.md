@@ -90,13 +90,30 @@ _This [Ansible](https://ansible.com) configuration automates the setup of a Home
 
 ## 🛠️ Configuration
 
-This project uses Ansible's best practices for variable management, separating public configuration from private secrets.
+### Cloudflare One
 
-### 1. Public Configuration (`group_vars/all/main.yml`)
+#### Cloudflare Tunnel - access your services publicly
+
+Follow the guide [1. Connect the server to Cloudflare](https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/private-net/cloudflared/connect-cidr/#1-connect-the-server-to-cloudflare) to create a [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel). This is a required step for accessing the services remotely.
+
+> [!IMPORTANT]
+> If you reach the **Install and run connectors** step, please just select installation with **Docker** and just copy the token and paste it into the Ansible vault (`cloudflared_token`). Please run the `cloudflare_tunnel` task with to connect to the tunnel:
+>
+> ```sh
+> ansible-playbook deploy.yml --tags cloudflare_tunnel
+> ```
+
+#### Cloudflare WARP - connect to your home network remotely and securely
+
+Follow the guide [Gateaway with WARP (default)](https://developers.cloudflare.com/cloudflare-one/team-and-resources/devices/warp/set-up-warp/#gateway-with-warp-default) to successfully set up [Cloudflare WARP](https://developers.cloudflare.com/cloudflare-one/team-and-resources/devices/warp) to remotely connect to your home network securely. You can skip step **4. Install the Cloudflare root certificate on your devices.**.
+
+### Ansible Variables
+
+#### 1. Public Configuration (`group_vars/all/main.yml`)
 
 This file contains all non-sensitive configuration for your server, such as domain names, ports, and feature flags. Open `group_vars/all/main.yml` and customize the settings to match your environment.
 
-### 2. Secret Management (`group_vars/all/vault.yml`)
+#### 2. Secret Management (`group_vars/all/vault.yml`)
 
 All sensitive data (API keys, passwords, secrets) is stored in an encrypted Ansible Vault file. For convenience, we will store the vault password in a local, git-ignored file.
 
