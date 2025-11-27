@@ -1,13 +1,21 @@
+(cloudflare) {
+  tls {
+    dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+  }
+}
+
 {% for name, service in services.items() %}
 {% if service.enabled and service.domain == domain %}
 {{ domain }} {
+	import cloudflare
+
 	reverse_proxy {{ service.container_name }}:{{ service.port }}
 }
 {% endif %}
 {% endfor %}
 
 *.{{ domain }} {
-	tls internal
+	import cloudflare
 
 	{% for name, service in services.items() %}
 	{% if service.enabled and service.domain == domain %}

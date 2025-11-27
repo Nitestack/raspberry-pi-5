@@ -1,11 +1,14 @@
 services:
   caddy:
-    image: caddy:2.10.2@sha256:cef7fe17d4df3b0843eae25bed319d6140b1a7bb13ccef076f5f1783d5bca9b1
+    image: caddybuilds/caddy-cloudflare:2.10.2@sha256:4a3d4afed443f026040cad84b48ef2eef6cc6eb5a80a3ecab66a03df469a46f8
     container_name: caddy
     restart: always
     ports:
       - "80:80"
       - "443:443"
+      - "443:443/udp"
+    cap_add:
+      - NET_ADMIN
     networks:
       - caddy
     volumes:
@@ -16,6 +19,8 @@ services:
       # wger file server volumes
       - "{{ wger_data_dir }}/static:/srv/wger/static:ro"
       - "{{ wger_data_dir }}/media:/srv/wger/media:ro"
+    environment:
+      CLOUDFLARE_API_TOKEN: "{{ cloudflare_api_token }}"
 
 networks:
   caddy:
