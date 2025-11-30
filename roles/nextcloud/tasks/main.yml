@@ -5,4 +5,4 @@
   vars:
     service_name: "NextCloud"
     service_dir_name: "{{ nextcloud_dir_name }}"
-    compose_url: "https://raw.githubusercontent.com/nextcloud/all-in-one/143cf5157cd9bc2caabeb2ff87305a62101b8187/compose.yaml"
+    compose_url: "https://raw.githubusercontent.com/nextcloud/all-in-one/10b61a5edea92eab87a4c7de1ca37172c0edd9a4/compose.yaml"
