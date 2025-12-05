@@ -9,7 +9,7 @@ jobs:
   backup:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
       - uses: dawidd6/action-ansible-playbook@3363d6aa333ecb41ef01579bc5eb4412b3d6802f # v5
         with:
           playbook: backup.yml
