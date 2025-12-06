@@ -16,7 +16,7 @@ services:
     ports: !reset []
 
   postgres:
-    image: postgres:15-alpine@sha256:cbb6a998431a5915856c220cd91e23d0753239057425e4ef24ff74e78ef05725
+    image: postgres:15-alpine@sha256:2e7b888f221193cddee9ce554d3311dc8be197a5d0c904fe30f5f568e0f99851
     container_name: "ghostfolio-postgres"
     restart: always
     env_file: !override .env
