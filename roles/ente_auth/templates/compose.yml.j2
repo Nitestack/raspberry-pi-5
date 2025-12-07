@@ -26,7 +26,7 @@ services:
       start_period: 5s
 
   web:
-    image: ghcr.io/ente-io/web:latest@sha256:1532caa2e85c070928768530f22510bbf264b7a9baa55d7ee5abd7755fc75945
+    image: ghcr.io/ente-io/web:latest@sha256:f8891560d106b720d244cc78d307c5b6eb9719ee75ae5f811a6e30bc699794ee
     container_name: "{{ services.ente_auth.container_name }}"
     restart: always
     networks:
