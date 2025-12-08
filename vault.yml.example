@@ -30,6 +30,9 @@ beszel_password: ""
 beszel_agent_token: ""
 beszel_agent_key: ""
 
+# Caddy
+cloudflare_api_token: ""
+
 # Calibre Web Automated
 calibre_web_automated_hardcover_token: ""
 
@@ -45,6 +48,8 @@ ghostfolio_db_password: ""
 ghostfolio_redis_password: ""
 ghostfolio_salt: ""
 ghostfolio_jwt_secret: ""
+ghostfolio_oidc_client_id: ""
+ghostfolio_oidc_client_secret: ""
 
 # Glance
 glance_user: ""
