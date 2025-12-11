@@ -19,11 +19,11 @@ services:
       - "{{ ente_auth_service_dir }}/museum.yml:/museum.yaml:ro"
       - "{{ ente_auth_data_dir }}/data:/data:ro"
     healthcheck:
-      test: ["CMD", "curl", "--fail", "http://localhost:8080/ping"]
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/ping"]
       interval: 60s
       timeout: 5s
       retries: 3
-      start_period: 5s
+      start_period: 120s
 
   web:
     image: ghcr.io/ente-io/web:latest@sha256:f8891560d106b720d244cc78d307c5b6eb9719ee75ae5f811a6e30bc699794ee
