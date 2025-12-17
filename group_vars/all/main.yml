@@ -74,12 +74,6 @@ services:
     domain: "media.{{ domain }}"
     container_name: "immich_server"
     port: 2283
-  # n8n
-  n8n:
-    enabled: false
-    domain: "automate.{{ domain }}"
-    container_name: "n8n"
-    port: 5678
   # NextCloud
   nextcloud:
     enabled: true

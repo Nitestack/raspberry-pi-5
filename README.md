@@ -42,7 +42,6 @@ _This [Ansible](https://ansible.com) configuration automates the setup of a Home
 - **Ghostfolio**: Wealth Manager
 - **Glance**: Dashboard
 - **Immich**: Image & Video Manager
-- **n8n**: Workflow Automation
 - **NextCloud**: Cloud
 - **Pocket ID**: OIDC Provider
 - **Vaultwarden**: Password Manager

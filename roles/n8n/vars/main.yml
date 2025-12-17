@@ -1,2 +1,0 @@
----
-n8n_data_dir: "{{ data_base_dir }}/{{ n8n_dir_name }}"
