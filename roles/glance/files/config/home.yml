@@ -214,11 +214,6 @@
               hide: true
             nextcloud-aio-watchtower:
               hide: true
-            personal-site:
-              name: Personal Site
-              icon: https://npham.de/favicon.ico
-              url: https://npham.de
-              description: Personal Site
             pocket-id:
               name: Pocket ID
               icon: di:pocket-id

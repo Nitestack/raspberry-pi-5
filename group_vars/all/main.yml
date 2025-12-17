@@ -85,12 +85,6 @@ services:
     domain: "nextcloud-aio.{{ domain }}"
     container_name: "nextcloud-aio-mastercontainer"
     port: 8080
-  # Personal Site
-  personal_site:
-    enabled: true
-    domain: "{{ domain }}"
-    container_name: "personal-site"
-    port: 3000
   # Pocket ID
   pocket_id:
     enabled: "{{ sso_enabled | bool }}"

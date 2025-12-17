@@ -1,2 +1,0 @@
----
-personal_site_service_dir: "{{ service_base_dir }}/{{ personal_site_dir_name }}"

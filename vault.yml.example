@@ -64,11 +64,6 @@ github_api_token: ""
 # Immich
 immich_db_password: "" # Please only use the characters `A-Za-z0-9`, without special characters or spaces
 
-# Personal Site
-personal_site_github_api_token: ""
-personal_site_notion_secret: ""
-personal_site_notion_datasource_id: ""
-
 # Pocket ID
 pocket_id_encryption_key: "" # openssl rand -base64 32
 pocket_id_maxmind_license_key: ""

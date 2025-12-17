@@ -46,9 +46,6 @@
     - role: freshrss
       tags: freshrss
 
-    - role: personal_site
-      tags: personal_site
-
     - role: zerobyte
       tags: backup,zerobyte
     - role: backup

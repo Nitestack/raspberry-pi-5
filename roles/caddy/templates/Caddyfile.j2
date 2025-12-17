@@ -4,16 +4,6 @@
   }
 }
 
-{% for name, service in services.items() %}
-{% if service.enabled and service.domain == domain %}
-{{ domain }} {
-	import cloudflare
-
-	reverse_proxy {{ service.container_name }}:{{ service.port }}
-}
-{% endif %}
-{% endfor %}
-
 *.{{ domain }} {
 	import cloudflare
 
