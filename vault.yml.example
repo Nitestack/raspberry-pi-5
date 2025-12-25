@@ -56,9 +56,6 @@ glance_user: ""
 glance_secret: "" # docker run --rm glanceapp/glance secret:make
 glance_password_hash: "" # docker run --rm glanceapp/glance password:hash <password>
 
-adguard_home_username: ""
-adguard_home_password: ""
-immich_api_key: ""
 github_api_token: ""
 
 # Immich
