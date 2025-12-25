@@ -11,6 +11,9 @@
                 - title: Cloudflare
                   url: https://dash.cloudflare.com
                   icon: di:cloudflare
+                - title: Cloudflare Zero Trust
+                  url: https://one.dash.cloudflare.com
+                  icon: di:cloudflare-zero-trust
                 - title: FRITZ!Box
                   url: http://192.168.178.1
                   icon: di:fritzbox
@@ -58,6 +61,9 @@
                 - title: Immich
                   url: https://immich.app/docs
                   icon: di:immich
+                - title: Navidrome
+                  url: https://navidrome.org/docs
+                  icon: di:navidrome
                 - title: Nextcloud
                   url: https://github.com/nextcloud/all-in-one
                   icon: di:nextcloud
@@ -187,6 +193,11 @@
             immich_postgres:
               name: PostgreSQL
               parent: immich
+            navidrome:
+              name: Navidrome
+              icon: di:navidrome
+              url: ${NAVIDROME_URL}
+              description: Music Server
             nextcloud-aio-nextcloud:
               name: NextCloud
               icon: di:nextcloud
@@ -290,7 +301,7 @@
           token: ${GITHUB_API_TOKEN}
           show-source-icon: true
           collapse-after: -1
-          limit: 18
+          limit: 19
           repositories:
             - AdguardTeam/AdGuardHome
             - seanmorley15/AdventureLog
@@ -304,6 +315,7 @@
             - ghostfolio/ghostfolio
             - glanceapp/glance
             - immich-app/immich
+            - navidrome/navidrome
             - nextcloud/all-in-one
             - pocket-id/pocket-id
             - dani-garcia/vaultwarden

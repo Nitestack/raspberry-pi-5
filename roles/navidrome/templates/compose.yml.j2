@@ -1,0 +1,19 @@
+services:
+  navidrome:
+    image: deluan/navidrome:0.59.0@sha256:4edc8a1de3e042f30b78a478325839f4395177eb8201c27543dccc0eba674f23
+    container_name: "{{ services.navidrome.container_name }}"
+    restart: always
+    user: "1000:1000"
+    networks:
+      - caddy
+    environment:
+      ND_ENABLEINSIGHTSCOLLECTOR: false
+      ND_DEFAULTTHEME: "Spotify-ish"
+      ND_SCANNER_PURGEMISSING: "always"
+    volumes:
+      - "{{ navidrome_data_dir }}/data:/data"
+      - "{{ lidarr_data_dir }}/music:/music:ro"
+
+networks:
+  caddy:
+    external: true

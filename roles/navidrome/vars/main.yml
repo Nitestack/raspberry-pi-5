@@ -1,0 +1,2 @@
+---
+navidrome_data_dir: "{{ data_base_dir }}/{{ navidrome_dir_name }}"

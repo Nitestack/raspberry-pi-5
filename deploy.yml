@@ -29,6 +29,8 @@
       tags: ente_auth
     - role: ghostfolio
       tags: ghostfolio
+    - role: navidrome
+      tags: navidrome
     - role: wger
       tags: wger
     - role: glance

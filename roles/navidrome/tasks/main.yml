@@ -1,0 +1,9 @@
+---
+- name: Deploy Navidrome
+  ansible.builtin.include_role:
+    name: service_deploy
+  vars:
+    service_name: "Navidrome"
+    service_dir_name: "{{ navidrome_dir_name }}"
+    data_dirs:
+      - "data"
