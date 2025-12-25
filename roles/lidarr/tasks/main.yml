@@ -1,0 +1,9 @@
+---
+- name: Deploy Lidarr
+  ansible.builtin.include_role:
+    name: service_deploy
+  vars:
+    service_name: "Lidarr"
+    service_dir_name: "{{ lidarr_dir_name }}"
+    data_dirs:
+      - "music"

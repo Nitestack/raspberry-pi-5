@@ -49,6 +49,9 @@
                 - title: Ente
                   url: https://help.ente.io
                   icon: https://cdn.jsdelivr.net/gh/selfhst/icons/webp/ente-auth.webp
+                - title: FlareSolverr
+                  url: https://github.com/FlareSolverr/FlareSolverr
+                  icon: di:flaresolverr
                 - title: FreshRSS
                   url: https://freshrss.github.io/FreshRSS/en
                   icon: di:freshrss
@@ -70,6 +73,12 @@
                 - title: Pocket ID
                   url: https://pocket-id.org/docs
                   icon: di:pocket-id
+                - title: Real-Debrid Torrent Client
+                  url: https://github.com/rogerfar/rdt-client
+                  icon: di:real-debrid
+                - title: Servarr
+                  url: https://wiki.servarr.com
+                  icon: di:servarr
                 - title: Vaultwarden
                   url: https://github.com/dani-garcia/vaultwarden/wiki
                   icon: si:vaultwarden
@@ -90,6 +99,9 @@
                 - title: Awesome Sysadmin
                   url: https://github.com/awesome-foss/awesome-sysadmin
                   icon: https://avatars.githubusercontent.com/u/20512645
+                - title: Awesome *Arr
+                  url: https://ravencentric.cc/awesome-arr
+                  icon: di:github
             - title: Repositories
               links:
                 - title: Raspberry Pi 5
@@ -156,6 +168,9 @@
             ente-postgres:
               name: PostgreSQL
               parent: ente
+            flaresolverr:
+              name: FlareSolverr
+              parent: prowlarr
             freshrss:
               name: FreshRSS
               icon: di:freshrss
@@ -193,6 +208,11 @@
             immich_postgres:
               name: PostgreSQL
               parent: immich
+            lidarr:
+              name: Lidarr
+              icon: di:lidarr
+              url: ${LIDARR_URL}
+              description: Music Manager
             navidrome:
               name: Navidrome
               icon: di:navidrome
@@ -237,6 +257,17 @@
               icon: di:pocket-id
               url: ${POCKET_ID_URL}
               description: OIDC Provider
+            prowlarr:
+              name: Prowlarr
+              icon: di:prowlarr
+              url: ${PROWLARR_URL}
+              description: Indexer Manager
+              id: prowlarr
+            rdtclient:
+              name: Real-Debrid Torrent Client
+              icon: di:real-debrid
+              url: ${RDTCLIENT_URL}
+              description: Torrent Client
             vaultwarden:
               name: Vaultwarden
               icon: si:vaultwarden
@@ -311,13 +342,17 @@
             - calibrain/calibre-web-automated-book-downloader
             - cloudflare/cloudflared
             - ente-io/ente
+            - FlareSolverr/FlareSolverr
             - FreshRSS/FreshRSS
             - ghostfolio/ghostfolio
             - glanceapp/glance
             - immich-app/immich
+            - Lidarr/Lidarr
             - navidrome/navidrome
             - nextcloud/all-in-one
             - pocket-id/pocket-id
+            - Prowlarr/Prowlarr
+            - rogerfar/rdt-client
             - dani-garcia/vaultwarden
             - wger-project/wger
             - FuzzyGrim/Yamtrack

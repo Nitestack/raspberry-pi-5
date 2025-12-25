@@ -1,0 +1,4 @@
+---
+lidarr_data_dir: "{{ data_base_dir }}/{{ lidarr_dir_name }}"
+prowlarr_data_dir: "{{ data_base_dir }}/{{ prowlarr_dir_name }}"
+rdtclient_data_dir: "{{ data_base_dir }}/{{ rdtclient_dir_name }}"

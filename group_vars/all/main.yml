@@ -79,6 +79,18 @@ services:
     domain: "media.{{ domain }}"
     container_name: "immich_server"
     port: 2283
+  # Lidarr
+  lidarr:
+    enabled: true
+    domain: "albums.{{ domain }}"
+    container_name: "lidarr"
+    port: 8686
+  # Navidrome
+  navidrome:
+    enabled: true
+    domain: "music.{{ domain }}"
+    container_name: "navidrome"
+    port: 4533
   # NextCloud
   nextcloud:
     enabled: true
@@ -96,6 +108,18 @@ services:
     domain: "id.{{ domain }}"
     container_name: "pocket-id"
     port: 1411
+  # Prowlarr
+  prowlarr:
+    enabled: true
+    domain: "index.{{ domain }}"
+    container_name: "prowlarr"
+    port: 9696
+  # Real-Debrid Torrent Client
+  rdtclient:
+    enabled: true
+    domain: "magnets.{{ domain }}"
+    container_name: "rdtclient"
+    port: 6500
   # Vaultwarden
   vaultwarden:
     enabled: true
