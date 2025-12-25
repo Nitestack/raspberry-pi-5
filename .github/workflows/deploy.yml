@@ -46,7 +46,7 @@ jobs:
         with:
           requirements_file: requirements.yml
       - if: steps.set-tags.outputs.ansible_tags != 'none'
-        uses: Boostport/setup-cloudflare-warp@v1
+        uses: Boostport/setup-cloudflare-warp@427fc9c04f371e4e0338701954d495c669ae7885 # v1
         with:
           organization: ${{ secrets.CLOUDFLARE_ORGANIZATION }}
           auth_client_id: ${{ secrets.CLOUDFLARE_AUTH_CLIENT_ID }}
