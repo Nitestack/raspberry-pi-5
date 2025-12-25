@@ -10,6 +10,7 @@ services:
     container_name: "{{ services.calibre_web_automated.container_name }}"
     restart: always
     networks:
+      - default
       - caddy
     environment:
       - TZ={{ timezone }}
@@ -21,6 +22,30 @@ services:
       - "{{ calibre_web_automated_data_dir }}/library:/calibre-library"
       - "{{ calibre_web_automated_data_dir }}/plugins:/config/.config/calibre/plugins"
     ports: !reset []
+  calibre-web-automated-book-downloader-tor:
+    image: ghcr.io/calibrain/calibre-web-automated-book-downloader-tor:dev
+    container_name: "{{ services.calibre_web_automated_book_downloader.container_name }}"
+    networks:
+      - default
+      - caddy
+    environment:
+      TZ: "{{ timezone }}"
+      CWA_DB_PATH: "/auth/app.db"
+      USING_TOR: true
+      CALIBRE_WEB_URL: "https://{{ services.calibre_web_automated.domain }}"
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    restart: unless-stopped
+    volumes:
+      - "{{ calibre_web_automated_data_dir }}/upload:/cwa-book-ingest"
+      - "{{ calibre_web_automated_data_dir }}/book-downloader/config:/config"
+      - "{{ calibre_web_automated_data_dir }}/config/app.db:/auth/app.db:ro"
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:8084/api/status"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
 
 networks:
   caddy:

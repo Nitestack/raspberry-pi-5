@@ -37,6 +37,7 @@ _This [Ansible](https://ansible.com) configuration automates the setup of a Home
 - **Beszel**: Server Monitoring
 - **Caddy**: Reverse Proxy & TLS
 - **Calibre Web Automated**: eBook Manager
+- **Calibre Web Automated Book Downloader**: Book Downloader for Calibre Web
 - **Ente Auth**: Two-factor Authenticator
 - **FreshRSS**: Feed Aggregator
 - **Ghostfolio**: Wealth Manager

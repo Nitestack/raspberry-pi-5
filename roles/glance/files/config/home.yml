@@ -37,6 +37,9 @@
                 - title: Calibre Web Automated
                   url: https://github.com/crocodilestick/Calibre-Web-Automated/wiki
                   icon: di:calibre-web
+                - title: Calibre Web Automated Book Downloader
+                  url: https://github.com/calibrain/calibre-web-automated-book-downloader
+                  icon: di:calibre-web
                 - title: Cloudflared
                   url: https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel
                   icon: di:cloudflare
@@ -127,6 +130,10 @@
               icon: di:calibre-web
               url: ${CALIBRE_WEB_AUTOMATED_URL}
               description: eBook Manager
+              id: calibre-web-automated
+            calibre-web-automated-book-downloader:
+              name: Book Downloader
+              parent: calibre-web-automated
             cloudflared:
               name: Cloudflared
               icon: di:cloudflare
@@ -283,13 +290,14 @@
           token: ${GITHUB_API_TOKEN}
           show-source-icon: true
           collapse-after: -1
-          limit: 17
+          limit: 18
           repositories:
             - AdguardTeam/AdGuardHome
             - seanmorley15/AdventureLog
             - henrygd/beszel
             - caddyserver/caddy
             - crocodilestick/Calibre-Web-Automated
+            - calibrain/calibre-web-automated-book-downloader
             - cloudflare/cloudflared
             - ente-io/ente
             - FreshRSS/FreshRSS
