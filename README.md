@@ -112,6 +112,10 @@ Follow the guide [1. Connect the server to Cloudflare](https://developers.cloudf
 
 Follow the guide [Gateaway with WARP (default)](https://developers.cloudflare.com/cloudflare-one/team-and-resources/devices/warp/set-up-warp/#gateway-with-warp-default) to successfully set up [Cloudflare WARP](https://developers.cloudflare.com/cloudflare-one/team-and-resources/devices/warp) to remotely connect to your home network securely. You can skip step **4. Install the Cloudflare root certificate on your devices.**.
 
+#### Continous Integration
+
+Follow the docs from the [`setup-cloudflare-warp` action](https://github.com/marketplace/actions/setup-cloudflare-warp) to setup CI.
+
 ### Ansible Variables
 
 #### 1. Public Configuration (`group_vars/all/main.yml`)

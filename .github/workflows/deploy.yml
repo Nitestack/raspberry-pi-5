@@ -46,6 +46,12 @@ jobs:
         with:
           requirements_file: requirements.yml
       - if: steps.set-tags.outputs.ansible_tags != 'none'
+        uses: Boostport/setup-cloudflare-warp@v1
+        with:
+          organization: ${{ secrets.CLOUDFLARE_ORGANIZATION }}
+          auth_client_id: ${{ secrets.CLOUDFLARE_AUTH_CLIENT_ID }}
+          auth_client_secret: ${{ secrets.CLOUDFLARE_AUTH_CLIENT_SECRET }}
+      - if: steps.set-tags.outputs.ansible_tags != 'none'
         uses: dawidd6/action-ansible-playbook@3363d6aa333ecb41ef01579bc5eb4412b3d6802f # v5
         with:
           playbook: deploy.yml
@@ -53,7 +59,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           inventory: |
             [raspberrypi]
-            npham.de ansible_user=nhan ansible_python_interpreter=auto_silent
+            192.168.178.20 ansible_user=nhan ansible_python_interpreter=auto_silent
           vault_password: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
           options: |
             --tags ${{ steps.set-tags.outputs.ansible_tags }}
