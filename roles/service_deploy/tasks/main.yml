@@ -41,7 +41,7 @@
       ansible.builtin.get_url:
         url: "{{ env_url }}"
         dest: "{{ service_dir }}/.env"
-        mode: "0644"
+        mode: "0600"
       when: env_url != ""
 
     - name: "Download additional files"
@@ -89,7 +89,7 @@
       ansible.builtin.template:
         src: "{{ ansible_parent_role_paths[-1] }}/templates/env.j2"
         dest: "{{ service_dir }}/.env"
-        mode: "0644"
+        mode: "0600"
       when: env_template.stat.exists
 
     - name: "Check for env.override template for {{ service_name }}"
@@ -102,7 +102,7 @@
       ansible.builtin.template:
         src: "{{ ansible_parent_role_paths[-1] }}/templates/env.override.j2"
         dest: "{{ service_dir }}/.env.override"
-        mode: "0644"
+        mode: "0600"
       when: env_override_template.stat.exists
 
     - name: "Copy additional templates for {{ service_name }}"
