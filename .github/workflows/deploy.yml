@@ -52,7 +52,7 @@ jobs:
           auth_client_id: ${{ secrets.CLOUDFLARE_AUTH_CLIENT_ID }}
           auth_client_secret: ${{ secrets.CLOUDFLARE_AUTH_CLIENT_SECRET }}
       - if: steps.set-tags.outputs.ansible_tags != 'none'
-        uses: dawidd6/action-ansible-playbook@3363d6aa333ecb41ef01579bc5eb4412b3d6802f # v5
+        uses: dawidd6/action-ansible-playbook@e8303e5fa5b52015d59fd5bc8c968943bd5f349c # v6
         with:
           playbook: deploy.yml
           requirements: requirements.yml
