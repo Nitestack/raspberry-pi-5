@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
-      - uses: Boostport/setup-cloudflare-warp@v1
+      - uses: Boostport/setup-cloudflare-warp@427fc9c04f371e4e0338701954d495c669ae7885 # v1
         with:
           organization: ${{ secrets.CLOUDFLARE_ORGANIZATION }}
           auth_client_id: ${{ secrets.CLOUDFLARE_AUTH_CLIENT_ID }}
