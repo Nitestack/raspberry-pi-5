@@ -23,7 +23,7 @@ services:
       - "{{ calibre_web_automated_data_dir }}/plugins:/config/.config/calibre/plugins"
     ports: !reset []
   calibre-web-automated-book-downloader-tor:
-    image: ghcr.io/calibrain/calibre-web-automated-book-downloader-tor:dev@sha256:056c877720da618713ec4e32c81a08809ed6bb32896b31603402e27c8e44cfa9
+    image: ghcr.io/calibrain/calibre-web-automated-book-downloader-tor:v0.4.0@sha256:ce91fb552de759c7deb4b50106eb47b4b7ef512d986f08f1c2f7498f50c9a0b2
     container_name: "{{ services.calibre_web_automated_book_downloader.container_name }}"
     networks:
       - default
@@ -33,6 +33,7 @@ services:
       CWA_DB_PATH: "/auth/app.db"
       USING_TOR: true
       CALIBRE_WEB_URL: "https://{{ services.calibre_web_automated.domain }}"
+      BOOK_LANGUAGE: "en,de"
     cap_add:
       - NET_ADMIN
       - NET_RAW
