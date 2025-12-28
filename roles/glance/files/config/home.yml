@@ -42,7 +42,7 @@
                   icon: di:calibre-web
                 - title: Calibre Web Automated Book Downloader
                   url: https://github.com/calibrain/calibre-web-automated-book-downloader
-                  icon: di:calibre-web
+                  icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/webp/calibre-web-automated-book-downloader.webp
                 - title: Cloudflared
                   url: https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel
                   icon: di:cloudflare
@@ -332,7 +332,7 @@
           token: ${GITHUB_API_TOKEN}
           show-source-icon: true
           collapse-after: -1
-          limit: 19
+          limit: 23
           repositories:
             - AdguardTeam/AdGuardHome
             - seanmorley15/AdventureLog
