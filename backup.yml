@@ -17,8 +17,6 @@
 - name: Execute backups and clean up old files
   hosts: raspberrypi
   gather_facts: true
-  vars:
-    backup_retention_days: 7
   tasks:
     - name: Run backup tasks for each discovered role
       ansible.builtin.include_role:
