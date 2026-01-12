@@ -1,6 +1,6 @@
 ---
 navidrome_dir_name: "navidrome"
 navidrome_default_theme: "Spotify-ish"
-navidrome_default_library: "/music/lidarr/mainstream"
+navidrome_default_library: "/music/mainstream"
 navidrome_enable_sharing: true
 navidrome_enable_star_rating: false

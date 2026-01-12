@@ -1,0 +1,2 @@
+---
+rdtclient_data_dir: "{{ data_base_dir }}/{{ rdtclient_dir_name }}"

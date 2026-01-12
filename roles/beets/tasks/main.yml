@@ -1,0 +1,35 @@
+---
+- name: Create Music Directory
+  ansible.builtin.file:
+    path: "{{ music_library_dir }}"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0755"
+  become: true
+
+- name: Deploy beets
+  ansible.builtin.include_role:
+    name: service_deploy
+  vars:
+    service_name: "beets"
+    service_dir_name: "{{ beets_dir_name }}"
+    data_dirs:
+      - "music"
+      - "config"
+
+- name: Deploy Beets Configuration
+  ansible.builtin.template:
+    src: "config.yaml.j2"
+    dest: "{{ beets_data_dir }}/config/config.yaml"
+    mode: "0644"
+  become: true
+  notify: Restart beets
+
+- name: Deploy Beets Classical Configuration
+  ansible.builtin.template:
+    src: "classical.yaml.j2"
+    dest: "{{ beets_data_dir }}/config/classical.yaml"
+    mode: "0644"
+  become: true
+  notify: Restart beets

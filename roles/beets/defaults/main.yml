@@ -1,0 +1,3 @@
+---
+beets_dir_name: "beets"
+music_library_dir: "{{ data_base_dir }}/music"

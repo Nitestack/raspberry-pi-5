@@ -31,6 +31,9 @@
                 - title: AdventureLog
                   url: https://adventurelog.app/docs/intro/adventurelog_overview.html
                   icon: di:adventure-log
+                - title: beets
+                  url: https://beets.readthedocs.io
+                  icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/webp/beets.webp
                 - title: Beszel
                   url: https://beszel.dev/guide
                   icon: di:beszel
@@ -130,6 +133,10 @@
             adventurelog-db:
               name: PostGIS
               parent: adventurelog
+            beets:
+              name: beets
+              icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/webp/beets.webp
+              description: Music Manager
             beszel:
               name: Beszel
               icon: di:beszel
@@ -208,11 +215,6 @@
             immich_postgres:
               name: PostgreSQL
               parent: immich
-            lidarr:
-              name: Lidarr
-              icon: di:lidarr
-              url: ${LIDARR_URL}
-              description: Music Manager
             navidrome:
               name: Navidrome
               icon: di:navidrome
@@ -336,6 +338,7 @@
           repositories:
             - AdguardTeam/AdGuardHome
             - seanmorley15/AdventureLog
+            - beetbox/beets
             - henrygd/beszel
             - caddyserver/caddy
             - crocodilestick/Calibre-Web-Automated
@@ -347,7 +350,6 @@
             - ghostfolio/ghostfolio
             - glanceapp/glance
             - immich-app/immich
-            - Lidarr/Lidarr
             - navidrome/navidrome
             - nextcloud/all-in-one
             - pocket-id/pocket-id

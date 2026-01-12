@@ -1,0 +1,7 @@
+---
+- name: Deploy Prowlarr
+  ansible.builtin.include_role:
+    name: service_deploy
+  vars:
+    service_name: "Prowlarr"
+    service_dir_name: "{{ prowlarr_dir_name }}"

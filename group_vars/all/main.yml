@@ -27,6 +27,12 @@ services:
     ports:
       frontend: 3000
       backend: 80
+  # beets
+  beets:
+    enabled: true
+    domain: ""
+    container_name: "beets"
+    port: 8337
   # Beszel
   beszel:
     enabled: true
@@ -79,12 +85,6 @@ services:
     domain: "media.{{ domain }}"
     container_name: "immich_server"
     port: 2283
-  # Lidarr
-  lidarr:
-    enabled: true
-    domain: "albums.{{ domain }}"
-    container_name: "lidarr"
-    port: 8686
   # Navidrome
   navidrome:
     enabled: true

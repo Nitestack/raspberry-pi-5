@@ -1,0 +1,7 @@
+---
+- name: Deploy Real-Debrid Torrent Client
+  ansible.builtin.include_role:
+    name: service_deploy
+  vars:
+    service_name: "Real-Debrid Torrent Client"
+    service_dir_name: "{{ rdtclient_dir_name }}"

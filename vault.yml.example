@@ -61,10 +61,9 @@ github_api_token: ""
 # Immich
 immich_db_password: "" # Please only use the characters `A-Za-z0-9`, without special characters or spaces
 
-# Navidrome
-# https://www.navidrome.org/docs/usage/integration/external-services/#lastfm
-navidrome_lastfm_key: ""
-navidrome_lastfm_secret: ""
+# last.fm
+lastfm_key: ""
+lastfm_secret: ""
 
 # Pocket ID
 pocket_id_encryption_key: "" # openssl rand -base64 32

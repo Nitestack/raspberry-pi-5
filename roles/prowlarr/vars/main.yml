@@ -1,0 +1,2 @@
+---
+prowlarr_data_dir: "{{ data_base_dir }}/{{ prowlarr_dir_name }}"

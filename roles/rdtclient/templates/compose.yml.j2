@@ -1,0 +1,18 @@
+services:
+  rdtclient:
+    image: rogerfar/rdtclient:2.0.119@sha256:ab9beded5f3770be207f8ffda1b3f23e1906b87b1af7362b66600f80d25ac201
+    container_name: "{{ services.rdtclient.container_name }}"
+    restart: always
+    networks:
+      - caddy
+    environment:
+      PUID: 1000
+      PGID: 1000
+      TZ: "{{ timezone }}"
+    volumes:
+      - "{{ rdtclient_data_dir }}/db:/data/db"
+      - "{{ rdtclient_data_dir }}/downloads:/data/downloads"
+
+networks:
+  caddy:
+    external: true

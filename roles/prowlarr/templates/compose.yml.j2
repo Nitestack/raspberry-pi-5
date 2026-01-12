@@ -1,0 +1,26 @@
+services:
+  prowlarr:
+    image: linuxserver/prowlarr:2.3.0@sha256:67a8aaedcfd6989f3030b937a6a07007310b1dfc7ee8df16d2cbfa48d1c1158c
+    container_name: "{{ services.prowlarr.container_name }}"
+    restart: always
+    networks:
+      - default
+      - caddy
+    environment:
+      PUID: 1000
+      PGID: 1000
+      TZ: "{{ timezone }}"
+    volumes:
+      - "{{ prowlarr_data_dir }}/data:/config"
+  flaresolverr:
+    image: flaresolverr/flaresolverr:v3.4.6@sha256:7962759d99d7e125e108e0f5e7f3cdbcd36161776d058d1d9b7153b92ef1af9e
+    container_name: flaresolverr
+    restart: always
+    environment:
+      TZ: "{{ timezone }}"
+    volumes:
+      - "{{ prowlarr_data_dir }}/flaresolverr/data:/config"
+
+networks:
+  caddy:
+    external: true

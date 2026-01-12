@@ -15,11 +15,11 @@ services:
       ND_ENABLESHARING: {{ navidrome_enable_sharing | lower }}
       ND_ENABLESTARRATING: {{ navidrome_enable_star_rating | lower }}
       # last.fm
-      ND_LASTFM_APIKEY: "{{ navidrome_lastfm_key }}"
-      ND_LASTFM_SECRET: "{{ navidrome_lastfm_secret }}"
+      ND_LASTFM_APIKEY: "{{ lastfm_key }}"
+      ND_LASTFM_SECRET: "{{ lastfm_secret }}"
     volumes:
       - "{{ navidrome_data_dir }}/data:/data"
-      - "{{ lidarr_data_dir }}/music:/music/lidarr:ro"
+      - "{{ music_library_dir }}:/music:ro"
 
 networks:
   caddy:

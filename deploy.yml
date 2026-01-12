@@ -31,8 +31,12 @@
       tags: ghostfolio
     - role: navidrome
       tags: navidrome
-    - role: lidarr
-      tags: lidarr
+    - role: beets
+      tags: beets
+    - role: prowlarr
+      tags: prowlarr
+    - role: rdtclient
+      tags: rdtclient
     - role: wger
       tags: wger
     - role: glance

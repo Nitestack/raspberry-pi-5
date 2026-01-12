@@ -34,6 +34,7 @@ _This [Ansible](https://ansible.com) configuration automates the setup of a Home
 
 - **AdGuard Home**: Network-wide Ad Blocker
 - **AdventureLog**: Travel Tracker
+- **beets**: Music Library Manager
 - **Beszel**: Server Monitoring
 - **Caddy**: Reverse Proxy & TLS
 - **Calibre Web Automated**: eBook Manager
@@ -44,7 +45,6 @@ _This [Ansible](https://ansible.com) configuration automates the setup of a Home
 - **Ghostfolio**: Wealth Manager
 - **Glance**: Dashboard
 - **Immich**: Image & Video Manager
-- **Lidarr**: Music Manager
 - **Navidrome**: Music Server
 - **NextCloud**: Cloud
 - **Pocket ID**: OIDC Provider
