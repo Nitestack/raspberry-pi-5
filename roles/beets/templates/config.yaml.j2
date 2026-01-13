@@ -32,6 +32,7 @@ plugins:
   - musicbrainz
   # Metadata
   - edit
+  - embedart
   - fetchart
   - ftintitle
   - lastgenre
@@ -49,6 +50,9 @@ plugins:
 convert:
   never_convert_lossy_files: yes
   no_convert: format:flac bitdepth:..16
+
+embedart:
+  maxwidth: 1000
 
 fetchart:
   auto: yes
