@@ -8,7 +8,7 @@
 	import cloudflare
 
 	{% for name, service in services.items() %}
-	{% if service.enabled and service.domain == domain %}
+	{% if service.enabled and service.domain is defined and service.domain == domain %}
 	@www host www.{{ domain }}
 
 	redir @www {scheme}://{{ domain }}/{uri} permanent
@@ -17,7 +17,11 @@
 	{% endfor %}
 
 	{% for name, service in services.items() %}
-	{% if service.enabled and service.domain != domain %}
+	{% if service.enabled
+		and service.domain is defined
+		and service.domain != domain
+		and (service.port is defined or name == "adventure_log")
+  %}
 	@{{ name }} host {{ service.domain }}
 
 	handle @{{ name }} {

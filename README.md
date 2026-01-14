@@ -38,7 +38,6 @@ _This [Ansible](https://ansible.com) configuration automates the setup of a Home
 - **Beszel**: Server Monitoring
 - **Caddy**: Reverse Proxy & TLS
 - **Calibre Web Automated**: eBook Manager
-- **Calibre Web Automated Book Downloader**: Book Downloader for Calibre Web
 - **Ente Auth**: Two-factor Authenticator
 - **FlareSolverr**: Proxy Server for bypassing Cloudflare protections
 - **FreshRSS**: Feed Aggregator
@@ -50,6 +49,7 @@ _This [Ansible](https://ansible.com) configuration automates the setup of a Home
 - **Pocket ID**: OIDC Provider
 - **Prowlarr**: Indexer Manager
 - **Real-Debrid Torrent Client**: Torrent Client
+- **Shelfmark**: Book Downloader
 - **Vaultwarden**: Password Manager
 - **wger Workout Manager**: Fitness Tracker
 - **Yamtrack**: Media Tracker (TV Shows, TV Seasons, Movies, Anime, Manga, Games, Books, Comics)

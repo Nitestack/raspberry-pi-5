@@ -30,9 +30,6 @@ services:
   # beets
   beets:
     enabled: true
-    domain: ""
-    container_name: "beets"
-    port: 8337
   # Beszel
   beszel:
     enabled: true
@@ -45,11 +42,6 @@ services:
     domain: "lib.{{ domain }}"
     container_name: "calibre-web-automated"
     port: 8083
-  calibre_web_automated_book_downloader:
-    enabled: true
-    domain: "books.{{ domain }}"
-    container_name: "calibre-web-automated-book-downloader"
-    port: 8084
   # Ente Auth
   ente_auth:
     enabled: true
@@ -120,6 +112,12 @@ services:
     domain: "magnets.{{ domain }}"
     container_name: "rdtclient"
     port: 6500
+  # Shelfmark
+  shelfmark:
+    enabled: true
+    domain: "books.{{ domain }}"
+    container_name: "shelfmark"
+    port: 8084
   # Vaultwarden
   vaultwarden:
     enabled: true

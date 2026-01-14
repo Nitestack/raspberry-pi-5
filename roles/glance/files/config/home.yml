@@ -43,9 +43,6 @@
                 - title: Calibre Web Automated
                   url: https://github.com/crocodilestick/Calibre-Web-Automated/wiki
                   icon: di:calibre-web
-                - title: Calibre Web Automated Book Downloader
-                  url: https://github.com/calibrain/calibre-web-automated-book-downloader
-                  icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/webp/calibre-web-automated-book-downloader.webp
                 - title: Cloudflared
                   url: https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel
                   icon: di:cloudflare
@@ -82,6 +79,9 @@
                 - title: Servarr
                   url: https://wiki.servarr.com
                   icon: di:servarr
+                - title: Shelfmark
+                  url: https://github.com/calibrain/shelfmark
+                  icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/webp/calibre-web-automated-book-downloader.webp
                 - title: Vaultwarden
                   url: https://github.com/dani-garcia/vaultwarden/wiki
                   icon: si:vaultwarden
@@ -155,10 +155,6 @@
               icon: di:calibre-web
               url: ${CALIBRE_WEB_AUTOMATED_URL}
               description: eBook Manager
-              id: calibre-web-automated
-            calibre-web-automated-book-downloader:
-              name: Book Downloader
-              parent: calibre-web-automated
             cloudflared:
               name: Cloudflared
               icon: di:cloudflare
@@ -270,6 +266,11 @@
               icon: di:real-debrid
               url: ${RDTCLIENT_URL}
               description: Torrent Client
+            shelfmark:
+              name: Shelfmark
+              icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/webp/calibre-web-automated-book-downloader.webp
+              url: ${SHELFMARK_URL}
+              description: Book Downloader
             vaultwarden:
               name: Vaultwarden
               icon: si:vaultwarden
@@ -342,7 +343,6 @@
             - henrygd/beszel
             - caddyserver/caddy
             - crocodilestick/Calibre-Web-Automated
-            - calibrain/calibre-web-automated-book-downloader
             - cloudflare/cloudflared
             - ente-io/ente
             - FlareSolverr/FlareSolverr
@@ -355,6 +355,7 @@
             - pocket-id/pocket-id
             - Prowlarr/Prowlarr
             - rogerfar/rdt-client
+            - calibrain/shelfmark
             - dani-garcia/vaultwarden
             - wger-project/wger
             - FuzzyGrim/Yamtrack

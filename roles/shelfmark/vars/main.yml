@@ -1,0 +1,2 @@
+---
+shelfmark_data_dir: "{{ data_base_dir }}/{{ shelfmark_dir_name }}"

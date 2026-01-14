@@ -1,0 +1,28 @@
+# external-file
+# owner: calibrain
+# repo: shelfmark
+# path: compose/stable/docker-compose.tor.yml
+# commit-hash: afeae46821ed0de5eeb543447ddec618d0514052
+
+services:
+  shelfmark-tor:
+    image: ghcr.io/calibrain/shelfmark:v1.0.1@sha256:c62954a6a268a93e515cc728c8c4136abed43db0d10e04c8cba57ec0642ff218
+    container_name: "{{ services.shelfmark.container_name }}"
+    networks:
+      - caddy
+    restart: always
+    ports: !reset []
+    volumes:
+      - "{{ calibre_web_automated_data_dir }}/upload:/books"
+      - "{{ shelfmark_data_dir }}/config:/config"
+      # Authentication
+      - "{{ calibre_web_automated_data_dir }}/config/app.db:/auth/app.db:ro"
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:8084/api/health"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+
+networks:
+  caddy:
+    external: true

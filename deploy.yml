@@ -47,6 +47,8 @@
       tags: yamtrack
     - role: calibre_web_automated
       tags: calibre_web_automated
+    - role: shelfmark
+      tags: shelfmark
     - role: adguard_home
       tags: adguard_home
     - role: adventure_log
