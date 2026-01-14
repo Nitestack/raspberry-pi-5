@@ -34,15 +34,10 @@ item_fields:
         return re.split(r';|\s-\s', artist)[0].strip()
     else:
         return "Unknown Artist"
-  resolved_work: |
-    if 'parentwork' in globals() and parentwork:
-        return parentwork
-    else:
-        return ""
 
 paths:
-  default: $top_composer/%if{$resolved_work,$resolved_work/}$album/$track $title
-  singleton: Non-Album/$top_composer/$title
+  default: $top_composer/$album%aunique{}/$track $title
+  singleton: Singles/$top_composer/$title
 
 # ── Plugins ───────────────────────────────────────────────────────────
 plugins:
@@ -64,6 +59,11 @@ plugins:
   - info
   - web
 
+fetchart:
+  minwidth: 400
+  enforce_ratio: no
+  sources: filesystem coverart amazon itunes lastfm fanarttv
+
 ftintitle:
   auto: no
 
@@ -74,5 +74,4 @@ musicbrainz:
   search_limit: 20
 
 parentwork:
-  force: yes
   auto: yes

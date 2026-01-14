@@ -22,7 +22,7 @@ match:
 
 paths:
   default: "%the{$albumartist}/$album%aunique{}/$track $title"
-  singleton: Non-Album/%the{$artist}/$title
+  singleton: Singles/%the{$artist}/$title
   comp: Compilations/$album%aunique{}/$track $title
 
 # ── Plugins ───────────────────────────────────────────────────────────
@@ -36,7 +36,7 @@ plugins:
   - fetchart
   - ftintitle
   - lastgenre
-  # - lyrics
+  - lyrics
   - mbsync
   - scrub
   # Path Formats
@@ -55,11 +55,10 @@ embedart:
   maxwidth: 1000
 
 fetchart:
-  auto: yes
   cautious: yes
   enforce_ratio: yes
   minwidth: 500
-  sources: coverart itunes lastfm albumart fanarttv filesystem
+  sources: filesystem fanarttv itunes coverart lastfm amazon
   lastfm_key: "{{ lastfm_key }}"
 
 ftintitle:
@@ -68,7 +67,10 @@ ftintitle:
 
 lastgenre:
   canonical: yes
-  force: yes
+
+lyrics:
+  synced: yes
+  # sources: lrclib # force synced lyrics
 
 # ── UI ────────────────────────────────────────────────────────────────
 ui:
