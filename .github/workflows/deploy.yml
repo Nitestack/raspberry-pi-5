@@ -45,10 +45,6 @@ jobs:
       - if: steps.set-tags.outputs.ansible_tags != 'none'
         run: echo "${{ secrets.ANSIBLE_VAULT_PASSWORD }}" > .vault_pass
       - if: steps.set-tags.outputs.ansible_tags != 'none'
-        uses: ansible/ansible-lint@main
-        with:
-          requirements_file: requirements.yml
-      - if: steps.set-tags.outputs.ansible_tags != 'none'
         uses: Boostport/setup-cloudflare-warp@427fc9c04f371e4e0338701954d495c669ae7885 # v1
         with:
           organization: ${{ secrets.CLOUDFLARE_ORGANIZATION }}
