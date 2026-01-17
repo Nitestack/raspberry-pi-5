@@ -149,7 +149,6 @@ smtp_host: "smtp.protonmail.ch"
 smtp_port: 587
 
 # ── Backup Configuration ──────────────────────────────────────────────
-restic_repository: "rclone:onedrive:raspberry-pi-5-backup"
 rclone_arch: "arm64"
 rclone_configs:
   - name: "onedrive"

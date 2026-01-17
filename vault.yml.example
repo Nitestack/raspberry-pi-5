@@ -1,9 +1,6 @@
 # Global Secrets
 smtp_password: ""
 
-# Backup Secrets
-restic_password: ""
-
 # Proton Drive
 rclone_proton_username: ""
 rclone_proton_password: ""

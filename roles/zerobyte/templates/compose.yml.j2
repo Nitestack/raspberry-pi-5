@@ -5,10 +5,8 @@ services:
     restart: always
     networks:
       - caddy
-    cap_add:
-      - SYS_ADMIN
-    devices:
-      - /dev/fuse:/dev/fuse
+    environment:
+      TZ: "{{ timezone }}"
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - "{{ zerobyte_data_dir }}/data:/var/lib/zerobyte"

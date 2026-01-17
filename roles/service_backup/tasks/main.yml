@@ -1,61 +1,80 @@
 ---
-- name: "Create backup directory for {{ service_name }}"
-  ansible.builtin.file:
-    path: "{{ backup_dir }}"
-    state: directory
-    mode: "0755"
-  become: true
-
-- name: "Backup {{ service_name }}"
+- name: "Backup for {{ service_name }}"
   block:
-    - name: "Stop services for {{ service_name }}"
-      community.docker.docker_compose_v2:
-        project_src: "{{ service_dir }}"
-        services: "{{ stop_services }}"
-        state: stopped
-      when: stop_services | length > 0
+    - name: Create temp backup directory
+      ansible.builtin.file:
+        path: "{{ temp_backup_dir }}"
+        state: directory
+        mode: "0755"
+      become: true
 
-    - name: "Run backup command for {{ service_name }}"
-      community.docker.docker_compose_v2_exec:
-        project_src: "{{ service_dir }}"
-        service: "{{ run_service_name }}"
-        command: "{{ run_command }}"
-        env: "{{ run_command_env }}"
-      register: command_result
-      when: run_command != ""
+    - name: Service Operations
+      block:
+        - name: "Stop services for {{ service_name }}"
+          community.docker.docker_compose_v2:
+            project_src: "{{ service_dir }}"
+            services: "{{ stop_services }}"
+            state: stopped
+          when: stop_services | length > 0
 
+        - name: "Run backup command for {{ service_name }}"
+          community.docker.docker_compose_v2_exec:
+            project_src: "{{ service_dir }}"
+            service: "{{ run_service_name }}"
+            command: "{{ run_command }}"
+            env: "{{ run_command_env }}"
+          register: command_result
+          when: run_command != ""
+
+      always:
+        - name: "Start services for {{ service_name }}"
+          community.docker.docker_compose_v2:
+            project_src: "{{ service_dir }}"
+            state: present
+          when: stop_services | length > 0
+
+    - name: Save data dump
+      ansible.builtin.copy:
+        content: "{{ command_result.stdout }}"
+        dest: "{{ dump_path }}"
+        mode: "0644"
+      when: run_command_produces_stdout and command_result.stdout is defined and command_result.stdout | length > 0
+      become: true
+
+    - name: Compress data dump
+      community.general.archive:
+        path: "{{ dump_path }}"
+        dest: "{{ dump_path }}.gz"
+        format: gz
+        remove: true
+        mode: "0644"
+      become: true
+      when: run_command_produces_stdout and command_result.stdout is defined and command_result.stdout | length > 0
+
+    - name: Copy extra data files
+      ansible.builtin.copy:
+        src: "{{ data_dir }}/{{ path }}"
+        dest: "{{ temp_backup_dir }}/{{ path }}"
+        remote_src: true
+        mode: "0755"
+      loop: "{{ data_paths }}"
+      loop_control:
+        loop_var: path
+      become: true
+
+    - name: "Remove old backup directory"
+      ansible.builtin.file:
+        path: "{{ backup_dir }}"
+        state: absent
+      become: true
+    - name: "Promote temp backup to final location"
+      ansible.builtin.command:
+        cmd: "mv {{ temp_backup_dir }} {{ backup_dir }}"
+      become: true
+      changed_when: true
   always:
-    - name: "Start services for {{ service_name }}"
-      community.docker.docker_compose_v2:
-        project_src: "{{ service_dir }}"
-        state: present
-      when: stop_services | length > 0
-
-- name: "Save data dump for {{ service_name }}"
-  ansible.builtin.copy:
-    content: "{{ command_result.stdout }}"
-    dest: "{{ dump_path }}"
-    mode: "0644"
-  when: run_command_produces_stdout and command_result.stdout is defined and command_result.stdout | length > 0
-  become: true
-
-- name: "Compress data dump for {{ service_name }}"
-  community.general.archive:
-    path: "{{ dump_path }}"
-    dest: "{{ dump_path }}.gz"
-    format: gz
-    remove: true
-    mode: "0644"
-  become: true
-  when: run_command_produces_stdout and command_result.stdout is defined and command_result.stdout | length > 0
-
-- name: "Copy data to backup directory for {{ service_name }}"
-  ansible.builtin.copy:
-    src: "{{ data_dir }}/{{ path }}"
-    dest: "{{ backup_dir }}/{{ path }}"
-    remote_src: true
-    mode: "0755"
-  loop: "{{ data_paths }}"
-  loop_control:
-    loop_var: path
-  become: true
+    - name: "Cleanup temp directory"
+      ansible.builtin.file:
+        path: "{{ temp_backup_dir }}"
+        state: absent
+      become: true
