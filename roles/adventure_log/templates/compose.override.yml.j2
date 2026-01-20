@@ -6,7 +6,7 @@
 
 services:
   web:
-    image: ghcr.io/seanmorley15/adventurelog-frontend:latest@sha256:bed5c18a819016ab2bc8cb323a60516df5026368a70dda1ab558db496deb2174
+    image: ghcr.io/seanmorley15/adventurelog-frontend:latest@sha256:7247ee113cd1ce24de958f71f00bc05c0de87102f2807a516bdb35c7294b3d19
     container_name: "{{ services.adventure_log.container_names.frontend }}"
     restart: always
     env_file:
@@ -27,7 +27,7 @@ services:
       - .env.override
 
   server:
-    image: ghcr.io/seanmorley15/adventurelog-backend:latest@sha256:57622e814909c00f485bc4c0864e1b8032651d4dbfd2bbf445a33bf2f9959890
+    image: ghcr.io/seanmorley15/adventurelog-backend:latest@sha256:445beb68819dd35db51e107e1efb1f4c762185711593c93d3007ffe1c5856b3f
     container_name: "{{ services.adventure_log.container_names.backend }}"
     restart: always
     volumes:
