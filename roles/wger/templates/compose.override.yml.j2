@@ -6,7 +6,7 @@
 
 services:
   web:
-    image: wger/server:2.4-dev@sha256:be958af0978e9070fd20e5469ad3488376ffd881bdb6b0ae53af046571a2a301
+    image: wger/server:latest@sha256:b52f03d3dd0eee50472c960044eae6a9da739d4b1f430141e0ff58782f6f9440
     container_name: "{{ services.wger.container_name }}"
     env_file: !override
       - .env
@@ -48,7 +48,7 @@ services:
     #mem_limit: 5gb
 
   celery_worker:
-    image: wger/server:2.4-dev@sha256:be958af0978e9070fd20e5469ad3488376ffd881bdb6b0ae53af046571a2a301
+    image: wger/server:latest@sha256:b52f03d3dd0eee50472c960044eae6a9da739d4b1f430141e0ff58782f6f9440
     container_name: "wger-celery-worker"
     env_file: !override
       - .env
@@ -58,7 +58,7 @@ services:
     restart: always
 
   celery_beat:
-    image: wger/server:2.4-dev@sha256:be958af0978e9070fd20e5469ad3488376ffd881bdb6b0ae53af046571a2a301
+    image: wger/server:latest@sha256:b52f03d3dd0eee50472c960044eae6a9da739d4b1f430141e0ff58782f6f9440
     container_name: "wger-celery-beat"
     env_file: !override
       - .env
