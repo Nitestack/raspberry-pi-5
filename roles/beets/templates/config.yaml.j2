@@ -13,12 +13,8 @@ match:
     media: ['CD', 'Digital Media|File']
     original_year: yes
   distance_weights:
-    missing_tracks: 0.0
-    album: 3.0
-    media: 2.0
-    label: 0.5
     year: 0.5
-    country: 0.5
+    country: 0.0
 
 paths:
   default: "%the{$albumartist}/$album%aunique{}/$track $title"
@@ -45,6 +41,7 @@ plugins:
   - convert
   - duplicates
   - info
+  - missing
   - web
 
 convert:
@@ -70,7 +67,7 @@ lastgenre:
 
 lyrics:
   synced: yes
-  # sources: lrclib # force synced lyrics
+  sources: [lrclib] # force synced lyrics
 
 # ── UI ────────────────────────────────────────────────────────────────
 ui:

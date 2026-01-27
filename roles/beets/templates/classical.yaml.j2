@@ -15,7 +15,6 @@ match:
     countries: ['DE', 'GB|UK', 'FR', 'NL', 'XE', 'AT', 'IT', 'US', 'XW']
     original_year: no
   distance_weights:
-    missing_tracks: 0.1
     composer: 2.5
     label: 1.5
     year: 0.8
@@ -57,6 +56,7 @@ plugins:
   - convert
   - duplicates
   - info
+  - missing
   - web
 
 fetchart:
@@ -68,6 +68,9 @@ ftintitle:
   auto: no
 
 lastgenre:
+  auto: no
+
+lyrics:
   auto: no
 
 musicbrainz:
