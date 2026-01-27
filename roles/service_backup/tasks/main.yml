@@ -1,4 +1,3 @@
----
 - name: "Backup for {{ service_name }}"
   block:
     - name: Create temp backup directory
@@ -18,13 +17,27 @@
           when: stop_services | length > 0
 
         - name: "Run backup command for {{ service_name }}"
+          ansible.builtin.shell: |
+            set -o pipefail
+            docker compose exec --no-tty {{ run_service_name }} {{ run_command }} > {{ dump_path }}
+          args:
+            chdir: "{{ service_dir }}"
+          environment: "{{ run_command_env }}"
+          changed_when: true
+          when:
+            - run_command != ""
+            - run_command_produces_stdout | bool
+          become: true
+
+        - name: "Run backup command for {{ service_name }}"
           community.docker.docker_compose_v2_exec:
             project_src: "{{ service_dir }}"
             service: "{{ run_service_name }}"
             command: "{{ run_command }}"
             env: "{{ run_command_env }}"
-          register: command_result
-          when: run_command != ""
+          when:
+            - run_command != ""
+            - not run_command_produces_stdout | bool
 
       always:
         - name: "Start services for {{ service_name }}"
@@ -33,45 +46,53 @@
             state: present
           when: stop_services | length > 0
 
-    - name: Save data dump
-      ansible.builtin.copy:
-        content: "{{ command_result.stdout }}"
-        dest: "{{ dump_path }}"
-        mode: "0644"
-      when: run_command_produces_stdout and command_result.stdout is defined and command_result.stdout | length > 0
-      become: true
-
-    - name: Compress data dump
-      community.general.archive:
-        path: "{{ dump_path }}"
-        dest: "{{ dump_path }}.gz"
-        format: gz
-        remove: true
-        mode: "0644"
-      become: true
-      when: run_command_produces_stdout and command_result.stdout is defined and command_result.stdout | length > 0
-
     - name: Copy extra data files
       ansible.builtin.copy:
-        src: "{{ data_dir }}/{{ path }}"
-        dest: "{{ temp_backup_dir }}/{{ path }}"
+        src: "{{ data_dir }}/{{ item }}"
+        dest: "{{ temp_backup_dir }}/{{ item }}"
         remote_src: true
         mode: "0755"
       loop: "{{ data_paths }}"
-      loop_control:
-        loop_var: path
       become: true
 
-    - name: "Remove old backup directory"
-      ansible.builtin.file:
-        path: "{{ backup_dir }}"
-        state: absent
-      become: true
-    - name: "Promote temp backup to final location"
-      ansible.builtin.command:
-        cmd: "mv {{ temp_backup_dir }} {{ backup_dir }}"
-      become: true
-      changed_when: true
+    - name: Atomic Swap Operation
+      block:
+        # 1. Ensure clean slate (delete any leftover _old from previous runs)
+        - name: "Pre-cleanup old backup rotation"
+          ansible.builtin.file:
+            path: "{{ backup_dir }}_old"
+            state: absent
+          become: true
+        - name: "Rotate current backup to old"
+          ansible.builtin.command:
+            cmd: "mv {{ backup_dir }} {{ backup_dir }}_old"
+            removes: "{{ backup_dir }}"
+          become: true
+        - name: "Promote temp backup to final location"
+          ansible.builtin.command:
+            cmd: "mv {{ temp_backup_dir }} {{ backup_dir }}"
+          changed_when: true
+          become: true
+        - name: "Remove old backup directory"
+          ansible.builtin.file:
+            path: "{{ backup_dir }}_old"
+            state: absent
+          become: true
+      rescue:
+        - name: "Restore old backup to live"
+          ansible.builtin.command:
+            cmd: "mv {{ backup_dir }}_old {{ backup_dir }}"
+            creates: "{{ backup_dir }}"
+            removes: "{{ backup_dir }}_old"
+          become: true
+          failed_when: false
+        - name: "WARNING: Backup Failed for {{ service_name }}"
+          ansible.builtin.debug:
+            msg:
+              - "CRITICAL WARNING: The backup for {{ service_name }} failed during rotation."
+              - "The system attempted to roll back to the previous backup."
+              - "Please check the logs. Proceeding with other backups..."
+
   always:
     - name: "Cleanup temp directory"
       ansible.builtin.file:
