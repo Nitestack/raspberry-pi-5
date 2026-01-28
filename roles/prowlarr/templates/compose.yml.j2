@@ -7,8 +7,8 @@ services:
       - default
       - caddy
     environment:
-      PUID: 1000
-      PGID: 1000
+      PUID: "{{ ansible_user_uid }}"
+      PGID: "{{ ansible_user_gid }}"
       TZ: "{{ timezone }}"
     volumes:
       - "{{ prowlarr_data_dir }}/data:/config"

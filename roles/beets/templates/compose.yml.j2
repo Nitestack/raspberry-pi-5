@@ -4,8 +4,8 @@ services:
     container_name: beets
     restart: always
     environment:
-      PUID: 1000
-      PGID: 1000
+      PUID: "{{ ansible_user_uid }}"
+      PGID: "{{ ansible_user_gid }}"
       TZ: "{{ timezone }}"
     volumes:
       - "{{ beets_data_dir }}/config:/config"

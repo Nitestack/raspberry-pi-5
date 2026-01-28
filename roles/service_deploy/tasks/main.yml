@@ -12,8 +12,8 @@
       ansible.builtin.file:
         path: "{{ data_dir }}"
         state: directory
-        owner: 1000
-        group: 1000
+        owner: "{{ ansible_user_uid }}"
+        group: "{{ ansible_user_gid }}"
         mode: "0755"
       become: true
       when: data_dirs | length > 0
@@ -22,8 +22,8 @@
       ansible.builtin.file:
         path: "{{ data_dir }}/{{ item }}"
         state: directory
-        owner: 1000
-        group: 1000
+        owner: "{{ ansible_user_uid }}"
+        group: "{{ ansible_user_gid }}"
         mode: "0755"
       loop: "{{ data_dirs }}"
       loop_control:

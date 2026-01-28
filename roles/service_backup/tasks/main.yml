@@ -5,7 +5,7 @@
         path: "{{ temp_backup_dir }}"
         state: directory
         mode: "0755"
-        owner: "{{ ansible_user_id }}"
+        owner: "{{ ansible_user_uid }}"
         group: "{{ ansible_user_gid }}"
       become: true
 
