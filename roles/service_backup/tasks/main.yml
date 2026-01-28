@@ -5,6 +5,8 @@
         path: "{{ temp_backup_dir }}"
         state: directory
         mode: "0755"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_gid }}"
       become: true
 
     - name: Service Operations
@@ -27,7 +29,6 @@
           when:
             - run_command != ""
             - run_command_produces_stdout | bool
-          become: true
 
         - name: "Run backup command for {{ service_name }}"
           community.docker.docker_compose_v2_exec:
