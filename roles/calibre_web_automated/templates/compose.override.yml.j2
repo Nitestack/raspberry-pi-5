@@ -6,13 +6,15 @@
 
 services:
   calibre-web-automated:
-    image: crocodilestick/calibre-web-automated:dev@sha256:fed9bc09df026a2b9aa965fca6105ec2ceefee770a2ce34c0f0322224086dbfd # TODO: pin to a specific tag when next release is made
+    image: crocodilestick/calibre-web-automated:v4.0.1@sha256:546aace4ef96610c65fa9e309d50137be8f36398974e2ea3ac8d1e1ed2ed8f0e
     container_name: "{{ services.calibre_web_automated.container_name }}"
     restart: always
     networks:
       - default
       - caddy
     environment:
+      - PUID={{ ansible_user_uid }}
+      - PGID={{ ansible_user_gid }}
       - TZ={{ timezone }}
       - HARDCOVER_TOKEN={{ calibre_web_automated_hardcover_token }}
       - TRUSTED_PROXY_COUNT=2 # Cloudflare Tunnel + reverse proxy (Caddy)
