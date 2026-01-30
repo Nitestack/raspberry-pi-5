@@ -7,6 +7,8 @@ services:
       - caddy
     environment:
       TZ: "{{ timezone }}"
+      BASE_URL: "https://{{ services.zerobyte.domain }}"
+      APP_SECRET: "{{ zerobyte_app_secret }}"
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - "{{ zerobyte_data_dir }}/data:/var/lib/zerobyte"
