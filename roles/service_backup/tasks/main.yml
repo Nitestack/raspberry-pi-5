@@ -19,26 +19,25 @@
           when: stop_services | length > 0
 
         - name: "Run backup command for {{ service_name }}"
-          ansible.builtin.shell: |
-            set -o pipefail
-            docker compose exec --no-tty {{ run_service_name }} {{ run_command }} > {{ dump_path }}
-          args:
-            chdir: "{{ service_dir }}"
-          environment: "{{ run_command_env }}"
-          changed_when: true
-          when:
-            - run_command != ""
-            - run_command_produces_stdout | bool
-
-        - name: "Run backup command for {{ service_name }}"
           community.docker.docker_compose_v2_exec:
             project_src: "{{ service_dir }}"
             service: "{{ run_service_name }}"
             command: "{{ run_command }}"
             env: "{{ run_command_env }}"
+          register: backup_output
+          no_log: true # Prevent sensitive dump data from spamming logs
           when:
             - run_command != ""
-            - not run_command_produces_stdout | bool
+            - run_command_produces_stdout | bool
+
+        - name: "Save backup to file for {{ service_name }}"
+          ansible.builtin.copy:
+            content: "{{ backup_output.stdout }}"
+            dest: "{{ dump_path }}"
+            mode: "0644"
+          when:
+            - run_command != ""
+            - run_command_produces_stdout | bool
 
       always:
         - name: "Start services for {{ service_name }}"
@@ -58,7 +57,6 @@
 
     - name: Atomic Swap Operation
       block:
-        # 1. Ensure clean slate (delete any leftover _old from previous runs)
         - name: "Pre-cleanup old backup rotation"
           ansible.builtin.file:
             path: "{{ backup_dir }}_old"
@@ -72,7 +70,8 @@
         - name: "Promote temp backup to final location"
           ansible.builtin.command:
             cmd: "mv {{ temp_backup_dir }} {{ backup_dir }}"
-          changed_when: true
+            creates: "{{ backup_dir }}"
+            removes: "{{ temp_backup_dir }}"
           become: true
         - name: "Remove old backup directory"
           ansible.builtin.file:

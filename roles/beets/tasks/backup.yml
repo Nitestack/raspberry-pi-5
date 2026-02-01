@@ -1,0 +1,55 @@
+---
+- name: Backup Music Library
+  vars:
+    backup_dir: "{{ backup_base_dir }}/music"
+    temp_backup_dir: "{{ backup_base_dir }}/music_temp"
+  block:
+    - name: Copy music files to temp directory
+      ansible.builtin.command:
+        cmd: "cp -a {{ music_library_dir }} {{ temp_backup_dir }}"
+      changed_when: true
+      become: true
+
+    - name: Atomic Swap Operation
+      block:
+        - name: "Pre-cleanup old backup rotation"
+          ansible.builtin.file:
+            path: "{{ backup_dir }}_old"
+            state: absent
+          become: true
+        - name: "Rotate current backup to old"
+          ansible.builtin.command:
+            cmd: "mv {{ backup_dir }} {{ backup_dir }}_old"
+            removes: "{{ backup_dir }}"
+          become: true
+        - name: "Promote temp backup to final location"
+          ansible.builtin.command:
+            cmd: "mv {{ temp_backup_dir }} {{ backup_dir }}"
+            creates: "{{ backup_dir }}"
+            removes: "{{ temp_backup_dir }}"
+          become: true
+        - name: "Remove old backup directory"
+          ansible.builtin.file:
+            path: "{{ backup_dir }}_old"
+            state: absent
+          become: true
+      rescue:
+        - name: "Restore old backup to live"
+          ansible.builtin.command:
+            cmd: "mv {{ backup_dir }}_old {{ backup_dir }}"
+            creates: "{{ backup_dir }}"
+            removes: "{{ backup_dir }}_old"
+          become: true
+          failed_when: false
+        - name: "WARNING: Backup failed for music library"
+          ansible.builtin.debug:
+            msg:
+              - "CRITICAL WARNING: The backup for music library failed during rotation."
+              - "The system attempted to roll back to the previous backup."
+              - "Please check the logs. Proceeding with other backups..."
+  always:
+    - name: "Cleanup temp directory"
+      ansible.builtin.file:
+        path: "{{ temp_backup_dir }}"
+        state: absent
+      become: true
