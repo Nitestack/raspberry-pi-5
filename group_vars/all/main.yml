@@ -38,7 +38,7 @@ services:
     port: 8090
   # Calibre Web Automated
   calibre_web_automated:
-    enabled: true
+    enabled: false
     domain: "lib.{{ domain }}"
     container_name: "calibre-web-automated"
     port: 8083
@@ -114,7 +114,7 @@ services:
     port: 6500
   # Shelfmark
   shelfmark:
-    enabled: true
+    enabled: "{{ services.calibre_web_automated.enabled | bool }}"
     domain: "books.{{ domain }}"
     container_name: "shelfmark"
     port: 8084

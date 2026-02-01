@@ -30,9 +30,6 @@ beszel_agent_key: ""
 # Caddy
 cloudflare_api_token: ""
 
-# Calibre Web Automated
-calibre_web_automated_hardcover_token: ""
-
 # Cloudflared
 cloudflared_token: ""
 
@@ -55,6 +52,9 @@ glance_password_hash: "" # docker run --rm glanceapp/glance password:hash <passw
 
 github_api_token: ""
 
+# Hardcover
+hardcover_api_token: ""
+
 # Immich
 immich_db_password: "" # Please only use the characters `A-Za-z0-9`, without special characters or spaces
 
@@ -76,3 +76,6 @@ wger_celery_flower_password: ""
 yamtrack_secret_key: "" # https://djecrety.ir
 yamtrack_oidc_client_id: ""
 yamtrack_oidc_secret: ""
+
+# Zerobyte
+zerobyte_app_secret: "" # openssl rand -hex 32

@@ -6,15 +6,31 @@
 
 services:
   shelfmark-tor:
-    image: ghcr.io/calibrain/shelfmark:v1.0.1@sha256:c62954a6a268a93e515cc728c8c4136abed43db0d10e04c8cba57ec0642ff218
+    image: ghcr.io/calibrain/shelfmark:v1.0.3@sha256:13b16443d711baf9f157ddbeeae8612a609702697075d83a03f1ef5312ac10c4
     container_name: "{{ services.shelfmark.container_name }}"
+    restart: always
     networks:
       - caddy
-    restart: always
+    environment:
+      PUID: "{{ ansible_user_uid }}"
+      PGID: "{{ ansible_user_gid }}"
+      DOCKERMODE: true
+      CALIBRE_WEB_URL: "https://{{ services.calibre_web_automated.domain }}"
+      BOOK_LANGUAGE: "en,de"
+      SEARCH_MODE: "universal"
+      METADATA_PROVIDER: "hardcover"
+      METADATA_PROVIDER_AUDIOBOOK: "hardcover"
+      HARDCOVER_ENABLED: true
+      HARDCOVER_API_KEY: "{{ hardcover_api_token }}"
+      PROWLARR_ENABLED: {{ services.prowlarr.enabled | lower }}
+      PROWLARR_URL: "https://{{ services.prowlarr.domain }}"
+      PROWLARR_TORRENT_CLIENT: "qbittorrent"
+      QBITTORRENT_URL: "https://{{ services.rdtclient.domain }}"
     ports: !reset []
     volumes:
       - "{{ calibre_web_automated_data_dir }}/upload:/books"
       - "{{ shelfmark_data_dir }}/config:/config"
+      - "{{ rdtclient_data_dir }}/downloads:{{ rdtclient_data_dir }}/downloads"
       # Authentication
       - "{{ calibre_web_automated_data_dir }}/config/app.db:/auth/app.db:ro"
     healthcheck:

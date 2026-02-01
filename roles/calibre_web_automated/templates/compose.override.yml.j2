@@ -16,7 +16,7 @@ services:
       - PUID={{ ansible_user_uid }}
       - PGID={{ ansible_user_gid }}
       - TZ={{ timezone }}
-      - HARDCOVER_TOKEN={{ calibre_web_automated_hardcover_token }}
+      - HARDCOVER_TOKEN={{ hardcover_api_token }}
       - TRUSTED_PROXY_COUNT=2 # Cloudflare Tunnel + reverse proxy (Caddy)
     volumes:
       - "{{ calibre_web_automated_data_dir }}/config:/config"
