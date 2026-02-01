@@ -5,4 +5,4 @@
   vars:
     service_name: "Shelfmark"
     service_dir_name: "{{ shelfmark_dir_name }}"
-    compose_url: "https://raw.githubusercontent.com/calibrain/shelfmark/afeae46821ed0de5eeb543447ddec618d0514052/compose/stable/docker-compose.tor.yml"
+    compose_url: "https://raw.githubusercontent.com/calibrain/shelfmark/8470095534330762c85067ffffa2d333fcf0be48/compose/docker-compose.tor.yml"
