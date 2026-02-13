@@ -126,7 +126,7 @@ services:
     port: 80
   # wger
   wger:
-    enabled: false
+    enabled: true
     domain: "health.{{ domain }}"
     container_name: "wger-web"
     port: 8000
