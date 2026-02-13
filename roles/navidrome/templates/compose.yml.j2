@@ -7,6 +7,8 @@ services:
     networks:
       - caddy
     environment:
+      ND_DEEZER_LANGUAGE: "en,de"
+      ND_LASTFM_LANGUAGE: "en,de"
       ND_ENABLEINSIGHTSCOLLECTOR: false
       ND_SCANNER_PURGEMISSING: "always"
       ND_MUSICFOLDER: "{{ navidrome_default_library }}"
