@@ -1,0 +1,7 @@
+---
+- name: Deploy IT Tools
+  ansible.builtin.include_role:
+    name: service_deploy
+  vars:
+    service_name: "IT Tools"
+    service_dir_name: "{{ it_tools_dir_name }}"

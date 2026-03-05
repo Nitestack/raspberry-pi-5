@@ -1,0 +1,11 @@
+services:
+  it-tools:
+    image: corentinth/it-tools:nightly@sha256:f07d246567e1ceb65e29b0a2ea155a70d7b05e9a35cfc534a2eee7b1f53df64b
+    container_name: "{{ services.it_tools.container_name }}"
+    restart: always
+    networks:
+      - caddy
+
+networks:
+  caddy:
+    external: true

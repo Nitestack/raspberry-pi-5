@@ -77,6 +77,12 @@ services:
     domain: "media.{{ domain }}"
     container_name: "immich_server"
     port: 2283
+  # IT Tools
+  it_tools:
+    enabled: true
+    domain: "it.{{ domain }}"
+    container_name: "it-tools"
+    port: 80
   # Navidrome
   navidrome:
     enabled: true

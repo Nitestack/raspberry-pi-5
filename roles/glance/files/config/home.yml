@@ -81,7 +81,7 @@
                   icon: di:servarr
                 - title: Shelfmark
                   url: https://github.com/calibrain/shelfmark
-                  icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/webp/calibre-web-automated-book-downloader.webp
+                  icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/webp/shelfmark.webp
                 - title: Vaultwarden
                   url: https://github.com/dani-garcia/vaultwarden/wiki
                   icon: si:vaultwarden
@@ -93,7 +93,7 @@
                   icon: di:yamtrack
                 - title: Zerobyte
                   url: https://github.com/nicotsx/zerobyte
-                  icon: https://raw.githubusercontent.com/nicotsx/zerobyte/main/public/images/favicon/favicon.svg
+                  icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/webp/zerobyte.webp
             - title: Selfhosted
               links:
                 - title: Awesome Selfhosted
@@ -105,6 +105,9 @@
                 - title: Awesome *Arr
                   url: https://ravencentric.cc/awesome-arr
                   icon: di:github
+                - title: selfh.st
+                  url: https://selfh.st
+                  icon: di:selfh-st
             - title: Repositories
               links:
                 - title: Raspberry Pi 5
@@ -211,6 +214,11 @@
             immich_postgres:
               name: PostgreSQL
               parent: immich
+            it-tools:
+              name: IT Tools
+              icon: di:it-tools
+              url: ${IT_TOOLS_URL}
+              description: Developer Tools
             navidrome:
               name: Navidrome
               icon: di:navidrome
@@ -268,7 +276,7 @@
               description: Torrent Client
             shelfmark:
               name: Shelfmark
-              icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/webp/calibre-web-automated-book-downloader.webp
+              icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/webp/shelfmark.webp
               url: ${SHELFMARK_URL}
               description: Book Downloader
             vaultwarden:
@@ -305,7 +313,7 @@
               parent: yamtrack
             zerobyte:
               name: Zerobyte
-              icon: https://raw.githubusercontent.com/nicotsx/zerobyte/main/public/images/favicon/favicon.svg
+              icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/webp/zerobyte.webp
               url: ${ZEROBYTE_URL}
               description: Backup Manager
         - type: group
@@ -335,7 +343,7 @@
           token: ${GITHUB_API_TOKEN}
           show-source-icon: true
           collapse-after: -1
-          limit: 23
+          limit: 24
           repositories:
             - AdguardTeam/AdGuardHome
             - seanmorley15/AdventureLog
@@ -350,6 +358,7 @@
             - ghostfolio/ghostfolio
             - glanceapp/glance
             - immich-app/immich
+            - CorentinTh/it-tools
             - navidrome/navidrome
             - nextcloud/all-in-one
             - pocket-id/pocket-id

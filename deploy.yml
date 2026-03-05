@@ -53,6 +53,8 @@
       tags: adguard_home
     - role: adventure_log
       tags: adventure_log
+    - role: it-tools
+      tags: it-tools
     - role: freshrss
       tags: freshrss
 

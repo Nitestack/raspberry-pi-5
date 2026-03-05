@@ -44,6 +44,7 @@ _This [Ansible](https://ansible.com) configuration automates the setup of a Home
 - **Ghostfolio**: Wealth Manager
 - **Glance**: Dashboard
 - **Immich**: Image & Video Manager
+- **IT Tools**: Developer Tools
 - **Navidrome**: Music Server
 - **NextCloud**: Cloud
 - **Pocket ID**: OIDC Provider
