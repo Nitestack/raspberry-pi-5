@@ -9,6 +9,7 @@ services:
       TZ: "{{ timezone }}"
       BASE_URL: "https://{{ services.zerobyte.domain }}"
       APP_SECRET: "{{ zerobyte_app_secret }}"
+      TRUSTED_ORIGINS: "https://{{ services.pocket_id.domain }}"
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - "{{ zerobyte_data_dir }}/data:/var/lib/zerobyte"
