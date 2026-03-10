@@ -50,7 +50,13 @@ fetchart:
   cautious: yes
   enforce_ratio: yes
   minwidth: 500
-  sources: filesystem fanarttv itunes coverart lastfm amazon
+  sources:
+    - filesystem
+    - fanarttv
+    - itunes
+    - coverart
+    - lastfm
+    - amazon
   lastfm_key: "{{ lastfm_key }}"
 
 ftintitle:

@@ -136,7 +136,7 @@ echo "YOUR_SUPER_SECRET_VAULT_PASSWORD" > .vault_pass
 chmod 600 .vault_pass # Set restrictive file permissions (read/write for your user only)
 ```
 
-2. **Create and fill your vault:** Copy the `vault.yml.example` file to `group_vars/all/vault.yml`, fill in your secrets, and then encrypt it. Ansible will automatically use your `.vault_pass` file.
+1. **Create and fill your vault:** Copy the `vault.yml.example` file to `group_vars/all/vault.yml`, fill in your secrets, and then encrypt it. Ansible will automatically use your `.vault_pass` file.
 
 ```sh
 cp vault.yml.example group_vars/all/vault.yml # copy template
@@ -186,6 +186,15 @@ Backups are performed daily via a cron job and can also be triggered via the "Ba
 1. **Install `rclone`** on your local machine.
 2. **Configure `rclone`**: Run `rclone config` and follow the steps to set up a new remote.
 3. **Update `vault.yml`**: Fill in your secrets (`rclone_...`). You can get the config by running `rclone config show <your_remote_name>`.
+
+## ⌨️ Command Sheet
+
+```sh
+# beets
+beet modify comments='' 'comments::.+' # remove all comments
+beet remove -d # remove query from database and delete files
+beet lyrics ^lyrics::'\[\d+:\d+' ^lyrics::'^\[Instrumental\]' ^lyrics::'lrclib' -f # all tracks with lyrics not being synced or instrumental
+```
 
 ## 📝 License
 
