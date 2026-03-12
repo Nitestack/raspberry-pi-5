@@ -6,7 +6,7 @@
 
 services:
   museum:
-    image: ghcr.io/ente-io/server:latest@sha256:691aa3344eb6698a6a6b00abad64bcb6bc97f939a92d78970d53a502db17a305
+    image: ghcr.io/ente-io/server:latest@sha256:1de2249fb7e2678547ee7ba253285234730a3c25ce6f9218a179320c88cdbff3
     container_name: "{{ services.ente_api.container_name }}"
     restart: always
     depends_on:
@@ -26,7 +26,7 @@ services:
       start_period: 120s
 
   web:
-    image: ghcr.io/ente-io/web:latest@sha256:27ae6174c8b90f9c33ebdebdfb83b1dbfb1037e176498dddf8b7137ed45c8eb9
+    image: ghcr.io/ente-io/web:latest@sha256:512454faaf0db3aeb79446b72752b0214e7d114edf82b8e69b33001a63769fc4
     container_name: "{{ services.ente_auth.container_name }}"
     restart: always
     networks:
