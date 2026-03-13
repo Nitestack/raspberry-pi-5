@@ -12,27 +12,47 @@ services:
     networks:
       - caddy
     environment:
+      DOCKERMODE: true
+      ONBOARDING: false
       PUID: "{{ ansible_user_uid }}"
       PGID: "{{ ansible_user_gid }}"
-      DOCKERMODE: true
+      # General
       CALIBRE_WEB_URL: "https://{{ services.calibre_web_automated.domain }}"
       BOOK_LANGUAGE: "en,de"
+      # Search Mode
       SEARCH_MODE: "universal"
       METADATA_PROVIDER: "hardcover"
       METADATA_PROVIDER_AUDIOBOOK: "hardcover"
-      HARDCOVER_ENABLED: true
-      HARDCOVER_API_KEY: "{{ hardcover_api_token }}"
+      # Downloads
+      EMAIL_SMTP_HOST: "{{ smtp_host }}"
+      EMAIL_SMTP_PORT: {{ smtp_port }}
+      EMAIL_SMTP_SECURITY: "starttls"
+      EMAIL_SMTP_USERNAME: "{{ no_reply_mail }}"
+      EMAIL_SMTP_PASSWORD: "{{ smtp_password }}"
+      EMAIL_FROM: "{{ no_reply_mail }}"
+      # Security
+      # AUTH_METHOD: "oidc"
+      # OIDC_DISCOVERY_URL: "https://{{ services.pocket_id.domain }}/.well-known/openid-configuration"
+      # OIDC_CLIENT_ID: "{{ shelfmark_oidc_client_id }}"
+      # OIDC_CLIENT_SECRET: "{{ shelfmark_oidc_client_secret }}"
+      # OIDC_BUTTON_LABEL: "Pocket ID"
+      # HIDE_LOCAL_AUTH: true
+      # OIDC_AUTO_REDIRECT: true
+      # Prowlarr
       PROWLARR_ENABLED: {{ services.prowlarr.enabled | lower }}
       PROWLARR_URL: "https://{{ services.prowlarr.domain }}"
+      PROWLARR_API_KEY: "{{ prowlarr_api_key }}"
+      # Download Clients
       PROWLARR_TORRENT_CLIENT: "qbittorrent"
       QBITTORRENT_URL: "https://{{ services.rdtclient.domain }}"
+      # Metadata Providers
+      HARDCOVER_ENABLED: true
+      HARDCOVER_API_KEY: "{{ hardcover_api_token }}"
     ports: !reset []
     volumes:
       - "{{ calibre_web_automated_data_dir }}/upload:/books"
       - "{{ shelfmark_data_dir }}/config:/config"
       - "{{ rdtclient_data_dir }}/downloads:{{ rdtclient_data_dir }}/downloads"
-      # Authentication
-      - "{{ calibre_web_automated_data_dir }}/config/app.db:/auth/app.db:ro"
     healthcheck:
       test: ["CMD", "curl", "-sf", "http://localhost:8084/api/health"]
       interval: 30s
