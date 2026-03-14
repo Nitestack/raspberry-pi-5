@@ -15,7 +15,7 @@ jobs:
           organization: ${{ secrets.CLOUDFLARE_ORGANIZATION }}
           auth_client_id: ${{ secrets.CLOUDFLARE_AUTH_CLIENT_ID }}
           auth_client_secret: ${{ secrets.CLOUDFLARE_AUTH_CLIENT_SECRET }}
-      - uses: dawidd6/action-ansible-playbook@6c0a4f86519cc4a09ba95e5077ecfa2141deba9e # v7
+      - uses: dawidd6/action-ansible-playbook@7e7e9693e63defdb99f0aa582dc418d1b9ff3364 # v8
         with:
           playbook: backup.yml
           requirements: requirements.yml
