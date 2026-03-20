@@ -6,7 +6,7 @@
 
 services:
   museum:
-    image: ghcr.io/ente-io/server:latest@sha256:1de2249fb7e2678547ee7ba253285234730a3c25ce6f9218a179320c88cdbff3
+    image: ghcr.io/ente-io/server:latest@sha256:e1b615b261391b79a9d27f00783f70b909a18c67960cc038846a9e928fe79903
     container_name: "{{ services.ente_api.container_name }}"
     restart: always
     depends_on:
@@ -26,7 +26,7 @@ services:
       start_period: 120s
 
   web:
-    image: ghcr.io/ente-io/web:latest@sha256:512454faaf0db3aeb79446b72752b0214e7d114edf82b8e69b33001a63769fc4
+    image: ghcr.io/ente-io/web:latest@sha256:8e2613273bbe28716d38e1a1f23cac18c1e3be5eecf3c9319370d1de2da30ea8
     container_name: "{{ services.ente_auth.container_name }}"
     restart: always
     networks:
@@ -36,7 +36,7 @@ services:
       ENTE_API_ORIGIN: "https://{{ services.ente_api.domain }}"
 
   postgres:
-    image: postgres:15@sha256:f30e3de0ac9cc938dac627ef2231099867c694b5f949fadb924c8c977428c399
+    image: postgres:15@sha256:c635fa3e3b7421a659d34abdfd6d492f679cbe8149e261a501237b55c5a94212
     container_name: ente-postgres
     restart: always
     environment:
