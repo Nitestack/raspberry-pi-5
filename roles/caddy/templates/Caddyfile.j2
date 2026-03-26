@@ -51,6 +51,7 @@
 		}
 	{% elif name == "sparky_fitness" %}
 		header X-Content-Type-Options "nosniff"
+		encode zstd gzip
 
 		reverse_proxy {{ service.container_name }}:{{ service.port }} {
 			# Grab the real IP from Cloudflare's special header and pass it to the app
