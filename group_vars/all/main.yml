@@ -124,6 +124,12 @@ services:
     domain: "books.{{ domain }}"
     container_name: "shelfmark"
     port: 8084
+  # SparkyFitness
+  sparky_fitness:
+    enabled: true
+    domain: "health.{{ domain }}"
+    container_name: "sparkyfitness-frontend"
+    port: 80
   # Vaultwarden
   vaultwarden:
     enabled: true
@@ -132,7 +138,7 @@ services:
     port: 80
   # wger
   wger:
-    enabled: true
+    enabled: false
     domain: "health.{{ domain }}"
     container_name: "wger-web"
     port: 8000

@@ -1,0 +1,8 @@
+---
+- name: Deploy SparkyFitness
+  ansible.builtin.include_role:
+    name: service_deploy
+  vars:
+    service_name: "SparkyFitness"
+    service_dir_name: "{{ sparky_fitness_dir_name }}"
+    compose_url: "https://github.com/CodeWithCJ/SparkyFitness/releases/latest/download/docker-compose.prod.yml"

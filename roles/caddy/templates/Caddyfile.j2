@@ -49,6 +49,22 @@
 				tls_insecure_skip_verify
 			}
 		}
+	{% elif name == "sparky_fitness" %}
+		header X-Content-Type-Options "nosniff"
+
+		reverse_proxy {{ service.container_name }}:{{ service.port }} {
+			# Grab the real IP from Cloudflare's special header and pass it to the app
+			header_up X-Real-IP {http.request.header.Cf-Connecting-Ip}
+			header_up X-Forwarded-For {http.request.header.Cf-Connecting-Ip}
+
+			# CRITICAL FOR PROXY TUNNELS: Tell Better Auth exactly what domain this is coming from
+			header_up Host {host}
+			header_up X-Forwarded-Host {host}
+
+			# Tell the app that the external connection is secure
+			header_up X-Forwarded-Proto https
+			header_up X-Forwarded-Ssl on
+		}
 	{% elif name == "vaultwarden" %}
 		encode zstd gzip
 		reverse_proxy {{ service.container_name }}:{{ service.port }} {

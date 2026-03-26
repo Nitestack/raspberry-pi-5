@@ -1,0 +1,4 @@
+---
+sparky_fitness_data_dir: "{{ data_base_dir }}/{{ sparky_fitness_dir_name }}"
+sparky_fitness_service_dir: "{{ service_base_dir }}/{{ sparky_fitness_dir_name }}"
+sparky_fitness_backup_dir: "{{ backup_base_dir }}/{{ sparky_fitness_dir_name }}"
