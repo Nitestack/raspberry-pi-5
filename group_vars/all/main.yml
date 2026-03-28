@@ -126,8 +126,8 @@ services:
     port: 8084
   # SparkyFitness
   sparky_fitness:
-    enabled: true
-    domain: "health.{{ domain }}"
+    enabled: false
+    domain: "fitness.{{ domain }}"
     container_name: "sparkyfitness-frontend"
     port: 80
   # Vaultwarden
@@ -138,7 +138,7 @@ services:
     port: 80
   # wger
   wger:
-    enabled: false
+    enabled: true
     domain: "health.{{ domain }}"
     container_name: "wger-web"
     port: 8000

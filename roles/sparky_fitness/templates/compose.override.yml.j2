@@ -9,6 +9,8 @@ services:
     image: postgres:18.3-alpine@sha256:4da1a4828be12604092fa55311276f08f9224a74a62dcb4708bd7439e2a03911
     container_name: "sparkyfitness-db"
     restart: always
+    volumes: !override
+      - ${DB_PATH:-./postgresql}:/var/lib/postgresql
   sparkyfitness-server:
     image: codewithcj/sparkyfitness_server:v0.16.5.4@sha256:d2d95f85662fe53a03f22ccb21dc0c3249d2ab7298c18c284a749172baa7b2c2
     container_name: "sparkyfitness-server"
