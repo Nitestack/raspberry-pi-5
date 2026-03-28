@@ -124,12 +124,6 @@ services:
     domain: "books.{{ domain }}"
     container_name: "shelfmark"
     port: 8084
-  # SparkyFitness
-  sparky_fitness:
-    enabled: false
-    domain: "fitness.{{ domain }}"
-    container_name: "sparkyfitness-frontend"
-    port: 80
   # Vaultwarden
   vaultwarden:
     enabled: true

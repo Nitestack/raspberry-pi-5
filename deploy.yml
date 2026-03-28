@@ -39,8 +39,6 @@
       tags: rdtclient
     - role: wger
       tags: wger
-    - role: sparky_fitness
-      tags: sparky_fitness
     - role: glance
       tags: glance
     - role: beszel

@@ -66,13 +66,6 @@ lastfm_secret: ""
 pocket_id_encryption_key: "" # openssl rand -base64 32
 pocket_id_maxmind_license_key: ""
 
-# SparkyFitness
-sparky_fitness_admin_email: ""
-sparky_fitness_app_db_password: ""
-sparky_fitness_db_password: ""
-sparky_fitness_api_encryption_key: "" # openssl rand -hex 32
-sparky_fitness_auth_secret: "" # openssl rand -hex 32
-
 # Prowlarr
 prowlarr_api_key: ""
 
