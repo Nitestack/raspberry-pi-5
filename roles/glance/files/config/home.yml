@@ -61,6 +61,9 @@
                 - title: Glance
                   url: https://github.com/glanceapp/glance/blob/main/docs/configuration.md
                   icon: di:glance
+                - title: Grocy
+                  url: https://github.com/grocy/grocy
+                  icon: di:grocy
                 - title: Immich
                   url: https://immich.app/docs
                   icon: di:immich
@@ -199,6 +202,11 @@
               icon: di:glance
               url: ${GLANCE_URL}
               description: Dashboard
+            grocy:
+              name: Grocy
+              icon: di:grocy
+              url: ${GROCY_URL}
+              description: Groceries & Household Manager
             immich_server:
               name: Immich
               icon: di:immich
@@ -343,7 +351,7 @@
           token: ${GITHUB_API_TOKEN}
           show-source-icon: true
           collapse-after: -1
-          limit: 24
+          limit: 25
           repositories:
             - AdguardTeam/AdGuardHome
             - seanmorley15/AdventureLog
@@ -357,6 +365,7 @@
             - FreshRSS/FreshRSS
             - ghostfolio/ghostfolio
             - glanceapp/glance
+            - grocy/grocy
             - immich-app/immich
             - CorentinTh/it-tools
             - navidrome/navidrome

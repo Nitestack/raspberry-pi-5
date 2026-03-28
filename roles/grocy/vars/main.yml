@@ -1,0 +1,2 @@
+---
+grocy_data_dir: "{{ data_base_dir }}/{{ grocy_dir_name }}"

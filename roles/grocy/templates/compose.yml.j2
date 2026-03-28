@@ -1,0 +1,17 @@
+services:
+  grocy:
+    image: linuxserver/grocy:4.6.0@sha256:6b507d191889d6c52e99fcc17fe7dc04f71afb2a98ea6b3d2ead1e4e591c1c79
+    container_name: "{{ services.grocy.container_name }}"
+    restart: always
+    networks:
+      - caddy
+    environment:
+      PUID: "{{ ansible_user_uid }}"
+      PGID: "{{ ansible_user_gid }}"
+      TZ: "{{ timezone }}"
+    volumes:
+      - "{{ grocy_data_dir }}/config:/config"
+
+networks:
+  caddy:
+    external: true

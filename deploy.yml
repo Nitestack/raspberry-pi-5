@@ -27,6 +27,8 @@
       tags: vaultwarden
     - role: ente_auth
       tags: ente_auth
+    - role: grocy
+      tags: grocy
     - role: ghostfolio
       tags: ghostfolio
     - role: navidrome

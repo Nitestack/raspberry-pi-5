@@ -43,6 +43,7 @@ _This [Ansible](https://ansible.com) configuration automates the setup of a Home
 - **FreshRSS**: Feed Aggregator
 - **Ghostfolio**: Wealth Manager
 - **Glance**: Dashboard
+- **Grocy**: Grocery & Household Manager
 - **Immich**: Image & Video Manager
 - **IT Tools**: Developer Tools
 - **Navidrome**: Music Server

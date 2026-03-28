@@ -71,6 +71,11 @@ services:
     domain: "dash.{{ domain }}"
     container_name: "glance"
     port: 8080
+  grocy:
+    enabled: true
+    domain: "house.{{ domain }}"
+    container_name: "grocy"
+    port: 80
   # Immich
   immich:
     enabled: true
