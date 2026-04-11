@@ -73,6 +73,10 @@ prowlarr_api_key: ""
 shelfmark_oidc_client_id: ""
 shelfmark_oidc_client_secret: ""
 
+# Wealthfolio
+wealthfolio_secret_key: "" # openssl rand -base64 32
+wealthfolio_password_hash: "" # printf 'your-password' | argon2 yoursalt16chars! -id -e
+
 # wger
 wger_secret_key: "" # https://djecrety.ir
 wger_signing_key: ""

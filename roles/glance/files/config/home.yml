@@ -88,6 +88,9 @@
                 - title: Vaultwarden
                   url: https://github.com/dani-garcia/vaultwarden/wiki
                   icon: si:vaultwarden
+                - title: Wealthfolio
+                  url: https://wealthfolio.app/docs/introduction
+                  icon: sh:wealthfolio
                 - title: wger
                   url: https://wger.readthedocs.io
                   icon: di:wger
@@ -211,7 +214,7 @@
               name: Immich
               icon: di:immich
               url: ${IMMICH_URL}
-              description: Image & Video Manager
+              description: Photo & Video Manager
               id: immich
             immich_machine_learning:
               name: Machine Learning
@@ -292,6 +295,11 @@
               icon: si:vaultwarden
               url: ${VAULTWARDEN_URL}
               description: Password Manager
+            wealthfolio:
+              name: Wealthfolio
+              icon: sh:wealthfolio
+              url: ${WEALTHFOLIO_URL}
+              description: Investment Tracker
             wger-web:
               name: wger
               icon: di:wger
@@ -351,7 +359,7 @@
           token: ${GITHUB_API_TOKEN}
           show-source-icon: true
           collapse-after: -1
-          limit: 25
+          limit: 26
           repositories:
             - AdguardTeam/AdGuardHome
             - seanmorley15/AdventureLog
@@ -375,6 +383,7 @@
             - rogerfar/rdt-client
             - calibrain/shelfmark
             - dani-garcia/vaultwarden
+            - afadil/wealthfolio
             - wger-project/wger
             - FuzzyGrim/Yamtrack
             - nicotsx/zerobyte

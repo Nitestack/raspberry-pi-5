@@ -39,12 +39,12 @@ _This [Ansible](https://ansible.com) configuration automates the setup of a Home
 - **Caddy**: Reverse Proxy & TLS
 - **Calibre Web Automated**: eBook Manager
 - **Ente Auth**: Two-factor Authenticator
-- **FlareSolverr**: Proxy Server for bypassing Cloudflare protections
+- **FlareSolverr**: Cloudflare Bypass Proxy
 - **FreshRSS**: Feed Aggregator
 - **Ghostfolio**: Wealth Manager
 - **Glance**: Dashboard
 - **Grocy**: Grocery & Household Manager
-- **Immich**: Image & Video Manager
+- **Immich**: Photo & Video Manager
 - **IT Tools**: Developer Tools
 - **Navidrome**: Music Server
 - **NextCloud**: Cloud
@@ -53,9 +53,10 @@ _This [Ansible](https://ansible.com) configuration automates the setup of a Home
 - **Real-Debrid Torrent Client**: Torrent Client
 - **Shelfmark**: Book Downloader
 - **Vaultwarden**: Password Manager
+- **Wealthfolio**: Investment Tracker
 - **wger Workout Manager**: Fitness Tracker
-- **Yamtrack**: Media Tracker (TV Shows, TV Seasons, Movies, Anime, Manga, Games, Books, Comics)
-- **Zerobyte**: Backup Manager (Web GUI for `restic`)
+- **Yamtrack**: Media Tracker
+- **Zerobyte**: Backup Manager
 
 ## ⚙️ Requirements
 

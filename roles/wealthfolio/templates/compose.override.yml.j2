@@ -1,0 +1,20 @@
+# external-file
+# owner: afadil
+# repo: wealthfolio
+# path: compose.yml
+# commit-hash: aca4c3d46dce1169bf7cbe8542521dfb9d12e796
+
+services:
+  wealthfolio:
+    image: afadil/wealthfolio:3.2.1@sha256:ce4d514f9e2ab3adaf0d59a0a8aef08bae820c9b748469f9c98d9f1d0688e937
+    container_name: "{{ services.wealthfolio.container_name }}"
+    restart: always
+    networks:
+      - caddy
+    expose: !reset null
+    volumes:
+      - "{{ wealthfolio_data_dir }}/data:/data"
+
+networks:
+  caddy:
+    external: true

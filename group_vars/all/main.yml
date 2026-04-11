@@ -61,7 +61,7 @@ services:
     port: 80
   # Ghostfolio
   ghostfolio:
-    enabled: true
+    enabled: false
     domain: "wealth.{{ domain }}"
     container_name: "ghostfolio"
     port: 3333
@@ -135,6 +135,12 @@ services:
     domain: "vault.{{ domain }}"
     container_name: "vaultwarden"
     port: 80
+  # Wealthfolio
+  wealthfolio:
+    enabled: true
+    domain: "wealth.{{ domain }}"
+    container_name: "wealthfolio"
+    port: 8088
   # wger
   wger:
     enabled: true

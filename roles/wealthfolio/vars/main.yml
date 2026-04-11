@@ -1,0 +1,2 @@
+---
+wealthfolio_data_dir: "{{ data_base_dir }}/{{ wealthfolio_dir_name }}"

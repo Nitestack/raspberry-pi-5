@@ -1,0 +1,8 @@
+---
+- name: Deploy Wealthfolio
+  ansible.builtin.include_role:
+    name: service_deploy
+  vars:
+    service_name: "Wealthfolio"
+    service_dir_name: "{{ wealthfolio_dir_name }}"
+    compose_url: "https://raw.githubusercontent.com/afadil/wealthfolio/d25e35036cba754eefedf464549d076e909f3201/compose.yml"

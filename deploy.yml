@@ -31,6 +31,8 @@
       tags: grocy
     - role: ghostfolio
       tags: ghostfolio
+    - role: wealthfolio
+      tags: wealthfolio
     - role: navidrome
       tags: navidrome
     - role: beets

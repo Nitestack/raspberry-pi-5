@@ -1,0 +1,14 @@
+---
+- name: Wealthfolio Backup
+  ansible.builtin.include_role:
+    name: service_backup
+  vars:
+    service_name: "Wealthfolio"
+    service_dir_name: "{{ wealthfolio_dir_name }}"
+    run_service_name: "wealthfolio"
+    run_command: ""
+    run_command_produces_stdout: false
+    stop_services:
+      - "wealthfolio"
+    data_paths:
+      - "data/"
