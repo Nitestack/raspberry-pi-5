@@ -16,7 +16,7 @@ services:
     ports: !reset []
 
   postgres:
-    image: postgres:15-alpine@sha256:fceb6f86328c36f2438fae3b851b0cc57c4a7e69a58c866d9ce24281f2cf0c9c
+    image: postgres:15-alpine@sha256:1c52f5ad23db5d7648a63634444af76de48e63b860fccbe3e3a5458b2812eaed
     container_name: "ghostfolio-postgres"
     restart: always
     env_file: !override .env
@@ -24,7 +24,7 @@ services:
       - "{{ ghostfolio_data_dir }}/db:/var/lib/postgresql/data"
 
   redis:
-    image: redis:alpine@sha256:81b6f81d6a6c5b9019231a2e8eb10085e3a139a34f833dcc965a8a959b040b72
+    image: redis:alpine@sha256:c5e375abb885e6b2021c0377879e4890bf76f9065b8922ffc113f2b226b9fc17
     container_name: "ghostfolio-redis"
     restart: always
     env_file: !override .env
