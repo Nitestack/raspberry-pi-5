@@ -5,4 +5,4 @@
   vars:
     service_name: "Wealthfolio"
     service_dir_name: "{{ wealthfolio_dir_name }}"
-    compose_url: "https://raw.githubusercontent.com/afadil/wealthfolio/d25e35036cba754eefedf464549d076e909f3201/compose.yml"
+    compose_url: "https://raw.githubusercontent.com/afadil/wealthfolio/bc614863ea5b65ed2cccfd4179d7a52fc0658f55/compose.yml"
