@@ -6,14 +6,14 @@
 
 services:
   immich-server:
-    image: ghcr.io/immich-app/immich-server:v2.7.2@sha256:6a2952539e2a9c8adcf6fb74850bb1ba7e1db2804050acea21baafdc9154c430
+    image: ghcr.io/immich-app/immich-server:v2.7.5@sha256:c15bff75068effb03f4355997d03dc7e0fc58720c2b54ad6f7f10d1bc57efaa5
     container_name: "{{ services.immich.container_name }}"
     networks:
       - default
       - caddy
     ports: !reset []
   immich-machine-learning:
-    image: ghcr.io/immich-app/immich-machine-learning:v2.7.2@sha256:2f381909ca2b669f22bf872ee0bea6b7d16dfce109431647a8cad0f2571ff053
+    image: ghcr.io/immich-app/immich-machine-learning:v2.7.5@sha256:a2501141440f10516d329fdfba2c68082e19eb9ba6016c061ac80d23beadf7f3
 
 networks:
   caddy:
