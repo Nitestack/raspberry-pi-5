@@ -5,7 +5,7 @@
   vars:
     service_name: "wger"
     service_dir_name: "{{ wger_dir_name }}"
-    compose_url: "https://raw.githubusercontent.com/wger-project/docker/75e44fe24c6fe9bcd98215270b74b5a1d6ed788d/docker-compose.yml"
+    compose_url: "https://raw.githubusercontent.com/wger-project/docker/b465402f57e38a6ff48954712d73b40d973cb8b7/docker-compose.yml"
     env_url: "https://raw.githubusercontent.com/wger-project/docker/d595c4ba9aa8157c9b1a715eef7db0ce8125b0a1/config/prod.env"
     service_downloads:
       - url: "https://raw.githubusercontent.com/wger-project/docker/refs/heads/master/config/redis.conf"
