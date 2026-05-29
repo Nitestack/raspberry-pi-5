@@ -6,7 +6,7 @@
 
 services:
   ghostfolio:
-    image: ghostfolio/ghostfolio:3.5.0@sha256:200c57ad71eab4b4a5216033cefa5a718d991ca7facbf0427583093ad81283ae
+    image: ghostfolio/ghostfolio:3.6.0@sha256:9baddf839704b833d5c30408fc065403e6af667d8abc3882a9ebae8d9f72af9d
     container_name: "{{ services.ghostfolio.container_name }}"
     restart: always
     networks:
@@ -24,7 +24,7 @@ services:
       - "{{ ghostfolio_data_dir }}/db:/var/lib/postgresql/data"
 
   redis:
-    image: redis:alpine@sha256:d146f83b1e0f02fc27c26a50cee39338c736674c5959db84363e6ae3cd9e02d2
+    image: redis:alpine@sha256:09160599abd229764c0fb44cb6be640294e1d360a54b19985ab4843dcf2d90f1
     container_name: "ghostfolio-redis"
     restart: always
     env_file: !override .env
