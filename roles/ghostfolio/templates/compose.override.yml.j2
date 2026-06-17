@@ -6,7 +6,7 @@
 
 services:
   ghostfolio:
-    image: ghostfolio/ghostfolio:3.11.0@sha256:deac12fc0f6e2845b79939ad1bf18adf855b5165b778e023201c7a5b7e851446
+    image: ghostfolio/ghostfolio:3.12.0@sha256:f8728e6eeda2c4f4e0d3b18380993cc238c37b3763c6f2d93a15dfbfaae5d259
     container_name: "{{ services.ghostfolio.container_name }}"
     restart: always
     networks:
@@ -16,7 +16,7 @@ services:
     ports: !reset []
 
   postgres:
-    image: postgres:18-alpine@sha256:96d56f7f57c6aacd1fcb908bc83b345ec5f83231ee486dd66a1baadce274db88
+    image: postgres:18-alpine@sha256:d3e64d36360a9f40c30fbbc5dd2dde799fe35f8537500c8b067551a6497f50f4
     container_name: "ghostfolio-postgres"
     restart: always
     env_file: !override .env
