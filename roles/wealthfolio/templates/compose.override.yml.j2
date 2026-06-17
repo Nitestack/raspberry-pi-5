@@ -11,7 +11,7 @@ services:
     restart: always
     networks:
       - caddy
-    expose: !reset null
+    ports: !reset null
     volumes:
       - "{{ wealthfolio_data_dir }}/data:/data"
 
