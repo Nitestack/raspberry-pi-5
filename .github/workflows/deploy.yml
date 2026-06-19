@@ -15,7 +15,7 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
       - id: changed-files
         uses: tj-actions/changed-files@24d32ffd492484c1d75e0c0b894501ddb9d30d62 # v47
       - id: set-tags
@@ -45,7 +45,7 @@ jobs:
       - if: steps.set-tags.outputs.ansible_tags != 'none'
         run: echo "${{ secrets.ANSIBLE_VAULT_PASSWORD }}" > .vault_pass
       - if: steps.set-tags.outputs.ansible_tags != 'none'
-        uses: Boostport/setup-cloudflare-warp@427fc9c04f371e4e0338701954d495c669ae7885 # v1
+        uses: Boostport/setup-cloudflare-warp@2557ba84f68223c4642f8d65d1c7371666c5af34 # v1
         with:
           organization: ${{ secrets.CLOUDFLARE_ORGANIZATION }}
           auth_client_id: ${{ secrets.CLOUDFLARE_AUTH_CLIENT_ID }}
