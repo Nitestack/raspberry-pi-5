@@ -72,7 +72,7 @@ services:
     container_name: "glance"
     port: 8080
   grocy:
-    enabled: true
+    enabled: false
     domain: "house.{{ domain }}"
     container_name: "grocy"
     port: 80
