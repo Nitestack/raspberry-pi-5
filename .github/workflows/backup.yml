@@ -9,7 +9,7 @@ jobs:
   backup:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
       - uses: Boostport/setup-cloudflare-warp@2557ba84f68223c4642f8d65d1c7371666c5af34 # v1
         with:
           organization: ${{ secrets.CLOUDFLARE_ORGANIZATION }}
