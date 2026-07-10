@@ -5,6 +5,6 @@
   vars:
     service_name: "Wealthfolio"
     service_dir_name: "{{ wealthfolio_dir_name }}"
-    compose_url: "https://raw.githubusercontent.com/wealthfolio/wealthfolio/9a4da25fc4477be93f5d169b251cf5a6e99e3373/compose.yml"
+    compose_url: "https://raw.githubusercontent.com/wealthfolio/wealthfolio/e4e9fdf025f2725e1d7e79fd822310e53fbf2551/compose.yml"
     data_dirs:
       - "data"

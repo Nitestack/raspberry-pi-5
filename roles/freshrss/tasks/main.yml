@@ -5,4 +5,4 @@
   vars:
     service_name: "FreshRSS"
     service_dir_name: "{{ freshrss_dir_name }}"
-    compose_url: "https://raw.githubusercontent.com/FreshRSS/FreshRSS/50eeede063bb3d17f3129da1775df4dcf391a05f/Docker/freshrss/docker-compose.yml"
+    compose_url: "https://raw.githubusercontent.com/FreshRSS/FreshRSS/dcec27c69d9800ece797b710d9b61104d3aca57d/Docker/freshrss/docker-compose.yml"
